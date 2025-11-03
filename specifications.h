@@ -21,6 +21,9 @@ typedef struct {
 }Sparse_CSR;
 
 void *surely_malloc(size_t size);
-void coo_quicksort(Sparse_Coordinate *p);
+void coo_quicksort(Sparse_Coordinate *p, unsigned base, unsigned n);
+unsigned coo_count(Sparse_Coordinate *p);
+Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p);
+
 
 #endif

@@ -1,7 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <immintrin.h>
 #include "mmio.h"
 #include "specifications.h"
+
+//define fma block operation
+#if defined(__x86_64__) && defined(__FMA__)
+static inline double fma_fallback(double a, double b, double c) {
+    __m128d A = _mm_set_sd(a);
+    __m128d B = _mm_set_sd(b);
+    __m128d C = _mm_set_sd(c);
+    __m128d R = _mm_fmadd_sd(A, B, C);
+    return _mm_cvtsd_f64(R);
+}
+#else
+static inline double fma_fallback(double a, double b, double c) {
+    return a * b + c; // may be fused by compiler with -O3 -ffp-contract=fast
+}
+#endif
+
 
 
 //function to initialize a struct COO given the data extracted from .mtx file
@@ -62,53 +79,78 @@ unsigned coo_count(Sparse_Coordinate *p){
     return count;
 }
 
-Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p){
+Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
     Sparse_CSR *q;
-    unsigned count, i, r, c, ri, ci, cols, k, l, rows;
+    unsigned count, i;
+    unsigned r,c, ri, ci, cols, k, l, rows;
     unsigned *col_ind, *row_ptr, *prow_ind, *pcol_ind;
     double x, *val, *pval;
     unsigned n = p->nnz;
-    coo_quicksort(p); // to check correct functioning
+    coo_quicksort(p, 0, n);
     k = coo_count(p);
-    rows=p->n_rows; prow_ind=p->row_indices; pcol_ind=p->col_indices;
-    pval=p->values;
-    q=surely_malloc(sizeof(Sparse_CSR)); //check correctt functioning
-    val=surely_malloc(k*sizeof(double));
-    col_ind=surely_malloc(k*sizeof(unsigned));
-    row_ptr=surely_malloc((rows+1)*sizeof(unsigned));
-
+    rows = p->n_rows;
+    prow_ind=p->row_indices;
+    pcol_ind=p->col_indices;
+    pval = p->values;
+    q = surely_malloc(sizeof(Sparse_CSR));
+    val = surely_malloc(k * sizeof(double));
+    col_ind = surely_malloc(k * sizeof(unsigned));
+    row_ptr = surely_malloc ((rows+1) * sizeof(unsigned));
     r=-1;
-    c=0;
+    c=0; /* this line is unnecessary for correctness but simplifies the proof */
     l=0;
-
-    for(i=0; i<n; i++){
-        ri = prow_ind[i]; ci = pcol_ind[i]; x = pval[i];
-        if (ri == r){
-            if (ci == c){
-                val[l-1] += x;
-            }else{
-                c = ci; col_ind[l] = ci; val[l] = x; l++;
-            }
-        }else{
-            while (r+1<=ri){
-                row_ptr[++r] = l;
-                c = ci; col_ind[l] = ci; val[l] = x; l++;
-            }
+    /* partial_csr_0 */
+    for (i=0; i<n; i++) {
+    ri = prow_ind[i];
+    ci = pcol_ind[i];
+    x = pval[i];
+    if (ri==r)
+        if (ci==c)
+    val[l-1] += x; /* partial_CSR_duplicate */
+        else {
+    c=ci;
+    col_ind[l] = ci;
+    val[l] = x;
+    l++;           /* partial_CSR_newcol */
         }
+    else {
+        while (r+1<=ri) row_ptr[++r]=l; /* partial_CSR_skiprow */
+        c= ci;
+        col_ind[l] = ci;
+        val[l] = x;
+        l++;            /* partial_CSR_newrow */
+    }
     }
     cols = p->n_cols;
-    while(r+1 <= rows){
-        row_ptr[++r] = l;
-    }
-
-    q->values = val; 
-    q->col_ind = col_ind; 
+    while (r+1<=rows) row_ptr[++r]=l;  /* partial_CSR_lastrows */
+    q->values = val;
+    q->col_ind = col_ind;
     q->row_ptr = row_ptr;
-    q->n_rows = rows; 
+    q->n_rows = rows;
     q->n_cols = cols;
-
-    return q;
-
+    return q;          /* partial_CSR_properties */
+}
+/*
+For SpMV, focus on memory/cache optimizations first (reordering, 
+blocking, prefetching, improve locality, reduce indirection) 
+— they yield larger gains. Then focus on optimizing computation (vectorization,
+parallelization)
+*/
+void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
+    unsigned i, rows = m->n_rows;
+    double *val = m->values;
+    unsigned *col_ind = m->col_ind;
+    unsigned *row_ptr = m->row_ptr;
+    unsigned next=row_ptr[0];
+    for (i = 0; i < rows; i++) {
+        double s = 0.0;
+        for (unsigned h = row_ptr[i]; h < row_ptr[i + 1]; h++) {
+            double x = val[h];
+            unsigned j = col_ind[h];
+            s = fma_fallback(x, v[j], s);
+        }
+    p[i] = s;
+    }
 }
 
 
@@ -194,26 +236,42 @@ int main(int argc, char *argv[])
     double* res = malloc(N * sizeof(double));
     double* vec = malloc(M * sizeof(double));
 
+    //INITIALIZE RANDOM VECTOR
     srand(0);
     for(int i = 0; i < N; i++){
         vec[i] = rand() % 10;
     }
 
-    //compute SpMV
+    //compute SpMV with COO 
     SpMV_COO(struct_COO, vec, res);
 
     printf("\nResult (first 10 entries):\n");
-    for (int i = 0; i < M && i < 100; i++) {
+    for (int i = 0; i < M && i < 10; i++) {
         printf("res[%d] = %g\n", i, res[i]);
     }
+
+    //INITIALIZE CSR MATRIX FROM COO
+    Sparse_CSR* struct_CSR = coo_to_csr_matrix(struct_COO);
+    double* res_csr = malloc(M * sizeof(double));
+
+    //COMPUTE SpMV WITH CSR
+    csr_mv_multiply(struct_CSR, vec, res_csr);
+
+    printf("\nCSR Result (first 10 entries):\n");
+    for (int i = 0; i < M && i < 10; i++) {
+        printf("res_csr[%d] = %g\n", i, res_csr[i]);
+    }   
 
     free(I);
     free(J);
     free(val);
     free(vec);
     free(res);
+    free(res_csr);
+    free(struct_CSR);      
     free(struct_COO);
-
+    
+    return 0;
 
 
     // test for quicksort
@@ -235,8 +293,6 @@ int main(int argc, char *argv[])
     // for (unsigned i = 0; i < coo.nnz; i++)
     //     printf("(%u, %u, %.1f)\n", rows[i], cols[i], vals[i]);
 
-  
-	return 0;
 }
 
 

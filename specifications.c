@@ -17,54 +17,72 @@ void *surely_malloc(size_t size) {
 // quicksort taken from Appel paper and modified for COO struct : qsort3.c; 
 // https://github.com/cverified/cbench-vst/blob/master/qsort/qsort3.c
 
-#define SWAP_UNSIGNED(a, b) do { unsigned tmp = (a); (a) = (b); (b) = tmp; } while(0)
-#define SWAP_DOUBLE(a, b)  do { double tmp = (a); (a) = (b); (b) = tmp; } while(0)
-
-/* Lexicographic quicksort by (row, col) */
-static void quicksort_coo_recursive(unsigned *row, unsigned *col, double *val,
-                                    int lo, int hi)
-{
-    if (lo >= hi)
-        return;
-
-    int i = lo;
-    int j = hi;
-    int mid = lo + ((hi - lo) >> 1);
-
-    unsigned piv_row = row[mid];
-    unsigned piv_col = col[mid];
-
-    while (i <= j) {
-        // Move i right while (row[i], col[i]) < (piv_row, piv_col)
-        while ((row[i] < piv_row) ||
-               (row[i] == piv_row && col[i] < piv_col))
-            i++;
-
-        // Move j left while (row[j], col[j]) > (piv_row, piv_col)
-        while ((row[j] > piv_row) ||
-               (row[j] == piv_row && col[j] > piv_col))
-            j--;
-
-        if (i <= j) {
-            SWAP_UNSIGNED(row[i], row[j]);
-            SWAP_UNSIGNED(col[i], col[j]);
-            SWAP_DOUBLE(val[i], val[j]);
-            i++;
-            j--;
-        }
-    }
-
-    if (lo < j)
-        quicksort_coo_recursive(row, col, val, lo, j);
-    if (i < hi)
-        quicksort_coo_recursive(row, col, val, i, hi);
+int coo_less (Sparse_Coordinate *p, unsigned a, unsigned b) {
+    unsigned ra = p->row_indices[a], rb = p->row_indices[b];
+    if (ra<rb) return 1;
+    if (ra>rb) return 0;
+    return p->col_indices[a] < p->col_indices[b];
 }
 
-/* Public API */
-void coo_quicksort(Sparse_Coordinate *p)
+void swap(Sparse_Coordinate *p, unsigned a, unsigned b) {
+    unsigned i,j; double x;
+    i=p->row_indices[a];
+    j=p->col_indices[a];
+    x=p->values[a];
+    p->row_indices[a]=p->row_indices[b];
+    p->col_indices[a]=p->col_indices[b];
+    p->values[a]=p->values[b];
+    p->row_indices[b]=i;
+    p->col_indices[b]=j;
+    p->values[b]=x;
+}
+
+/* Lexicographic quicksort by (row, col) */
+void coo_quicksort(Sparse_Coordinate *p, unsigned base, unsigned n)
 {
-    if (p == NULL || p->nnz <= 1)
-        return;
-    quicksort_coo_recursive(p->row_indices, p->col_indices, p->values,
-                            0, (int)p->nnz - 1);
+    unsigned lo, hi, left, right, mid;
+
+    if (n == 0)
+    return;
+    lo = base;
+    hi = lo + n - 1;
+    while (lo < hi) {
+    mid = lo + ((hi - lo) >> 1);
+
+    if (coo_less(p,mid,lo))
+        swap(p, mid, lo);
+    if (coo_less(p,hi,mid)) {
+        swap(p, mid, hi);
+        if (coo_less(p,mid,lo))
+        swap(p, mid, lo);
+    }
+    left = lo + 1;
+    right = hi - 1;
+    do {
+        while (coo_less(p,left,mid))
+        left++;
+        while (coo_less(p,mid,right))
+        right--;
+        if (left < right) {
+    swap(p, left, right);
+        if (mid == left)
+            mid = right;
+        else if (mid == right)
+            mid = left;
+        left++;
+        right--;
+        } else if (left == right) {
+        left++;
+        right--;
+        break;
+        }
+    } while (left <= right);
+    if (right - lo > hi - left) {
+        coo_quicksort(p, left, hi - left + 1);
+        hi = right;
+    } else {
+        coo_quicksort(p, lo, right - lo + 1);
+        lo = left;
+    }
+    }
 }
