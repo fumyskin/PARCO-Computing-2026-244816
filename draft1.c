@@ -1,25 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mmio.h"
-
-
-typedef struct {
-    unsigned n_rows;
-    unsigned n_cols;
-    unsigned nnz;
-    unsigned* row_indices;
-    unsigned* col_indices;
-    double* values;
-}Sparse_Coordinate;
-
-typedef_struct{
-    unsigned n_rows;
-    unsigned n_cols;
-    unsigned* row_indices;
-    unsigned* col_indices;
-    double* values;
-}Sparse_CSR;
-
+#include "specifications.h"
 
 
 //function to initialize a struct COO given the data extracted from .mtx file
@@ -63,12 +45,12 @@ void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
 }
 
 
-unsigned coo_count(struct Sparse_Coordinate *p){
+unsigned coo_count(Sparse_Coordinate *p){
 
-    if (p == NULL || p->n == 0)
+    if (p == NULL || p->nnz == 0)
         return 0;
 
-    unsigned i, n = p->n; 
+    unsigned i, n = p->nnz; 
     if (n == 0) return 0;
     unsigned count = 1;
     for (i=1; i<n; i++){
@@ -80,8 +62,8 @@ unsigned coo_count(struct Sparse_Coordinate *p){
     return count;
 }
 
-struct Sparse_CSR *coo_to_csr_matrix(struct Sparse_Coordinate *p){
-    struct Sparse_CSR *q;
+Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p){
+    Sparse_CSR *q;
     unsigned count, i, r, c, ri, ci, cols, k, l, rows;
     unsigned *col_ind, *row_ptr, *prow_ind, *pcol_ind;
     double x, *val, *pval;
@@ -90,7 +72,7 @@ struct Sparse_CSR *coo_to_csr_matrix(struct Sparse_Coordinate *p){
     k = coo_count(p);
     rows=p->n_rows; prow_ind=p->row_indices; pcol_ind=p->col_indices;
     pval=p->values;
-    q=surely_malloc(sizeof(struct Sparse_CSR)); //check correctt functioning
+    q=surely_malloc(sizeof(Sparse_CSR)); //check correctt functioning
     val=surely_malloc(k*sizeof(double));
     col_ind=surely_malloc(k*sizeof(unsigned));
     row_ptr=surely_malloc((rows+1)*sizeof(unsigned));
@@ -119,12 +101,12 @@ struct Sparse_CSR *coo_to_csr_matrix(struct Sparse_Coordinate *p){
         row_ptr[++r] = l;
     }
 
-    q->val = val; 
+    q->values = val; 
     q->col_ind = col_ind; 
     q->row_ptr = row_ptr;
-    q->rows = rows; 
-    q->cols = cols;
-    
+    q->n_rows = rows; 
+    q->n_cols = cols;
+
     return q;
 
 }
@@ -206,7 +188,7 @@ int main(int argc, char *argv[])
     //create struct with data read from .mtx file
     Sparse_Coordinate* struct_COO = initialize_COO(M, N, nz, I, J, val);
     //convert COO to CSR
-    Sparse_CSR* struct_CSR = convert_COO_CSR(M, N, nz, &struct_COO);
+    //Sparse_CSR* struct_CSR = convert_COO_CSR(M, N, nz, &struct_COO);
 
     //INITIALIZE MATRIX VECTOR MULTIPLICATION
     double* res = malloc(N * sizeof(double));

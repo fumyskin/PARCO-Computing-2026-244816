@@ -10,7 +10,15 @@ typedef struct {
     unsigned *row_indices;
     unsigned *col_indices;
     double *values;
-} Sparse_Coordinate;
+}Sparse_Coordinate;
+
+typedef struct {
+    unsigned n_rows;
+    unsigned n_cols;
+    unsigned* row_ptr;
+    unsigned* col_ind;
+    double* values;
+}Sparse_CSR;
 
 void *surely_malloc(size_t size);
 void coo_quicksort(Sparse_Coordinate *p);
