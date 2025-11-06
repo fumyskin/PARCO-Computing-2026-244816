@@ -39,7 +39,32 @@ or define the number of threads at program level (which may be better ?)
 - REALLY IMPORTANT: BARRIER DIRECTIVE
 
 
+
+
+- ** NOTE: RACE CONDITIONS ARE STILL POSSIBLE EVEN IN CASE OF pragma omp parallel schedule() **
+- POSSIBLE PROBLEM: A REGISTER FROM A CORE MAY WANT TO ACCESS THE MEMORY OF ANOTHER CORE (**NUMA EFFECT**): mem_barrier; cpu_barrier MAY BE SOLUTIONS TO THIS
+- lscpu !
+
+
+try these:
+- #pragma omp parallel for reduction(+:sum) schedule(static, chunk_sizes[c])
+- #pragma omp parallel for reduction(+:temp_sum)
+- #pragma omp parallel for collapse(2) reduction(+:sum)
+- see schedule.c 
+
+
+- CONSIDER THE AVERAGE OF THE MOST RECURRENT RESULTS (NO OUTLIERS)
+
+- consider tying the first code run directly with the cache somehow....
+
+
+
+
+
+
 # REFERENCES
+https://stackoverflow.com/questions/28482833/understanding-the-collapse-clause-in-openmp -> for understanding better the COLLAPSE keyword for pragmas
+
 https://ieeexplore.ieee.org/document/10444348 -> paper to Efficient COO to CSR Conversion for Accelerating Sparse Matrix Processing on FPGA
 
 https://arxiv.org/abs/2510.13412 -> paper to Formal Verification of COO to CSR Sparse Matrix Conversion (Invited Paper) -> https://www.cs.princeton.edu/~appel/papers/coo-csr.pdf

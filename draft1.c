@@ -95,31 +95,31 @@ Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
     q = surely_malloc(sizeof(Sparse_CSR));
     val = surely_malloc(k * sizeof(double));
     col_ind = surely_malloc(k * sizeof(unsigned));
-    row_ptr = surely_malloc ((rows+1) * sizeof(unsigned));
+    row_ptr = surely_malloc((rows+1) * sizeof(unsigned));
     r=-1;
-    c=0; /* this line is unnecessary for correctness but simplifies the proof */
+    c=0; 
     l=0;
     /* partial_csr_0 */
     for (i=0; i<n; i++) {
-    ri = prow_ind[i];
-    ci = pcol_ind[i];
-    x = pval[i];
+        ri = prow_ind[i];
+        ci = pcol_ind[i];
+        x = pval[i];
     if (ri==r)
         if (ci==c)
-    val[l-1] += x; /* partial_CSR_duplicate */
+            val[l-1] += x; /* partial_CSR_duplicate */
         else {
-    c=ci;
-    col_ind[l] = ci;
-    val[l] = x;
-    l++;           /* partial_CSR_newcol */
+            c=ci;
+            col_ind[l] = ci;
+            val[l] = x;
+            l++;           /* partial_CSR_newcol */
         }
-    else {
-        while (r+1<=ri) row_ptr[++r]=l; /* partial_CSR_skiprow */
-        c= ci;
-        col_ind[l] = ci;
-        val[l] = x;
-        l++;            /* partial_CSR_newrow */
-    }
+        else{
+            while (r+1<=ri) row_ptr[++r]=l; /* partial_CSR_skiprow */
+            c= ci;
+            col_ind[l] = ci;
+            val[l] = x;
+            l++;            /* partial_CSR_newrow */
+        }
     }
     cols = p->n_cols;
     while (r+1<=rows) row_ptr[++r]=l;  /* partial_CSR_lastrows */
@@ -143,7 +143,7 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
     unsigned *row_ptr = m->row_ptr;
     unsigned next=row_ptr[0];
 
-    #pragma omp parallel for schedule(static)
+    #pragma omp parallel for schedule(dynamic)
     for (i = 0; i < rows; i++) {
         double s = 0.0;
         for (unsigned h = row_ptr[i]; h < row_ptr[i + 1]; h++) {
@@ -151,8 +151,16 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
             unsigned j = col_ind[h];
             s = fma_fallback(x, v[j], s);
         }
-    p[i] = s;
+        p[i] = s;
     }
+
+    // #pragma omp barrier
+    // #pragma omp master
+    // {
+    //     //finalization code ?
+    // }
+    // #pragma omp barrier
+
 }
 
 
@@ -225,9 +233,9 @@ int main(int argc, char *argv[])
     /************************/
     mm_write_banner(stdout, matcode);
     mm_write_mtx_crd_size(stdout, M, N, nz);
-    for (i=0; i<nz; i++){
-        fprintf(stdout, "%d %d %20.19g\n", I[i]+1, J[i]+1, val[i]);
-    }
+    // for (i=0; i<nz; i++){
+    //     fprintf(stdout, "%d %d %20.19g\n", I[i]+1, J[i]+1, val[i]);
+    // }
 
     //create struct with data read from .mtx file
     Sparse_Coordinate* struct_COO = initialize_COO(M, N, nz, I, J, val);
@@ -247,22 +255,33 @@ int main(int argc, char *argv[])
     //compute SpMV with COO 
     SpMV_COO(struct_COO, vec, res);
 
-    printf("\nResult (first 10 entries):\n");
-    for (int i = 0; i < M && i < 10; i++) {
-        printf("res[%d] = %g\n", i, res[i]);
-    }
+    // printf("\nResult (first 10 entries):\n");
+    // for (int i = 0; i < M && i < 10; i++) {
+    //     printf("res[%d] = %g\n", i, res[i]);
+    // }
 
     //INITIALIZE CSR MATRIX FROM COO
     Sparse_CSR* struct_CSR = coo_to_csr_matrix(struct_COO);
     double* res_csr = malloc(M * sizeof(double));
 
     //COMPUTE SpMV WITH CSR
+    double start = omp_get_wtime();
     csr_mv_multiply(struct_CSR, vec, res_csr);
+    double end = omp_get_wtime();
+    printf("\nCSR SpMV Time: %g seconds\n", end - start);
 
-    printf("\nCSR Result (first 10 entries):\n");
-    for (int i = 0; i < M && i < 10; i++) {
-        printf("res_csr[%d] = %g\n", i, res_csr[i]);
-    }   
+    // printf("\nCSR Result (first 10 entries):\n");
+    // for (int i = 0; i < M && i < 10; i++) {
+    //     printf("res_csr[%d] = %g\n", i, res_csr[i]);
+    // }   
+
+
+    printf("Array number of rows: %d\n", struct_CSR->n_rows);
+    printf("Array number of cols: %d\n", struct_CSR->n_cols);
+    
+
+    int length = sizeof(struct_CSR->row_ptr)/sizeof(struct_CSR->row_ptr[0]);
+    printf("count: %d\n", length);
 
     free(I);
     free(J);
