@@ -104,25 +104,26 @@ Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
         ri = prow_ind[i];
         ci = pcol_ind[i];
         x = pval[i];
-    if (ri==r)
-        if (ci==c)
-            val[l-1] += x; /* partial_CSR_duplicate */
-        else {
-            c=ci;
-            col_ind[l] = ci;
-            val[l] = x;
-            l++;           /* partial_CSR_newcol */
+        if (ri==r){
+            if (ci==c)
+                val[l-1] += x; /* partial_csr_duplicate */
+            else {
+                c=ci;
+                col_ind[l] = ci;
+                val[l] = x;
+                l++;           /* partial_csr_newcol */
+            }
         }
         else{
-            while (r+1<=ri) row_ptr[++r]=l; /* partial_CSR_skiprow */
+            while (r+1<=ri) row_ptr[++r]=l; /* partial_csr_skiprow */
             c= ci;
             col_ind[l] = ci;
             val[l] = x;
-            l++;            /* partial_CSR_newrow */
+            l++;            /* partial_csr_newrow */
         }
     }
     cols = p->n_cols;
-    while (r+1<=rows) row_ptr[++r]=l;  /* partial_CSR_lastrows */
+    while (r+1<=rows) row_ptr[++r]=l;  /* partial_csr_lastrows */
     q->values = val;
     q->col_ind = col_ind;
     q->row_ptr = row_ptr;
@@ -279,10 +280,9 @@ int main(int argc, char *argv[])
     printf("Array number of rows: %d\n", struct_CSR->n_rows);
     printf("Array number of cols: %d\n", struct_CSR->n_cols);
     
-
-    int length = sizeof(struct_CSR->row_ptr)/sizeof(struct_CSR->row_ptr[0]);
-    printf("count: %d\n", length);
-
+    unsigned nnz_csr = struct_CSR->row_ptr[struct_CSR->n_rows];
+    printf("result: %d\n", nnz_csr);
+    
     free(I);
     free(J);
     free(val);
