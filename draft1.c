@@ -144,7 +144,7 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
     unsigned *row_ptr = m->row_ptr;
     unsigned next=row_ptr[0];
 
-    #pragma omp parallel for schedule(dynamic)
+    #pragma omp parallel for schedule(guided)
     for (i = 0; i < rows; i++) {
         double s = 0.0;
         for (unsigned h = row_ptr[i]; h < row_ptr[i + 1]; h++) {
@@ -269,19 +269,12 @@ int main(int argc, char *argv[])
     double start = omp_get_wtime();
     csr_mv_multiply(struct_CSR, vec, res_csr);
     double end = omp_get_wtime();
-    printf("\nCSR SpMV Time: %g seconds\n", end - start);
+    printf("\nElapsed time: %g seconds\n", end - start);
 
     // printf("\nCSR Result (first 10 entries):\n");
     // for (int i = 0; i < M && i < 10; i++) {
     //     printf("res_csr[%d] = %g\n", i, res_csr[i]);
     // }   
-
-
-    printf("Array number of rows: %d\n", struct_CSR->n_rows);
-    printf("Array number of cols: %d\n", struct_CSR->n_cols);
-    
-    unsigned nnz_csr = struct_CSR->row_ptr[struct_CSR->n_rows];
-    printf("result: %d\n", nnz_csr);
     
     free(I);
     free(J);

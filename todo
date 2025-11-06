@@ -1,9 +1,17 @@
 # PRELIMINARIES
-- [x ] implement COO multiplication with vector
+- [x] implement COO multiplication with vector
 - [x] implement CSR multiplication with vector
 
 # DELIVERABLE
 - [x] implement conversion COO to CSR
+- [ ] verify quickly how the cluster running works (like, which commands are needed)
+- [ ] once done that, try to run the first draft of the script and get results on the cluster
+- [ ] these are dummy results, as we have not dealt in depth with the parallelization part
+- [ ] once done that, study deeply what to do to parallelize the code 
+- [ ] AND optimize the cache, you have various options, make sure to consider them all
+- [ ] plot the resulting data into a matlab scipt to plot the results
+- [ ] check literature for conclusion
+- [ ] write it all
 - [ ] examine the cache performance of sequential code under 5 different type of sparse matrices (this allows you to verify the code is working and general purpose as well) 
 
 
