@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#PBS -N a # Job name
+#PBS -o ./a.out # Output files
+#PBS -e ./a.err # Error files
+#PBS -q short_cpuQ # Queue name
+#PBS -l walltime=0:10:00 # Set the maximum wall time
+#PBS -l select=1:ncpus=1
+#PBS -l mem=1mb # Set the memory
+# Load modules
+module load gcc91
+g++() { g++-9.1.0 "$@"; }
+g++ --version
+
+# Select the working directory
+cd "$ PBS_O_WORKDIR " # go to the directory where qsub was run
+# Compile and run
+# gcc - std = c99 codename .c -o codename . out # C code
+g ++ - std =c ++11 codename .c -o codename . out # C++ code
+./ a.out
