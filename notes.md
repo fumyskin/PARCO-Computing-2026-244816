@@ -78,3 +78,5 @@ https://stackoverflow.com/questions/10850155/whats-the-difference-between-static
 https://arxiv.org/html/2502.19284v1#alg1 -> regarding the optimization of SpMV algorithm
 
 https://michalpitr.substack.com/p/optimizing-matrix-multiplication -> inspo for perf stat functionaity
+
+https://arxiv.org/html/2404.06047v1#S8 -> THIS ON IS A GIGANTIC SURVEY THAT SUMMARIZES SIMULATIONS
