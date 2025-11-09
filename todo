@@ -17,6 +17,16 @@
 
 
 
+# TO DO TODAY
+- [ ] plot spmv_static, spvm_dynamic, spvm_guided, spvm_manual information(s) FIRST (with all different 
+        matrices AND different architectures) -> TOMORROW ASK TUTOR IF THIS MODE OF PROCEEDING IS FINE
+- [ ] write paper information regarding this part FIRST
+- [ ] then, you may implement other pragma omp options:  
+        - [ ] CHUNK SIZE, 
+        - [ ] AUTO, 
+        - [ ] pragma barriers, 
+        - [ ] REDUCTION and so on
+
 -------------------------------
 DELIVERABLE1 INSTRUCTION
 -------------------------------
