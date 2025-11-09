@@ -1,23 +1,30 @@
 #!/bin/bash
 
-#PBS -N a # parco_job1
-#PBS -o run_output.log # Output files
-#PBS -e run_error.log  # Error files
-#PBS -q short_cpuQ     # Queue name
-#PBS -l select=1:ncpus=12:mem=2gb # Resources: 1 node, 12 CPUs, 2GB memory
-#PBS -l walltime=00:10:00 # Set a walltime limit
+# Job name
+#PBS -N a
 
-# Load modules (assure it's gcc 9.1)
+# Output files
+#PBS -o run_output.log
+#PBS -e run_error.log
+
+# Queue name
+#PBS -q short_cpuQ
+
+# Resources: 1 node, 2 CPUs, 2GB memory
+#PBS -l select=1:ncpus=2:mem=2gb
+
+# Walltime limit
+#PBS -l walltime=00:10:00
+
+# Load compiler module
 module load gcc91
-g++() { g++-9.1.0 "$@"; }
 g++ --version
 
-# Select the working directory
-cd "$PBS_O_WORKDIR " # go to the directory where qsub was run
+# Go to working directory
+cd "$PBS_O_WORKDIR"
 
 # Compile and run
-# gcc - std = c99 codename .c -o codename . out # C code, is this necessary?
-# Run your shell script that executes all the a.out files
+# gcc -std=c99 codename.c -o codename.out   # Uncomment if needed
 bash compile.sh
 
 
