@@ -1,9 +1,9 @@
-%% plot_spmv_results.m
+%% plot_spmv_results_balanced.m
 % Clear workspace
 clear; close all; clc;
 
 %% Load data
-filename = 'results.csv'; % <-- change to your CSV filename
+filename = 'results_utm.csv'; % <-- change to your CSV filename
 data = readtable(filename);
 
 % Convert Executable column to categorical for easy grouping
@@ -15,6 +15,7 @@ nExec = numel(executables);
 
 meanTimes = struct();
 stdTimes = struct();
+threadCounts = struct();
 
 for i = 1:nExec
     exec = executables{i};
@@ -38,9 +39,13 @@ end
 
 %% Plot settings
 colors = lines(nExec);
-markers = {'o', 's', 'd'};
+markers = {'o', 's', 'd', '^', 'v'};
 figure;
 hold on; grid on; box on;
+
+% Create evenly spaced x positions
+allThreads = unique(data.Threads);
+xPositions = 1:numel(allThreads); % evenly spaced indices
 
 for i = 1:nExec
     exec = executables{i};
@@ -48,9 +53,12 @@ for i = 1:nExec
     mTimes = meanTimes.(exec);
     sTimes = stdTimes.(exec);
     
-    errorbar(threads, mTimes, sTimes, ...
+    % Map thread numbers to evenly spaced x positions
+    [~, idx] = ismember(threads, allThreads);
+    
+    errorbar(xPositions(idx), mTimes, sTimes, ...
         'LineWidth', 1.5, ...
-        'Marker', markers{i}, ...
+        'Marker', markers{mod(i-1, numel(markers))+1}, ...
         'Color', colors(i,:), ...
         'MarkerFaceColor', colors(i,:));
 end
@@ -61,10 +69,18 @@ ylabel('Execution Time (s)', 'Interpreter', 'latex', 'FontSize', 12);
 title('SpMV Performance with Different Scheduling Policies', ...
     'Interpreter', 'latex', 'FontSize', 13);
 legend(strrep(executables, 'spmv_', ''), 'Location', 'northwest', 'Interpreter', 'latex');
-set(gca, 'YScale', 'log'); % log scale often helps with time data
+
+% X-axis evenly spaced with real thread labels
+set(gca, 'XTick', xPositions);
+set(gca, 'XTickLabel', string(allThreads));
 set(gca, 'FontSize', 11);
-xticks(unique(data.Threads));
+
+% Use a log scale for the y-axis to make small sequential runs visible
+set(gca, 'YScale', 'log');
+ylim([1e-5, 1]); % adjust upper bound if you have higher times
+
 axis tight;
+grid on;
 
 %% Save figure (optional)
-exportgraphics(gcf, 'spmv_performance.png', 'Resolution', 300);
+exportgraphics(gcf, 'spmv_performance_balanced.png', 'Resolution', 300);
