@@ -183,7 +183,7 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
     unsigned *row_ptr = m->row_ptr;
     unsigned next=row_ptr[0];
 
-    #pragma omp parallel for schedule(static)   // static i think improves cache performance, since it forces threads to work on contiguous blocks of data
+    #pragma omp parallel for schedule(runtime)   // static i think improves cache performance, since it forces threads to work on contiguous blocks of data
     for (i = 0; i < rows; i++) {
         double s = 0.0; // private scope to each thread
         for (unsigned h = row_ptr[i]; h < row_ptr[i + 1]; h++) {

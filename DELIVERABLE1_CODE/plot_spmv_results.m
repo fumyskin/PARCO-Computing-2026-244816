@@ -1,6 +1,6 @@
 %% plot_all_spmv_results.m
 % Processes all CSV files in /results directory
-% Creates separate execution time and speedup plots for each matrix type
+% Creates separate execution time and parallel efficiency plots for each matrix type
 clear; close all; clc;
 
 %% Configuration
@@ -149,7 +149,7 @@ for f = 1:nFiles
         exportgraphics(gcf, execTimeFilename, 'Resolution', 300);
         fprintf('  ✅ Saved: %s\n', execTimeFilename);
         
-        %% ===== SPEEDUP PLOT =====
+        %% ===== PARALLEL EFFICIENCY PLOT =====
         seqExec = executables(contains(string(executables), 'sequential', 'IgnoreCase', true));
         
         if ~isempty(seqExec)
@@ -166,58 +166,55 @@ for f = 1:nFiles
                 
                 threads = threadCounts.(exec);
                 pTimes = p90Times.(exec);
-                speedup = seqTime ./ pTimes;
+                efficiency = (seqTime ./ pTimes) ./ threads * 100; % Parallel efficiency %
                 [~, idx] = ismember(threads, allThreads);
                 
-                plot(xPositions(idx), speedup, ...
+                plot(xPositions(idx), efficiency, ...
                     'LineWidth', 1.5, ...
                     'Marker', markers{mod(i-1, numel(markers))+1}, ...
                     'Color', colors(i,:), 'MarkerFaceColor', colors(i,:), 'MarkerSize', 8);
             end
             
-            % Ideal linear speedup line
-            if any(allThreads > 1)
-                parallelThreads = allThreads(allThreads > 1);
-                [~, idx] = ismember(parallelThreads, allThreads);
-                plot(xPositions(idx), parallelThreads, '--k', 'LineWidth', 1.2, 'DisplayName', 'Ideal Linear');
-            end
+            % Ideal efficiency (100%)
+            plot(xPositions, 100 * ones(size(xPositions)), '--k', 'LineWidth', 1.2, 'DisplayName', 'Ideal (100%)');
             
             xlabel('Number of Threads', 'Interpreter', 'latex', 'FontSize', 12);
-            ylabel('Speedup (×)', 'Interpreter', 'latex', 'FontSize', 12);
-            title(sprintf('SpMV Speedup vs Sequential - %s', strrep(matrixName, '_', '\_')), ...
+            ylabel('Parallel Efficiency (\%)', 'Interpreter','latex','FontSize',12);
+            title(sprintf('SpMV Parallel Efficiency - %s', strrep(matrixName, '_', '\_')), ...
                 'Interpreter', 'tex', 'FontSize', 13);
             
             legendEntries = executables(~strcmp(executables, seqExec));
-            legend([strrep(legendEntries, 'spmv_', ''); {'Ideal Linear'}], ...
-                'Location', 'northwest', 'Interpreter', 'latex');
+            legend([strrep(legendEntries, 'spmv_', ''); {'Ideal (100%)'}], ...
+                'Location', 'northeast', 'Interpreter', 'latex');
             set(gca, 'XTick', xPositions, 'XTickLabel', string(allThreads), 'FontSize', 11);
+            ylim([0 110]); yticks(0:20:100);
             axis tight; grid on;
             
-            %% Smart label positioning for speedup
-            allSpeedupLabels = [];
+            %% Smart label positioning for efficiency
+            allEffLabels = [];
             for i = 1:nExec
                 exec = executables{i};
                 if strcmp(exec, seqExec), continue; end
                 
                 threads = threadCounts.(exec);
                 pTimes = p90Times.(exec);
-                speedup = seqTime ./ pTimes;
+                eff = (seqTime ./ pTimes) ./ threads * 100;
                 [~, idx] = ismember(threads, allThreads);
                 
-                for j = 1:numel(speedup)
-                    allSpeedupLabels = [allSpeedupLabels; struct('x', xPositions(idx(j)), 'y', speedup(j), 'exec', i)];
+                for j = 1:numel(eff)
+                    allEffLabels = [allEffLabels; struct('x', xPositions(idx(j)), 'y', eff(j), 'exec', i)];
                 end
             end
             
-            [~, sortIdx] = sortrows([[allSpeedupLabels.x]', [allSpeedupLabels.y]'], [1, 2]);
-            allSpeedupLabels = allSpeedupLabels(sortIdx);
+            [~, sortIdx] = sortrows([[allEffLabels.x]', [allEffLabels.y]'], [1, 2]);
+            allEffLabels = allEffLabels(sortIdx);
             
-            for k = 1:length(allSpeedupLabels)
-                lbl = allSpeedupLabels(k);
-                labelText = sprintf('%.2fx', lbl.y);
+            for k = 1:length(allEffLabels)
+                lbl = allEffLabels(k);
+                labelText = sprintf('%.1f%%', lbl.y);
                 
-                sameX = [allSpeedupLabels.x] == lbl.x;
-                yValues = [allSpeedupLabels(sameX).y];
+                sameX = [allEffLabels.x] == lbl.x;
+                yValues = [allEffLabels(sameX).y];
                 if length(yValues) > 1
                     yRank = find(sort(yValues) == lbl.y, 1);
                     if mod(yRank, 2) == 0
@@ -235,10 +232,10 @@ for f = 1:nFiles
                     'BackgroundColor', [1 1 1 0.7], 'EdgeColor', 'none', 'Margin', 1);
             end
             
-            % Save speedup figure
-            speedupFilename = fullfile(outputDir, sprintf('%s_speedup.png', matrixName));
-            exportgraphics(gcf, speedupFilename, 'Resolution', 300);
-            fprintf('  Saved: %s\n', speedupFilename);
+            % Save efficiency figure
+            effFilename = fullfile(outputDir, sprintf('%s_efficiency.png', matrixName));
+            exportgraphics(gcf, effFilename, 'Resolution', 300);
+            fprintf('  Saved: %s\n', effFilename);
         else
             warning('  No sequential implementation found for %s', matrixName);
         end
