@@ -4,7 +4,7 @@
 clear; close all; clc;
 
 %% Configuration
-resultsDir = './results'; % Change to your results directory path
+resultsDir = './DELIVERABLE1_RES'; % Change to your results directory path
 outputDir = './DELIVERABLE1_IMAGES'; % Folder to save figures
 
 % Create output folder if it doesn't exist

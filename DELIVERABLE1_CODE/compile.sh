@@ -4,15 +4,16 @@
 # ===========================
 # Configuration
 # ===========================
-MATRICES=("1138_bus/1138_bus.mtx" "utm5940/utm5940.mtx")
+MATRICES=("flowmeter0/flowmeter0.mtx" "1138_bus/1138_bus.mtx")
 RUNS=12
 THREADS=(1 2 4 8 16 32 64 96)
 EXECUTABLES=("spmv_sequential" "spmv_static" "spmv_manual" "spmv_dynamic" "spmv_guided" \
-             "spmv_runtime_static" "spmv_runtime_dynamic" "spmv_runtime_guided")
+             "spmv_runtime_static" "spmv_runtime_dynamic" "spmv_runtime_guided" "spmv_task")
 CHUNK_SIZES=(10 100 1000 10000)
 
-RESULTS_DIR="results"
-mkdir -p "$RESULTS_DIR"
+RESULTS_DIR="DELIVERABLE1_RES"
+rm -rf "$RESULTS_DIR"        # Remove old results completely
+mkdir -p "$RESULTS_DIR"      # Create fresh folder
 
 # ===========================
 # Main benchmarking loop
@@ -26,6 +27,11 @@ for MATRIX_PATH in "${MATRICES[@]}"; do
     # Prepare single chunked results file
     CHUNKED_OUTPUT="${RESULTS_DIR}/${MATRIX_NAME}_chunked.csv"
     echo "Executable,Threads,Run,ChunkSize,Time" > "$CHUNKED_OUTPUT"
+
+    # Default case for other executables (non-runtime)
+    OUTPUT_FILE="${RESULTS_DIR}/${MATRIX_NAME}.csv"
+    echo "Executable,Threads,Run,ChunkSize,Time" > "$OUTPUT_FILE"
+
 
     # Loop for each executable
     for EXEC in "${EXECUTABLES[@]}"; do
@@ -61,10 +67,7 @@ for MATRIX_PATH in "${MATRICES[@]}"; do
             done
 
         else
-            # Default case for other executables (non-runtime)
-            OUTPUT_FILE="${RESULTS_DIR}/${MATRIX_NAME}_${EXEC}.csv"
-            echo "Executable,Threads,Run,ChunkSize,Time" > "$OUTPUT_FILE"
-
+        
             for T in "${THREADS[@]}"; do
                 export OMP_NUM_THREADS=$T
                 echo "  Threads: $T"
