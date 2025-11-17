@@ -1,0 +1,463 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <immintrin.h>
+#include <pthread.h>
+#include <omp.h>
+#include <string.h>
+#include <stdint.h>
+#include <math.h>
+#include "mmio.h"
+#include "specifications.h"
+
+typedef struct {
+    unsigned n_rows;
+    unsigned n_cols;
+    unsigned nnz;
+
+    unsigned beta;     // block size
+    unsigned nb_r;     // number of block rows
+    unsigned nb_c;     // number of block cols
+    unsigned bits;     // log2(beta)
+
+    unsigned *blk_ptr; // length = nb_r * nb_c + 1
+    double   *values;  // length = nnz
+    uint32_t *idx;     // packed (r_in, c_in)
+} Sparse_CSB;
+
+// block entry block
+typedef struct {
+    uint32_t r_in, c_in;
+    double   val;
+    uint32_t key;
+} BlockEntry;
+
+//define fma block operation
+#if defined(__x86_64__) && defined(__FMA__)
+static inline double fma_fallback(double a, double b, double c) {
+    __m128d A = _mm_set_sd(a);
+    __m128d B = _mm_set_sd(b);
+    __m128d C = _mm_set_sd(c);
+    __m128d R = _mm_fmadd_sd(A, B, C);
+    return _mm_cvtsd_f64(R);
+}
+#else
+static inline double fma_fallback(double a, double b, double c) {
+    return a * b + c; // may be fused by compiler with -O3 -ffp-contract=fast
+}
+#endif
+
+
+// Morton helpers: 
+static inline unsigned highest_pow2_le(unsigned x) {
+    return x == 0 ? 1 : (1u << (31 - __builtin_clz(x)));
+}
+
+static inline unsigned choose_beta_pow2(unsigned n) {
+    unsigned b = (unsigned)sqrt((double)n);
+    if (b == 0) b = 1;
+    return highest_pow2_le(b);
+}
+
+static inline uint32_t morton_key(unsigned r, unsigned c, unsigned bits) {
+    uint32_t key = 0;
+    for (int k = bits-1; k >= 0; k--) {
+        key = (key << 2) |
+              (((r >> k) & 1u) << 1) |
+              ((c >> k) & 1u);
+    }
+    return key;
+}
+
+
+
+//function to initialize a struct COO given the data extracted from .mtx file
+Sparse_Coordinate* initialize_COO(
+    int n_rows,
+    int n_cols,
+    int nnz,
+    int* row_indices,
+    int* col_indices,
+    double* values
+)
+{
+    Sparse_Coordinate* struct_COO = malloc(sizeof(Sparse_Coordinate));
+    struct_COO->n_rows = n_rows;
+    struct_COO->n_cols = n_cols;
+    struct_COO->nnz = nnz;
+    struct_COO->row_indices = row_indices;
+    struct_COO->col_indices = col_indices;
+    struct_COO->values = values;
+
+    return struct_COO;
+}
+
+
+//function to perform matrix
+void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
+    for(int i = 0; i < COO->n_rows; i++){
+        res[i] = 0;
+    }
+
+    for(ssize_t nnz_id = 0; nnz_id < COO->nnz; nnz_id++){
+        ssize_t i = COO->row_indices[nnz_id];
+        ssize_t j = COO->col_indices[nnz_id];
+        double val = COO->values[nnz_id];
+
+        res[i] += val * vec[j]; 
+    } 
+
+    return;
+}
+
+
+unsigned coo_count(Sparse_Coordinate *p){
+    if (p == NULL || p->nnz == 0)
+        return 0;
+
+    unsigned i, n = p->nnz; 
+    if (n == 0) return 0;
+    unsigned count = 1;
+    for (i=1; i<n; i++){
+        if (p->row_indices[i-1] !=p->row_indices[i] || 
+            p->col_indices[i-1] !=p->col_indices[i]){
+            count++;
+        }
+    }
+    return count;
+}
+
+Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
+    Sparse_CSR *q;
+    unsigned count, i;
+    unsigned r,c, ri, ci, cols, k, l, rows;
+    unsigned *col_ind, *row_ptr, *prow_ind, *pcol_ind;
+    double x, *val, *pval;
+    unsigned n = p->nnz;
+    coo_quicksort(p, 0, n);
+    k = coo_count(p);
+    rows = p->n_rows;
+    prow_ind=p->row_indices;
+    pcol_ind=p->col_indices;
+    pval = p->values;
+    q = surely_malloc(sizeof(Sparse_CSR));
+    val = surely_malloc(k * sizeof(double));
+    col_ind = surely_malloc(k * sizeof(unsigned));
+    row_ptr = surely_malloc((rows+1) * sizeof(unsigned));
+    r=-1;
+    c=0; 
+    l=0;
+    /* partial_csr_0 */
+    for (i=0; i<n; i++) {
+        ri = prow_ind[i];
+        ci = pcol_ind[i];
+        x = pval[i];
+        if (ri==r){
+            if (ci==c)
+                val[l-1] += x; /* partial_csr_duplicate */
+            else {
+                c=ci;
+                col_ind[l] = ci;
+                val[l] = x;
+                l++;           /* partial_csr_newcol */
+            }
+        }
+        else{
+            while (r+1<=ri) row_ptr[++r]=l; /* partial_csr_skiprow */
+            c= ci;
+            col_ind[l] = ci;
+            val[l] = x;
+            l++;            /* partial_csr_newrow */
+        }
+    }
+    cols = p->n_cols;
+    while (r+1<=rows) row_ptr[++r]=l;  /* partial_csr_lastrows */
+    q->values = val;
+    q->col_ind = col_ind;
+    q->row_ptr = row_ptr;
+    q->n_rows = rows;
+    q->n_cols = cols;
+    return q;          /* partial_CSR_properties */
+}
+/*
+For SpMV, focus on memory/cache optimizations first (reordering, 
+blocking, prefetching, improve locality, reduce indirection) 
+— they yield larger gains. Then focus on optimizing computation (vectorization,
+parallelization)
+*/
+
+// coo to csb conversion
+Sparse_CSB *coo_to_csb(
+        int n_rows, int n_cols, int nnz,
+        int *I, int *J, double *V)
+{
+    Sparse_CSB *A = malloc(sizeof(Sparse_CSB));
+    A->n_rows = n_rows;
+    A->n_cols = n_cols;
+    A->nnz    = nnz;
+
+    unsigned beta = choose_beta_pow2(n_rows);
+    unsigned bits = 0; while ((1u << bits) < beta) bits++;
+    unsigned nb_r = (n_rows + beta - 1) / beta;
+    unsigned nb_c = (n_cols + beta - 1) / beta;
+
+    A->beta  = beta;
+    A->bits  = bits;
+    A->nb_r  = nb_r;
+    A->nb_c  = nb_c;
+
+    unsigned num_blocks = nb_r * nb_c;
+
+    // Allocate block vectors
+    BlockEntry **blocks = calloc(num_blocks, sizeof(BlockEntry*));
+    unsigned    *counts = calloc(num_blocks, sizeof(unsigned));
+    unsigned    *caps   = calloc(num_blocks, sizeof(unsigned));
+
+    for (int k = 0; k < nnz; k++) {
+        int r = I[k], c = J[k];
+        int brow = r / beta;
+        int bcol = c / beta;
+        int r_in = r % beta;
+        int c_in = c % beta;
+
+        unsigned b = brow * nb_c + bcol;
+
+        // grow block if needed
+        if (counts[b] == caps[b]) {
+            caps[b] = caps[b] ? 2*caps[b] : 8;
+            blocks[b] = realloc(blocks[b], caps[b] * sizeof(BlockEntry));
+        }
+
+        BlockEntry *e = &blocks[b][counts[b]++];
+
+        e->r_in = r_in;
+        e->c_in = c_in;
+        e->val  = V[k];
+        e->key  = morton_key(r_in, c_in, bits);
+    }
+
+    // sort each block by Morton order
+    int cmp(const void *a, const void *b) {
+        uint32_t ka = ((BlockEntry*)a)->key;
+        uint32_t kb = ((BlockEntry*)b)->key;
+        return (ka > kb) - (ka < kb);
+    }
+
+    for (unsigned b = 0; b < num_blocks; b++)
+        if (counts[b] > 1)
+            qsort(blocks[b], counts[b], sizeof(BlockEntry), cmp);
+
+    // Allocate output arrays
+    A->values = malloc(nnz * sizeof(double));
+    A->idx    = malloc(nnz * sizeof(uint32_t));
+    A->blk_ptr = malloc((num_blocks + 1) * sizeof(unsigned));
+
+    // build blk_ptr and flatten blocks
+    unsigned pos = 0;
+    A->blk_ptr[0] = 0;
+
+    for (unsigned b = 0; b < num_blocks; b++) {
+        unsigned cnt = counts[b];
+        for (unsigned t = 0; t < cnt; t++) {
+            BlockEntry *e = &blocks[b][t];
+            A->values[pos] = e->val;
+            A->idx[pos]    = (e->r_in << bits) | e->c_in;
+            pos++;
+        }
+        A->blk_ptr[b+1] = pos;
+    }
+
+    // free temporary blocks
+    for (unsigned b = 0; b < num_blocks; b++)
+        free(blocks[b]);
+
+    free(blocks);
+    free(counts);
+    free(caps);
+
+    return A;
+}
+
+
+
+
+void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
+    unsigned i, rows = m->n_rows;
+    double *val = m->values;
+    unsigned *col_ind = m->col_ind;
+    unsigned *row_ptr = m->row_ptr;
+    unsigned next=row_ptr[0];
+
+    // sequential implementation
+    for (i = 0; i < rows; i++) {
+        double s = 0.0; // private scope to each thread
+        for (unsigned h = row_ptr[i]; h < row_ptr[i + 1]; h++) {
+            double x = val[h];
+            unsigned j = col_ind[h];
+            s = fma_fallback(x, v[j], s);
+        }
+        p[i] = s;
+    }
+
+}
+
+// csb multiplication
+void csb_spmv(const Sparse_CSB *A, const double *x, double *y)
+{
+    unsigned n = A->n_rows;
+    memset(y, 0, n * sizeof(double));
+
+    unsigned beta = A->beta;
+    unsigned bits = A->bits;
+    unsigned nb_r = A->nb_r;
+    unsigned nb_c = A->nb_c;
+
+    #pragma omp parallel for schedule(dynamic)
+    for (int brow = 0; brow < (int)nb_r; brow++) {
+
+        for (unsigned bcol = 0; bcol < nb_c; bcol++) {
+
+            unsigned b = brow * nb_c + bcol;
+            unsigned start = A->blk_ptr[b];
+            unsigned end   = A->blk_ptr[b+1];
+
+            unsigned row_base = brow * beta;
+            unsigned col_base = bcol * beta;
+
+            for (unsigned p = start; p < end; p++) {
+
+                uint32_t packed = A->idx[p];
+                unsigned r_in = packed >> bits;
+                unsigned c_in = packed & ((1u << bits) - 1);
+
+                unsigned i = row_base + r_in;
+                unsigned j = col_base + c_in;
+
+                y[i] += A->values[p] * x[j];
+            }
+        }
+    }
+}
+
+
+
+int main(int argc, char *argv[])
+{
+    //FOR NOW I'LL USE THE EXAMPLE GIVEN
+    int ret_code;
+    MM_typecode matcode;
+    FILE *f;
+    int M, N, nz;   
+    int i, *I, *J;
+    double *val;
+
+    /*Initialize struct for sparse matrix */
+    if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s [martix-market-filename]\n", argv[0]);
+		exit(1);
+	}
+    else    
+    { 
+        if ((f = fopen(argv[1], "r")) == NULL) 
+            exit(1);
+    }
+
+    if (mm_read_banner(f, &matcode) != 0)
+    {
+        printf("Could not process Matrix Market banner.\n");
+        exit(1);
+    }
+
+
+    /*  This is how one can screen matrix types if their application */
+    /*  only supports a subset of the Matrix Market data types.      */
+    if (mm_is_complex(matcode) && mm_is_matrix(matcode) && 
+            mm_is_sparse(matcode) )
+    {
+        printf("Sorry, this application does not support ");
+        printf("Market Market type: [%s]\n", mm_typecode_to_str(matcode));
+        exit(1);
+    }
+
+    /* find out size of sparse matrix .... */
+    if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
+        exit(1);
+
+
+    /* reseve memory for matrices */
+    I = (int *) malloc(nz * sizeof(int));
+    J = (int *) malloc(nz * sizeof(int));
+    val = (double *) malloc(nz * sizeof(double));
+
+
+    /* NOTE: when reading in doubles, ANSI C requires the use of the "l"  */
+    /*   specifier as in "%lg", "%lf", "%le", otherwise errors will occur */
+    /*  (ANSI C X3.159-1989, Sec. 4.9.6.2, p. 136 lines 13-15)            */
+    for (i=0; i<nz; i++)
+    {
+        fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
+        I[i]--;  /* adjust from 1-based to 0-based */
+        J[i]--;
+    }
+
+    if (f !=stdin) fclose(f);
+
+    /************************/
+    /* now write out matrix */
+    /************************/
+    mm_write_banner(stdout, matcode);
+    mm_write_mtx_crd_size(stdout, M, N, nz);
+    // for (i=0; i<nz; i++){
+    //     fprintf(stdout, "%d %d %20.19g\n", I[i]+1, J[i]+1, val[i]);
+    // }
+
+    //create struct with data read from .mtx file
+    Sparse_Coordinate* struct_COO = initialize_COO(M, N, nz, I, J, val);
+    //convert COO to CSR
+    //Sparse_CSR* struct_CSR = convert_COO_CSR(M, N, nz, &struct_COO);
+
+    //INITIALIZE MATRIX VECTOR MULTIPLICATION
+    double* res = malloc(M * sizeof(double));
+    double* vec = malloc(N * sizeof(double));
+
+    //INITIALIZE RANDOM VECTOR
+    srand(0);
+    for(int i = 0; i < N; i++){
+        vec[i] = rand() % 10;
+    }
+
+    //compute SpMV with COO 
+    SpMV_COO(struct_COO, vec, res);
+
+    // printf("\nResult (first 10 entries):\n");
+    // for (int i = 0; i < M && i < 10; i++) {
+    //     printf("res[%d] = %g\n", i, res[i]);
+    // }
+
+    //INITIALIZE CSR MATRIX FROM COO
+    Sparse_CSR* struct_CSR = coo_to_csr_matrix(struct_COO);
+    double* res_csr = malloc(M * sizeof(double));
+
+    //COMPUTE SpMV WITH CSR
+    double start = omp_get_wtime();
+    csr_mv_multiply(struct_CSR, vec, res_csr);
+    double end = omp_get_wtime();
+    printf("\nElapsed time: %g seconds\n", end - start);
+
+    // printf("\nCSR Result (first 10 entries):\n");
+    // for (int i = 0; i < M && i < 10; i++) {
+    //     printf("res_csr[%d] = %g\n", i, res_csr[i]);
+    // }   
+    
+    free(I);
+    free(J);
+    free(val);
+    free(vec);
+    free(res);
+    free(res_csr);
+    free(struct_CSR);      
+    free(struct_COO);
+    
+    return 0;
+
+}

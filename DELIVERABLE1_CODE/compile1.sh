@@ -13,37 +13,83 @@ export OMP_PLACES="\
 {3,7,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,75,79,83,87,91,95}"
 
 
-MATRICES=("1138_bus/1138_bus.mtx" "utm5940/utm5940.mtx")
-RUNS=12
-THREADS=(1 2 4 8 16 32 64 96)  # adjust for your system
-EXECUTABLES=("spmv_static")
-CHUNK_SIZE=(10 100 1000)
+MATRICES=("flowmeter0/flowmeter0.mtx" "1138_bus/1138_bus.mtx")
+RUNS=10
+THREADS=(1 2 4 8 16 32 64 96)
+EXECUTABLES=("spmv_exp1")
+CHUNK_SIZES=(10 100 1000 10000)
 
-# others to add: "spmv_collapse" "spmv_runtime" "spmv_auto" "spmv_chunked"!!!!!!!!!!!
-# "spmv_sequential" "spmv_manual"
-# Output file
-OUTPUT_FILE="results1.csv"
-echo "Executable,Threads,Run,ChunkSize,Time" > "$OUTPUT_FILE"
+RESULTS_DIR="DELIVERABLE1_RES/ARCH5"
+rm -rf "$RESULTS_DIR"        # Remove old results completely
+mkdir -p "$RESULTS_DIR"      # Create fresh folder
 
-# Loop for each executable
-for MATRIX in "${MATRICES[@]}"; do
-    echo "Testing matrix: $MATRIX ..."
+# ===========================
+# Main benchmarking loop
+# ===========================
+for MATRIX_PATH in "${MATRICES[@]}"; do
+    MATRIX_NAME=$(basename "$MATRIX_PATH" .mtx)
+    echo "============================================"
+    echo "Testing matrix: $MATRIX_NAME"
+    echo "============================================"
+
+    # Prepare single chunked results file
+    CHUNKED_OUTPUT="${RESULTS_DIR}/${MATRIX_NAME}_chunked.csv"
+    echo "Executable,Threads,Run,ChunkSize,Time" > "$CHUNKED_OUTPUT"
+
+    # Default case for other executables (non-runtime)
+    OUTPUT_FILE="${RESULTS_DIR}/${MATRIX_NAME}.csv"
+    echo "Executable,Threads,Run,ChunkSize,Time" > "$OUTPUT_FILE"
+
+
+    # Loop for each executable
     for EXEC in "${EXECUTABLES[@]}"; do
-        for T in "${THREADS[@]}"; do
-            echo "Running $EXEC with $T threads..."
-            export OMP_NUM_THREADS=$T
+        echo "Running executable: $EXEC"
 
-            for ((i=1; i<=RUNS; i++)); do
-                if [ "$EXEC" == "spmv_chunked" ]; then
-                    for CHUNK in "${CHUNK_SIZE[@]}"; do
-                        output=$(./"$EXEC" "$MATRIX" "$CHUNK" | grep "Elapsed time" | awk '{print $3}')
-                        echo "$EXEC,$T,$i,$CHUNK,$output" >> "$OUTPUT_FILE"
+        if [[ "$EXEC" == spmv_runtime_static || "$EXEC" == spmv_runtime_dynamic || "$EXEC" == spmv_runtime_guided ]]; then
+            
+            # Determine schedule type
+            if [[ "$EXEC" == spmv_runtime_static ]]; then
+                SCHED_TYPE="static"
+            elif [[ "$EXEC" == spmv_runtime_dynamic ]]; then
+                SCHED_TYPE="dynamic"
+            else
+                SCHED_TYPE="guided"
+            fi
+
+            # Loop over chunk sizes
+            for CHUNK in "${CHUNK_SIZES[@]}"; do
+                export OMP_SCHEDULE="${SCHED_TYPE},${CHUNK}"
+                echo "  Schedule: ${SCHED_TYPE}, Chunk: ${CHUNK}"
+
+                # Loop over thread counts
+                for T in "${THREADS[@]}"; do
+                    export OMP_NUM_THREADS=$T
+                    echo "    Threads: $T"
+
+                    for ((i=1; i<=RUNS; i++)); do
+                        echo "      Run $i"
+                        output=$(./"$EXEC" "$MATRIX_PATH" | grep "Elapsed time" | awk '{print $3}')
+                        echo "$EXEC,$T,$i,$CHUNK,$output" >> "$CHUNKED_OUTPUT"
                     done
-                else
-                    output=$(./"$EXEC" "$MATRIX" | grep "Elapsed time" | awk '{print $3}')
-                    echo "$EXEC,$T,$i,NA,$output" >> "$OUTPUT_FILE"
-                fi
+                done
             done
-        done
+
+        else
+        
+            for T in "${THREADS[@]}"; do
+                export OMP_NUM_THREADS=$T
+                echo "  Threads: $T"
+
+                for ((i=1; i<=RUNS; i++)); do
+                    echo "      Run $i"
+                    output=$(./"$EXEC" "$MATRIX_PATH" | grep "Elapsed time" | awk '{print $3}')
+                    echo "$EXEC,$T,$i,NA,$output" >> "$OUTPUT_FILE"
+                done
+            done
+        fi
     done
+
+    echo "Finished all executables for matrix $MATRIX_NAME"
 done
+
+echo "All tests completed. Results saved in '$RESULTS_DIR/'"

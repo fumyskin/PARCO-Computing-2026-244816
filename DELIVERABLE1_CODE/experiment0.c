@@ -21,9 +21,7 @@ static inline double fma_fallback(double a, double b, double c) {
 }
 #endif
 
-
-
-//function to initialize a struct COO given the data extracted from .mtx file
+// function to initialize a struct COO given the data extracted from .mtx file
 Sparse_Coordinate* initialize_COO(
     int n_rows,
     int n_cols,
@@ -33,7 +31,7 @@ Sparse_Coordinate* initialize_COO(
     double* values
 )
 {
-    Sparse_Coordinate* struct_COO = malloc(sizeof(Sparse_Coordinate));
+    Sparse_Coordinate* struct_COO = surely_malloc(sizeof(Sparse_Coordinate));
     struct_COO->n_rows = n_rows;
     struct_COO->n_cols = n_cols;
     struct_COO->nnz = nnz;
@@ -45,7 +43,7 @@ Sparse_Coordinate* initialize_COO(
 }
 
 
-//function to perform matrix
+// function to perform spmv on COO
 void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
     for(int i = 0; i < COO->n_rows; i++){
         res[i] = 0;
@@ -131,6 +129,7 @@ Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
     q->n_cols = cols;
     return q;          /* partial_CSR_properties */
 }
+
 /*
 For SpMV, focus on memory/cache optimizations first (reordering, 
 blocking, prefetching, improve locality, reduce indirection) 
@@ -155,16 +154,7 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
         p[i] = s;
     }
 
-    // #pragma omp barrier
-    // #pragma omp master 
-    // {
-    //     //finalization code ?
-    // }
-    // #pragma omp barrier
-
 }
-
-
 
 
 int main(int argc, char *argv[])
@@ -196,8 +186,8 @@ int main(int argc, char *argv[])
     }
 
 
-    /*  This is how one can screen matrix types if their application */
-    /*  only supports a subset of the Matrix Market data types.      */
+    //  This is how one can screen matrix types if their application 
+    //  only supports a subset of the Matrix Market data types.     
     if (mm_is_complex(matcode) && mm_is_matrix(matcode) && 
             mm_is_sparse(matcode) )
     {
@@ -206,15 +196,15 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    /* find out size of sparse matrix .... */
+    // find out size of sparse matrix .... 
     if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
         exit(1);
 
 
-    /* reseve memory for matrices */
-    I = (int *) malloc(nz * sizeof(int));
-    J = (int *) malloc(nz * sizeof(int));
-    val = (double *) malloc(nz * sizeof(double));
+    // reseve memory for matrices 
+    I = (int *) surely_malloc(nz * sizeof(int));
+    J = (int *) surely_malloc(nz * sizeof(int));
+    val = (double *) surely_malloc(nz * sizeof(double));
 
 
     /* NOTE: when reading in doubles, ANSI C requires the use of the "l"  */
@@ -244,8 +234,8 @@ int main(int argc, char *argv[])
     //Sparse_CSR* struct_CSR = convert_COO_CSR(M, N, nz, &struct_COO);
 
     //INITIALIZE MATRIX VECTOR MULTIPLICATION
-    double* res = malloc(N * sizeof(double));
-    double* vec = malloc(M * sizeof(double));
+    double* res = surely_malloc(M * sizeof(double));
+    double* vec = surely_malloc(N * sizeof(double));
 
     //INITIALIZE RANDOM VECTOR
     srand(0);
@@ -256,11 +246,6 @@ int main(int argc, char *argv[])
     //compute SpMV with COO 
     SpMV_COO(struct_COO, vec, res);
 
-    // printf("\nResult (first 10 entries):\n");
-    // for (int i = 0; i < M && i < 10; i++) {
-    //     printf("res[%d] = %g\n", i, res[i]);
-    // }
-
     //INITIALIZE CSR MATRIX FROM COO
     Sparse_CSR* struct_CSR = coo_to_csr_matrix(struct_COO);
     double* res_csr = malloc(M * sizeof(double));
@@ -270,11 +255,6 @@ int main(int argc, char *argv[])
     csr_mv_multiply(struct_CSR, vec, res_csr);
     double end = omp_get_wtime();
     printf("\nElapsed time: %g seconds\n", end - start);
-
-    // printf("\nCSR Result (first 10 entries):\n");
-    // for (int i = 0; i < M && i < 10; i++) {
-    //     printf("res_csr[%d] = %g\n", i, res_csr[i]);
-    // }   
     
     free(I);
     free(J);
@@ -286,27 +266,6 @@ int main(int argc, char *argv[])
     free(struct_COO);
     
     return 0;
-
-
-    // test for quicksort
-    // unsigned rows[] = {2, 0, 1, 2, 0};
-    // unsigned cols[] = {1, 2, 0, 0, 1};
-    // double vals[] =  {5.0, 2.0, 1.0, 4.0, 3.0};
-
-    // Sparse_Coordinate coo = {
-    //     .n_rows = 3,
-    //     .n_cols = 3,
-    //     .nnz = 5,
-    //     .row_indices = rows,
-    //     .col_indices = cols,
-    //     .values = vals
-    // };
-
-    // quicksort_coo(&coo);
-
-    // for (unsigned i = 0; i < coo.nnz; i++)
-    //     printf("(%u, %u, %.1f)\n", rows[i], cols[i], vals[i]);
-
 }
 
 
