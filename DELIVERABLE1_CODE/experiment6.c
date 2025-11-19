@@ -29,6 +29,46 @@ typedef struct {
     unsigned nz;    // y coordinate (number of nonzero events consumed)
 } MergeCoord;
 
+
+// function to initialize a struct COO given the data extracted from .mtx file
+Sparse_Coordinate* initialize_COO(
+    unsigned n_rows,
+    unsigned n_cols,
+    unsigned nnz,
+    unsigned* row_indices,
+    unsigned* col_indices,
+    double* values
+)
+{
+    Sparse_Coordinate* struct_COO = surely_malloc(sizeof(Sparse_Coordinate));
+    struct_COO->n_rows = n_rows;
+    struct_COO->n_cols = n_cols;
+    struct_COO->nnz = nnz;
+    struct_COO->row_indices = row_indices;
+    struct_COO->col_indices = col_indices;
+    struct_COO->values = values;
+
+    return struct_COO;
+}
+
+// function to perform Spmv on COO
+void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
+    for(unsigned i = 0; i < COO->n_rows; i++){
+        res[i] = 0;
+    }
+
+    for(unsigned nnz_id = 0; nnz_id < COO->nnz; nnz_id++){
+        unsigned i = COO->row_indices[nnz_id];
+        unsigned j = COO->col_indices[nnz_id];
+        double val = COO->values[nnz_id];
+
+        res[i] += val * vec[j]; 
+    } 
+
+    return;
+}
+
+
 // MergePathSearch:
 // diagonal : target diagonal index in the logical merge path (0..num_rows+nnz)
 // a_len    : number of row-end entries (num_rows)
@@ -174,49 +214,6 @@ void merge_path_csr_mv(const Sparse_CSR *m, const double *x, double *y, int num_
     free(row_carry_out);
     free(value_carry_out);
 }
-
-
-
-
-// function to initialize a struct COO given the data extracted from .mtx file
-Sparse_Coordinate* initialize_COO(
-    int n_rows,
-    int n_cols,
-    int nnz,
-    int* row_indices,
-    int* col_indices,
-    double* values
-)
-{
-    Sparse_Coordinate* struct_COO = surely_malloc(sizeof(Sparse_Coordinate));
-    struct_COO->n_rows = n_rows;
-    struct_COO->n_cols = n_cols;
-    struct_COO->nnz = nnz;
-    struct_COO->row_indices = row_indices;
-    struct_COO->col_indices = col_indices;
-    struct_COO->values = values;
-
-    return struct_COO;
-}
-
-
-// function to perform spmv on COO
-void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
-    for(int i = 0; i < COO->n_rows; i++){
-        res[i] = 0;
-    }
-
-    for(ssize_t nnz_id = 0; nnz_id < COO->nnz; nnz_id++){
-        ssize_t i = COO->row_indices[nnz_id];
-        ssize_t j = COO->col_indices[nnz_id];
-        double val = COO->values[nnz_id];
-
-        res[i] += val * vec[j]; 
-    } 
-
-    return;
-}
-
 
 unsigned coo_count(Sparse_Coordinate *p){
     if (p == NULL || p->nnz == 0)
@@ -381,15 +378,16 @@ void test_csr_merge_path(Sparse_CSR *csr)
 
 int main(int argc, char *argv[])
 {
-    //FOR NOW I'LL USE THE EXAMPLE GIVEN
+    
     int ret_code;
     MM_typecode matcode;
     FILE *f;
-    int M, N, nz;   
-    int i, *I, *J;
+    int M, N, nz;   // M=rows, N=cols, nz=nonzeroes
+    int i;
+    unsigned *I, *J;
     double *val;
 
-    /*Initialize struct for sparse matrix */
+    // Initialize struct for sparse matrix 
     if (argc < 2)
 	{
 		fprintf(stderr, "Usage: %s [martix-market-filename]\n", argv[0]);
@@ -423,9 +421,9 @@ int main(int argc, char *argv[])
         exit(1);
 
 
-    // reseve memory for matrices 
-    I = (int *) surely_malloc(nz * sizeof(int));
-    J = (int *) surely_malloc(nz * sizeof(int));
+    // reserve memory for matrices 
+    I = (unsigned *) surely_malloc(nz * sizeof(unsigned));
+    J = (unsigned *) surely_malloc(nz * sizeof(unsigned));
     val = (double *) surely_malloc(nz * sizeof(double));
 
 
@@ -434,9 +432,10 @@ int main(int argc, char *argv[])
     /*  (ANSI C X3.159-1989, Sec. 4.9.6.2, p. 136 lines 13-15)            */
     for (i=0; i<nz; i++)
     {
-        fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
-        I[i]--;  /* adjust from 1-based to 0-based */
-        J[i]--;
+        int temp_i, temp_j;
+        fscanf(f, "%d %d %lg\n", &temp_i, &temp_j, &val[i]);
+        I[i] = (unsigned)(temp_i - 1);
+        J[i] = (unsigned)(temp_j - 1);
     }
 
     if (f !=stdin) fclose(f);
@@ -450,35 +449,59 @@ int main(int argc, char *argv[])
     //     fprintf(stdout, "%d %d %20.19g\n", I[i]+1, J[i]+1, val[i]);
     // }
 
-    //create struct with data read from .mtx file
-    Sparse_Coordinate* struct_COO = initialize_COO(M, N, nz, I, J, val);
-    //convert COO to CSR
-    //Sparse_CSR* struct_CSR = convert_COO_CSR(M, N, nz, &struct_COO);
+    // create struct with data read from .mtx file
+    Sparse_Coordinate* struct_COO = initialize_COO((unsigned)M, (unsigned)N, (unsigned)nz, I, J, val);
 
-    //INITIALIZE MATRIX VECTOR MULTIPLICATION
+    // INITIALIZE MATRIX VECTOR MULTIPLICATION
     double* res = surely_malloc(M * sizeof(double));
     double* vec = surely_malloc(N * sizeof(double));
 
-    //INITIALIZE RANDOM VECTOR
+    // INITIALIZE RANDOM VECTOR
     srand(0);
     for(int i = 0; i < N; i++){
         vec[i] = rand() % 10;
     }
 
-    //compute SpMV with COO 
-    SpMV_COO(struct_COO, vec, res);
-
-    //INITIALIZE CSR MATRIX FROM COO
+    // INITIALIZE CSR MATRIX FROM COO
     Sparse_CSR* struct_CSR = coo_to_csr_matrix(struct_COO);
-    
-    printf("\n===== Testing merge-path CSR SpMV correctness =====\n");
-    test_csr_merge_path(struct_CSR);
-    
+    double* res_csr = surely_malloc(M * sizeof(double));
+
+   
+    // test_csr_merge_path(struct_CSR); -> misleading for times, avoid it unless you want to check correctness
+
+    // COMPUTE SpMV WITH CSR MREGED
+    int N_ITERS = 20;
+    double total = 0;
+
+    for(int i = 0; i < N_ITERS; i++) {
+        double t0 = omp_get_wtime();
+        merge_path_csr_mv(struct_CSR, vec, res_csr, 0);
+        //csr_mv_multiply(struct_CSR, vec, res_csr);
+        double t1 = omp_get_wtime();
+        total += (t1 - t0);
+    }
+
+    printf("Average merge-path time = %.6f s\n", total / N_ITERS);
+
+    // // COMPUTE SpMV WITH COO (for verification)
+    // SpMV_COO(struct_COO, vec, res);
+
+    // printf("\nResult (first 10 entries):\n");
+    // for (int i = 0; i < M && i < 10; i++) {
+    //     printf("res[%d] = %g\n", i, res[i]);
+    // }
+
+    // printf("\nCSR Result (first 10 entries):\n");
+    // for (int i = 0; i < M && i < 10; i++) {
+    //     printf("res_csr[%d] = %g\n", i, res_csr[i]);
+    // }   
+
     free(I);
     free(J);
     free(val);
     free(vec);
     free(res);
+    free(res_csr);
     free(struct_CSR);      
     free(struct_COO);
     

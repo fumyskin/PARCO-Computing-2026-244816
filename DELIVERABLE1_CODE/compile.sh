@@ -5,13 +5,13 @@
 # Configuration
 # ===========================
 MATRICES=("MATRICES/flowmeter0/flowmeter0.mtx" "MATRICES/1138_bus/1138_bus.mtx")
-RUNS=12
+RUNS=1
 THREADS=(1 2 4 8 16 32 64 96)
 EXECUTABLES=("spmv_sequential" "spmv_static" "spmv_manual" "spmv_dynamic" "spmv_guided" \
-             "spmv_runtime_static" "spmv_runtime_dynamic" "spmv_runtime_guided" "spmv_task")
+             "spmv_runtime_static" "spmv_runtime_dynamic" "spmv_runtime_guided" "spmv_task" "spmv_merge")
 CHUNK_SIZES=(10 100 1000 10000)
 
-RESULTS_DIR="DELIVERABLE1_RES"
+RESULTS_DIR="DELIVERABLE1_RES/EXP1"
 rm -rf "$RESULTS_DIR"        # Remove old results completely
 mkdir -p "$RESULTS_DIR"      # Create fresh folder
 
