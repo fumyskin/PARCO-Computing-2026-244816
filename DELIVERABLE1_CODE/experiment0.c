@@ -3,10 +3,28 @@
 #include <immintrin.h>
 #include <pthread.h>
 #include <omp.h>
+//#include <math.h>  
 #include "mmio.h"
 #include "specifications.h"
 
-//define fma block operation
+
+/*
+*    PREMISE: 
+*    - in case one wants to verify correctness of CSR COO SpMVM, uncomment the math.h library
+*      and body in the main. Finally, run with the following flags: 
+*      gcc mmio.h specifications.c experiment0.c -fopenmp -lm -o spmv_sequential
+*      ./spmv_sequential MATRICES/<name_matrix_folder>/<name_matrix>.mtx
+*
+*    - in case one wants to try optimized version, run with:
+*      gcc -O3 mmio.h specifications.c experiment0.c -fopenmp -ffp-contract=fast -o spmv_sequential
+*
+*    - otherwise, withouth optimization of brach prediction, run with:
+*      gcc mmio.h specifications.c experiment0.c -fopenmp -o spmv_sequential
+*
+*/
+
+
+// define fma block operation
 #if defined(__x86_64__) && defined(__FMA__)
 static inline double fma_fallback(double a, double b, double c) {
     __m128d A = _mm_set_sd(a);
@@ -23,11 +41,11 @@ static inline double fma_fallback(double a, double b, double c) {
 
 // function to initialize a struct COO given the data extracted from .mtx file
 Sparse_Coordinate* initialize_COO(
-    int n_rows,
-    int n_cols,
-    int nnz,
-    int* row_indices,
-    int* col_indices,
+    unsigned n_rows,
+    unsigned n_cols,
+    unsigned nnz,
+    unsigned* row_indices,
+    unsigned* col_indices,
     double* values
 )
 {
@@ -43,15 +61,15 @@ Sparse_Coordinate* initialize_COO(
 }
 
 
-// function to perform spmv on COO
+// function to perform Spmv on COO
 void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
-    for(int i = 0; i < COO->n_rows; i++){
+    for(unsigned i = 0; i < COO->n_rows; i++){
         res[i] = 0;
     }
 
-    for(ssize_t nnz_id = 0; nnz_id < COO->nnz; nnz_id++){
-        ssize_t i = COO->row_indices[nnz_id];
-        ssize_t j = COO->col_indices[nnz_id];
+    for(unsigned nnz_id = 0; nnz_id < COO->nnz; nnz_id++){
+        unsigned i = COO->row_indices[nnz_id];
+        unsigned j = COO->col_indices[nnz_id];
         double val = COO->values[nnz_id];
 
         res[i] += val * vec[j]; 
@@ -97,7 +115,7 @@ Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
     r=-1;
     c=0; 
     l=0;
-    /* partial_csr_0 */
+    // partial_csr_0 
     for (i=0; i<n; i++) {
         ri = prow_ind[i];
         ci = pcol_ind[i];
@@ -137,6 +155,8 @@ blocking, prefetching, improve locality, reduce indirection)
 parallelization)
 */
 void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
+    if (!m || !v || !p) return;  // null check
+
     unsigned i, rows = m->n_rows;
     double *val = m->values;
     unsigned *col_ind = m->col_ind;
@@ -156,15 +176,89 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
 
 }
 
+// /*
+//  * Compare SpMV results computed with COO and CSR.
+//  *
+//  * Parameters:
+//  *   coo   - pointer to Sparse_Coordinate (input COO matrix)
+//  *   csr   - pointer to Sparse_CSR (CSR matrix converted from COO)
+//  *   vec   - input vector (length = coo->n_cols)
+//  *   tol   - tolerance for comparison (suggested 1e-12..1e-9)
+//  *
+//  * Returns:
+//  *   1 if results match within tolerance, 0 otherwise.
+//  *
+//  * Notes:
+//  *   - Uses a combined absolute+relative tolerance:
+//  *       |a - b| <= tol_abs + tol_rel * max(|a|, |b|)
+//  *   - Prints up to 10 mismatches for debugging.
+//  */
+// int compare_spmv_results(Sparse_Coordinate *coo, Sparse_CSR *csr, double *vec, double tol) {
+//     if (coo == NULL || csr == NULL || vec == NULL) {
+//         fprintf(stderr, "compare_spmv_results: NULL pointer input\n");
+//         return 0;
+//     }
+
+//     int rows = coo->n_rows;
+//     double *res_coo = (double *) surely_malloc(rows * sizeof(double));
+//     double *res_csr = (double *) surely_malloc(rows * sizeof(double));
+//     if (!res_coo || !res_csr) {
+//         fprintf(stderr, "compare_spmv_results: allocation failed\n");
+//         free(res_coo); free(res_csr);
+//         return 0;
+//     }
+
+//     /* compute using COO */
+//     SpMV_COO(coo, vec, res_coo);
+
+//     /* compute using CSR */
+//     csr_mv_multiply(csr, vec, res_csr);
+
+//     /* compare */
+//     const double tol_abs = tol * 1e-3; /* small absolute floor so very tiny values compare well */
+//     int mismatches = 0;
+//     int max_report = 10;
+//     for (int i = 0; i < rows; ++i) {
+//         double a = res_coo[i];
+//         double b = res_csr[i];
+//         double diff = a - b;
+//         double adiff = fabs(diff);
+//         double scale = fmax(fabs(a), fabs(b));
+//         double allowed = tol_abs + tol * scale;
+
+//         if (adiff > allowed) {
+//             if (mismatches < max_report) {
+//                 printf("Mismatch row %d: COO = %.17g, CSR = %.17g, diff = %.17g, allowed = %.17g\n",
+//                        i, a, b, diff, allowed);
+//             }
+//             mismatches++;
+//         }
+//     }
+
+//     if (mismatches == 0) {
+//         printf("compare_spmv_results: OK — results match within tol = %g\n", tol);
+//     } else {
+//         printf("compare_spmv_results: FAILED — %d mismatches (showing up to %d)\n", mismatches, max_report);
+//     }
+
+//     free(res_coo);
+//     free(res_csr);
+
+//     return (mismatches == 0) ? 1 : 0;
+// }
+
+
+
 
 int main(int argc, char *argv[])
 {
-    //FOR NOW I'LL USE THE EXAMPLE GIVEN
+    
     int ret_code;
     MM_typecode matcode;
     FILE *f;
-    int M, N, nz;   // M=rows N=cols nz=nonzeroes
-    int i, *I, *J;
+    int M, N, nz;   // M=rows, N=cols, nz=nonzeroes
+    int i;
+    unsigned *I, *J;
     double *val;
 
     // Initialize struct for sparse matrix 
@@ -201,9 +295,9 @@ int main(int argc, char *argv[])
         exit(1);
 
 
-    // reseve memory for matrices 
-    I = (int *) surely_malloc(nz * sizeof(int));
-    J = (int *) surely_malloc(nz * sizeof(int));
+    // reserve memory for matrices 
+    I = (unsigned *) surely_malloc(nz * sizeof(unsigned));
+    J = (unsigned *) surely_malloc(nz * sizeof(unsigned));
     val = (double *) surely_malloc(nz * sizeof(double));
 
 
@@ -212,9 +306,10 @@ int main(int argc, char *argv[])
     /*  (ANSI C X3.159-1989, Sec. 4.9.6.2, p. 136 lines 13-15)            */
     for (i=0; i<nz; i++)
     {
-        fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
-        I[i]--;  /* adjust from 1-based to 0-based */
-        J[i]--;
+        int temp_i, temp_j;
+        fscanf(f, "%d %d %lg\n", &temp_i, &temp_j, &val[i]);
+        I[i] = (unsigned)(temp_i - 1);
+        J[i] = (unsigned)(temp_j - 1);
     }
 
     if (f !=stdin) fclose(f);
@@ -229,7 +324,7 @@ int main(int argc, char *argv[])
     // }
 
     // create struct with data read from .mtx file
-    Sparse_Coordinate* struct_COO = initialize_COO(M, N, nz, I, J, val);
+    Sparse_Coordinate* struct_COO = initialize_COO((unsigned)M, (unsigned)N, (unsigned)nz, I, J, val);
 
     // INITIALIZE MATRIX VECTOR MULTIPLICATION
     double* res = surely_malloc(M * sizeof(double));
@@ -250,7 +345,16 @@ int main(int argc, char *argv[])
     csr_mv_multiply(struct_CSR, vec, res_csr);
     double end = omp_get_wtime();
     printf("\nElapsed time: %g seconds\n", end - start);
-    
+ 
+
+    // //verify CSR vs COO correctness -> VERIFIED AND CORRECT
+    // double tol = 1e-12; // tolerance delta to compare similar results up to tol
+    // int ok = compare_spmv_results(struct_COO, struct_CSR, vec, tol);
+    // if (!ok) {
+    //     fprintf(stderr, "Warning: CSR and COO SpMV differ!\n");
+    //     // optional: you can exit non-zero here if you want immediate failure 
+    // }
+
     free(I);
     free(J);
     free(val);
