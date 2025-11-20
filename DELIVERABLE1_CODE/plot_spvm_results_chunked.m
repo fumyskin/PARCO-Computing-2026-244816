@@ -1,8 +1,8 @@
 clc; clear; close all;
 
 %% Directories
-dataDir = './DELIVERABLE1_RES/ARCH2_16';
-outputDir = './DELIVERABLE1_IMAGES/ARCH2_16';
+dataDir = './DELIVERABLE1_RES/TESTBENCH3_RES';
+outputDir = './DELIVERABLE1_IMAGES/TESTBENCH3_IMAGES_CHUNKED';
 
 if ~exist(outputDir, 'dir')
     mkdir(outputDir);
