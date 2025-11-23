@@ -57,3 +57,20 @@ Results can be found at folder /DELIVERABLE1_RES. More specifically:
 
 ## IMAGES
 Images can be found, for each testbench, in the folder /DELIVERABLE1_IMAGES
+The images we are interested in can be found in the following folders:
+- **/TESTBENCH2_IMAGES**: simulations run **WITHOUT** cold start and **NO OPTIMIZATION FLAGS**. Contains, for each matrix, 3 .png files with the following specifications:
+    - < name_matrix >_exectime.png -> contains the results which USE DEFAULT CHUNKSIZE
+    - < name_matrix >_chunked_exectime.png -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES
+    - < name_matrix >_efficiency.png -> contains the parallel efficiency
+- **/TESTBENCH2_IMAGES_CHUNKED**: simulations run **WITHOUT** cold start and **NO OPTIMIZATION FLAGS**. Contains, for each matrix, 2 .png files with the following specifications:
+    - Heatmap_< name_matrix >.png -> contains the results of different runtime scheduling with different mappings
+    - LinePlot_< name_matrix >.png -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES in a lineplot
+    - < name_matrix >_efficiency.png -> contains the parallel efficiency
+- **/TESTBENCH3_IMAGES**: simulations run **WITHOUT** cold start and **WITH OPTIMIZATION FLAGS**. Contains, for each matrix, 3 .png files with the following specifications:
+    - < name_matrix >_exectime.png -> contains the results which USE DEFAULT CHUNKSIZE
+    - < name_matrix >_chunked_exectime.png -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES
+    - < name_matrix >_efficiency.png -> contains the parallel efficiency
+- **/TESTBENCH3_IMAGES_CHUNKED**: simulations run **WITHOUT** cold start and **WITH OPTIMIZATION FLAGS**. Contains, for each matrix, 2 .png files with the following specifications:
+    - Heatmap_< name_matrix >.png -> contains the results of different runtime scheduling with different mappings
+    - LinePlot_< name_matrix >.png -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES in a lineplot
+    - < name_matrix >_efficiency.png -> contains the parallel efficiency
