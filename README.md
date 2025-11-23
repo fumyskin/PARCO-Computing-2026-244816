@@ -8,7 +8,7 @@ In this deliverable are going to be implemented the following *.c files:
 - _experiment2.c_: a manual attempt to divide workload; posix_mem_align() is used to minimize false sharing
 - _experiment3.c_: an attempt to use ```#pragma task```
 - _experiment4.c_: a fused solution between experiment1.c and experiment2.c: it tries to minimize false sharing by using cache alignment while using ```#pragma omp static```
-- -experiment6.c_: an attempt to implement the merge-based CSR spmvm algorithm, a state-of-the-art approach to further explore CSR spmvm parallelization
+- _experiment6.c_: an attempt to implement the merge-based CSR spmvm algorithm, a state-of-the-art approach to further explore CSR spmvm parallelization
 
 ## INSTRUCTIONS TO COMPILE AND RUN THE CODE
 We have two approaches to compile the testbenches:
@@ -42,14 +42,14 @@ The files are to be saved in a .csv file, then given in input in 2 matlab script
 
 ## RESULTS
 Results can be found at folder /DELIVERABLE1_RES. More specifically:
-- **/TESTBENCH1_RES**: simulations run  **WITH** cold start removed and **NO OPTIMIZATION FLAGS**. Contains, for each matrix, a .csv file with the following specifications:
+- **/TESTBENCH1_RES**: simulations run  **WITH** cold start and **NO OPTIMIZATION FLAGS**. Contains, for each matrix, a .csv file with the following specifications:
     - < name_matrix >.csv -> contains the results which USE DEFAULT CHUNKSIZE
     - < name_matrix >_chunked.csv -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES
 *This version of the testbenches was my first attempt and presented a higher overhead due to cold start. In my report, it is not considered, but I've decided to keep this first attempt for completeness.*
-- **/TESTBENCH2_RES**: simulations run **WITHOUT** cold start removed and **NO OPTIMIZATION FLAGS**. Contains, for each matrix, a .csv file with the following specifications:
+- **/TESTBENCH2_RES**: simulations run **WITHOUT** cold start and **NO OPTIMIZATION FLAGS**. Contains, for each matrix, a .csv file with the following specifications:
     - < name_matrix >.csv -> contains the results which USE DEFAULT CHUNKSIZE
     - < name_matrix >_chunked.csv -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES
 - TESTBENCH2_BIND: contains the results for the spmv_bind simulation (run with compile1.sh)
-- **/TESTBENCH3_RES**: simulations run **WITHOUT** cold start removed **WITH OPTIMIZATION FLAGS**. Contains, for each matrix, a .csv file with the following specifications:
+- **/TESTBENCH3_RES**: simulations run **WITHOUT** cold start **WITH OPTIMIZATION FLAGS**. Contains, for each matrix, a .csv file with the following specifications:
     - < name_matrix >.csv -> contains the results which USE DEFAULT CHUNKSIZE
     - < name_matrix >_chunked.csv -> contains the results of runtime scheduling REPORTING DIFFERENT CHUNKSIZES
