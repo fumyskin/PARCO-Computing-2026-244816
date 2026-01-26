@@ -177,6 +177,137 @@ int load_matrix_market(const char *filename, Sparse_Coordinate* matrix)
     return 0;
 }
 
+int load_mm_chunked(const char *filename, Sparse_Coordinate* matrix, int rank, int comm_size){
+
+    /*
+    int MPI_File_read_at_all(MPI_File fh, MPI_Offset offset, void *buf,
+                         int count, MPI_Datatype datatype, MPI_Status * status)
+
+    MPI_Offset = file offset
+    MPI_File_read_at_all is a collective routine that attempts to read from 
+    the file associated with fh (at the offset position) a total number of 
+    count data items having datatype type into the user’s buffer buf. 
+    The offset is in etype units relative to the current view. 
+    That is, holes are not counted when locating an offset. The data 
+    is taken out of those parts of the file specified by the current view.
+     MPI_File_read_at_all stores the number of datatype elements 
+     actually read in status. All other fields of status 
+     are undefined. It is erroneous to call this function if 
+     MPI_MODE_SEQUENTIAL mode was specified when the file was opened.
+    */
+
+    MPI_File fh;
+    MPI_Offset file_size;
+    // every process in MPI_COMM_WORLD open the filename in RDMODE
+    MPI_File_open(MPI_COMM_WORLD, filename, MPI_MODE_RDONLY, MPI_INFO_NULL, &fh);
+    // how many bytes each process reads
+    MPI_File_get_size(fh, &file_size);
+    MPI_Offset chunk_size = file_size / comm_size;
+    MPI_Offset my_offset = rank * chunk_size;
+    //  check for remainder: last one takes the rest -> mhhh is it the best approach?
+    if (rank == comm_size - 1) {
+        chunk_size = file_size - my_offset;
+    }
+    // allocate buffer (add padding for alignment/overlap!)
+    int bytes_read = chunk_size + 1024;
+    char *buffer = surely_malloc(bytes_read); 
+    char* cursor = buffer;
+    char* end_of_buffer = buffer + bytes_read;
+
+    // everyone reads their chunk simultaneously + checking we're not going out
+    MPI_Status status;
+    MPI_Offset end_of_read = my_offset + bytes_read;
+    if (end_of_read > file_size) {
+        bytes_read = file_size - my_offset;
+    }
+    MPI_File_read_at_all(fh, my_offset, buffer, bytes_read, MPI_CHAR, &status);
+
+    Sparse_Coordinate local_matrix;
+    int n_rows, n_cols, nnz;
+    unsigned index = 0;
+    if (rank == 0){
+        // deal with header 
+        while (cursor < end_of_buffer && *cursor == '%') {
+            char* next = memchr(cursor, '\n', end_of_buffer - cursor);
+            if (!next) break;
+            cursor = next + 1;
+        }
+        // extract n_rows, n_cols, nnz
+        int args_found = sscanf(cursor, "%d %d %d", &n_rows, &n_cols, &nnz);
+        if(args_found == 3){
+            local_matrix.n_rows = n_rows;
+            local_matrix.n_cols = n_cols;
+            local_matrix.nnz = nnz;
+
+            char* next = memchr(cursor, '\n', end_of_buffer - cursor);
+            if (next) cursor = next + 1;
+        }
+    }else{
+        char* eol = memchr(cursor, '\n', bytes_read);
+        if (eol == NULL){
+            cursor = end_of_buffer;
+        }else{
+            cursor = eol+1;
+        }
+    }
+
+    MPI_Bcast(&n_rows, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&n_cols, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&nnz, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
+
+    int estimate = (nnz / comm_size) * 2; // very poor and rough estimate that is probably wrong, i doubled just to be safe but idk
+    if (estimate < 100) estimate = 100; 
+    local_matrix.row_index = (unsigned*)surely_malloc(estimate*sizeof(unsigned));
+    local_matrix.col_index = (unsigned*)surely_malloc(estimate*sizeof(unsigned));
+    local_matrix.values    = (double*)surely_malloc(estimate*sizeof(double));
+
+    // parsing -> FOR ALL PROCESSES
+    while(cursor < end_of_buffer){
+        if (cursor >= buffer + chunk_size){
+            break;
+        }
+        // next current line check
+        char* next_newline = memchr(cursor, '\n', end_of_buffer-cursor);
+        if (!next_newline) break;
+
+        int curr_row, curr_col;
+        double curr_val;
+        int args_found = sscanf(cursor, "%d %d %lf", &curr_row, &curr_col, &curr_val);
+        if (args_found == 3) {
+            int destination_rank = curr_row % comm_size;
+            if(destination_rank == rank){
+                if (index < estimate) {
+                    local_matrix.row_indices[index] = curr_row;
+                    local_matrix.col_indices[index] = curr_col;
+                    local_matrix.values[index]      = curr_val;
+                    index++;
+                }else{
+                    fprintf(stderr, "Rank %d: Buffer overflow!\n", rank);
+                    break;
+                }
+            }else{
+                // It belongs to SOMEONE ELSE.
+                // For now, we are ignoring it (Data Loss), but
+                // this is where you would put it in a send_buffer.
+            }
+        }
+        cursor = next_newline + 1;
+         /*
+        int MPI_Alltoall(const void *sendbuf, int sendcount, MPI_Datatype sendtype,
+            void *recvbuf, int recvcount, MPI_Datatype recvtype,
+            MPI_Comm comm)
+        */
+        
+        local_matrix.n_rows = n_rows;
+        local_matrix.n_cols = n_cols;
+        local_matrix.nnz = index;
+    }
+
+        
+
+    MPI_File_close(&fh);
+}
+
 // function to initialize a struct COO given the data extracted from .mtx file
 Sparse_Coordinate* initialize_COO(
     unsigned n_rows,
