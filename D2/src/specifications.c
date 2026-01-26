@@ -1,18 +1,8 @@
-
-
-// Implementation of the baseline
-// 1. Read a matrix in matrix market format
-// Rank 0 reads the entire file and distributes matrix entries to all other processes.
-
-#include <stdio.h>
 #include <stdlib.h>
-#include <immintrin.h>
-#include <pthread.h>
-#include <omp.h> 
+#include <stdio.h>
+#include <mpi.h>
 #include "mmio.h"
 #include "specifications.h"
-
-
 
 // define fma block operation
 #if defined(__x86_64__) && defined(__FMA__)
@@ -28,6 +18,164 @@ static inline double fma_fallback(double a, double b, double c) {
     return a * b + c; // may be fused by compiler with -O3 -ffp-contract=fast
 }
 #endif
+
+
+//implement surely_malloc function
+void *surely_malloc(size_t size) {
+    void *ptr = malloc(size);
+    if (ptr == NULL) {
+        fprintf(stderr, "Out of memory while allocating %zu bytes\n", size);
+        //MPI aborting
+        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+    }
+    return ptr;
+}
+
+// quicksort taken from Appel paper and modified for COO struct : qsort3.c; 
+// https://github.com/cverified/cbench-vst/blob/master/qsort/qsort3.c
+
+int coo_less (Sparse_Coordinate *p, unsigned a, unsigned b) {
+    unsigned ra = p->row_indices[a], rb = p->row_indices[b];
+    if (ra<rb) return 1;
+    if (ra>rb) return 0;
+    return p->col_indices[a] < p->col_indices[b];
+}
+
+void swap(Sparse_Coordinate *p, unsigned a, unsigned b) {
+    unsigned i,j; double x;
+    i=p->row_indices[a];
+    j=p->col_indices[a];
+    x=p->values[a];
+    p->row_indices[a]=p->row_indices[b];
+    p->col_indices[a]=p->col_indices[b];
+    p->values[a]=p->values[b];
+    p->row_indices[b]=i;
+    p->col_indices[b]=j;
+    p->values[b]=x;
+}
+
+/* Lexicographic quicksort by (row, col) */
+void coo_quicksort(Sparse_Coordinate *p, unsigned base, unsigned n)
+{
+    unsigned lo, hi, left, right, mid;
+
+    if (n == 0)
+    return;
+    lo = base;
+    hi = lo + n - 1;
+    while (lo < hi) {
+    mid = lo + ((hi - lo) >> 1);
+
+    if (coo_less(p,mid,lo))
+        swap(p, mid, lo);
+    if (coo_less(p,hi,mid)) {
+        swap(p, mid, hi);
+        if (coo_less(p,mid,lo))
+        swap(p, mid, lo);
+    }
+    left = lo + 1;
+    right = hi - 1;
+    do {
+        while (coo_less(p,left,mid))
+        left++;
+        while (coo_less(p,mid,right))
+        right--;
+        if (left < right) {
+    swap(p, left, right);
+        if (mid == left)
+            mid = right;
+        else if (mid == right)
+            mid = left;
+        left++;
+        right--;
+        } else if (left == right) {
+        left++;
+        right--;
+        break;
+        }
+    } while (left <= right);
+    if (right - lo > hi - left) {
+        coo_quicksort(p, left, hi - left + 1);
+        hi = right;
+    } else {
+        coo_quicksort(p, lo, right - lo + 1);
+        lo = left;
+    }
+    }
+}
+
+int load_matrix_market(const char *filename, Sparse_Coordinate* matrix)
+{
+    MM_typecode matcode;
+    FILE *f;
+    int ret_code;
+    int M, N, nz;   // M=rows, N=cols, nz=nonzeroes
+    int i;
+
+    int temp_i, temp_j;
+
+    printf("Retrieving the matrix from '%s'...\n", filename);
+
+    if ((f = fopen(filename, "r")) == NULL)
+    {
+        fprintf(stderr, "Error: could not open file %s\n", filename);
+        return -1;
+    }
+
+    if (mm_read_banner(f, &matcode) != 0)
+    {
+        printf("Could not process Matrix Market banner.\n");
+        exit(1);
+    }
+   
+    if (mm_is_complex(matcode) && mm_is_matrix(matcode) && 
+            mm_is_sparse(matcode) )
+    {
+        printf("Sorry, this application does not support ");
+        printf("Market Market type: [%s]\n", mm_typecode_to_str(matcode));
+        exit(1);
+    }
+
+    // find out size of sparse matrix .... 
+    if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
+        exit(1);
+
+    // reserve memory for matrices 
+    matrix->n_rows = (unsigned)M;
+    matrix->n_cols = (unsigned)N;
+    matrix->nnz = (unsigned)nz;
+
+    // allocate memory for struct members
+    matrix->row_indices = (unsigned *) malloc(nz * sizeof(unsigned));
+    matrix->col_indices = (unsigned *) malloc(nz * sizeof(unsigned));
+    matrix->values = (double *) malloc(nz * sizeof(double));
+
+
+    if (!matrix->row_indices || !matrix->col_indices || !matrix->values) {
+        fprintf(stderr, "Error: Memory allocation failed.\n");
+        if (f) fclose(f);
+        return -1;
+    }
+
+    for (i = 0; i < nz; i++)
+    {
+        fscanf(f, "%d %d %lg\n", &temp_i, &temp_j, &matrix->values[i]);
+        matrix->row_indices[i] = (unsigned)(temp_i - 1);
+        matrix->col_indices[i] = (unsigned)(temp_j - 1);
+    }
+
+    if (f != stdin) fclose(f);
+
+    // matrix write out -> ok
+    mm_write_banner(stdout, matcode);
+    mm_write_mtx_crd_size(stdout, matrix->n_rows, matrix->n_cols, matrix->nnz);
+    // for (i=0; i < matrix->nnz; i++){
+    //     fprintf(stdout, "%d %d %20.19g\n", 
+    //         matrix->row_indices[i]+1, matrix->col_indices[i]+1, matrix->values[i]);
+    // }
+
+    return 0;
+}
 
 // function to initialize a struct COO given the data extracted from .mtx file
 Sparse_Coordinate* initialize_COO(
@@ -50,7 +198,6 @@ Sparse_Coordinate* initialize_COO(
     return struct_COO;
 }
 
-
 // function to perform Spmv on COO
 void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
     for(unsigned i = 0; i < COO->n_rows; i++){
@@ -67,7 +214,6 @@ void SpMV_COO(Sparse_Coordinate* COO, double* vec, double* res){
 
     return;
 }
-
 
 unsigned coo_count(Sparse_Coordinate *p){
     if (p == NULL || p->nnz == 0)
@@ -138,12 +284,6 @@ Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p) {
     return q;          // partial_CSR_properties 
 }
 
-/*
-For SpMV, focus on memory/cache optimizations first (reordering, 
-blocking, prefetching, improve locality, reduce indirection) 
-— they yield larger gains. Then focus on optimizing computation (eventual vectorization,
-parallelization)
-*/
 void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
     if (!m || !v || !p) return;  // null check
 
@@ -166,6 +306,20 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
 
 }
 
+
+void free_sparse(Sparse_Coordinate * matrix){
+
+    free(matrix->values);
+    free(matrix->col_indices);
+    free(matrix->row_indices);
+}
+
+void free_csr(Sparse_CSR *q)
+{
+    free(q->values);
+    free(q->col_ind);
+    free(q->row_ptr);
+}
 // /*
 //  * Compare SpMV results computed with COO and CSR.
 //  *
@@ -237,149 +391,4 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
 //     return (mismatches == 0) ? 1 : 0;
 // }
 
-
-
-
-int main(int argc, char *argv[])
-{
-    
-    int ret_code;
-    MM_typecode matcode;
-    FILE *f;
-    int M, N, nz;   // M=rows, N=cols, nz=nonzeroes
-    int i;
-    unsigned *I, *J;
-    double *val;
-
-    // Initialize struct for sparse matrix 
-    if (argc < 2)
-	{
-		fprintf(stderr, "Usage: %s [martix-market-filename]\n", argv[0]);
-		exit(1);
-	}
-    else    
-    { 
-        if ((f = fopen(argv[1], "r")) == NULL) 
-            exit(1);
-    }
-
-    if (mm_read_banner(f, &matcode) != 0)
-    {
-        printf("Could not process Matrix Market banner.\n");
-        exit(1);
-    }
-
-
-    //  This is how one can screen matrix types if their application 
-    //  only supports a subset of the Matrix Market data types.     
-    if (mm_is_complex(matcode) && mm_is_matrix(matcode) && 
-            mm_is_sparse(matcode) )
-    {
-        printf("Sorry, this application does not support ");
-        printf("Market Market type: [%s]\n", mm_typecode_to_str(matcode));
-        exit(1);
-    }
-
-    // find out size of sparse matrix .... 
-    if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
-        exit(1);
-
-
-    // reserve memory for matrices 
-    I = (unsigned *) surely_malloc(nz * sizeof(unsigned));
-    J = (unsigned *) surely_malloc(nz * sizeof(unsigned));
-    val = (double *) surely_malloc(nz * sizeof(double));
-
-
-    /* NOTE: when reading in doubles, ANSI C requires the use of the "l"  */
-    /*   specifier as in "%lg", "%lf", "%le", otherwise errors will occur */
-    /*  (ANSI C X3.159-1989, Sec. 4.9.6.2, p. 136 lines 13-15)            */
-    for (i=0; i<nz; i++)
-    {
-        int temp_i, temp_j;
-        fscanf(f, "%d %d %lg\n", &temp_i, &temp_j, &val[i]);
-        I[i] = (unsigned)(temp_i - 1);
-        J[i] = (unsigned)(temp_j - 1);
-    }
-
-    if (f !=stdin) fclose(f);
-
-    /************************/
-    /* now write out matrix */
-    /************************/
-    mm_write_banner(stdout, matcode);
-    mm_write_mtx_crd_size(stdout, M, N, nz);
-    // for (i=0; i<nz; i++){
-    //     fprintf(stdout, "%d %d %20.19g\n", I[i]+1, J[i]+1, val[i]);
-    // }
-
-    // create struct with data read from .mtx file
-    Sparse_Coordinate* struct_COO = initialize_COO((unsigned)M, (unsigned)N, (unsigned)nz, I, J, val);
-
-    // INITIALIZE MATRIX VECTOR MULTIPLICATION
-    double* res = surely_malloc(M * sizeof(double));
-    double* vec = surely_malloc(N * sizeof(double));
-
-    // INITIALIZE RANDOM VECTOR
-    srand(0);
-    for(int i = 0; i < N; i++){
-        vec[i] = rand() % 10;
-    }
-
-    // INITIALIZE CSR MATRIX FROM COO
-    Sparse_CSR* struct_CSR = coo_to_csr_matrix(struct_COO);
-    double* res_csr = surely_malloc(M * sizeof(double));
-
-    // COMPUTE SpMV WITH CSR
-    double start = omp_get_wtime();
-    csr_mv_multiply(struct_CSR, vec, res_csr);
-    double end = omp_get_wtime();
-    printf("\nElapsed time: %g seconds\n", end - start);
-
-    
-    // //verify CSR vs COO correctness -> VERIFIED AND CORRECT
-    // double tol = 1e-12; // tolerance delta to compare similar results up to tol
-    // int ok = compare_spmv_results(struct_COO, struct_CSR, vec, tol);
-    // if (!ok) {
-    //     fprintf(stderr, "Warning: CSR and COO SpMV differ!\n");
-    //     // optional: you can exit non-zero here if you want immediate failure 
-    // }
-
-    free(I);
-    free(J);
-    free(val);
-    free(vec);
-    free(res);
-    free(res_csr);
-    free(struct_CSR);      
-    free(struct_COO);
-    
-    return 0;
-}
-
-
-
-
-
-/*
-NOTES ON PARALLELIZATION
-CACHE
-
-- efficient parallel code we need to assure that SEQUENTIAL PARTS ARE PERFORMANT
-- TRY TO COORDINATE SEQUENTIAL PARTS in such a way that exploit cache as much as possible (eg row major, ...)
-- WARNING:
-    - FALSE SHARING MAY BE A PROBLEM
-    -> if you use cache, pay attention to cache lines: if data is invalidated, the entire content of cache line is
-    -> FORCE VARIABLES WHICH ARE ACCESSED BY DIFFERENT THREADS TO BE ON DIFFERENT CACHE LINES
-    
-        struct alignTo64ByteCacheLine {
-            int _onCacheLine1 __attribute__((aligned(64)))
-            int _onCacheLine2 __attribute__((aligned(64)))
-        }
-
-    - BRANCH PREDICTION
-    -> Random data leads to unpredictable branches, slowing execution
-    -> SORTING data can improve branch prediction and speed up execution
-
-*/
 
