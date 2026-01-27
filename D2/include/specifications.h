@@ -26,6 +26,7 @@ static inline double fma_fallback(double a, double b, double c);
 void *surely_malloc(size_t size);
 void coo_quicksort(Sparse_Coordinate *p, unsigned base, unsigned n);
 int load_matrix_market(const char *filename, Sparse_Coordinate* matrix);
+int load_mm_chunked(const char *filename, Sparse_Coordinate* matrix, int rank, int comm_size);
 unsigned coo_count(Sparse_Coordinate *p);
 
 Sparse_CSR *coo_to_csr_matrix(Sparse_Coordinate *p);
