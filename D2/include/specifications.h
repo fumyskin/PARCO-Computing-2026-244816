@@ -21,6 +21,7 @@ typedef struct {
     double* values;
 }Sparse_CSR;
 
+
 static inline double fma_fallback(double a, double b, double c);
 
 void *surely_malloc(size_t size);

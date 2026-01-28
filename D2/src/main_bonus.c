@@ -9,6 +9,7 @@
 #include "mmio.h"
 #include "specifications.h"
 #include "distributions.h"
+#include "bonus_utils.h"
 
 
 int main(int argc, char *argv[])

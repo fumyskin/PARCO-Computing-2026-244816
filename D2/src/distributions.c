@@ -68,3 +68,44 @@ void distribution_1D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
     }
 
 }
+
+void generate_dummy_matrix(Sparse_Coordinate* local_matrix, unsigned rows_per_process, unsigned nnz_per_row, int rank, int comm_size) {
+    
+    unsigned long long global_matrix_rows = (unsigned long long)rows_per_process * comm_size;
+    unsigned long long global_matrix_cols = global_matrix_rows; // ASSUMING SQUARE MATRIX !
+    unsigned long long local_nnz = (unsigned long long)rows_per_process * nnz_per_row;
+    
+    local_matrix->row_indices = (unsigned*)surely_malloc(local_nnz * sizeof(unsigned));
+    local_matrix->col_indices = (unsigned*)surely_malloc(local_nnz * sizeof(unsigned));
+    local_matrix->values      = (double*)surely_malloc(local_nnz * sizeof(double));
+
+    local_matrix->n_rows = global_matrix_rows;
+    local_matrix->n_cols = global_matrix_cols; 
+    local_matrix->nnz    = local_nnz;
+
+    // seed random based on rank so every process generates unique, reproducible numbers.
+    srand(rank * 12345 + 1); 
+
+    unsigned current_idx = 0;
+
+    for (unsigned k = 0; k < rows_per_process; k++) {
+        // 1D CYCLIC RULE: 
+        // The k-th row in my local memory corresponds to Global Row: (k * P) + rank
+        // Example (P=4, Rank=1):
+        // k=0 -> Global Row 1
+        // k=1 -> Global Row 5
+        // k=2 -> Global Row 9
+        unsigned global_row_idx = (k * comm_size) + rank;
+        
+        for (unsigned n = 0; n < nnz_per_row; n++) {
+    
+            unsigned rand_col = rand() % global_matrix_cols;
+            
+            local_matrix->row_indices[current_idx] = global_row_idx;
+            local_matrix->col_indices[current_idx] = rand_col;
+            local_matrix->values[current_idx]      = 1.0; // use 1.0 for easy verification later
+            
+            current_idx++;
+        }
+    }
+}
