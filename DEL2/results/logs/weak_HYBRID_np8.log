@@ -1,0 +1,2 @@
+mpirun: Error: unknown option "-env"
+Type 'mpirun --help' for usage.
