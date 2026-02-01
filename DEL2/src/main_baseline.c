@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <immintrin.h>
 #include <string.h>
 #include <time.h>
 #include <mpi.h>
 #include <omp.h> 
-#include <stdbool.h>
-#include <string.h>
 
 #include "mmio.h"
 #include "specifications.h"
@@ -21,7 +18,20 @@ int main(int argc, char *argv[])
     // 1. Read a matrix in matrix market format
     // Rank 0 reads the entire file and distributes matrix entries to all other processes.
     int rank, comm_size; 
-    MPI_Init(&argc, &argv);
+    int num_threads = 1;
+
+    #ifdef HYBRID
+        int provided;
+        MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &provided);
+        if(provided < MPI_THREAD_FUNNELED){
+            fprintf(stderr, "MPI does not support MPI_THREAD_FUNNELED\n");
+            MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+        }
+        num_threads = omp_get_max_threads();
+    #else
+        MPI_Init(&argc, &argv);
+    #endif
+
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
@@ -160,7 +170,7 @@ int main(int argc, char *argv[])
         printf("Ghost columns identified: %d total ghost values needed\n", comm_pattern.num_ghost_cols);
     }
 
-    // RANDOM VECTOR DISTR 
+    // RANDOM VECTOR DISTRIBUTION
     unsigned local_vec_size = matrix_cols/comm_size;
     if(rank <(matrix_cols % comm_size)){
         local_vec_size++;
@@ -190,7 +200,7 @@ int main(int argc, char *argv[])
     Performance_Metrics pmetrics;
     pmetrics.local_nnz = local_matrix.nnz;
     pmetrics.ghost_entries = comm_pattern.num_ghost_cols;
-    pmetrics.local_flops = 2LL * local_matrix.nnz;
+    pmetrics.local_flops = 2LL * local_matrix.nnz; // fix
     pmetrics.num_repeats = repeats;
 
     pmetrics.elapsed_times = (double*)surely_malloc(repeats * sizeof(double));

@@ -1,2 +1,23 @@
-mpirun: Error: unknown option "-env"
-Type 'mpirun --help' for usage.
+Retrieving the matrix from '../matrices/cond-mat-2005.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+40421 40421 175693
+Real Matrix (Strong Scaling): Rows=40421 | Cols=40421 | NNZ=175693 | Procs=1
+ok 1D distribution
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=40421 per process)
+[RESULT] 0,1,0,0.000612973,0.000184287,175693,0,351386
+[RESULT] 0,1,1,0.000580046,0.000137391,175693,0,351386
+[RESULT] 0,1,2,0.000607478,0.000163643,175693,0,351386
+[RESULT] 0,1,3,0.000640641,0.000171118,175693,0,351386
+[RESULT] 0,1,4,0.000523561,0.000099625,175693,0,351386
+[RESULT] 0,1,5,0.000640987,0.000180627,175693,0,351386
+[RESULT] 0,1,6,0.000597097,0.000163250,175693,0,351386
+[RESULT] 0,1,7,0.000563926,0.000129849,175693,0,351386
+[RESULT] 0,1,8,0.000539245,0.000111847,175693,0,351386
+[RESULT] 0,1,9,0.000546675,0.000124865,175693,0,351386
+
+Benchmark Summary
+Processes: 1
+Iterations: 10
+Matrix NNZ: 175693
+Total execution time: 0.089 seconds

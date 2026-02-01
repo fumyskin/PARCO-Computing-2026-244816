@@ -156,6 +156,9 @@ void find_ghost_vals(Sparse_CSR *local_csr, Comm_Pattern *cp, int rank, int comm
 void exchange_ghost_vals(double *local_vec, Comm_Pattern *cp, int rank, int comm_size){
     // Pack outgoing values
     double *send_buf = (double *)surely_malloc(cp->total_to_send * sizeof(double));
+    #ifdef HYBRID
+        #pragma omp parallel for schedule(static)
+    #endif
     for (int i = 0; i < cp->total_to_send; i++)
         send_buf[i] = local_vec[cp->send_indices[i]];
 
@@ -175,6 +178,10 @@ void exchange_ghost_vals(double *local_vec, Comm_Pattern *cp, int rank, int comm
 
 void local_SpMV(Sparse_CSR *local_csr, double *local_vec, double *local_result, Comm_Pattern *comm_pattern, int rank, int comm_size) {
     
+    
+    #ifdef HYBRID
+        #pragma omp parallel for schedule(dynamic, 64)
+    #endif
     for (unsigned i = 0; i < local_csr->n_rows; i++) {
         local_result[i] = 0.0;
     }

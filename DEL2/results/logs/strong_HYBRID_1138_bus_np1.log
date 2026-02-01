@@ -1,2 +1,23 @@
-mpirun: Error: unknown option "-env"
-Type 'mpirun --help' for usage.
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix (Strong Scaling): Rows=1138 | Cols=1138 | NNZ=2596 | Procs=1
+ok 1D distribution
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=1138 per process)
+[RESULT] 0,1,0,0.000208586,0.000093056,2596,0,5192
+[RESULT] 0,1,1,0.000227915,0.000105342,2596,0,5192
+[RESULT] 0,1,2,0.000199358,0.000087219,2596,0,5192
+[RESULT] 0,1,3,0.000214568,0.000107110,2596,0,5192
+[RESULT] 0,1,4,0.000242117,0.000092568,2596,0,5192
+[RESULT] 0,1,5,0.000200790,0.000058323,2596,0,5192
+[RESULT] 0,1,6,0.000194828,0.000077857,2596,0,5192
+[RESULT] 0,1,7,0.000257638,0.000099652,2596,0,5192
+[RESULT] 0,1,8,0.000296752,0.000156645,2596,0,5192
+[RESULT] 0,1,9,0.000206397,0.000107206,2596,0,5192
+
+Benchmark Summary
+Processes: 1
+Iterations: 10
+Matrix NNZ: 2596
+Total execution time: 0.005 seconds
