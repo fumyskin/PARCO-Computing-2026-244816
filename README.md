@@ -6,8 +6,8 @@ The following repository will organize as follows:
 
 ``` bash
 PARCO-repo/
-├── D1/         #Deliverable 1 folder        
-├── D2/         #Deliverable 2 folder
+├── DEL1/         #Deliverable 1 folder        
+├── DEL2/         #Deliverable 2 folder
 └── README.md   #Report description
 ```
 
