@@ -97,3 +97,11 @@ row_index[i]*leading_dimension + col_index[j] = val[i][j]
 */
 
 
+
+
+
+# DEL2 TO DO
+- [/] communication.c module
+- [ ] distribution.c module to check
+- [ ] implementation of hybrid MPI
+- [ ] main function to fix input reading
