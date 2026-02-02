@@ -35,16 +35,18 @@ int main(int argc, char *argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
-    srand(time(NULL) + rank*17);
+    srand(time(NULL) + rank*17); 
 
     double start_total = MPI_Wtime();
 
-    // change
-    if (argc < 3) {
+    // changed to consider also 2d 
+    if (argc < 4) {
         if (rank == 0){
-            // print a better message
-            fprintf(stderr, "Usage: %s <arg1> <arg2> <arg3>\n", argv[0]);
-            fprintf(stderr, "Error: Expected 3 arguments, but received %d.\n", argc - 1);
+            // print a better message ?
+            fprintf(stderr, "Usage: %s <matrix_file|dummy> <repeats> <distribution_type> [rows_per_proc] [nnz_per_row]\n", argv[0]);
+            fprintf(stderr, "  distribution_type: 1D, 2D, or 2D_cyclic\n");
+            fprintf(stderr, "  For dummy matrices: provide rows_per_proc and nnz_per_row\n");
+            fprintf(stderr, "Error: Expected at least 3 arguments, but received %d.\n", argc - 1);;
         }
         MPI_Finalize();
         return EXIT_FAILURE; 
@@ -52,7 +54,27 @@ int main(int argc, char *argv[])
 
     char* matrix = argv[1];
     int repeats = atoi(argv[2]);
+    char* distr_type = argv[3];
     int dummy = (strcmp(matrix, "dummy") == 0);
+
+    // check distribution type
+    int use_2d = 0;
+    int use_cyclic = 0;
+    if (strcmp(distr_type, "1D") == 0){
+        use_2d = 0;
+    }else if (strcmp(distr_type, "2D") == 0){
+        use_2d = 1;
+        use_cyclic = 0;
+    }else if (strcmp(distr_type, "2D_cyclic") == 0){
+        use_2d = 1;
+        use_cyclic = 1;
+    }else{
+        if (rank == 0){
+            fprintf(stderr, "Error: Invalid distribution type '%s'. Use 1D, 2D, or 2D_cyclic\n", distr_type);
+        }
+        MPI_Finalize();
+        return EXIT_FAILURE;
+    }
 
     Sparse_Coordinate coo_matrix = {0};
     Sparse_CSR csr_matrix = {0};
@@ -63,7 +85,7 @@ int main(int argc, char *argv[])
 
     // input check
     if (dummy){
-        if(argc < 5){
+        if(argc < 6){
             if(rank == 0){
                 fprintf(stderr, "Error: weak scaling simulation requires #rows per process and #nnz per row\n");
             }
@@ -71,8 +93,8 @@ int main(int argc, char *argv[])
             return EXIT_FAILURE;
         }
 
-        rows_per_process = atoi(argv[3]);
-        nnz_per_row = atoi(argv[4]);
+        rows_per_process = atoi(argv[4]);
+        nnz_per_row = atoi(argv[5]);
     }
 
     if(!dummy){
@@ -91,7 +113,8 @@ int main(int argc, char *argv[])
             csr_matrix = *temp_csr; 
             free(temp_csr);
            
-            printf("Real Matrix (Strong Scaling): Rows=%d | Cols=%d | NNZ=%d | Procs=%d\n", matrix_rows, matrix_cols, matrix_nnz, comm_size);
+            printf("Real Matrix: Rows=%d | Cols=%d | NNZ=%d | Procs=%d | Distribution=%s\n", 
+                   matrix_rows, matrix_cols, matrix_nnz, comm_size, distr_type);
 
         }
         MPI_Bcast(&matrix_rows, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
@@ -115,8 +138,16 @@ int main(int argc, char *argv[])
         MPI_Bcast(coo_matrix.values, matrix_nnz, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
     }else{
-        matrix_rows = rows_per_process*comm_size;
-        matrix_cols = matrix_rows;
+        // dummy matrix setup
+        if (use_2d){
+            int proc_rows, proc_cols;
+            create_2d_grid(comm_size, &proc_rows, &proc_cols);
+            matrix_rows = rows_per_process * proc_rows;
+            matrix_cols = matrix_rows;
+        }else{
+            matrix_rows = rows_per_process * comm_size;
+            matrix_cols = matrix_rows;
+        }
         matrix_nnz = 0;
 
         if (rank == 0) {
@@ -131,13 +162,28 @@ int main(int argc, char *argv[])
     Sparse_Coordinate local_matrix = {0};
     Sparse_CSR local_csr = {0};
     if(!dummy){
-        distribution_1D(&coo_matrix, &local_matrix, &local_csr, rank, comm_size);
-        if (rank == 0){
-            printf("ok 1D distribution\n");
-        }
+        if(use_2d){
+            if(use_cyclic){
+                distribution_2D_cyclic(&coo_matrix, &local_matrix, &local_csr, rank, comm_size);
+            }else{
+                distribution_2D(&coo_matrix, &local_matrix, &local_csr, rank, comm_size);
+            }
+            if(rank == 0){
+                printf("Applied 2D%s distribution\n", use_cyclic ? "cyclic" : "");
+            }
+        }else{
+            distribution_1D(&coo_matrix, &local_matrix, &local_csr, rank, comm_size);
+            if (rank == 0){
+                printf("Applied 1D distribution\n");
+            }
+        }    
     }else{
-        //generate a random local matrix for each process
-        generate_dummy_matrix(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
+        if(use_2d){
+            generate_dummy_matrix_2d(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
+        }else{
+            //generate a random local matrix for each process
+            generate_dummy_matrix(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
+        }
         
         // conversion in CSR
         Sparse_CSR *temp_csr = coo_to_csr_matrix(&local_matrix);
@@ -152,8 +198,7 @@ int main(int argc, char *argv[])
         matrix_cols = matrix_rows;
 
         if (rank == 0) {
-            printf("Dummy Matrix Generated: %llu Global Rows | Total NNZ: %u\n", 
-                   (unsigned long long)matrix_rows, matrix_nnz);
+            printf("Dummy Matrix Generated: %llu Global Rows | Total NNZ: %u\n", (unsigned long long)matrix_rows, matrix_nnz);
         }
     }
 
@@ -170,9 +215,9 @@ int main(int argc, char *argv[])
         printf("Ghost columns identified: %d total ghost values needed\n", comm_pattern.num_ghost_cols);
     }
 
-    // RANDOM VECTOR DISTRIBUTION
+    // RANDOM VECTOR DISTRIBUTION (cyclic)
     unsigned local_vec_size = matrix_cols/comm_size;
-    if(rank <(matrix_cols % comm_size)){
+    if(rank < (matrix_cols % comm_size)){
         local_vec_size++;
     }
 
@@ -182,7 +227,7 @@ int main(int argc, char *argv[])
     for (int i = 0; i < local_vec_size; i++) {
         // global index with cyclic distribution
         int global_idx = rank + i * comm_size;
-        local_rand_vec[i] = ((double)rand() / RAND_MAX) * 8.0 - 4.0;
+        local_rand_vec[i] = ((double)rand() / RAND_MAX) * 8.0 - 4.0; //!!!
     }
     
     if (rank == 0) {
@@ -240,6 +285,7 @@ int main(int argc, char *argv[])
     if (rank == 0) {
         printf("\nBenchmark Summary\n");
         printf("Processes: %d\n", comm_size);
+        printf("Distribution: %s\n", distr_type);
         printf("Iterations: %d\n", repeats);
         printf("Matrix NNZ: %d\n", matrix_nnz);
     }

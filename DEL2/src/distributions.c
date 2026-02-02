@@ -147,8 +147,7 @@ int coords_to_rank_2d(int row_coord, int col_coord, int proc_cols) {
 }
 
 // determine which process owns a matrix element (i, j) in 2D block distribution
-int owner_2d(unsigned row, unsigned col, unsigned matrix_rows, unsigned matrix_cols, 
-             int proc_rows, int proc_cols) {
+int owner_2d(unsigned row, unsigned col, unsigned matrix_rows, unsigned matrix_cols, int proc_rows, int proc_cols) {
     // block distribution: divide matrix into blocks
     unsigned rows_per_proc = (matrix_rows + proc_rows - 1) / proc_rows;
     unsigned cols_per_proc = (matrix_cols + proc_cols - 1) / proc_cols;
@@ -170,8 +169,7 @@ int owner_2d_cyclic(unsigned row, unsigned col, int proc_rows, int proc_cols) {
 }
 
 // main
-void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, 
-                     Sparse_CSR *local_csr, int rank, int comm_size) {
+void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, Sparse_CSR *local_csr, int rank, int comm_size) {
     
     // 1) create 2D process grid
     int proc_rows, proc_cols;
@@ -238,7 +236,7 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
                                      matrix->n_cols, proc_rows, proc_cols);
         
         if (element_owner == rank) {
-            // Convert to local row index (subtract the starting row)
+            // convert to local row index (subtract the starting row)
             local_matrix->row_indices[local_idx] = global_row - my_start_row;
             local_matrix->col_indices[local_idx] = global_col;  // Keep global column index
             local_matrix->values[local_idx] = matrix->values[i];
@@ -269,8 +267,7 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
 
 
 // generate dummy matrix for 2D distribution (weak scaling)
-void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per_proc,
-                              unsigned nnz_per_row, int rank, int comm_size) {
+void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, unsigned nnz_per_row, int rank, int comm_size) {
     
     int proc_rows, proc_cols;
     create_2d_grid(comm_size, &proc_rows, &proc_cols);
