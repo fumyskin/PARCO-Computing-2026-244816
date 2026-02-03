@@ -1,0 +1,24 @@
+Retrieving the matrix from '../matrices/dixmaanl.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+60000 60000 179999
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=179999 | Procs=1 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=60000 per process)
+[RESULT] 0,1,1D,0,0.000563833,0.000172009,179999,0,359998
+[RESULT] 0,1,1D,1,0.000499210,0.000140009,179999,0,359998
+[RESULT] 0,1,1D,2,0.000623535,0.000198602,179999,0,359998
+[RESULT] 0,1,1D,3,0.000717133,0.000197525,179999,0,359998
+[RESULT] 0,1,1D,4,0.000534063,0.000171682,179999,0,359998
+[RESULT] 0,1,1D,5,0.000578345,0.000192500,179999,0,359998
+[RESULT] 0,1,1D,6,0.000517631,0.000134130,179999,0,359998
+[RESULT] 0,1,1D,7,0.000590924,0.000163858,179999,0,359998
+[RESULT] 0,1,1D,8,0.000531549,0.000149870,179999,0,359998
+[RESULT] 0,1,1D,9,0.000603016,0.000090922,179999,0,359998
+
+Benchmark Summary
+Processes: 1
+Distribution: 1D
+Iterations: 10
+Matrix NNZ: 179999
+Total execution time: 0.264 seconds

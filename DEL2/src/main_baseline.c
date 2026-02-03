@@ -266,13 +266,15 @@ int main(int argc, char *argv[])
         pmetrics.elapsed_times[r] = total_iter_end - total_iter_start;
     }
 
+    
 
     // RAW OUTPUT DATA
     // fix visualization bug in benchmark results
     for (int r = 0; r < repeats; r++) {
-        printf("[RESULT] %d,%d,%d,%.9f,%.9f,%d,%d,%d\n",
+        printf("[RESULT] %d,%d,%s,%d,%.9f,%.9f,%d,%d,%d\n",
             rank, 
-            comm_size, 
+            comm_size,
+            distr_type,
             r,
             pmetrics.elapsed_times[r], 
             pmetrics.comm_times[r],

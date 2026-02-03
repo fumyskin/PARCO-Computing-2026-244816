@@ -1,0 +1,24 @@
+Retrieving the matrix from '../matrices/flowmeter0.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+9669 9669 38530
+Real Matrix: Rows=9669 | Cols=9669 | NNZ=38530 | Procs=1 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=9669 per process)
+[RESULT] 0,1,1D,0,0.000310584,0.000110050,38530,0,77060
+[RESULT] 0,1,1D,1,0.000281594,0.000121201,38530,0,77060
+[RESULT] 0,1,1D,2,0.000295230,0.000132308,38530,0,77060
+[RESULT] 0,1,1D,3,0.000279680,0.000141691,38530,0,77060
+[RESULT] 0,1,1D,4,0.000293125,0.000139526,38530,0,77060
+[RESULT] 0,1,1D,5,0.000315577,0.000107457,38530,0,77060
+[RESULT] 0,1,1D,6,0.000497352,0.000220560,38530,0,77060
+[RESULT] 0,1,1D,7,0.000487706,0.000269452,38530,0,77060
+[RESULT] 0,1,1D,8,0.000365235,0.000125412,38530,0,77060
+[RESULT] 0,1,1D,9,0.000254047,0.000065827,38530,0,77060
+
+Benchmark Summary
+Processes: 1
+Distribution: 1D
+Iterations: 10
+Matrix NNZ: 38530
+Total execution time: 0.086 seconds

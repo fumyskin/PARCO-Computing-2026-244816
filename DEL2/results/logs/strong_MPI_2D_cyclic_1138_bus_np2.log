@@ -1,0 +1,37 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=2 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 1 x 2
+Rank 0: Grid pos (0,0) | Local rows: 1138 | Local NNZ: 1297
+Applied 2Dcyclic distribution
+Rank 1: Grid pos (0,1) | Local rows: 1138 | Local NNZ: 1299
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=569 per process)
+[RESULT] 1,2,2D_cyclic,0,0.000004394,0.000000399,1299,0,2598
+[RESULT] 1,2,2D_cyclic,1,0.000009191,0.000006874,1299,0,2598
+[RESULT] 1,2,2D_cyclic,2,0.000002181,0.000000197,1299,0,2598
+[RESULT] 1,2,2D_cyclic,3,0.000002256,0.000000321,1299,0,2598
+[RESULT] 1,2,2D_cyclic,4,0.000002036,0.000000159,1299,0,2598
+[RESULT] 1,2,2D_cyclic,5,0.000001960,0.000000143,1299,0,2598
+[RESULT] 1,2,2D_cyclic,6,0.000002066,0.000000183,1299,0,2598
+[RESULT] 0,2,2D_cyclic,0,0.000004008,0.000000305,1297,0,2594
+[RESULT] 0,2,2D_cyclic,1,0.000009047,0.000006792,1297,0,2594
+[RESULT] 0,2,2D_cyclic,2,0.000004349,0.000002336,1297,0,2594
+[RESULT] 0,2,2D_cyclic,3,0.000004010,0.000002089,1297,0,2594
+[RESULT] 0,2,2D_cyclic,4,0.000002139,0.000000238,1297,0,2594
+[RESULT] 0,2,2D_cyclic,5,0.000002110,0.000000255,1297,0,2594
+[RESULT] 0,2,2D_cyclic,6,0.000002118,0.000000204,1297,0,2594
+[RESULT] 0,2,2D_cyclic,7,0.000002085,0.000000212,1297,0,2594
+[RESULT] 0,2,2D_cyclic,8,0.000002159,0.000000235,1297,0,2594
+[RESULT] 0,2,2D_cyclic,9,0.000001975,0.000000179,1297,0,2594
+
+Benchmark Summary
+Processes: 2
+Distribution: 2D_cyclic
+Iterations: 10
+Matrix NNZ: 2596
+Total execution time: 0.010 seconds
+[RESULT] 1,2,2D_cyclic,7,0.000002027,0.000000141,1299,0,2598
+[RESULT] 1,2,2D_cyclic,8,0.000002131,0.000000162,1299,0,2598
+[RESULT] 1,2,2D_cyclic,9,0.000002018,0.000000185,1299,0,2598

@@ -1,0 +1,24 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=1 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=1138 per process)
+[RESULT] 0,1,1D,0,0.000284002,0.000141350,2596,0,5192
+[RESULT] 0,1,1D,1,0.000223280,0.000119410,2596,0,5192
+[RESULT] 0,1,1D,2,0.000277170,0.000119810,2596,0,5192
+[RESULT] 0,1,1D,3,0.000282290,0.000154557,2596,0,5192
+[RESULT] 0,1,1D,4,0.000329768,0.000162429,2596,0,5192
+[RESULT] 0,1,1D,5,0.000221955,0.000113141,2596,0,5192
+[RESULT] 0,1,1D,6,0.000223279,0.000092648,2596,0,5192
+[RESULT] 0,1,1D,7,0.000283870,0.000137402,2596,0,5192
+[RESULT] 0,1,1D,8,0.000195310,0.000079664,2596,0,5192
+[RESULT] 0,1,1D,9,0.000265370,0.000137765,2596,0,5192
+
+Benchmark Summary
+Processes: 1
+Distribution: 1D
+Iterations: 10
+Matrix NNZ: 2596
+Total execution time: 0.058 seconds
