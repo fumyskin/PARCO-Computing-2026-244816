@@ -25,7 +25,9 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
 void distribution_2D_cyclic(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, Sparse_CSR *local_csr, int rank, int comm_size);
 
 // gnerate dummy matrix for 2D weak scaling tests
-void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, unsigned nnz_per_row, int rank, int comm_size);
-
+void generate_dummy_matrix_2d_block(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, 
+                                    unsigned nnz_per_row, int rank, int comm_size);
+void generate_dummy_matrix_2d_cyclic(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, 
+                                     unsigned nnz_per_row, int rank, int comm_size);
 
 #endif

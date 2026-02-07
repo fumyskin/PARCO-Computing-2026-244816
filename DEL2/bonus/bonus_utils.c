@@ -28,14 +28,18 @@ int parse_mm_header(char* buffer, char* buffer_end, char** cursor_out, int* n_ro
 
     // move past header line
     char* next = memchr(cursor, '\n', buffer_end - cursor);
-    if (next) cursor = next + 1;
+    if (next) {
+        cursor = next + 1;
+    } else {
+        return -1; // no newline after dimensions is an error
+    }
     
     *cursor_out = cursor;
     return 0;
 }
 
 // adjust cursor for non-zero ranks to skip partial first line
-void skip_partial_line(char* buffer, MPI_Offset my_offset, MPI_Offset bytes_read, char** cursor_out){
+void skip_partial_line(char* buffer, MPI_Offset bytes_read, char** cursor_out){
     if (my_offset > 0) {
         char* eol = memchr(buffer, '\n', bytes_read);
         if (eol != NULL) {
@@ -366,8 +370,9 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
     }
     
     MPI_Offset chunk_size = file_size / comm_size;
+    MPI_Offset my_offset = rank * chunk_size;
     if (rank == comm_size - 1) {
-        chunk_size = file_size - rank * (file_size / comm_size);
+        chunk_size = file_size - my_offset;
     }
     
     // parse header, adjust cursor
@@ -385,8 +390,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
             return -1;
         }
     } else {
-        skip_partial_line(buffer, rank * (file_size / comm_size), 
-                         bytes_read, &cursor);
+        skip_partial_line(buffer, bytes_read, &cursor);
     }
     
     MPI_Bcast(&n_rows, 1, MPI_INT, 0, MPI_COMM_WORLD);
@@ -398,8 +402,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
     unsigned* local_rows = (unsigned*)surely_malloc(local_capacity * sizeof(unsigned));
     unsigned* local_cols = (unsigned*)surely_malloc(local_capacity * sizeof(unsigned));
     double* local_vals = (double*)surely_malloc(local_capacity * sizeof(double));
-    
-    
+
     // PHASE 2: parse and partition
     SendBuffers* send_bufs = create_send_buffers(comm_size, 1000);
     if (!send_bufs) {
@@ -413,8 +416,16 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
     
     // Adjust cursor position in buffer
     MPI_Offset cursor_offset = cursor - buffer;
-    ret = parse_and_partition(cursor, chunk_size - cursor_offset, 
-                             bytes_read - cursor_offset, rank, comm_size,
+    MPI_Offset bytes_remaining = bytes_read - cursor_offset;
+
+    // FIXED: For rank 0, adjust chunk_size to account for header
+    MPI_Offset effective_chunk_size = chunk_size;
+    if (rank == 0) {
+        effective_chunk_size = chunk_size - cursor_offset;
+    }
+
+    ret = parse_and_partition(cursor, effective_chunk_size, 
+                             bytes_remaining, rank, comm_size,
                              &local_rows, &local_cols, &local_vals, 
                              &local_count, &local_capacity, send_bufs);
     

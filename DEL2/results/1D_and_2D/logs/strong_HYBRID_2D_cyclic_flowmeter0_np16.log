@@ -1,0 +1,51 @@
+Retrieving the matrix from '../matrices/flowmeter0.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+9669 9669 38530
+Real Matrix: Rows=9669 | Cols=9669 | NNZ=38530 | Procs=16 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 4 x 4
+Rank 0: Grid pos (0,0) | Local rows: 2418 | Local NNZ: 4186
+Applied 2Dcyclic distribution
+Rank 2: Grid pos (0,2) | Local rows: 2418 | Local NNZ: 1844
+Rank 4: Grid pos (1,0) | Local rows: 2417 | Local NNZ: 1831
+Rank 6: Grid pos (1,2) | Local rows: 2417 | Local NNZ: 1792
+Rank 8: Grid pos (2,0) | Local rows: 2417 | Local NNZ: 1832
+Rank 1: Grid pos (0,1) | Local rows: 2418 | Local NNZ: 1764
+Rank 9: Grid pos (2,1) | Local rows: 2417 | Local NNZ: 1810
+Rank 5: Grid pos (1,1) | Local rows: 2417 | Local NNZ: 4179
+Rank 10: Grid pos (2,2) | Local rows: 2417 | Local NNZ: 4211
+Rank 11: Grid pos (2,3) | Local rows: 2417 | Local NNZ: 1783
+Rank 3: Grid pos (0,3) | Local rows: 2418 | Local NNZ: 1841
+Rank 13: Grid pos (3,1) | Local rows: 2417 | Local NNZ: 1864
+Rank 15: Grid pos (3,3) | Local rows: 2417 | Local NNZ: 4189
+Rank 12: Grid pos (3,0) | Local rows: 2417 | Local NNZ: 1802
+Rank 7: Grid pos (1,3) | Local rows: 2417 | Local NNZ: 1817
+Rank 14: Grid pos (3,2) | Local rows: 2417 | Local NNZ: 1785
+Ghost columns identified: 1813 total ghost values needed
+Local vector initialized (size=605 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 38530
+BALANCE: nnz_local   min=    1764  avg=   2408.12  max=    4211
+COMM:    ghost       min=    1051  avg=   1258.12  max=    1813  | recv_double_avg=  10065.00 B
+MEM:     bytes       min=   63580  avg=     72808  max=   98876
+STRUCT:  ghost_ratio min=  43.054  avg=    55.194  max=  60.601
+METRICS: t_total     = 6.442e-02        t_comp.   = 1.065e-03      t_comm= 6.401e-02
+         gflops_total= 1.196121e-03   gflops_comp= 7.232497e-02
+========================================
+
+[RESULT] 0,16,2D_cyclic,0,0.032061815,0.032002449,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,1,0.032404900,0.031971693,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,2,0.032361269,0.031965017,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,3,0.032404661,0.031979084,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,4,0.032370806,0.031968355,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,5,0.032393456,0.031965971,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,6,0.032369137,0.031972647,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,7,0.032410622,0.031983852,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,8,0.032385111,0.031985283,4186,1813,8372
+[RESULT] 0,16,2D_cyclic,9,0.032418966,0.031987667,4186,1813,8372
+Total execution time: 2.847 seconds

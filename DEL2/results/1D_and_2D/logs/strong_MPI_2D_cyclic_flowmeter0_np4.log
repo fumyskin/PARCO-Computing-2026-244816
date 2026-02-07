@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/flowmeter0.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+9669 9669 38530
+Real Matrix: Rows=9669 | Cols=9669 | NNZ=38530 | Procs=4 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 2
+Rank 2: Grid pos (1,0) | Local rows: 4834 | Local NNZ: 7210
+Rank 0: Grid pos (0,0) | Local rows: 4835 | Local NNZ: 12073
+Applied 2Dcyclic distribution
+Rank 1: Grid pos (0,1) | Local rows: 4835 | Local NNZ: 7198
+Rank 3: Grid pos (1,1) | Local rows: 4834 | Local NNZ: 12049
+Ghost columns identified: 2417 total ghost values needed
+Local vector initialized (size=2418 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 38530
+BALANCE: nnz_local   min=    7198  avg=   9632.50  max=   12073
+COMM:    ghost       min=    2189  avg=   2304.25  max=    2417  | recv_double_avg=  18434.00 B
+MEM:     bytes       min=  181288  avg=    211380  max=  241580
+STRUCT:  ghost_ratio min=  20.020  avg=    25.230  max=  30.481
+METRICS: t_total     = 1.338e-04        t_comp.   = 1.226e-04      t_comm= 1.113e-05
+         gflops_total= 5.761374e-01   gflops_comp= 6.284524e-01
+========================================
+
+[RESULT] 0,4,2D_cyclic,0,0.000137806,0.000011206,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,1,0.000134468,0.000011206,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,2,0.000132084,0.000010014,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,3,0.000131845,0.000009775,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,4,0.000131845,0.000010014,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,5,0.000138998,0.000010252,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,6,0.000132322,0.000010014,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,7,0.000132561,0.000012875,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,8,0.000133038,0.000012875,12073,2417,24146
+[RESULT] 0,4,2D_cyclic,9,0.000132561,0.000013113,12073,2417,24146
+Total execution time: 0.027 seconds

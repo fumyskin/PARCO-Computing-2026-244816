@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=4 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 2
+Rank 2: Grid pos (1,0) | Local rows: 363356 | Local NNZ: 725736
+Rank 0: Grid pos (0,0) | Local rows: 363357 | Local NNZ: 726184
+Applied 2Dcyclic distribution
+Rank 3: Grid pos (1,1) | Local rows: 363356 | Local NNZ: 725925
+Rank 1: Grid pos (0,1) | Local rows: 363357 | Local NNZ: 725992
+Ghost columns identified: 181678 total ghost values needed
+Local vector initialized (size=181679 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=  725736  avg= 725959.25  max=  726184
+COMM:    ghost       min=  181623  avg= 181661.00  max=  181678  | recv_double_avg=1453288.00 B
+MEM:     bytes       min=15975852  avg=  15978507  max=15981352
+STRUCT:  ghost_ratio min=  25.017  avg=    25.024  max=  25.032
+METRICS: t_total     = 6.770e-03        t_comp.   = 5.758e-03      t_comm= 1.015e-03
+         gflops_total= 8.579129e-01   gflops_comp= 1.008681e+00
+========================================
+
+[RESULT] 0,4,2D_cyclic,0,0.007491589,0.001650572,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,1,0.006747484,0.000948429,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,2,0.006709099,0.000940561,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,3,0.006668568,0.000905037,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,4,0.006649733,0.000916719,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,5,0.006714106,0.000936985,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,6,0.006645441,0.000923872,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,7,0.006791353,0.001049519,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,8,0.006633043,0.000914335,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,9,0.006644964,0.000932455,726184,181678,1452368
+Total execution time: 1.862 seconds

@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/cond-mat-2005.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+40421 40421 175693
+Real Matrix: Rows=40421 | Cols=40421 | NNZ=175693 | Procs=4 | Distribution=2D
+2D Process Grid: 2 x 2 (rows x cols)
+Rank 1: Grid pos (0,1) | Rows [0-20211) | Cols [20211-40421) | Local NNZ: 0
+Rank 3: Grid pos (1,1) | Rows [20211-40421) | Cols [20211-40421) | Local NNZ: 24374
+Rank 2: Grid pos (1,0) | Rows [20211-40421) | Cols [0-20211) | Local NNZ: 50713
+Rank 0: Grid pos (0,0) | Rows [0-20211) | Cols [0-20211) | Local NNZ: 100606
+Applied 2D distribution
+Ghost columns identified: 11098 total ghost values needed
+Local vector initialized (size=10106 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 175693
+BALANCE: nnz_local   min=       0  avg=  43923.25  max=  100606
+COMM:    ghost       min=       0  avg=   6564.25  max=   11098  | recv_double_avg=  52514.00 B
+MEM:     bytes       min=  323376  avg=    902965  max= 1619440
+STRUCT:  ghost_ratio min=   0.000  avg=    14.109  max=  29.868
+METRICS: t_total     = 1.140e-03        t_comp.   = 9.903e-04      t_comm= 1.522e-04
+         gflops_total= 3.081306e-01   gflops_comp= 3.548380e-01
+========================================
+
+[RESULT] 0,4,2D,0,0.001137495,0.000146866,100606,11098,201212
+[RESULT] 0,4,2D,1,0.001129866,0.000140190,100606,11098,201212
+[RESULT] 0,4,2D,2,0.001158714,0.000167131,100606,11098,201212
+[RESULT] 0,4,2D,3,0.001137018,0.000146389,100606,11098,201212
+[RESULT] 0,4,2D,4,0.001142740,0.000152826,100606,11098,201212
+[RESULT] 0,4,2D,5,0.001147985,0.000152588,100606,11098,201212
+[RESULT] 0,4,2D,6,0.001140833,0.000150919,100606,11098,201212
+[RESULT] 0,4,2D,7,0.001136303,0.000147820,100606,11098,201212
+[RESULT] 0,4,2D,8,0.001137257,0.000149488,100606,11098,201212
+[RESULT] 0,4,2D,9,0.001135588,0.000146866,100606,11098,201212
+Total execution time: 0.107 seconds

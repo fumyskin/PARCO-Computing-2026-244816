@@ -1,0 +1,43 @@
+Retrieving the matrix from '../matrices/msdoor.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+415863 415863 10328399
+Real Matrix: Rows=415863 | Cols=415863 | NNZ=10328399 | Procs=8 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 4
+Rank 1: Grid pos (0,1) | Local rows: 207932 | Local NNZ: 1263993
+Rank 3: Grid pos (0,3) | Local rows: 207932 | Local NNZ: 1248750
+Rank 5: Grid pos (1,1) | Local rows: 207931 | Local NNZ: 1326783
+Rank 0: Grid pos (0,0) | Local rows: 207932 | Local NNZ: 1323668
+Applied 2Dcyclic distribution
+Rank 6: Grid pos (1,2) | Local rows: 207931 | Local NNZ: 1265132
+Rank 4: Grid pos (1,0) | Local rows: 207931 | Local NNZ: 1280269
+Rank 2: Grid pos (0,2) | Local rows: 207932 | Local NNZ: 1308512
+Rank 7: Grid pos (1,3) | Local rows: 207931 | Local NNZ: 1311292
+Ghost columns identified: 51983 total ghost values needed
+Local vector initialized (size=51983 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 10328399
+BALANCE: nnz_local   min= 1248750  avg=1291049.88  max= 1326783
+COMM:    ghost       min=   50557  avg=  51303.38  max=   51983  | recv_double_avg= 410427.00 B
+MEM:     bytes       min=18300948  avg=  18814070  max=19248300
+STRUCT:  ghost_ratio min=   3.918  avg=     3.975  max=   4.053
+METRICS: t_total     = 1.078e-02        t_comp.   = 1.052e-02      t_comm= 2.719e-04
+         gflops_total= 1.915736e+00   gflops_comp= 1.963702e+00
+========================================
+
+[RESULT] 0,8,2D_cyclic,0,0.010774612,0.000249863,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,1,0.010831356,0.000282288,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,2,0.010691404,0.000220537,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,3,0.010783911,0.000286579,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,4,0.010744572,0.000284910,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,5,0.010876417,0.000276804,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,6,0.010840178,0.000242472,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,7,0.010777235,0.000264645,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,8,0.010777712,0.000301123,1323668,51983,2647336
+[RESULT] 0,8,2D_cyclic,9,0.010729551,0.000224590,1323668,51983,2647336
+Total execution time: 6.383 seconds

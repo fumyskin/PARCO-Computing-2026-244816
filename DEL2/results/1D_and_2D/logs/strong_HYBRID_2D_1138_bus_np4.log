@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=4 | Distribution=2D
+2D Process Grid: 2 x 2 (rows x cols)
+Rank 0: Grid pos (0,0) | Rows [0-569) | Cols [0-569) | Local NNZ: 1289
+Applied 2D distribution
+Rank 1: Grid pos (0,1) | Rows [0-569) | Cols [569-1138) | Local NNZ: 0
+Rank 2: Grid pos (1,0) | Rows [569-1138) | Cols [0-569) | Local NNZ: 140
+Rank 3: Grid pos (1,1) | Rows [569-1138) | Cols [569-1138) | Local NNZ: 1167
+Ghost columns identified: 426 total ghost values needed
+Local vector initialized (size=285 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 2596
+BALANCE: nnz_local   min=       0  avg=    649.00  max=    1289
+COMM:    ghost       min=       0  avg=    227.75  max=     427  | recv_double_avg=   1822.00 B
+MEM:     bytes       min=    9112  avg=     18718  max=   27988
+STRUCT:  ghost_ratio min=   0.000  avg=    27.767  max=  41.429
+METRICS: t_total     = 2.316e-02        t_comp.   = 4.992e-04      t_comm= 2.266e-02
+         gflops_total= 2.242232e-04   gflops_comp= 1.040062e-02
+========================================
+
+[RESULT] 0,4,2D,0,0.026109457,0.025993586,1289,426,2578
+[RESULT] 0,4,2D,1,0.034978390,0.034866571,1289,426,2578
+[RESULT] 0,4,2D,2,0.025989056,0.025875807,1289,426,2578
+[RESULT] 0,4,2D,3,0.030353546,0.025883913,1289,426,2578
+[RESULT] 0,4,2D,4,0.013540983,0.013525724,1289,426,2578
+[RESULT] 0,4,2D,5,0.026039362,0.026001692,1289,426,2578
+[RESULT] 0,4,2D,6,0.018502951,0.018471956,1289,426,2578
+[RESULT] 0,4,2D,7,0.018505573,0.018473387,1289,426,2578
+[RESULT] 0,4,2D,8,0.018499851,0.018469572,1289,426,2578
+[RESULT] 0,4,2D,9,0.019035816,0.019000769,1289,426,2578
+Total execution time: 0.467 seconds

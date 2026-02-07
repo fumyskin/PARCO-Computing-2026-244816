@@ -1,0 +1,34 @@
+Retrieving the matrix from '../matrices/dixmaanl.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+60000 60000 179999
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=179999 | Procs=8 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 7499 total ghost values needed
+Local vector initialized (size=7500 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 179999
+BALANCE: nnz_local   min=   22499  avg=  22499.88  max=   22500
+COMM:    ghost       min=    7499  avg=   7499.88  max=    7500  | recv_double_avg=  59999.00 B
+MEM:     bytes       min=  479984  avg=    480002  max=  480004
+STRUCT:  ghost_ratio min=  33.330  avg=    33.333  max=  33.333
+METRICS: t_total     = 5.514e-02        t_comp.   = 2.197e-03      t_comm= 5.496e-02
+         gflops_total= 6.528673e-03   gflops_comp= 1.638853e-01
+========================================
+
+[RESULT] 0,8,1D,0,0.052826643,0.052645445,22499,7499,44998
+[RESULT] 0,8,1D,1,0.052844286,0.052662611,22499,7499,44998
+[RESULT] 0,8,1D,2,0.053848028,0.053658962,22499,7499,44998
+[RESULT] 0,8,1D,3,0.055973291,0.055786610,22499,7499,44998
+[RESULT] 0,8,1D,4,0.055990458,0.055795908,22499,7499,44998
+[RESULT] 0,8,1D,5,0.055965424,0.055788517,22499,7499,44998
+[RESULT] 0,8,1D,6,0.055963278,0.055799007,22499,7499,44998
+[RESULT] 0,8,1D,7,0.056024075,0.055835724,22499,7499,44998
+[RESULT] 0,8,1D,8,0.055961847,0.055787802,22499,7499,44998
+[RESULT] 0,8,1D,9,0.056013346,0.055809259,22499,7499,44998
+Total execution time: 1.993 seconds

@@ -1,0 +1,34 @@
+Retrieving the matrix from '../matrices/flowmeter0.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+9669 9669 38530
+Real Matrix: Rows=9669 | Cols=9669 | NNZ=38530 | Procs=2 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 4358 total ghost values needed
+Local vector initialized (size=4835 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 38530
+BALANCE: nnz_local   min=   19259  avg=  19265.00  max=   19271
+COMM:    ghost       min=    4356  avg=   4357.00  max=    4358  | recv_double_avg=  34856.00 B
+MEM:     bytes       min=  362640  avg=    362730  max=  362820
+STRUCT:  ghost_ratio min=  22.614  avg=    22.616  max=  22.618
+METRICS: t_total     = 2.699e-04        t_comp.   = 1.763e-04      t_comm= 9.356e-05
+         gflops_total= 2.855491e-01   gflops_comp= 4.370697e-01
+========================================
+
+[RESULT] 0,2,1D,0,0.000266314,0.000090361,19271,4358,38542
+[RESULT] 0,2,1D,1,0.000266075,0.000083447,19271,4358,38542
+[RESULT] 0,2,1D,2,0.000268221,0.000092268,19271,4358,38542
+[RESULT] 0,2,1D,3,0.000268936,0.000094414,19271,4358,38542
+[RESULT] 0,2,1D,4,0.000268698,0.000094652,19271,4358,38542
+[RESULT] 0,2,1D,5,0.000272512,0.000093222,19271,4358,38542
+[RESULT] 0,2,1D,6,0.000267982,0.000092506,19271,4358,38542
+[RESULT] 0,2,1D,7,0.000270844,0.000094652,19271,4358,38542
+[RESULT] 0,2,1D,8,0.000275612,0.000101566,19271,4358,38542
+[RESULT] 0,2,1D,9,0.000273466,0.000098467,19271,4358,38542
+Total execution time: 0.027 seconds

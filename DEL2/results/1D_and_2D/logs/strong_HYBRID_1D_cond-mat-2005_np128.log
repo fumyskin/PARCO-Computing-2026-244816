@@ -1,0 +1,34 @@
+Retrieving the matrix from '../matrices/cond-mat-2005.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+40421 40421 175693
+Real Matrix: Rows=40421 | Cols=40421 | NNZ=175693 | Procs=128 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 1308 total ghost values needed
+Local vector initialized (size=316 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 175693
+BALANCE: nnz_local   min=    1173  avg=   1372.60  max=    1583
+COMM:    ghost       min=    1098  avg=   1254.09  max=    1418  | recv_double_avg=  10032.69 B
+MEM:     bytes       min=   29164  avg=     32824  max=   36664
+STRUCT:  ghost_ratio min=  87.306  avg=    91.429  max=  95.496
+METRICS: t_total     = 1.837e+00        t_comp.   = 3.104e-05      t_comm= 1.837e+00
+         gflops_total= 1.912781e-04   gflops_comp= 1.131966e+01
+========================================
+
+[RESULT] 0,128,1D,0,1.792009830,1.791980743,1447,1308,2894
+[RESULT] 0,128,1D,1,1.533054113,1.533025265,1447,1308,2894
+[RESULT] 0,128,1D,2,1.536052704,1.536022186,1447,1308,2894
+[RESULT] 0,128,1D,3,1.792022705,1.791992426,1447,1308,2894
+[RESULT] 0,128,1D,4,1.739027500,1.738995552,1447,1308,2894
+[RESULT] 0,128,1D,5,1.536066771,1.536032915,1447,1308,2894
+[RESULT] 0,128,1D,6,1.536061525,1.536028385,1447,1308,2894
+[RESULT] 0,128,1D,7,1.536030293,1.535999537,1447,1308,2894
+[RESULT] 0,128,1D,8,1.536032438,1.536004543,1447,1308,2894
+[RESULT] 0,128,1D,9,1.533234358,1.533200264,1447,1308,2894
+Total execution time: 96.089 seconds

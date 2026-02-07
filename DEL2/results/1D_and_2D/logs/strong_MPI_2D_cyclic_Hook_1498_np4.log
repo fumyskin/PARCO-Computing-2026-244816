@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=4 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 2
+Rank 1: Grid pos (0,1) | Local rows: 749012 | Local NNZ: 7596746
+Rank 3: Grid pos (1,1) | Local rows: 749011 | Local NNZ: 8006193
+Rank 0: Grid pos (0,0) | Local rows: 749012 | Local NNZ: 8006390
+Applied 2Dcyclic distribution
+Rank 2: Grid pos (1,0) | Local rows: 749011 | Local NNZ: 7598405
+Ghost columns identified: 374506 total ghost values needed
+Local vector initialized (size=374506 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min= 7596746  avg=7801933.50  max= 8006390
+COMM:    ghost       min=  372318  avg= 373421.25  max=  374506  | recv_double_avg=2987370.00 B
+MEM:     bytes       min=106123692  avg= 108594760  max=111056924
+STRUCT:  ghost_ratio min=   4.678  avg=     4.789  max=   4.901
+METRICS: t_total     = 7.362e-02        t_comp.   = 7.161e-02      t_comm= 2.114e-03
+         gflops_total= 8.478033e-01   gflops_comp= 8.716134e-01
+========================================
+
+[RESULT] 0,4,2D_cyclic,0,0.074700356,0.003176212,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,1,0.073455811,0.001882315,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,2,0.073536396,0.001896620,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,3,0.073602915,0.001914501,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,4,0.073446512,0.001866102,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,5,0.073436260,0.001873493,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,6,0.073523998,0.001856327,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,7,0.073392868,0.001885414,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,8,0.073531628,0.001882315,8006390,374506,16012780
+[RESULT] 0,4,2D_cyclic,9,0.073575497,0.001877785,8006390,374506,16012780
+Total execution time: 18.675 seconds

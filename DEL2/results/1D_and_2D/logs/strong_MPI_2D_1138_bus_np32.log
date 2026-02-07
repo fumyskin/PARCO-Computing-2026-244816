@@ -1,0 +1,67 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=32 | Distribution=2D
+2D Process Grid: 4 x 8 (rows x cols)
+Rank 4: Grid pos (0,4) | Rows [0-285) | Cols [572-715) | Local NNZ: 0
+Rank 0: Grid pos (0,0) | Rows [0-285) | Cols [0-143) | Local NNZ: 329
+Applied 2D distribution
+Rank 2: Grid pos (0,2) | Rows [0-285) | Cols [286-429) | Local NNZ: 0
+Rank 6: Grid pos (0,6) | Rows [0-285) | Cols [858-1001) | Local NNZ: 0
+Rank 8: Grid pos (1,0) | Rows [285-570) | Cols [0-143) | Local NNZ: 50
+Rank 12: Grid pos (1,4) | Rows [285-570) | Cols [572-715) | Local NNZ: 0
+Rank 1: Grid pos (0,1) | Rows [0-285) | Cols [143-286) | Local NNZ: 301
+Rank 16: Grid pos (2,0) | Rows [570-855) | Cols [0-143) | Local NNZ: 19
+Rank 3: Grid pos (0,3) | Rows [0-285) | Cols [429-572) | Local NNZ: 0
+Rank 10: Grid pos (1,2) | Rows [285-570) | Cols [286-429) | Local NNZ: 289
+Rank 5: Grid pos (0,5) | Rows [0-285) | Cols [715-858) | Local NNZ: 0
+Rank 14: Grid pos (1,6) | Rows [285-570) | Cols [858-1001) | Local NNZ: 0
+Rank 7: Grid pos (0,7) | Rows [0-285) | Cols [1001-1138) | Local NNZ: 0
+Rank 18: Grid pos (2,2) | Rows [570-855) | Cols [286-429) | Local NNZ: 15
+Rank 9: Grid pos (1,1) | Rows [285-570) | Cols [143-286) | Local NNZ: 44
+Rank 20: Grid pos (2,4) | Rows [570-855) | Cols [572-715) | Local NNZ: 275
+Rank 11: Grid pos (1,3) | Rows [285-570) | Cols [429-572) | Local NNZ: 277
+Rank 22: Grid pos (2,6) | Rows [570-855) | Cols [858-1001) | Local NNZ: 0
+Rank 13: Grid pos (1,5) | Rows [285-570) | Cols [715-858) | Local NNZ: 0
+Rank 24: Grid pos (3,0) | Rows [855-1138) | Cols [0-143) | Local NNZ: 10
+Rank 15: Grid pos (1,7) | Rows [285-570) | Cols [1001-1138) | Local NNZ: 0
+Rank 26: Grid pos (3,2) | Rows [855-1138) | Cols [286-429) | Local NNZ: 0
+Rank 17: Grid pos (2,1) | Rows [570-855) | Cols [143-286) | Local NNZ: 6
+Rank 28: Grid pos (3,4) | Rows [855-1138) | Cols [572-715) | Local NNZ: 40
+Rank 19: Grid pos (2,3) | Rows [570-855) | Cols [429-572) | Local NNZ: 58
+Rank 30: Grid pos (3,6) | Rows [855-1138) | Cols [858-1001) | Local NNZ: 294
+Rank 21: Grid pos (2,5) | Rows [570-855) | Cols [715-858) | Local NNZ: 249
+Rank 23: Grid pos (2,7) | Rows [570-855) | Cols [1001-1138) | Local NNZ: 0
+Rank 25: Grid pos (3,1) | Rows [855-1138) | Cols [143-286) | Local NNZ: 1
+Rank 29: Grid pos (3,5) | Rows [855-1138) | Cols [715-858) | Local NNZ: 50
+Rank 27: Grid pos (3,3) | Rows [855-1138) | Cols [429-572) | Local NNZ: 36
+Rank 31: Grid pos (3,7) | Rows [855-1138) | Cols [1001-1138) | Local NNZ: 253
+Ghost columns identified: 138 total ghost values needed
+Local vector initialized (size=36 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 2596
+BALANCE: nnz_local   min=       0  avg=     81.12  max=     329
+COMM:    ghost       min=       0  avg=     40.56  max=     139  | recv_double_avg=    324.50 B
+MEM:     bytes       min=    3680  avg=      5000  max=    8764
+STRUCT:  ghost_ratio min=   0.000  avg=    36.094  max= 100.000
+METRICS: t_total     = 1.561e-04        t_comp.   = 3.028e-06      t_comm= 1.530e-04
+         gflops_total= 3.326738e-02   gflops_comp= 1.714711e+00
+========================================
+
+[RESULT] 0,32,2D,0,0.000102520,0.000099421,329,138,658
+[RESULT] 0,32,2D,1,0.000138283,0.000135899,329,138,658
+[RESULT] 0,32,2D,2,0.000134230,0.000132084,329,138,658
+[RESULT] 0,32,2D,3,0.000154734,0.000152588,329,138,658
+[RESULT] 0,32,2D,4,0.000091314,0.000089407,329,138,658
+[RESULT] 0,32,2D,5,0.000149965,0.000147820,329,138,658
+[RESULT] 0,32,2D,6,0.000105619,0.000103235,329,138,658
+[RESULT] 0,32,2D,7,0.000154257,0.000152349,329,138,658
+[RESULT] 0,32,2D,8,0.000079155,0.000076771,329,138,658
+[RESULT] 0,32,2D,9,0.000115871,0.000113964,329,138,658
+Total execution time: 0.010 seconds

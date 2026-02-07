@@ -178,12 +178,8 @@ int main(int argc, char *argv[])
             }
         }    
     }else{
-        if(use_2d){
-            generate_dummy_matrix_2d(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
-        }else{
-            //generate a random local matrix for each process
-            generate_dummy_matrix(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
-        }
+        //generate a random local matrix for each process
+        generate_dummy_matrix(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
         
         // conversion in CSR
         Sparse_CSR *temp_csr = coo_to_csr_matrix(&local_matrix);
@@ -266,31 +262,142 @@ int main(int argc, char *argv[])
         pmetrics.elapsed_times[r] = total_iter_end - total_iter_start;
     }
 
+    unsigned nnz = local_csr.row_ptr[local_csr.n_rows];
+    // Calculate local memory usage
+    size_t local_bytes = 0;
+    // CSR structure: row_ptr, col_indices, values
+    local_bytes += (local_csr.n_rows + 1) * sizeof(unsigned);  // row_ptr
+    local_bytes += nnz * sizeof(unsigned);            // col_indices
+    local_bytes += nnz * sizeof(double);              // values
+    // Local vector and result
+    local_bytes += local_vec_size * sizeof(double);             // local_rand_vec
+    local_bytes += local_csr.n_rows * sizeof(double);           // local_res
+    // Ghost communication buffers
+    local_bytes += comm_pattern.num_ghost_cols * sizeof(double); // ghost values
+    
+    // Gather statistics across all processes
+    unsigned local_nnz = local_matrix.nnz;
+    unsigned local_ghosts = comm_pattern.num_ghost_cols;
+    
+    // BONUS : min/max/avg nnz for rank
+    unsigned nnz_min, nnz_max;
+    double nnz_avg;
+    MPI_Reduce(&local_nnz, &nnz_min, 1, MPI_UNSIGNED, MPI_MIN, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_nnz, &nnz_max, 1, MPI_UNSIGNED, MPI_MAX, 0, MPI_COMM_WORLD);
+    unsigned long long nnz_sum = local_nnz;
+    unsigned long long nnz_total;
+    MPI_Reduce(&nnz_sum, &nnz_total, 1, MPI_UNSIGNED_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+    nnz_avg = (double)nnz_total / comm_size;
+    
+    // BONUS: communication volume for rank -> min/max/avg for ghost entries
+    unsigned ghost_min, ghost_max;
+    double ghost_avg;
+    MPI_Reduce(&local_ghosts, &ghost_min, 1, MPI_UNSIGNED, MPI_MIN, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_ghosts, &ghost_max, 1, MPI_UNSIGNED, MPI_MAX, 0, MPI_COMM_WORLD);
+    unsigned long long ghost_sum = local_ghosts;
+    unsigned long long ghost_total;
+    MPI_Reduce(&ghost_sum, &ghost_total, 1, MPI_UNSIGNED_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+    ghost_avg = (double)ghost_total / comm_size;
+    
+    // Average bytes received (ghost values in doubles)
+    double recv_bytes = local_ghosts * sizeof(double);
+    double recv_bytes_avg;
+    MPI_Reduce(&recv_bytes, &recv_bytes_avg, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    recv_bytes_avg /= comm_size;
+    
+    // Min/Max/Avg for memory usage
+    size_t mem_min, mem_max;
+    double mem_avg;
+    MPI_Reduce(&local_bytes, &mem_min, 1, MPI_UNSIGNED_LONG, MPI_MIN, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_bytes, &mem_max, 1, MPI_UNSIGNED_LONG, MPI_MAX, 0, MPI_COMM_WORLD);
+    unsigned long long mem_sum = local_bytes;
+    unsigned long long mem_total;
+    MPI_Reduce(&mem_sum, &mem_total, 1, MPI_UNSIGNED_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+    mem_avg = (double)mem_total / comm_size;
+    
+    // Ghost ratio (percentage)
+    double ghost_ratio = (local_nnz > 0) ? (100.0 * local_ghosts / local_nnz) : 0.0;
+    double ghost_ratio_min, ghost_ratio_max, ghost_ratio_avg;
+    MPI_Reduce(&ghost_ratio, &ghost_ratio_min, 1, MPI_DOUBLE, MPI_MIN, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&ghost_ratio, &ghost_ratio_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&ghost_ratio, &ghost_ratio_avg, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    ghost_ratio_avg /= comm_size;
+    
+    // Compute average times from all iterations
+    double total_time_local = 0.0, comm_time_local = 0.0;
+    for (int r = 0; r < repeats; r++) {
+        total_time_local += pmetrics.elapsed_times[r];
+        comm_time_local += pmetrics.comm_times[r];
+    }
+    total_time_local /= repeats;
+    comm_time_local /= repeats;
+    
+    // Computation time (total - comm)
+    double comp_time_local = total_time_local - comm_time_local;
+    
+    // Max times across all processes (for overall performance)
+    double total_time_max, comm_time_max, comp_time_max;
+    MPI_Reduce(&total_time_local, &total_time_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&comm_time_local, &comm_time_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&comp_time_local, &comp_time_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    
+    // GFLOPS calculations
+    // Total FLOPS = 2 * total_nnz (one mult + one add per non-zero)
+    long long total_flops = 2LL * matrix_nnz;
+    
+    double gflops_total = 0.0, gflops_comp = 0.0;
+    if (total_time_max > 0) {
+        gflops_total = (total_flops / 1e9) / total_time_max;
+    }
+    if (comp_time_max > 0) {
+        gflops_comp = (total_flops / 1e9) / comp_time_max;
+    }
+    
+    // ============================================================
+    // DISPLAY METRICS 
+    // ============================================================
+    if (rank == 0) {
+        printf("\n");
+        printf("========================================\n");
+        printf("COMPREHENSIVE METRICS SUMMARY\n");
+        printf("========================================\n");
+        printf("PROCESSES: %d\n", comm_size);
+        printf("DISTRIBUTION: %s\n", distr_type);
+        printf("ITERATIONS: %d\n", repeats);
+        printf("Matrix NNZ: %d\n", matrix_nnz);
+        printf("BALANCE: nnz_local   min=%8u  avg=%10.2f  max=%8u\n", 
+               nnz_min, nnz_avg, nnz_max);
+        printf("COMM:    ghost       min=%8u  avg=%10.2f  max=%8u  | recv_double_avg=%10.2f B\n",
+               ghost_min, ghost_avg, ghost_max, recv_bytes_avg);
+        printf("MEM:     bytes       min=%8zu  avg=%10.0f  max=%8zu\n",
+               mem_min, mem_avg, mem_max);
+        printf("STRUCT:  ghost_ratio min=%8.3f  avg=%10.3f  max=%8.3f\n",
+               ghost_ratio_min, ghost_ratio_avg, ghost_ratio_max);
+        printf("METRICS: t_total     = %.3e        t_comp.   = %.3e      t_comm= %.3e\n",
+               total_time_max, comp_time_max, comm_time_max);
+        printf("         gflops_total= %.6e   gflops_comp= %.6e\n",
+               gflops_total, gflops_comp);
+        printf("========================================\n\n");
+    }
+
+    // RAW OUTPUT DATA (per iteration, per rank)
+    if (rank == 0){
+        for (int r = 0; r < repeats; r++) {
+            printf("[RESULT] %d,%d,%s,%d,%.9f,%.9f,%d,%d,%d\n",
+                rank, 
+                comm_size,
+                distr_type,
+                r,
+                pmetrics.elapsed_times[r], 
+                pmetrics.comm_times[r],
+                pmetrics.local_nnz,
+                pmetrics.ghost_entries,
+                pmetrics.local_flops);
+            fflush(stdout); 
+        }
+    }
     
 
-    // RAW OUTPUT DATA
-    // fix visualization bug in benchmark results
-    for (int r = 0; r < repeats; r++) {
-        printf("[RESULT] %d,%d,%s,%d,%.9f,%.9f,%d,%d,%d\n",
-            rank, 
-            comm_size,
-            distr_type,
-            r,
-            pmetrics.elapsed_times[r], 
-            pmetrics.comm_times[r],
-            pmetrics.local_nnz,
-            pmetrics.ghost_entries,
-            pmetrics.local_flops);
-        fflush(stdout); 
-    }
-
-    if (rank == 0) {
-        printf("\nBenchmark Summary\n");
-        printf("Processes: %d\n", comm_size);
-        printf("Distribution: %s\n", distr_type);
-        printf("Iterations: %d\n", repeats);
-        printf("Matrix NNZ: %d\n", matrix_nnz);
-    }
 
     double end_total = MPI_Wtime();
     if (rank == 0) {
@@ -299,6 +406,10 @@ int main(int argc, char *argv[])
 
 
     // removing from the heap
+    free(pmetrics.elapsed_times);
+    free(pmetrics.comm_times);
+    free(local_rand_vec);
+    free(local_res);
     free_sparse(&coo_matrix);
     free_sparse(&local_matrix);
     free_csr(&local_csr);

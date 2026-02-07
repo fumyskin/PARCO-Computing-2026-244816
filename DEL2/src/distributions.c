@@ -31,7 +31,7 @@ void distribution_1D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
         }
     }
     // find row_indices and col_indices
-    if (local_matrix->nnz != 0){
+    if (local_matrix->nnz > 0){
         local_matrix->row_indices = (unsigned*)surely_malloc((local_matrix->nnz)*sizeof(unsigned));
         local_matrix->col_indices = (unsigned*)surely_malloc((local_matrix->nnz)*sizeof(unsigned));
         local_matrix->values      = (double*)surely_malloc((local_matrix->nnz)*sizeof(double));
@@ -113,8 +113,10 @@ void generate_dummy_matrix(Sparse_Coordinate* local_matrix, unsigned rows_per_pr
 }
 
 
-
 // 2D DISTRIBUTION
+// helper function to create a 2D process grid
+// 2D DISTRIBUTION - CORRECTED VERSION
+
 // helper function to create a 2D process grid
 // returns the process grid dimensions (proc_rows x proc_cols)
 void create_2d_grid(int comm_size, int *proc_rows, int *proc_cols) {
@@ -161,15 +163,15 @@ int owner_2d(unsigned row, unsigned col, unsigned matrix_rows, unsigned matrix_c
     return coords_to_rank_2d(owner_row, owner_col, proc_cols);
 }
 
-// Alternative: Cyclic 2D distribution (better load balance for irregular matrices)
+// Cyclic 2D distribution (better load balance for irregular matrices)
 int owner_2d_cyclic(unsigned row, unsigned col, int proc_rows, int proc_cols) {
     int owner_row = row % proc_rows;
     int owner_col = col % proc_cols;
     return coords_to_rank_2d(owner_row, owner_col, proc_cols);
 }
 
-// main
-void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, Sparse_CSR *local_csr, int rank, int comm_size) {
+void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, 
+                     Sparse_CSR *local_csr, int rank, int comm_size) {
     
     // 1) create 2D process grid
     int proc_rows, proc_cols;
@@ -179,7 +181,7 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
     rank_to_coords_2d(rank, proc_rows, proc_cols, &my_row_coord, &my_col_coord);
     
     if (rank == 0) {
-        printf("2D Process Grid: %d x %d (rows x cols)\n", proc_rows, proc_cols);
+        printf("2D Process Grid (Block): %d x %d (rows x cols)\n", proc_rows, proc_cols);
     }
     
     // 2) determine local matrix dimensions -> use block distribution
@@ -198,8 +200,9 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
         my_end_col = matrix->n_cols;
     }
     
+    // CORRECTED: Set proper local dimensions
     local_matrix->n_rows = my_end_row - my_start_row;
-    local_matrix->n_cols = matrix->n_cols;  // keep full column space for SpMV ?
+    local_matrix->n_cols = my_end_col - my_start_col;
     
     // 3) count local non-zeros (first pass)
     local_matrix->nnz = 0;
@@ -208,7 +211,8 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
         unsigned global_col = matrix->col_indices[i];
         
         // check if this element belongs to this process using block distribution
-        int element_owner = owner_2d(global_row, global_col, matrix->n_rows, matrix->n_cols, proc_rows, proc_cols);
+        int element_owner = owner_2d(global_row, global_col, matrix->n_rows, 
+                                     matrix->n_cols, proc_rows, proc_cols);
         
         if (element_owner == rank) {
             local_matrix->nnz++;
@@ -236,9 +240,9 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
                                      matrix->n_cols, proc_rows, proc_cols);
         
         if (element_owner == rank) {
-            // convert to local row index (subtract the starting row)
+            // CORRECTED: Convert BOTH row and column to local indices
             local_matrix->row_indices[local_idx] = global_row - my_start_row;
-            local_matrix->col_indices[local_idx] = global_col;  // Keep global column index
+            local_matrix->col_indices[local_idx] = global_col - my_start_col;
             local_matrix->values[local_idx] = matrix->values[i];
             local_idx++;
         }
@@ -258,16 +262,110 @@ void distribution_2D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
     }
     
     // debug output
-    printf("Rank %d: Grid pos (%d,%d) | Rows [%u-%u) | Cols [%u-%u) | Local NNZ: %u\n",
+    printf("Rank %d: Grid pos (%d,%d) | Rows [%u-%u) | Cols [%u-%u) | Local size: %ux%u | NNZ: %u\n",
            rank, my_row_coord, my_col_coord, my_start_row, my_end_row, 
-           my_start_col, my_end_col, local_matrix->nnz);
+           my_start_col, my_end_col, local_matrix->n_rows, local_matrix->n_cols, 
+           local_matrix->nnz);
 }
 
 
+void distribution_2D_cyclic(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, 
+                            Sparse_CSR *local_csr, int rank, int comm_size) {
+    
+    // Step 1: Create 2D process grid
+    int proc_rows, proc_cols;
+    create_2d_grid(comm_size, &proc_rows, &proc_cols);
+    
+    int my_row_coord, my_col_coord;
+    rank_to_coords_2d(rank, proc_rows, proc_cols, &my_row_coord, &my_col_coord);
+    
+    if (rank == 0) {
+        printf("2D Process Grid (Cyclic): %d x %d\n", proc_rows, proc_cols);
+    }
+    
+    // Step 2: Count rows and columns owned by this process
+    // In cyclic distribution: row i belongs to process (i % proc_rows)
+    //                        col j belongs to process (j % proc_cols)
+    unsigned local_rows = 0;
+    for (unsigned i = 0; i < matrix->n_rows; i++) {
+        if ((int)(i % proc_rows) == my_row_coord) {
+            local_rows++;
+        }
+    }
+    
+    // CORRECTED: Count local columns
+    unsigned local_cols = 0;
+    for (unsigned j = 0; j < matrix->n_cols; j++) {
+        if ((int)(j % proc_cols) == my_col_coord) {
+            local_cols++;
+        }
+    }
+    
+    local_matrix->n_rows = local_rows;
+    local_matrix->n_cols = local_cols;
+    
+    // Step 3: Count local non-zeros
+    local_matrix->nnz = 0;
+    for (unsigned i = 0; i < matrix->nnz; i++) {
+        unsigned global_row = matrix->row_indices[i];
+        unsigned global_col = matrix->col_indices[i];
+        
+        int element_owner = owner_2d_cyclic(global_row, global_col, proc_rows, proc_cols);
+        
+        if (element_owner == rank) {
+            local_matrix->nnz++;
+        }
+    }
+    
+    // Step 4: Allocate
+    if (local_matrix->nnz > 0) {
+        local_matrix->row_indices = (unsigned*)surely_malloc(local_matrix->nnz * sizeof(unsigned));
+        local_matrix->col_indices = (unsigned*)surely_malloc(local_matrix->nnz * sizeof(unsigned));
+        local_matrix->values = (double*)surely_malloc(local_matrix->nnz * sizeof(double));
+    } else {
+        local_matrix->row_indices = NULL;
+        local_matrix->col_indices = NULL;
+        local_matrix->values = NULL;
+    }
+    
+    // Step 5: Fill arrays with local indexing
+    unsigned local_idx = 0;
+    for (unsigned i = 0; i < matrix->nnz; i++) {
+        unsigned global_row = matrix->row_indices[i];
+        unsigned global_col = matrix->col_indices[i];
+        
+        int element_owner = owner_2d_cyclic(global_row, global_col, proc_rows, proc_cols);
+        
+        if (element_owner == rank) {
+            // CORRECTED: Map BOTH global row and column to local indices
+            // For cyclic: local_index = global_index / num_processes_in_dimension
+            local_matrix->row_indices[local_idx] = global_row / proc_rows;
+            local_matrix->col_indices[local_idx] = global_col / proc_cols;
+            local_matrix->values[local_idx] = matrix->values[i];
+            local_idx++;
+        }
+    }
+    
+    // Step 6: Convert to CSR
+    if (local_matrix->nnz > 0) {
+        Sparse_CSR *temp_csr = coo_to_csr_matrix(local_matrix);
+        *local_csr = *temp_csr;
+        free(temp_csr);
+    } else {
+        local_csr->n_rows = local_matrix->n_rows;
+        local_csr->n_cols = local_matrix->n_cols;
+        local_csr->row_ptr = (unsigned*)calloc(local_matrix->n_rows + 1, sizeof(unsigned));
+        local_csr->col_ind = NULL;
+        local_csr->values = NULL;
+    }
+    
+    printf("Rank %d: Grid pos (%d,%d) | Local size: %ux%u | Local NNZ: %u\n",
+           rank, my_row_coord, my_col_coord, local_rows, local_cols, local_matrix->nnz);
+}
 
 
-// generate dummy matrix for 2D distribution (weak scaling)
-void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, unsigned nnz_per_row, int rank, int comm_size) {
+void generate_dummy_matrix_2d_block(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, 
+                                    unsigned nnz_per_row, int rank, int comm_size) {
     
     int proc_rows, proc_cols;
     create_2d_grid(comm_size, &proc_rows, &proc_cols);
@@ -279,7 +377,7 @@ void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per
     unsigned total_cols = total_rows;  // Square matrix
     
     local_matrix->n_rows = rows_per_proc;
-    local_matrix->n_cols = total_cols;
+    local_matrix->n_cols = total_cols;  // Keep full column space for generation
     
     // Generate approximately nnz_per_row non-zeros per row
     unsigned estimated_nnz = rows_per_proc * nnz_per_row;
@@ -293,7 +391,10 @@ void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per
     
     // Generate non-zeros for each local row
     for (unsigned local_row = 0; local_row < rows_per_proc; local_row++) {
-        unsigned global_row = my_row_coord + local_row * proc_rows;  // Cyclic mapping
+        // CORRECTED: Block mapping instead of cyclic
+        unsigned global_row = my_row_coord * rows_per_proc + local_row;
+        
+        if (global_row >= total_rows) continue;  // Skip if out of bounds
         
         // Add diagonal element
         if (global_row < total_cols) {
@@ -333,92 +434,73 @@ void generate_dummy_matrix_2d(Sparse_Coordinate *local_matrix, unsigned rows_per
     free(temp_vals);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
 
-// AAAA
-// alternative: 2D Cyclic distribution (better for load balancing)
-void distribution_2D_cyclic(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix, 
-                            Sparse_CSR *local_csr, int rank, int comm_size) {
+void generate_dummy_matrix_2d_cyclic(Sparse_Coordinate *local_matrix, unsigned rows_per_proc, 
+                                     unsigned nnz_per_row, int rank, int comm_size) {
     
-    // Step 1: Create 2D process grid
     int proc_rows, proc_cols;
     create_2d_grid(comm_size, &proc_rows, &proc_cols);
     
     int my_row_coord, my_col_coord;
     rank_to_coords_2d(rank, proc_rows, proc_cols, &my_row_coord, &my_col_coord);
     
-    if (rank == 0) {
-        printf("2D Process Grid (Cyclic): %d x %d\n", proc_rows, proc_cols);
-    }
+    unsigned total_rows = rows_per_proc * proc_rows;
+    unsigned total_cols = total_rows;  // Square matrix
     
-    // Step 2: Count rows owned by this process
-    // In cyclic distribution: row i belongs to process (i % proc_rows)
-    unsigned local_rows = 0;
-    for (unsigned i = 0; i < matrix->n_rows; i++) {
-        if ((int)(i % proc_rows) == my_row_coord) {
-            local_rows++;
+    local_matrix->n_rows = rows_per_proc;
+    local_matrix->n_cols = total_cols;  // Keep full column space for generation
+    
+    // Generate approximately nnz_per_row non-zeros per row
+    unsigned estimated_nnz = rows_per_proc * nnz_per_row;
+    
+    // Allocate temporary arrays
+    unsigned *temp_rows = (unsigned*)surely_malloc(estimated_nnz * 2 * sizeof(unsigned));
+    unsigned *temp_cols = (unsigned*)surely_malloc(estimated_nnz * 2 * sizeof(unsigned));
+    double *temp_vals = (double*)surely_malloc(estimated_nnz * 2 * sizeof(double));
+    
+    unsigned actual_nnz = 0;
+    
+    // Generate non-zeros for each local row
+    for (unsigned local_row = 0; local_row < rows_per_proc; local_row++) {
+        // Cyclic mapping: global_row = my_row_coord + local_row * proc_rows
+        unsigned global_row = my_row_coord + local_row * proc_rows;
+        
+        if (global_row >= total_rows) continue;
+        
+        // Add diagonal element
+        if (global_row < total_cols) {
+            temp_rows[actual_nnz] = local_row;
+            temp_cols[actual_nnz] = global_row;
+            temp_vals[actual_nnz] = 4.0;
+            actual_nnz++;
+        }
+        
+        // Add random off-diagonal elements
+        for (unsigned k = 1; k < nnz_per_row && actual_nnz < estimated_nnz * 2; k++) {
+            unsigned global_col = rand() % total_cols;
+            
+            if (global_col != global_row) {
+                temp_rows[actual_nnz] = local_row;
+                temp_cols[actual_nnz] = global_col;
+                temp_vals[actual_nnz] = ((double)rand() / RAND_MAX) * 2.0 - 1.0;
+                actual_nnz++;
+            }
         }
     }
     
-    local_matrix->n_rows = local_rows;
-    local_matrix->n_cols = matrix->n_cols;
+    // Copy to final arrays
+    local_matrix->nnz = actual_nnz;
+    local_matrix->row_indices = (unsigned*)surely_malloc(actual_nnz * sizeof(unsigned));
+    local_matrix->col_indices = (unsigned*)surely_malloc(actual_nnz * sizeof(unsigned));
+    local_matrix->values = (double*)surely_malloc(actual_nnz * sizeof(double));
     
-    // Step 3: Count local non-zeros
-    local_matrix->nnz = 0;
-    for (unsigned i = 0; i < matrix->nnz; i++) {
-        unsigned global_row = matrix->row_indices[i];
-        unsigned global_col = matrix->col_indices[i];
-        
-        int element_owner = owner_2d_cyclic(global_row, global_col, proc_rows, proc_cols);
-        
-        if (element_owner == rank) {
-            local_matrix->nnz++;
-        }
+    for (unsigned i = 0; i < actual_nnz; i++) {
+        local_matrix->row_indices[i] = temp_rows[i];
+        local_matrix->col_indices[i] = temp_cols[i];
+        local_matrix->values[i] = temp_vals[i];
     }
     
-    // Step 4: Allocate
-    if (local_matrix->nnz > 0) {
-        local_matrix->row_indices = (unsigned*)surely_malloc(local_matrix->nnz * sizeof(unsigned));
-        local_matrix->col_indices = (unsigned*)surely_malloc(local_matrix->nnz * sizeof(unsigned));
-        local_matrix->values = (double*)surely_malloc(local_matrix->nnz * sizeof(double));
-    } else {
-        local_matrix->row_indices = NULL;
-        local_matrix->col_indices = NULL;
-        local_matrix->values = NULL;
-    }
-    
-    // Step 5: Fill arrays with local-to-global mapping
-    unsigned local_idx = 0;
-    for (unsigned i = 0; i < matrix->nnz; i++) {
-        unsigned global_row = matrix->row_indices[i];
-        unsigned global_col = matrix->col_indices[i];
-        
-        int element_owner = owner_2d_cyclic(global_row, global_col, proc_rows, proc_cols);
-        
-        if (element_owner == rank) {
-            // Map global row to local row index
-            // Local row index = global_row / proc_rows
-            local_matrix->row_indices[local_idx] = global_row / proc_rows;
-            local_matrix->col_indices[local_idx] = global_col;
-            local_matrix->values[local_idx] = matrix->values[i];
-            local_idx++;
-        }
-    }
-    
-    // Step 6: Convert to CSR
-    if (local_matrix->nnz > 0) {
-        Sparse_CSR *temp_csr = coo_to_csr_matrix(local_matrix);
-        *local_csr = *temp_csr;
-        free(temp_csr);
-    } else {
-        local_csr->n_rows = local_matrix->n_rows;
-        local_csr->n_cols = local_matrix->n_cols;
-        local_csr->row_ptr = (unsigned*)calloc(local_matrix->n_rows + 1, sizeof(unsigned));
-        local_csr->col_ind = NULL;
-        local_csr->values = NULL;
-    }
-    
-    printf("Rank %d: Grid pos (%d,%d) | Local rows: %u | Local NNZ: %u\n",
-           rank, my_row_coord, my_col_coord, local_rows, local_matrix->nnz);
+    free(temp_rows);
+    free(temp_cols);
+    free(temp_vals);
 }
-

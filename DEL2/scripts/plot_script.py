@@ -20,12 +20,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ---------------------------------------------------------------------------
-# Directory layout 
+# Directory layout  (mirrors the existing structure)
 # ---------------------------------------------------------------------------
-RESULTS_DIR = "../results"
-PLOTS_DIR   = "../plots"
+RESULTS_DIR = "../results/1D_and_2D"
+PLOTS_DIR   = "../plots/1D_and_2D"
 
-SUB_DIRS = {
+SUBDIRS = {
     "data":                os.path.join(PLOTS_DIR, "data_reduction"),
     "strong_speedup":      os.path.join(PLOTS_DIR, "speedup_strong"),
     "strong_comp_comm":    os.path.join(PLOTS_DIR, "comp_vs_comm_strong"),
@@ -34,7 +34,7 @@ SUB_DIRS = {
     "comparison":          os.path.join(PLOTS_DIR, "comparison"),
 }
 
-for d in SUB_DIRS.values():
+for d in SUBDIRS.values():
     os.makedirs(d, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -52,6 +52,7 @@ DIST_ORDER   = ["1D", "2D", "2D_cyclic"]   # canonical draw-order
 # 1.  DATA LOADING  &  90th-PERCENTILE REDUCTION
 # ===========================================================================
 def load_csv(path):
+    """Read one CSV, strip any surrounding whitespace from string cols."""
     df = pd.read_csv(path)
     df.columns = [c.strip() for c in df.columns]
     for c in df.select_dtypes(include="object").columns:
@@ -60,7 +61,17 @@ def load_csv(path):
 
 
 def calculate_90th_percentile(df):
-    group_cols = ["num_procs", "distribution", "rank"]
+    """
+    Correct p90 reduction:
+        group by  (num_procs, distribution, run, [matrix if present])
+        → take the 90th percentile of elapsed_time / comm_time  ACROSS RANKS
+          (this captures the slowest-rank tail)
+        Then derive comp_time.
+
+    The original code grouped by (num_procs, rank), which computed p90 over
+    repeated runs *per rank* and therefore never captured inter-rank imbalance.
+    """
+    group_cols = ["num_procs", "distribution", "run"]
     if "matrix" in df.columns:
         group_cols.append("matrix")
 
@@ -80,6 +91,13 @@ def calculate_90th_percentile(df):
 
 
 def aggregate_over_runs(p90_df, extra_group=None):
+    """
+    Collapse the 10 repeated runs → median of the p90 values.
+    Also keep min / mean / max of ghost_entries and local_nz across runs
+    for communication-volume and load-balance tables.
+
+    extra_group: list of additional columns beyond (num_procs, distribution).
+    """
     base = ["num_procs", "distribution"]
     if extra_group:
         base = base + extra_group
@@ -238,9 +256,9 @@ def plot_strong_speedup(strong_agg, label="MPI"):
         ax.grid(True, alpha=0.3)
 
         plt.tight_layout()
-        plt.savefig(os.path.join(SUB_DIRS["strong_speedup"],
+        plt.savefig(os.path.join(SUBDIRS["strong_speedup"],
                                  f"speedup_{label}_{matrix}.png"),
-                    dpi=300)
+                    dpi=300, bbox_inches="tight")
         plt.close()
         print(f"    saved  speedup_{label}_{matrix}.png")
 
@@ -279,12 +297,23 @@ def plot_strong_comp_comm(strong_agg, label="MPI"):
                    label="Communication" if di == 0 else None,
                    hatch="///" if dist != "1D" else None)
 
-            # small distribution label below the group
-            ax.text(x.mean(), -0.8, dist, ha="center", va="top",
-                    fontsize=8, color=DIST_COLOURS[dist], fontweight="bold")
 
         ax.set_xticks(range(n_procs))
         ax.set_xticklabels([str(int(p)) for p in procs_sorted])
+        
+        # Add distribution labels below each process count group
+        y_min = ax.get_ylim()[0]
+        label_y = y_min - (ax.get_ylim()[1] - y_min) * 0.05  # 5% below bottom
+        
+        for pi in range(n_procs):
+            # Group center for this process count
+            group_center = pi
+            for di, dist in enumerate(dists_present):
+                x_pos = group_center + (di - n_dists / 2.0 + 0.5) * bar_w
+                ax.text(x_pos, label_y, dist, ha="center", va="top",
+                        fontsize=7, color=DIST_COLOURS[dist], fontweight="bold",
+                        rotation=0)
+        
         ax.set_xlabel("Number of Processes", fontsize=13, fontweight="bold")
         ax.set_ylabel("Time (ms)", fontsize=13, fontweight="bold")
         ax.set_title(f"Computation vs Communication  [{label}]  ({matrix})",
@@ -293,9 +322,9 @@ def plot_strong_comp_comm(strong_agg, label="MPI"):
         ax.grid(True, alpha=0.3, axis="y")
 
         plt.tight_layout()
-        plt.savefig(os.path.join(SUB_DIRS["strong_comp_comm"],
+        plt.savefig(os.path.join(SUBDIRS["strong_comp_comm"],
                                  f"comp_vs_comm_{label}_{matrix}.png"),
-                    dpi=300)
+                    dpi=300, bbox_inches="tight")
         plt.close()
         print(f"    saved  comp_vs_comm_{label}_{matrix}.png")
 
@@ -364,9 +393,9 @@ def plot_strong_comp_comm_mpi_vs_hybrid(strong_agg_mpi, strong_agg_hyb):
         ax.grid(True, alpha=0.3, axis="y")
 
         plt.tight_layout()
-        plt.savefig(os.path.join(SUB_DIRS["strong_comp_comm"],
+        plt.savefig(os.path.join(SUBDIRS["strong_comp_comm"],
                                  f"comp_vs_comm_mpi_vs_hybrid_{matrix}.png"),
-                    dpi=300)
+                    dpi=300, bbox_inches="tight")
         plt.close()
         print(f"    saved  comp_vs_comm_mpi_vs_hybrid_{matrix}.png")
 
@@ -427,9 +456,9 @@ def plot_comm_volume_heatmap(strong_agg, label="MPI"):
 
         fig.colorbar(im, ax=ax, shrink=0.85, label="Total ghost entries")
         plt.tight_layout()
-        plt.savefig(os.path.join(SUB_DIRS["strong_comm_volume"],
+        plt.savefig(os.path.join(SUBDIRS["strong_comm_volume"],
                                  f"comm_volume_{label}_{matrix}.png"),
-                    dpi=300)
+                    dpi=300, bbox_inches="tight")
         plt.close()
         print(f"    saved  comm_volume_{label}_{matrix}.png")
 
@@ -449,7 +478,7 @@ def plot_comm_volume_heatmap(strong_agg, label="MPI"):
                                                       max(r["ghost_entries_mean"], 1)), 3),
                 })
         pd.DataFrame(rows).to_csv(
-            os.path.join(SUB_DIRS["strong_comm_volume"],
+            os.path.join(SUBDIRS["strong_comm_volume"],
                          f"comm_volume_{label}_{matrix}.csv"),
             index=False)
 
@@ -496,9 +525,9 @@ def plot_strong_comparison(strong_agg, label="MPI"):
                   fontsize=14, fontweight="bold")
 
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["comparison"],
+    plt.savefig(os.path.join(SUBDIRS["comparison"],
                              f"strong_scaling_comparison_{label}.png"),
-                dpi=300)
+                dpi=300, bbox_inches="tight")
     plt.close()
     print(f"    saved  strong_scaling_comparison_{label}.png")
 
@@ -548,9 +577,9 @@ def plot_strong_mpi_vs_hybrid(strong_agg_mpi, strong_agg_hyb):
         ax.grid(True, alpha=0.3)
 
         plt.tight_layout()
-        plt.savefig(os.path.join(SUB_DIRS["comparison"],
+        plt.savefig(os.path.join(SUBDIRS["comparison"],
                                  f"strong_mpi_vs_hybrid_{matrix}.png"),
-                    dpi=300)
+                    dpi=300, bbox_inches="tight")
         plt.close()
         print(f"    saved  strong_mpi_vs_hybrid_{matrix}.png")
 
@@ -616,8 +645,8 @@ def plot_weak_speedup(weak_agg, label="MPI"):
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["weak"], f"weak_scaling_speedup_{label}.png"),
-                dpi=300)
+    plt.savefig(os.path.join(SUBDIRS["weak"], f"weak_scaling_speedup_{label}.png"),
+                dpi=300, bbox_inches="tight")
     plt.close()
     print(f"    saved  weak_scaling_speedup_{label}.png")
 
@@ -670,8 +699,8 @@ def plot_weak_efficiency(weak_agg, label="MPI"):
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["weak"], f"weak_scaling_efficiency_{label}.png"),
-                dpi=300)
+    plt.savefig(os.path.join(SUBDIRS["weak"], f"weak_scaling_efficiency_{label}.png"),
+                dpi=300, bbox_inches="tight")
     plt.close()
     print(f"    saved  weak_scaling_efficiency_{label}.png")
 
@@ -730,9 +759,9 @@ def plot_weak_time_breakdown(weak_agg, label="MPI"):
     fig.suptitle(f"Weak Scaling – Execution Time Breakdown  [{label}]",
                  fontsize=15, fontweight="bold", y=1.02)
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["weak"],
+    plt.savefig(os.path.join(SUBDIRS["weak"],
                              f"weak_scaling_time_breakdown_{label}.png"),
-                dpi=300)
+                dpi=300, bbox_inches="tight")
     plt.close()
     print(f"    saved  weak_scaling_time_breakdown_{label}.png")
 
@@ -762,11 +791,23 @@ def plot_weak_comp_comm(weak_agg, label="MPI"):
                color=COMM_COLOUR, alpha=0.85, edgecolor="white", linewidth=0.7,
                label="Communication" if di == 0 else None,
                hatch="///" if dist != "1D" else None)
-        ax.text(x.mean(), -0.5, dist, ha="center", va="top",
-                fontsize=8, color=DIST_COLOURS[dist], fontweight="bold")
 
     ax.set_xticks(range(n_procs))
     ax.set_xticklabels([str(int(p)) for p in procs_sorted])
+    
+    # Add distribution labels below each process count group
+    y_min = ax.get_ylim()[0]
+    label_y = y_min - (ax.get_ylim()[1] - y_min) * 0.05  # 5% below bottom
+    
+    for pi in range(n_procs):
+        # Group center for this process count
+        group_center = pi
+        for di, dist in enumerate(dists_present):
+            x_pos = group_center + (di - n_dists / 2.0 + 0.5) * bar_w
+            ax.text(x_pos, label_y, dist, ha="center", va="top",
+                    fontsize=7, color=DIST_COLOURS[dist], fontweight="bold",
+                    rotation=0)
+    
     ax.set_xlabel("Number of Processes", fontsize=13, fontweight="bold")
     ax.set_ylabel("Time (ms)", fontsize=13, fontweight="bold")
     ax.set_title(f"Weak Scaling – Computation vs Communication  [{label}]",
@@ -775,9 +816,9 @@ def plot_weak_comp_comm(weak_agg, label="MPI"):
     ax.grid(True, alpha=0.3, axis="y")
 
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["weak"],
+    plt.savefig(os.path.join(SUBDIRS["weak"],
                              f"weak_scaling_comp_vs_comm_{label}.png"),
-                dpi=300)
+                dpi=300, bbox_inches="tight")
     plt.close()
     print(f"    saved  weak_scaling_comp_vs_comm_{label}.png")
 
@@ -810,9 +851,9 @@ def plot_weak_load_balance(weak_agg, label="MPI"):
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["weak"],
+    plt.savefig(os.path.join(SUBDIRS["weak"],
                              f"weak_scaling_load_balance_{label}.png"),
-                dpi=300)
+                dpi=300, bbox_inches="tight")
     plt.close()
     print(f"    saved  weak_scaling_load_balance_{label}.png")
 
@@ -830,7 +871,7 @@ def export_weak_comm_volume(weak_agg, label="MPI"):
             "load_imbalance":     round(float(r["ghost_entries_max"] /
                                               max(r["ghost_entries_mean"], 1)), 3),
         })
-    out = os.path.join(SUB_DIRS["weak"], f"comm_volume_weak_{label}.csv")
+    out = os.path.join(SUBDIRS["weak"], f"comm_volume_weak_{label}.csv")
     pd.DataFrame(rows).to_csv(out, index=False)
     print(f"    saved  comm_volume_weak_{label}.csv")
 
@@ -893,8 +934,8 @@ def plot_weak_mpi_vs_hybrid(weak_agg_mpi, weak_agg_hyb):
     ax2.grid(True, alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(SUB_DIRS["comparison"], "weak_mpi_vs_hybrid.png"),
-                dpi=300)
+    plt.savefig(os.path.join(SUBDIRS["comparison"], "weak_mpi_vs_hybrid.png"),
+                dpi=300, bbox_inches="tight")
     plt.close()
     print("    saved  weak_mpi_vs_hybrid.png")
 
@@ -922,10 +963,10 @@ def main():
     weak_h90    = calculate_90th_percentile(weak_hybrid_df)
 
     # persist reduced CSVs
-    strong_90 .to_csv(os.path.join(SUB_DIRS["data"], "strong_scaling_90th.csv"),        index=False)
-    weak_90   .to_csv(os.path.join(SUB_DIRS["data"], "weak_scaling_90th.csv"),          index=False)
-    strong_h90.to_csv(os.path.join(SUB_DIRS["data"], "strong_scaling_hybrid_90th.csv"), index=False)
-    weak_h90  .to_csv(os.path.join(SUB_DIRS["data"], "weak_scaling_hybrid_90th.csv"),   index=False)
+    strong_90 .to_csv(os.path.join(SUBDIRS["data"], "strong_scaling_90th.csv"),        index=False)
+    weak_90   .to_csv(os.path.join(SUBDIRS["data"], "weak_scaling_90th.csv"),          index=False)
+    strong_h90.to_csv(os.path.join(SUBDIRS["data"], "strong_scaling_hybrid_90th.csv"), index=False)
+    weak_h90  .to_csv(os.path.join(SUBDIRS["data"], "weak_scaling_hybrid_90th.csv"),   index=False)
     print("  MPI + Hybrid 90th-percentile CSVs saved to plots/data_reduction/")
 
     # ── collapse runs → median  (keeps distribution!) ──

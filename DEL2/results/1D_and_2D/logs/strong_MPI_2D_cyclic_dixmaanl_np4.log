@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/dixmaanl.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+60000 60000 179999
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=179999 | Procs=4 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 2
+Rank 2: Grid pos (1,0) | Local rows: 30000 | Local NNZ: 30000
+Rank 0: Grid pos (0,0) | Local rows: 30000 | Local NNZ: 60000
+Applied 2Dcyclic distribution
+Rank 1: Grid pos (0,1) | Local rows: 30000 | Local NNZ: 29999
+Rank 3: Grid pos (1,1) | Local rows: 30000 | Local NNZ: 60000
+Ghost columns identified: 15000 total ghost values needed
+Local vector initialized (size=15000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 179999
+BALANCE: nnz_local   min=   29999  avg=  44999.75  max=   60000
+COMM:    ghost       min=   14999  avg=  14999.75  max=   15000  | recv_double_avg= 119998.00 B
+MEM:     bytes       min=  959984  avg=   1139999  max= 1320004
+STRUCT:  ghost_ratio min=  25.000  avg=    37.500  max=  50.000
+METRICS: t_total     = 3.623e-04        t_comp.   = 2.749e-04      t_comm= 8.738e-05
+         gflops_total= 9.936438e-01   gflops_comp= 1.309462e+00
+========================================
+
+[RESULT] 0,4,2D_cyclic,0,0.000386000,0.000093460,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,1,0.000358820,0.000087738,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,2,0.000355959,0.000084639,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,3,0.000365496,0.000094175,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,4,0.000355244,0.000084162,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,5,0.000361681,0.000083447,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,6,0.000362396,0.000090837,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,7,0.000355244,0.000083923,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,8,0.000361681,0.000082493,60000,15000,120000
+[RESULT] 0,4,2D_cyclic,9,0.000360489,0.000088930,60000,15000,120000
+Total execution time: 0.104 seconds

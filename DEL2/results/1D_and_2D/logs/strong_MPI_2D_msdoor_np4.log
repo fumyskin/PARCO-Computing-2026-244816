@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/msdoor.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+415863 415863 10328399
+Real Matrix: Rows=415863 | Cols=415863 | NNZ=10328399 | Procs=4 | Distribution=2D
+2D Process Grid: 2 x 2 (rows x cols)
+Rank 1: Grid pos (0,1) | Rows [0-207932) | Cols [207932-415863) | Local NNZ: 0
+Rank 2: Grid pos (1,0) | Rows [207932-415863) | Cols [0-207932) | Local NNZ: 835033
+Rank 3: Grid pos (1,1) | Rows [207932-415863) | Cols [207932-415863) | Local NNZ: 4669633
+Rank 0: Grid pos (0,0) | Rows [0-207932) | Cols [0-207932) | Local NNZ: 4823733
+Applied 2D distribution
+Ghost columns identified: 155949 total ghost values needed
+Local vector initialized (size=103966 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 10328399
+BALANCE: nnz_local   min=       0  avg=2582099.75  max= 4823733
+COMM:    ghost       min=       0  avg=  86195.00  max=  155949  | recv_double_avg= 689560.00 B
+MEM:     bytes       min= 3326916  avg=  35001665  max=62459304
+STRUCT:  ghost_ratio min=   0.000  avg=     2.628  max=   3.938
+METRICS: t_total     = 2.538e-02        t_comp.   = 2.412e-02      t_comm= 1.263e-03
+         gflops_total= 8.138489e-01   gflops_comp= 8.564713e-01
+========================================
+
+[RESULT] 0,4,2D,0,0.023529291,0.001200914,4823733,155949,9647466
+[RESULT] 0,4,2D,1,0.023545504,0.000987530,4823733,155949,9647466
+[RESULT] 0,4,2D,2,0.023408890,0.001000881,4823733,155949,9647466
+[RESULT] 0,4,2D,3,0.023405790,0.001013517,4823733,155949,9647466
+[RESULT] 0,4,2D,4,0.023404837,0.000992775,4823733,155949,9647466
+[RESULT] 0,4,2D,5,0.023433924,0.000999451,4823733,155949,9647466
+[RESULT] 0,4,2D,6,0.023452520,0.000995398,4823733,155949,9647466
+[RESULT] 0,4,2D,7,0.023307800,0.000999689,4823733,155949,9647466
+[RESULT] 0,4,2D,8,0.023509026,0.000979185,4823733,155949,9647466
+[RESULT] 0,4,2D,9,0.023481846,0.001015902,4823733,155949,9647466
+Total execution time: 6.396 seconds

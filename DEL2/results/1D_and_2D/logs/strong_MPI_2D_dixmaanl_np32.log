@@ -1,0 +1,67 @@
+Retrieving the matrix from '../matrices/dixmaanl.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+60000 60000 179999
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=179999 | Procs=32 | Distribution=2D
+2D Process Grid: 4 x 8 (rows x cols)
+Rank 3: Grid pos (0,3) | Rows [0-15000) | Cols [22500-30000) | Local NNZ: 0
+Rank 5: Grid pos (0,5) | Rows [0-15000) | Cols [37500-45000) | Local NNZ: 0
+Rank 4: Grid pos (0,4) | Rows [0-15000) | Cols [30000-37500) | Local NNZ: 0
+Rank 2: Grid pos (0,2) | Rows [0-15000) | Cols [15000-22500) | Local NNZ: 0
+Rank 13: Grid pos (1,5) | Rows [15000-30000) | Cols [37500-45000) | Local NNZ: 0
+Rank 15: Grid pos (1,7) | Rows [15000-30000) | Cols [52500-60000) | Local NNZ: 0
+Rank 12: Grid pos (1,4) | Rows [15000-30000) | Cols [30000-37500) | Local NNZ: 0
+Rank 1: Grid pos (0,1) | Rows [0-15000) | Cols [7500-15000) | Local NNZ: 14999
+Rank 14: Grid pos (1,6) | Rows [15000-30000) | Cols [45000-52500) | Local NNZ: 0
+Rank 17: Grid pos (2,1) | Rows [30000-45000) | Cols [7500-15000) | Local NNZ: 5000
+Rank 18: Grid pos (2,2) | Rows [30000-45000) | Cols [15000-22500) | Local NNZ: 7500
+Rank 0: Grid pos (0,0) | Rows [0-15000) | Cols [0-7500) | Local NNZ: 15000
+Applied 2D distribution
+Rank 19: Grid pos (2,3) | Rows [30000-45000) | Cols [22500-30000) | Local NNZ: 2501
+Rank 16: Grid pos (2,0) | Rows [30000-45000) | Cols [0-7500) | Local NNZ: 5000
+Rank 6: Grid pos (0,6) | Rows [0-15000) | Cols [45000-52500) | Local NNZ: 0
+Rank 9: Grid pos (1,1) | Rows [15000-30000) | Cols [7500-15000) | Local NNZ: 2501
+Rank 7: Grid pos (0,7) | Rows [0-15000) | Cols [52500-60000) | Local NNZ: 0
+Rank 11: Grid pos (1,3) | Rows [15000-30000) | Cols [22500-30000) | Local NNZ: 14999
+Rank 31: Grid pos (3,7) | Rows [45000-60000) | Cols [52500-60000) | Local NNZ: 14999
+Rank 29: Grid pos (3,5) | Rows [45000-60000) | Cols [37500-45000) | Local NNZ: 2501
+Rank 8: Grid pos (1,0) | Rows [15000-30000) | Cols [0-7500) | Local NNZ: 7500
+Rank 10: Grid pos (1,2) | Rows [15000-30000) | Cols [15000-22500) | Local NNZ: 15000
+Rank 22: Grid pos (2,6) | Rows [30000-45000) | Cols [45000-52500) | Local NNZ: 0
+Rank 23: Grid pos (2,7) | Rows [30000-45000) | Cols [52500-60000) | Local NNZ: 0
+Rank 30: Grid pos (3,6) | Rows [45000-60000) | Cols [45000-52500) | Local NNZ: 15000
+Rank 27: Grid pos (3,3) | Rows [45000-60000) | Cols [22500-30000) | Local NNZ: 5000
+Rank 28: Grid pos (3,4) | Rows [45000-60000) | Cols [30000-37500) | Local NNZ: 7500
+Rank 20: Grid pos (2,4) | Rows [30000-45000) | Cols [30000-37500) | Local NNZ: 15000
+Rank 25: Grid pos (3,1) | Rows [45000-60000) | Cols [7500-15000) | Local NNZ: 7500
+Rank 24: Grid pos (3,0) | Rows [45000-60000) | Cols [0-7500) | Local NNZ: 2500
+Rank 26: Grid pos (3,2) | Rows [45000-60000) | Cols [15000-22500) | Local NNZ: 5000
+Rank 21: Grid pos (2,5) | Rows [30000-45000) | Cols [37500-45000) | Local NNZ: 14999
+Ghost columns identified: 7265 total ghost values needed
+Local vector initialized (size=1875 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 179999
+BALANCE: nnz_local   min=       0  avg=   5624.97  max=   15000
+COMM:    ghost       min=       0  avg=   3632.84  max=    7266  | recv_double_avg=  29062.75 B
+MEM:     bytes       min=  195004  avg=    291566  max=  433132
+STRUCT:  ghost_ratio min=   0.000  avg=    48.437  max=  96.881
+METRICS: t_total     = 4.424e-04        t_comp.   = 9.222e-05      t_comm= 3.515e-04
+         gflops_total= 8.136773e-01   gflops_comp= 3.903674e+00
+========================================
+
+[RESULT] 0,32,2D,0,0.000391483,0.000302076,15000,7265,30000
+[RESULT] 0,32,2D,1,0.000462294,0.000373363,15000,7265,30000
+[RESULT] 0,32,2D,2,0.000375748,0.000286579,15000,7265,30000
+[RESULT] 0,32,2D,3,0.000390291,0.000301600,15000,7265,30000
+[RESULT] 0,32,2D,4,0.000367403,0.000278234,15000,7265,30000
+[RESULT] 0,32,2D,5,0.000417709,0.000328541,15000,7265,30000
+[RESULT] 0,32,2D,6,0.000364304,0.000275612,15000,7265,30000
+[RESULT] 0,32,2D,7,0.000361681,0.000272751,15000,7265,30000
+[RESULT] 0,32,2D,8,0.000490427,0.000400782,15000,7265,30000
+[RESULT] 0,32,2D,9,0.000419140,0.000329256,15000,7265,30000
+Total execution time: 0.148 seconds

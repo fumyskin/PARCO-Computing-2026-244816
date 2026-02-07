@@ -5,7 +5,7 @@
 #include "mmio.h"
 #include "specifications.h"
 
-
+// OTHER UTILS
 //implement surely_malloc function
 void *surely_malloc(size_t size) {
     void *ptr = malloc(size);
@@ -290,8 +290,6 @@ void csr_mv_multiply(Sparse_CSR *m, double *v, double *p) {
         p[i] = s;
     }
 }
-
-
 
 
 void free_sparse(Sparse_Coordinate * matrix){

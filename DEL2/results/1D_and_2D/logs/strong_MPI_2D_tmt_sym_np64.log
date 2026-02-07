@@ -1,0 +1,99 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=64 | Distribution=2D
+Rank 34: Grid pos (4,2) | Rows [363360-454200) | Cols [181680-272520) | Local NNZ: 0
+Rank 33: Grid pos (4,1) | Rows [363360-454200) | Cols [90840-181680) | Local NNZ: 0
+2D Process Grid: 8 x 8 (rows x cols)
+Rank 35: Grid pos (4,3) | Rows [363360-454200) | Cols [272520-363360) | Local NNZ: 1922
+Rank 55: Grid pos (6,7) | Rows [545040-635880) | Cols [635880-726713) | Local NNZ: 0
+Rank 56: Grid pos (7,0) | Rows [635880-726713) | Cols [0-90840) | Local NNZ: 0
+Rank 32: Grid pos (4,0) | Rows [363360-454200) | Cols [0-90840) | Local NNZ: 0
+Rank 31: Grid pos (3,7) | Rows [272520-363360) | Cols [635880-726713) | Local NNZ: 0
+Rank 30: Grid pos (3,6) | Rows [272520-363360) | Cols [545040-635880) | Local NNZ: 0
+Rank 37: Grid pos (4,5) | Rows [363360-454200) | Cols [454200-545040) | Local NNZ: 0
+Rank 57: Grid pos (7,1) | Rows [635880-726713) | Cols [90840-181680) | Local NNZ: 0
+Rank 21: Grid pos (2,5) | Rows [181680-272520) | Cols [454200-545040) | Local NNZ: 0
+Rank 24: Grid pos (3,0) | Rows [272520-363360) | Cols [0-90840) | Local NNZ: 0
+Rank 19: Grid pos (2,3) | Rows [181680-272520) | Cols [272520-363360) | Local NNZ: 0
+Rank 22: Grid pos (2,6) | Rows [181680-272520) | Cols [545040-635880) | Local NNZ: 0
+Rank 58: Grid pos (7,2) | Rows [635880-726713) | Cols [181680-272520) | Local NNZ: 0
+Rank 20: Grid pos (2,4) | Rows [181680-272520) | Cols [363360-454200) | Local NNZ: 0
+Rank 29: Grid pos (3,5) | Rows [272520-363360) | Cols [454200-545040) | Local NNZ: 0
+Rank 23: Grid pos (2,7) | Rows [181680-272520) | Cols [635880-726713) | Local NNZ: 0
+Rank 25: Grid pos (3,1) | Rows [272520-363360) | Cols [90840-181680) | Local NNZ: 0
+Rank 53: Grid pos (6,5) | Rows [545040-635880) | Cols [454200-545040) | Local NNZ: 1761
+Rank 17: Grid pos (2,1) | Rows [181680-272520) | Cols [90840-181680) | Local NNZ: 1761
+Rank 28: Grid pos (3,4) | Rows [272520-363360) | Cols [363360-454200) | Local NNZ: 0
+Rank 36: Grid pos (4,4) | Rows [363360-454200) | Cols [363360-454200) | Local NNZ: 361263
+Rank 26: Grid pos (3,2) | Rows [272520-363360) | Cols [181680-272520) | Local NNZ: 1887
+Rank 38: Grid pos (4,6) | Rows [363360-454200) | Cols [545040-635880) | Local NNZ: 0
+Rank 59: Grid pos (7,3) | Rows [635880-726713) | Cols [272520-363360) | Local NNZ: 0
+Rank 39: Grid pos (4,7) | Rows [363360-454200) | Cols [635880-726713) | Local NNZ: 0
+Rank 15: Grid pos (1,7) | Rows [90840-181680) | Cols [635880-726713) | Local NNZ: 0
+Rank 50: Grid pos (6,2) | Rows [545040-635880) | Cols [181680-272520) | Local NNZ: 0
+Rank 16: Grid pos (2,0) | Rows [181680-272520) | Cols [0-90840) | Local NNZ: 0
+Rank 52: Grid pos (6,4) | Rows [545040-635880) | Cols [363360-454200) | Local NNZ: 0
+Rank 51: Grid pos (6,3) | Rows [545040-635880) | Cols [272520-363360) | Local NNZ: 0
+Rank 60: Grid pos (7,4) | Rows [635880-726713) | Cols [363360-454200) | Local NNZ: 0
+Rank 14: Grid pos (1,6) | Rows [90840-181680) | Cols [545040-635880) | Local NNZ: 0
+Rank 13: Grid pos (1,5) | Rows [90840-181680) | Cols [454200-545040) | Local NNZ: 0
+Rank 18: Grid pos (2,2) | Rows [181680-272520) | Cols [181680-272520) | Local NNZ: 361319
+Rank 49: Grid pos (6,1) | Rows [545040-635880) | Cols [90840-181680) | Local NNZ: 0
+Rank 47: Grid pos (5,7) | Rows [454200-545040) | Cols [635880-726713) | Local NNZ: 0
+Rank 40: Grid pos (5,0) | Rows [454200-545040) | Cols [0-90840) | Local NNZ: 0
+Rank 48: Grid pos (6,0) | Rows [545040-635880) | Cols [0-90840) | Local NNZ: 0
+Rank 61: Grid pos (7,5) | Rows [635880-726713) | Cols [454200-545040) | Local NNZ: 0
+Rank 27: Grid pos (3,3) | Rows [272520-363360) | Cols [272520-363360) | Local NNZ: 361260
+Rank 12: Grid pos (1,4) | Rows [90840-181680) | Cols [363360-454200) | Local NNZ: 0
+Rank 11: Grid pos (1,3) | Rows [90840-181680) | Cols [272520-363360) | Local NNZ: 0
+Rank 54: Grid pos (6,6) | Rows [545040-635880) | Cols [545040-635880) | Local NNZ: 361479
+Rank 41: Grid pos (5,1) | Rows [454200-545040) | Cols [90840-181680) | Local NNZ: 0
+Rank 46: Grid pos (5,6) | Rows [454200-545040) | Cols [545040-635880) | Local NNZ: 0
+Rank 42: Grid pos (5,2) | Rows [454200-545040) | Cols [181680-272520) | Local NNZ: 0
+Rank 43: Grid pos (5,3) | Rows [454200-545040) | Cols [272520-363360) | Local NNZ: 0
+Rank 62: Grid pos (7,6) | Rows [635880-726713) | Cols [545040-635880) | Local NNZ: 1485
+Rank 44: Grid pos (5,4) | Rows [454200-545040) | Cols [363360-454200) | Local NNZ: 1885
+Rank 8: Grid pos (1,0) | Rows [90840-181680) | Cols [0-90840) | Local NNZ: 1487
+Rank 7: Grid pos (0,7) | Rows [0-90840) | Cols [635880-726713) | Local NNZ: 0
+Rank 10: Grid pos (1,2) | Rows [90840-181680) | Cols [181680-272520) | Local NNZ: 0
+Rank 5: Grid pos (0,5) | Rows [0-90840) | Cols [454200-545040) | Local NNZ: 0
+Rank 3: Grid pos (0,3) | Rows [0-90840) | Cols [272520-363360) | Local NNZ: 0
+Rank 6: Grid pos (0,6) | Rows [0-90840) | Cols [545040-635880) | Local NNZ: 0
+Rank 2: Grid pos (0,2) | Rows [0-90840) | Cols [181680-272520) | Local NNZ: 0
+Rank 1: Grid pos (0,1) | Rows [0-90840) | Cols [90840-181680) | Local NNZ: 0
+Rank 4: Grid pos (0,4) | Rows [0-90840) | Cols [363360-454200) | Local NNZ: 0
+Rank 45: Grid pos (5,5) | Rows [454200-545040) | Cols [454200-545040) | Local NNZ: 361324
+Rank 9: Grid pos (1,1) | Rows [90840-181680) | Cols [90840-181680) | Local NNZ: 361478
+Rank 63: Grid pos (7,7) | Rows [635880-726713) | Cols [635880-726713) | Local NNZ: 361743
+Rank 0: Grid pos (0,0) | Rows [0-90840) | Cols [0-90840) | Local NNZ: 361783
+Applied 2D distribution
+Ghost columns identified: 89420 total ghost values needed
+Local vector initialized (size=11355 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=       0  avg=  45372.45  max=  361783
+COMM:    ghost       min=       0  avg=  11271.20  max=   89421  | recv_double_avg=  90169.62 B
+MEM:     bytes       min= 1180832  avg=   1815552  max= 6237680
+STRUCT:  ghost_ratio min=   0.000  avg=     8.476  max=  49.285
+METRICS: t_total     = 3.570e-03        t_comp.   = 1.992e-03      t_comm= 1.661e-03
+         gflops_total= 1.626817e+00   gflops_comp= 2.916041e+00
+========================================
+
+[RESULT] 0,64,2D,0,0.003591537,0.001646757,361783,89420,723566
+[RESULT] 0,64,2D,1,0.003592730,0.001693726,361783,89420,723566
+[RESULT] 0,64,2D,2,0.003554106,0.001667976,361783,89420,723566
+[RESULT] 0,64,2D,3,0.003584623,0.001694202,361783,89420,723566
+[RESULT] 0,64,2D,4,0.003567457,0.001667976,361783,89420,723566
+[RESULT] 0,64,2D,5,0.003543377,0.001668215,361783,89420,723566
+[RESULT] 0,64,2D,6,0.003577471,0.001704931,361783,89420,723566
+[RESULT] 0,64,2D,7,0.003535032,0.001664639,361783,89420,723566
+[RESULT] 0,64,2D,8,0.003544807,0.001671076,361783,89420,723566
+[RESULT] 0,64,2D,9,0.003454924,0.001533985,361783,89420,723566
+Total execution time: 3.107 seconds

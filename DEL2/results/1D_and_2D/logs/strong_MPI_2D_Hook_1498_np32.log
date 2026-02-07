@@ -1,0 +1,67 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=32 | Distribution=2D
+2D Process Grid: 4 x 8 (rows x cols)
+Rank 14: Grid pos (1,6) | Rows [374506-749012) | Cols [1123518-1310771) | Local NNZ: 0
+Rank 13: Grid pos (1,5) | Rows [374506-749012) | Cols [936265-1123518) | Local NNZ: 0
+Rank 4: Grid pos (0,4) | Rows [0-374506) | Cols [749012-936265) | Local NNZ: 0
+Rank 5: Grid pos (0,5) | Rows [0-374506) | Cols [936265-1123518) | Local NNZ: 0
+Rank 12: Grid pos (1,4) | Rows [374506-749012) | Cols [749012-936265) | Local NNZ: 0
+Rank 16: Grid pos (2,0) | Rows [749012-1123518) | Cols [0-187253) | Local NNZ: 0
+Rank 17: Grid pos (2,1) | Rows [749012-1123518) | Cols [187253-374506) | Local NNZ: 0
+Rank 15: Grid pos (1,7) | Rows [374506-749012) | Cols [1310771-1498023) | Local NNZ: 0
+Rank 7: Grid pos (0,7) | Rows [0-374506) | Cols [1310771-1498023) | Local NNZ: 0
+Rank 6: Grid pos (0,6) | Rows [0-374506) | Cols [1123518-1310771) | Local NNZ: 0
+Rank 29: Grid pos (3,5) | Rows [1123518-1498023) | Cols [936265-1123518) | Local NNZ: 221967
+Rank 23: Grid pos (2,7) | Rows [749012-1123518) | Cols [1310771-1498023) | Local NNZ: 0
+Rank 27: Grid pos (3,3) | Rows [1123518-1498023) | Cols [561759-749012) | Local NNZ: 0
+Rank 22: Grid pos (2,6) | Rows [749012-1123518) | Cols [1123518-1310771) | Local NNZ: 0
+Rank 25: Grid pos (3,1) | Rows [1123518-1498023) | Cols [187253-374506) | Local NNZ: 0
+Rank 3: Grid pos (0,3) | Rows [0-374506) | Cols [561759-749012) | Local NNZ: 0
+Rank 19: Grid pos (2,3) | Rows [749012-1123518) | Cols [561759-749012) | Local NNZ: 247082
+Rank 2: Grid pos (0,2) | Rows [0-374506) | Cols [374506-561759) | Local NNZ: 0
+Rank 9: Grid pos (1,1) | Rows [374506-749012) | Cols [187253-374506) | Local NNZ: 194717
+Rank 18: Grid pos (2,2) | Rows [749012-1123518) | Cols [374506-561759) | Local NNZ: 0
+Rank 28: Grid pos (3,4) | Rows [1123518-1498023) | Cols [749012-936265) | Local NNZ: 0
+Rank 8: Grid pos (1,0) | Rows [374506-749012) | Cols [0-187253) | Local NNZ: 0
+Rank 24: Grid pos (3,0) | Rows [1123518-1498023) | Cols [0-187253) | Local NNZ: 0
+Rank 26: Grid pos (3,2) | Rows [1123518-1498023) | Cols [374506-561759) | Local NNZ: 0
+Rank 31: Grid pos (3,7) | Rows [1123518-1498023) | Cols [1310771-1498023) | Local NNZ: 3791452
+Rank 0: Grid pos (0,0) | Rows [0-374506) | Cols [0-187253) | Local NNZ: 3937136
+Applied 2D distribution
+Rank 30: Grid pos (3,6) | Rows [1123518-1498023) | Cols [1123518-1310771) | Local NNZ: 3825296
+Rank 11: Grid pos (1,3) | Rows [374506-749012) | Cols [561759-749012) | Local NNZ: 3651396
+Rank 1: Grid pos (0,1) | Rows [0-374506) | Cols [187253-374506) | Local NNZ: 3783968
+Rank 20: Grid pos (2,4) | Rows [749012-1123518) | Cols [749012-936265) | Local NNZ: 3939583
+Rank 21: Grid pos (2,5) | Rows [749012-1123518) | Cols [936265-1123518) | Local NNZ: 3658074
+Rank 10: Grid pos (1,2) | Rows [374506-749012) | Cols [374506-561759) | Local NNZ: 3957063
+Ghost columns identified: 181401 total ghost values needed
+Local vector initialized (size=46814 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min=       0  avg= 975241.69  max= 3957063
+COMM:    ghost       min=       0  avg=  46957.91  max=  181401  | recv_double_avg= 375663.25 B
+MEM:     bytes       min= 4868568  avg=  16947142  max=53804544
+STRUCT:  ghost_ratio min=   0.000  avg=     1.916  max=   7.940
+METRICS: t_total     = 2.196e-02        t_comp.   = 1.913e-02      t_comm= 2.879e-03
+         gflops_total= 2.842673e+00   gflops_comp= 3.261901e+00
+========================================
+
+[RESULT] 0,32,2D,0,0.021636724,0.002851248,3937136,181401,7874272
+[RESULT] 0,32,2D,1,0.021661282,0.002856731,3937136,181401,7874272
+[RESULT] 0,32,2D,2,0.021648645,0.002887011,3937136,181401,7874272
+[RESULT] 0,32,2D,3,0.021514654,0.002867699,3937136,181401,7874272
+[RESULT] 0,32,2D,4,0.021533728,0.002818346,3937136,181401,7874272
+[RESULT] 0,32,2D,5,0.021696568,0.002892494,3937136,181401,7874272
+[RESULT] 0,32,2D,6,0.021658659,0.002883673,3937136,181401,7874272
+[RESULT] 0,32,2D,7,0.021581411,0.002920151,3937136,181401,7874272
+[RESULT] 0,32,2D,8,0.021645308,0.002906084,3937136,181401,7874272
+[RESULT] 0,32,2D,9,0.021704435,0.002904415,3937136,181401,7874272
+Total execution time: 24.259 seconds

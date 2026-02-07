@@ -1,0 +1,99 @@
+Retrieving the matrix from '../matrices/cond-mat-2005.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+40421 40421 175693
+Real Matrix: Rows=40421 | Cols=40421 | NNZ=175693 | Procs=64 | Distribution=2D_cyclic
+Rank 8: Grid pos (1,0) | Local rows: 5053 | Local NNZ: 4351
+Rank 10: Grid pos (1,2) | Local rows: 5053 | Local NNZ: 2194
+Rank 13: Grid pos (1,5) | Local rows: 5053 | Local NNZ: 2459
+Rank 27: Grid pos (3,3) | Local rows: 5053 | Local NNZ: 2218
+2D Process Grid (Cyclic): 8 x 8
+Rank 9: Grid pos (1,1) | Local rows: 5053 | Local NNZ: 2219
+Rank 14: Grid pos (1,6) | Local rows: 5053 | Local NNZ: 2744
+Rank 7: Grid pos (0,7) | Local rows: 5053 | Local NNZ: 4382
+Rank 6: Grid pos (0,6) | Local rows: 5053 | Local NNZ: 3246
+Rank 26: Grid pos (3,2) | Local rows: 5053 | Local NNZ: 4401
+Rank 11: Grid pos (1,3) | Local rows: 5053 | Local NNZ: 2274
+Rank 5: Grid pos (0,5) | Local rows: 5053 | Local NNZ: 2678
+Rank 25: Grid pos (3,1) | Local rows: 5053 | Local NNZ: 3287
+Rank 24: Grid pos (3,0) | Local rows: 5053 | Local NNZ: 2755
+Rank 12: Grid pos (1,4) | Local rows: 5053 | Local NNZ: 2397
+Rank 4: Grid pos (0,4) | Local rows: 5053 | Local NNZ: 2487
+Rank 20: Grid pos (2,4) | Local rows: 5053 | Local NNZ: 2301
+Rank 23: Grid pos (2,7) | Local rows: 5053 | Local NNZ: 2656
+Rank 3: Grid pos (0,3) | Local rows: 5053 | Local NNZ: 2316
+Rank 2: Grid pos (0,2) | Local rows: 5053 | Local NNZ: 2265
+Rank 18: Grid pos (2,2) | Local rows: 5053 | Local NNZ: 2246
+Rank 22: Grid pos (2,6) | Local rows: 5053 | Local NNZ: 2403
+Rank 19: Grid pos (2,3) | Local rows: 5053 | Local NNZ: 2212
+Rank 21: Grid pos (2,5) | Local rows: 5053 | Local NNZ: 2397
+Rank 15: Grid pos (1,7) | Local rows: 5053 | Local NNZ: 3182
+Rank 1: Grid pos (0,1) | Local rows: 5053 | Local NNZ: 2304
+Rank 16: Grid pos (2,0) | Local rows: 5053 | Local NNZ: 3210
+Rank 28: Grid pos (3,4) | Local rows: 5053 | Local NNZ: 2321
+Rank 30: Grid pos (3,6) | Local rows: 5053 | Local NNZ: 2294
+Rank 0: Grid pos (0,0) | Local rows: 5053 | Local NNZ: 2187
+Applied 2Dcyclic distribution
+Rank 29: Grid pos (3,5) | Local rows: 5053 | Local NNZ: 2212
+Rank 17: Grid pos (2,1) | Local rows: 5053 | Local NNZ: 4444
+Rank 63: Grid pos (7,7) | Local rows: 5052 | Local NNZ: 2113
+Rank 32: Grid pos (4,0) | Local rows: 5053 | Local NNZ: 2516
+Rank 31: Grid pos (3,7) | Local rows: 5053 | Local NNZ: 2355
+Rank 33: Grid pos (4,1) | Local rows: 5053 | Local NNZ: 2768
+Rank 34: Grid pos (4,2) | Local rows: 5053 | Local NNZ: 3325
+Rank 62: Grid pos (7,6) | Local rows: 5052 | Local NNZ: 4380
+Rank 61: Grid pos (7,5) | Local rows: 5052 | Local NNZ: 3232
+Rank 60: Grid pos (7,4) | Local rows: 5052 | Local NNZ: 2721
+Rank 58: Grid pos (7,2) | Local rows: 5052 | Local NNZ: 2285
+Rank 59: Grid pos (7,3) | Local rows: 5052 | Local NNZ: 2402
+Rank 57: Grid pos (7,1) | Local rows: 5052 | Local NNZ: 2266
+Rank 56: Grid pos (7,0) | Local rows: 5052 | Local NNZ: 2144
+Rank 55: Grid pos (6,7) | Local rows: 5052 | Local NNZ: 2215
+Rank 48: Grid pos (6,0) | Local rows: 5052 | Local NNZ: 2333
+Rank 50: Grid pos (6,2) | Local rows: 5052 | Local NNZ: 2482
+Rank 54: Grid pos (6,6) | Local rows: 5052 | Local NNZ: 2224
+Rank 47: Grid pos (5,7) | Local rows: 5052 | Local NNZ: 2242
+Rank 49: Grid pos (6,1) | Local rows: 5052 | Local NNZ: 2362
+Rank 36: Grid pos (4,4) | Local rows: 5053 | Local NNZ: 2374
+Rank 46: Grid pos (5,6) | Local rows: 5052 | Local NNZ: 2288
+Rank 52: Grid pos (6,4) | Local rows: 5052 | Local NNZ: 3340
+Rank 35: Grid pos (4,3) | Local rows: 5053 | Local NNZ: 4560
+Rank 45: Grid pos (5,5) | Local rows: 5052 | Local NNZ: 2189
+Rank 51: Grid pos (6,3) | Local rows: 5052 | Local NNZ: 2766
+Rank 39: Grid pos (4,7) | Local rows: 5053 | Local NNZ: 2325
+Rank 53: Grid pos (6,5) | Local rows: 5052 | Local NNZ: 4327
+Rank 42: Grid pos (5,2) | Local rows: 5052 | Local NNZ: 2765
+Rank 37: Grid pos (4,5) | Local rows: 5053 | Local NNZ: 2282
+Rank 40: Grid pos (5,0) | Local rows: 5052 | Local NNZ: 2323
+Rank 41: Grid pos (5,1) | Local rows: 5052 | Local NNZ: 2483
+Rank 38: Grid pos (4,6) | Local rows: 5053 | Local NNZ: 2330
+Rank 43: Grid pos (5,3) | Local rows: 5052 | Local NNZ: 3337
+Rank 44: Grid pos (5,4) | Local rows: 5052 | Local NNZ: 4597
+Ghost columns identified: 887 total ghost values needed
+Local vector initialized (size=632 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 175693
+BALANCE: nnz_local   min=    2113  avg=   2745.20  max=    4597
+COMM:    ghost       min=     875  avg=   1221.44  max=    2386  | recv_double_avg=   9771.50 B
+MEM:     bytes       min=   98032  avg=    108402  max=  139840
+STRUCT:  ghost_ratio min=  37.940  avg=    43.404  max=  54.472
+METRICS: t_total     = 7.992e-05        t_comp.   = 6.504e-05      t_comm= 1.726e-05
+         gflops_total= 4.396837e+00   gflops_comp= 5.402565e+00
+========================================
+
+[RESULT] 0,64,2D_cyclic,0,0.000056028,0.000012636,2187,887,4374
+[RESULT] 0,64,2D_cyclic,1,0.000053167,0.000010967,2187,887,4374
+[RESULT] 0,64,2D_cyclic,2,0.000051975,0.000011921,2187,887,4374
+[RESULT] 0,64,2D_cyclic,3,0.000051498,0.000012159,2187,887,4374
+[RESULT] 0,64,2D_cyclic,4,0.000049591,0.000011683,2187,887,4374
+[RESULT] 0,64,2D_cyclic,5,0.000049829,0.000011921,2187,887,4374
+[RESULT] 0,64,2D_cyclic,6,0.000049829,0.000011921,2187,887,4374
+[RESULT] 0,64,2D_cyclic,7,0.000048399,0.000010967,2187,887,4374
+[RESULT] 0,64,2D_cyclic,8,0.000050783,0.000012875,2187,887,4374
+[RESULT] 0,64,2D_cyclic,9,0.000048876,0.000011683,2187,887,4374
+Total execution time: 0.169 seconds

@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/dixmaanl.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+60000 60000 179999
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=179999 | Procs=4 | Distribution=2D
+2D Process Grid: 2 x 2 (rows x cols)
+Rank 0: Grid pos (0,0) | Rows [0-30000) | Cols [0-30000) | Local NNZ: 69999
+Applied 2D distribution
+Rank 1: Grid pos (0,1) | Rows [0-30000) | Cols [30000-60000) | Local NNZ: 0
+Rank 2: Grid pos (1,0) | Rows [30000-60000) | Cols [0-30000) | Local NNZ: 40001
+Rank 3: Grid pos (1,1) | Rows [30000-60000) | Cols [30000-60000) | Local NNZ: 69999
+Ghost columns identified: 22500 total ghost values needed
+Local vector initialized (size=15000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 179999
+BALANCE: nnz_local   min=       0  avg=  44999.75  max=   69999
+COMM:    ghost       min=       0  avg=  16875.00  max=   22500  | recv_double_avg= 135000.00 B
+MEM:     bytes       min=  480004  avg=   1155001  max= 1499992
+STRUCT:  ghost_ratio min=   0.000  avg=    30.134  max=  56.249
+METRICS: t_total     = 2.607e-02        t_comp.   = 4.113e-04      t_comm= 2.566e-02
+         gflops_total= 1.380879e-02   gflops_comp= 8.752774e-01
+========================================
+
+[RESULT] 0,4,2D,0,0.026386023,0.025999784,69999,22500,139998
+[RESULT] 0,4,2D,1,0.026001692,0.025589705,69999,22500,139998
+[RESULT] 0,4,2D,2,0.025982141,0.025566101,69999,22500,139998
+[RESULT] 0,4,2D,3,0.025967836,0.025567055,69999,22500,139998
+[RESULT] 0,4,2D,4,0.025997162,0.025582314,69999,22500,139998
+[RESULT] 0,4,2D,5,0.025977373,0.025568247,69999,22500,139998
+[RESULT] 0,4,2D,6,0.025970936,0.025566339,69999,22500,139998
+[RESULT] 0,4,2D,7,0.025995255,0.025574684,69999,22500,139998
+[RESULT] 0,4,2D,8,0.025957823,0.025557280,69999,22500,139998
+[RESULT] 0,4,2D,9,0.026465893,0.026017666,69999,22500,139998
+Total execution time: 0.952 seconds

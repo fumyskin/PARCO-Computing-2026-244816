@@ -1,0 +1,43 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=8 | Distribution=2D
+2D Process Grid: 2 x 4 (rows x cols)
+Rank 2: Grid pos (0,2) | Rows [0-363357) | Cols [363358-545037) | Local NNZ: 0
+Rank 3: Grid pos (0,3) | Rows [0-363357) | Cols [545037-726713) | Local NNZ: 0
+Rank 4: Grid pos (1,0) | Rows [363357-726713) | Cols [0-181679) | Local NNZ: 0
+Rank 5: Grid pos (1,1) | Rows [363357-726713) | Cols [181679-363358) | Local NNZ: 1927
+Rank 1: Grid pos (0,1) | Rows [0-363357) | Cols [181679-363358) | Local NNZ: 724458
+Rank 0: Grid pos (0,0) | Rows [0-363357) | Cols [0-181679) | Local NNZ: 726504
+Applied 2D distribution
+Rank 7: Grid pos (1,3) | Rows [363357-726713) | Cols [545037-726713) | Local NNZ: 724719
+Rank 6: Grid pos (1,2) | Rows [363357-726713) | Cols [363358-545037) | Local NNZ: 726229
+Ghost columns identified: 158969 total ghost values needed
+Local vector initialized (size=90840 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=       0  avg= 362979.62  max=  726504
+COMM:    ghost       min=       0  avg=  79589.25  max=  158969  | recv_double_avg= 636714.00 B
+MEM:     bytes       min= 5086988  avg=  10079464  max=15076808
+STRUCT:  ghost_ratio min=   0.000  avg=    16.418  max=  43.695
+METRICS: t_total     = 8.527e-02        t_comp.   = 1.104e-02      t_comm= 7.423e-02
+         gflops_total= 6.811252e-02   gflops_comp= 5.261894e-01
+========================================
+
+[RESULT] 0,8,2D,0,0.061445713,0.056308508,726504,158969,1453008
+[RESULT] 0,8,2D,1,0.056928873,0.051769018,726504,158969,1453008
+[RESULT] 0,8,2D,2,0.059971094,0.054826260,726504,158969,1453008
+[RESULT] 0,8,2D,3,0.059969425,0.054828167,726504,158969,1453008
+[RESULT] 0,8,2D,4,0.058798790,0.053678036,726504,158969,1453008
+[RESULT] 0,8,2D,5,0.061436653,0.056305408,726504,158969,1453008
+[RESULT] 0,8,2D,6,0.082889080,0.077739239,726504,158969,1453008
+[RESULT] 0,8,2D,7,0.061320305,0.056195974,726504,158969,1453008
+[RESULT] 0,8,2D,8,0.084505558,0.079367638,726504,158969,1453008
+[RESULT] 0,8,2D,9,0.082935333,0.077790976,726504,158969,1453008
+Total execution time: 13.575 seconds

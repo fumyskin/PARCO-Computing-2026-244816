@@ -1,0 +1,43 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=8 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 4
+Rank 3: Grid pos (0,3) | Local rows: 363357 | Local NNZ: 363069
+Rank 7: Grid pos (1,3) | Local rows: 363356 | Local NNZ: 363178
+Rank 5: Grid pos (1,1) | Local rows: 363356 | Local NNZ: 362747
+Rank 1: Grid pos (0,1) | Local rows: 363357 | Local NNZ: 362923
+Rank 2: Grid pos (0,2) | Local rows: 363357 | Local NNZ: 363008
+Rank 0: Grid pos (0,0) | Local rows: 363357 | Local NNZ: 363176
+Applied 2Dcyclic distribution
+Rank 6: Grid pos (1,2) | Local rows: 363356 | Local NNZ: 363063
+Rank 4: Grid pos (1,0) | Local rows: 363356 | Local NNZ: 362673
+Ghost columns identified: 90839 total ghost values needed
+Local vector initialized (size=90840 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=  362673  avg= 362979.62  max=  363178
+COMM:    ghost       min=   90809  avg=  90829.12  max=   90839  | recv_double_avg= 726633.00 B
+MEM:     bytes       min=10165712  avg=  10169384  max=10171836
+STRUCT:  ghost_ratio min=  25.012  avg=    25.023  max=  25.045
+METRICS: t_total     = 3.800e-03        t_comp.   = 3.402e-03      t_comm= 4.529e-04
+         gflops_total= 1.528475e+00   gflops_comp= 1.707114e+00
+========================================
+
+[RESULT] 0,8,2D_cyclic,0,0.003825188,0.000416040,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,1,0.003807545,0.000404835,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,2,0.003772974,0.000396252,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,3,0.003829002,0.000390530,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,4,0.003744364,0.000373363,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,5,0.003791571,0.000407696,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,6,0.003744125,0.000375271,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,7,0.003761292,0.000371933,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,8,0.003903627,0.000422239,363176,90839,726352
+[RESULT] 0,8,2D_cyclic,9,0.003816843,0.000417948,363176,90839,726352
+Total execution time: 1.929 seconds

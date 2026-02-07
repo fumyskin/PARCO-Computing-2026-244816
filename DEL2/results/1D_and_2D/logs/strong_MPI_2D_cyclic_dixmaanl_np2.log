@@ -1,0 +1,37 @@
+Retrieving the matrix from '../matrices/dixmaanl.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+60000 60000 179999
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=179999 | Procs=2 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 1 x 2
+Rank 0: Grid pos (0,0) | Local rows: 60000 | Local NNZ: 90000
+Applied 2Dcyclic distribution
+Rank 1: Grid pos (0,1) | Local rows: 60000 | Local NNZ: 89999
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=30000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 179999
+BALANCE: nnz_local   min=   89999  avg=  89999.50  max=   90000
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+MEM:     bytes       min= 2039992  avg=   2039998  max= 2040004
+STRUCT:  ghost_ratio min=   0.000  avg=     0.000  max=   0.000
+METRICS: t_total     = 3.930e-04        t_comp.   = 3.925e-04      t_comm= 4.768e-07
+         gflops_total= 9.160596e-01   gflops_comp= 9.171725e-01
+========================================
+
+[RESULT] 0,2,2D_cyclic,0,0.000399590,0.000000954,90000,0,180000
+[RESULT] 0,2,2D_cyclic,1,0.000389814,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,2,0.000389814,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,3,0.000397205,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,4,0.000389814,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,5,0.000398159,0.000000238,90000,0,180000
+[RESULT] 0,2,2D_cyclic,6,0.000389814,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,7,0.000389576,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,8,0.000396252,0.000000477,90000,0,180000
+[RESULT] 0,2,2D_cyclic,9,0.000389814,0.000000238,90000,0,180000
+Total execution time: 0.111 seconds

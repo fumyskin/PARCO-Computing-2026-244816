@@ -49,6 +49,7 @@ typedef struct {
     double* comm_times; // communication time per iteration 
 }Performance_Metrics;
 
+// OTHER UTILS
 void *surely_malloc(size_t size);
 void coo_quicksort(Sparse_Coordinate *p, unsigned base, unsigned n);
 int load_matrix_market(const char *filename, Sparse_Coordinate* matrix);

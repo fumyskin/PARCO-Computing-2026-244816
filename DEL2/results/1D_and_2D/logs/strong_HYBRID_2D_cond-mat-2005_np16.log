@@ -1,0 +1,51 @@
+Retrieving the matrix from '../matrices/cond-mat-2005.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+40421 40421 175693
+Real Matrix: Rows=40421 | Cols=40421 | NNZ=175693 | Procs=16 | Distribution=2D
+2D Process Grid: 4 x 4 (rows x cols)
+Rank 1: Grid pos (0,1) | Rows [0-10106) | Cols [10106-20212) | Local NNZ: 0
+Rank 2: Grid pos (0,2) | Rows [0-10106) | Cols [20212-30318) | Local NNZ: 0
+Rank 15: Grid pos (3,3) | Rows [30318-40421) | Cols [30318-40421) | Local NNZ: 8047
+Rank 3: Grid pos (0,3) | Rows [0-10106) | Cols [30318-40421) | Local NNZ: 0
+Rank 0: Grid pos (0,0) | Rows [0-10106) | Cols [0-10106) | Local NNZ: 47344
+Applied 2D distribution
+Rank 4: Grid pos (1,0) | Rows [10106-20212) | Cols [0-10106) | Local NNZ: 33178
+Rank 9: Grid pos (2,1) | Rows [20212-30318) | Cols [10106-20212) | Local NNZ: 11473
+Rank 11: Grid pos (2,3) | Rows [20212-30318) | Cols [30318-40421) | Local NNZ: 0
+Rank 6: Grid pos (1,2) | Rows [10106-20212) | Cols [20212-30318) | Local NNZ: 0
+Rank 13: Grid pos (3,1) | Rows [30318-40421) | Cols [10106-20212) | Local NNZ: 5837
+Rank 10: Grid pos (2,2) | Rows [20212-30318) | Cols [20212-30318) | Local NNZ: 12751
+Rank 5: Grid pos (1,1) | Rows [10106-20212) | Cols [10106-20212) | Local NNZ: 20091
+Rank 12: Grid pos (3,0) | Rows [30318-40421) | Cols [0-10106) | Local NNZ: 15392
+Rank 8: Grid pos (2,0) | Rows [20212-30318) | Cols [0-10106) | Local NNZ: 18004
+Rank 7: Grid pos (1,3) | Rows [10106-20212) | Cols [30318-40421) | Local NNZ: 0
+Rank 14: Grid pos (3,2) | Rows [30318-40421) | Cols [20212-30318) | Local NNZ: 3576
+Ghost columns identified: 7399 total ghost values needed
+Local vector initialized (size=2527 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 175693
+BALANCE: nnz_local   min=       0  avg=  10980.81  max=   47344
+COMM:    ghost       min=       0  avg=   2675.38  max=    7399  | recv_double_avg=  21403.00 B
+MEM:     bytes       min=  141484  avg=    294650  max=  768812
+STRUCT:  ghost_ratio min=   0.000  avg=    18.891  max=  47.285
+METRICS: t_total     = 6.743e-02        t_comp.   = 3.411e-03      t_comm= 6.405e-02
+         gflops_total= 5.211383e-03   gflops_comp= 1.030067e-01
+========================================
+
+[RESULT] 0,16,2D,0,0.064397097,0.064010859,47344,7399,94688
+[RESULT] 0,16,2D,1,0.096086979,0.067656755,47344,7399,94688
+[RESULT] 0,16,2D,2,0.096382380,0.095995426,47344,7399,94688
+[RESULT] 0,16,2D,3,0.045807362,0.045018673,47344,7399,94688
+[RESULT] 0,16,2D,4,0.064589739,0.064002752,47344,7399,94688
+[RESULT] 0,16,2D,5,0.062035561,0.061452150,47344,7399,94688
+[RESULT] 0,16,2D,6,0.062032700,0.061456203,47344,7399,94688
+[RESULT] 0,16,2D,7,0.061057091,0.060457945,47344,7399,94688
+[RESULT] 0,16,2D,8,0.057083130,0.056454420,47344,7399,94688
+[RESULT] 0,16,2D,9,0.064794302,0.064004421,47344,7399,94688
+Total execution time: 3.518 seconds

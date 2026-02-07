@@ -1,0 +1,34 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=8 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 1139406 total ghost values needed
+Local vector initialized (size=187253 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min= 3895764  avg=3900966.75  max= 3905099
+COMM:    ghost       min= 1138620  avg=1139345.88  max= 1139819  | recv_double_avg=9114767.00 B
+MEM:     bytes       min=59603192  avg=  59671430  max=59724804
+STRUCT:  ghost_ratio min=  29.181  avg=    29.207  max=  29.238
+METRICS: t_total     = 6.321e-01        t_comp.   = 8.782e-02      t_comm= 5.456e-01
+         gflops_total= 9.873533e-02   gflops_comp= 7.107104e-01
+========================================
+
+[RESULT] 0,8,1D,0,0.698760986,0.615026474,3898612,1139406,7797224
+[RESULT] 0,8,1D,1,0.506999493,0.420199156,3898612,1139406,7797224
+[RESULT] 0,8,1D,2,0.730054379,0.643010616,3898612,1139406,7797224
+[RESULT] 0,8,1D,3,0.755739450,0.668931246,3898612,1139406,7797224
+[RESULT] 0,8,1D,4,0.561871290,0.474999189,3898612,1139406,7797224
+[RESULT] 0,8,1D,5,0.584567308,0.497558594,3898612,1139406,7797224
+[RESULT] 0,8,1D,6,0.617668390,0.531026840,3898612,1139406,7797224
+[RESULT] 0,8,1D,7,0.674727678,0.588020563,3898612,1139406,7797224
+[RESULT] 0,8,1D,8,0.561932564,0.475011826,3898612,1139406,7797224
+[RESULT] 0,8,1D,9,0.629171133,0.542012453,3898612,1139406,7797224
+Total execution time: 120.437 seconds

@@ -1,0 +1,67 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=32 | Distribution=2D_cyclic
+Rank 19: Grid pos (2,3) | Local rows: 181678 | Local NNZ: 45317
+Rank 20: Grid pos (2,4) | Local rows: 181678 | Local NNZ: 45566
+Rank 18: Grid pos (2,2) | Local rows: 181678 | Local NNZ: 136094
+2D Process Grid (Cyclic): 4 x 8
+Rank 17: Grid pos (2,1) | Local rows: 181678 | Local NNZ: 136086
+Rank 21: Grid pos (2,5) | Local rows: 181678 | Local NNZ: 135936
+Rank 16: Grid pos (2,0) | Local rows: 181678 | Local NNZ: 45395
+Rank 22: Grid pos (2,6) | Local rows: 181678 | Local NNZ: 136160
+Rank 15: Grid pos (1,7) | Local rows: 181678 | Local NNZ: 45415
+Rank 23: Grid pos (2,7) | Local rows: 181678 | Local NNZ: 45502
+Rank 14: Grid pos (1,6) | Local rows: 181678 | Local NNZ: 45337
+Rank 24: Grid pos (3,0) | Local rows: 181678 | Local NNZ: 45119
+Rank 25: Grid pos (3,1) | Local rows: 181678 | Local NNZ: 45345
+Rank 13: Grid pos (1,5) | Local rows: 181678 | Local NNZ: 136074
+Rank 12: Grid pos (1,4) | Local rows: 181678 | Local NNZ: 136122
+Rank 11: Grid pos (1,3) | Local rows: 181678 | Local NNZ: 45259
+Rank 10: Grid pos (1,2) | Local rows: 181678 | Local NNZ: 45337
+Rank 29: Grid pos (3,5) | Local rows: 181678 | Local NNZ: 45146
+Rank 5: Grid pos (0,5) | Local rows: 181679 | Local NNZ: 45351
+Rank 30: Grid pos (3,6) | Local rows: 181678 | Local NNZ: 136205
+Rank 26: Grid pos (3,2) | Local rows: 181678 | Local NNZ: 136184
+Rank 28: Grid pos (3,4) | Local rows: 181678 | Local NNZ: 45314
+Rank 27: Grid pos (3,3) | Local rows: 181678 | Local NNZ: 136194
+Rank 9: Grid pos (1,1) | Local rows: 181678 | Local NNZ: 136182
+Rank 6: Grid pos (0,6) | Local rows: 181679 | Local NNZ: 45321
+Rank 1: Grid pos (0,1) | Local rows: 181679 | Local NNZ: 45550
+Rank 2: Grid pos (0,2) | Local rows: 181679 | Local NNZ: 45433
+Rank 8: Grid pos (1,0) | Local rows: 181678 | Local NNZ: 136118
+Rank 7: Grid pos (0,7) | Local rows: 181679 | Local NNZ: 136079
+Rank 3: Grid pos (0,3) | Local rows: 181679 | Local NNZ: 136171
+Rank 0: Grid pos (0,0) | Local rows: 181679 | Local NNZ: 136050
+Applied 2Dcyclic distribution
+Rank 4: Grid pos (0,4) | Local rows: 181679 | Local NNZ: 136165
+Rank 31: Grid pos (3,7) | Local rows: 181678 | Local NNZ: 136310
+Ghost columns identified: 68130 total ghost values needed
+Local vector initialized (size=22710 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=   45119  avg=  90744.91  max=  136310
+COMM:    ghost       min=   33784  avg=  51064.59  max=   68130  | recv_double_avg= 408516.75 B
+MEM:     bytes       min= 3173520  avg=   3859277  max= 4542572
+STRUCT:  ghost_ratio min=  49.982  avg=    62.512  max=  75.126
+METRICS: t_total     = 1.578e-03        t_comp.   = 1.314e-03      t_comm= 3.110e-04
+         gflops_total= 3.680520e+00   gflops_comp= 4.420417e+00
+========================================
+
+[RESULT] 0,32,2D_cyclic,0,0.001650095,0.000308514,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,1,0.001591206,0.000289440,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,2,0.001549721,0.000247240,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,3,0.001531363,0.000247478,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,4,0.001534939,0.000247478,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,5,0.001516342,0.000233173,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,6,0.001552820,0.000264645,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,7,0.001529932,0.000239849,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,8,0.001570940,0.000286579,136050,68130,272100
+[RESULT] 0,32,2D_cyclic,9,0.001518011,0.000223160,136050,68130,272100
+Total execution time: 2.401 seconds

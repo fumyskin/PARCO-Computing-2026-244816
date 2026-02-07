@@ -1,0 +1,51 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=16 | Distribution=2D
+2D Process Grid: 4 x 4 (rows x cols)
+Rank 2: Grid pos (0,2) | Rows [0-285) | Cols [570-855) | Local NNZ: 0
+Rank 1: Grid pos (0,1) | Rows [0-285) | Cols [285-570) | Local NNZ: 0
+Rank 8: Grid pos (2,0) | Rows [570-855) | Cols [0-285) | Local NNZ: 25
+Rank 3: Grid pos (0,3) | Rows [0-285) | Cols [855-1138) | Local NNZ: 0
+Rank 0: Grid pos (0,0) | Rows [0-285) | Cols [0-285) | Local NNZ: 630
+Applied 2D distribution
+Rank 5: Grid pos (1,1) | Rows [285-570) | Cols [285-570) | Local NNZ: 567
+Rank 4: Grid pos (1,0) | Rows [285-570) | Cols [0-285) | Local NNZ: 93
+Rank 7: Grid pos (1,3) | Rows [285-570) | Cols [855-1138) | Local NNZ: 0
+Rank 6: Grid pos (1,2) | Rows [285-570) | Cols [570-855) | Local NNZ: 0
+Rank 9: Grid pos (2,1) | Rows [570-855) | Cols [285-570) | Local NNZ: 69
+Rank 12: Grid pos (3,0) | Rows [855-1138) | Cols [0-285) | Local NNZ: 11
+Rank 11: Grid pos (2,3) | Rows [570-855) | Cols [855-1138) | Local NNZ: 0
+Rank 14: Grid pos (3,2) | Rows [855-1138) | Cols [570-855) | Local NNZ: 86
+Rank 13: Grid pos (3,1) | Rows [855-1138) | Cols [285-570) | Local NNZ: 36
+Rank 10: Grid pos (2,2) | Rows [570-855) | Cols [570-855) | Local NNZ: 528
+Rank 15: Grid pos (3,3) | Rows [855-1138) | Cols [855-1138) | Local NNZ: 551
+Ghost columns identified: 267 total ghost values needed
+Local vector initialized (size=72 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 2596
+BALANCE: nnz_local   min=       0  avg=    162.25  max=     630
+COMM:    ghost       min=       0  avg=     78.44  max=     267  | recv_double_avg=    627.50 B
+MEM:     bytes       min=    3992  avg=      6562  max=   13696
+STRUCT:  ghost_ratio min=   0.000  avg=    33.584  max=  76.744
+METRICS: t_total     = 9.015e-05        t_comp.   = 3.386e-06      t_comm= 8.798e-05
+         gflops_total= 5.759541e-02   gflops_comp= 1.533579e+00
+========================================
+
+[RESULT] 0,16,2D,0,0.000068426,0.000063896,630,267,1260
+[RESULT] 0,16,2D,1,0.000086069,0.000082254,630,267,1260
+[RESULT] 0,16,2D,2,0.000085831,0.000082493,630,267,1260
+[RESULT] 0,16,2D,3,0.000099421,0.000096083,630,267,1260
+[RESULT] 0,16,2D,4,0.000101089,0.000097990,630,267,1260
+[RESULT] 0,16,2D,5,0.000105143,0.000102043,630,267,1260
+[RESULT] 0,16,2D,6,0.000085115,0.000081778,630,267,1260
+[RESULT] 0,16,2D,7,0.000089884,0.000086784,630,267,1260
+[RESULT] 0,16,2D,8,0.000084639,0.000081539,630,267,1260
+[RESULT] 0,16,2D,9,0.000095844,0.000092745,630,267,1260
+Total execution time: 0.008 seconds

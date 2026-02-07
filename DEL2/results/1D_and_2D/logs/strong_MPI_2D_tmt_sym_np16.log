@@ -1,0 +1,51 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=16 | Distribution=2D
+2D Process Grid: 4 x 4 (rows x cols)
+Rank 13: Grid pos (3,1) | Rows [545037-726713) | Cols [181679-363358) | Local NNZ: 0
+Rank 12: Grid pos (3,0) | Rows [545037-726713) | Cols [0-181679) | Local NNZ: 0
+Rank 1: Grid pos (0,1) | Rows [0-181679) | Cols [181679-363358) | Local NNZ: 0
+Rank 14: Grid pos (3,2) | Rows [545037-726713) | Cols [363358-545037) | Local NNZ: 1761
+Rank 11: Grid pos (2,3) | Rows [363358-545037) | Cols [545037-726713) | Local NNZ: 0
+Rank 2: Grid pos (0,2) | Rows [0-181679) | Cols [363358-545037) | Local NNZ: 0
+Rank 9: Grid pos (2,1) | Rows [363358-545037) | Cols [181679-363358) | Local NNZ: 1922
+Rank 8: Grid pos (2,0) | Rows [363358-545037) | Cols [0-181679) | Local NNZ: 0
+Rank 3: Grid pos (0,3) | Rows [0-181679) | Cols [545037-726713) | Local NNZ: 0
+Rank 7: Grid pos (1,3) | Rows [181679-363358) | Cols [545037-726713) | Local NNZ: 0
+Rank 4: Grid pos (1,0) | Rows [181679-363358) | Cols [0-181679) | Local NNZ: 1761
+Rank 6: Grid pos (1,2) | Rows [181679-363358) | Cols [363358-545037) | Local NNZ: 0
+Rank 15: Grid pos (3,3) | Rows [545037-726713) | Cols [545037-726713) | Local NNZ: 724719
+Rank 0: Grid pos (0,0) | Rows [0-181679) | Cols [0-181679) | Local NNZ: 724743
+Applied 2D distribution
+Rank 5: Grid pos (1,1) | Rows [181679-363358) | Cols [181679-363358) | Local NNZ: 724463
+Rank 10: Grid pos (2,2) | Rows [363358-545037) | Cols [363358-545037) | Local NNZ: 724468
+Ghost columns identified: 170324 total ghost values needed
+Local vector initialized (size=45420 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=       0  avg= 181489.81  max=  724743
+COMM:    ghost       min=       0  avg=  42740.31  max=  170324  | recv_double_avg= 341922.50 B
+MEM:     bytes       min= 2543468  avg=   5063300  max=12603020
+STRUCT:  ghost_ratio min=   0.000  avg=    14.666  max=  46.905
+METRICS: t_total     = 5.546e-03        t_comp.   = 4.121e-03      t_comm= 1.498e-03
+         gflops_total= 1.047264e+00   gflops_comp= 1.409265e+00
+========================================
+
+[RESULT] 0,16,2D,0,0.005519390,0.001384258,724743,170324,1449486
+[RESULT] 0,16,2D,1,0.005490303,0.001393080,724743,170324,1449486
+[RESULT] 0,16,2D,2,0.005479336,0.001393080,724743,170324,1449486
+[RESULT] 0,16,2D,3,0.005581379,0.001445293,724743,170324,1449486
+[RESULT] 0,16,2D,4,0.005594015,0.001446009,724743,170324,1449486
+[RESULT] 0,16,2D,5,0.005604744,0.001470089,724743,170324,1449486
+[RESULT] 0,16,2D,6,0.005567789,0.001441002,724743,170324,1449486
+[RESULT] 0,16,2D,7,0.005536556,0.001420975,724743,170324,1449486
+[RESULT] 0,16,2D,8,0.005553961,0.001437187,724743,170324,1449486
+[RESULT] 0,16,2D,9,0.005528212,0.001414061,724743,170324,1449486
+Total execution time: 2.144 seconds

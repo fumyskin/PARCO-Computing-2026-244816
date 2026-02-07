@@ -1,0 +1,37 @@
+Retrieving the matrix from '../matrices/cond-mat-2005.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+40421 40421 175693
+Real Matrix: Rows=40421 | Cols=40421 | NNZ=175693 | Procs=2 | Distribution=2D
+2D Process Grid: 1 x 2 (rows x cols)
+Rank 1: Grid pos (0,1) | Rows [0-40421) | Cols [20211-40421) | Local NNZ: 24374
+Rank 0: Grid pos (0,0) | Rows [0-40421) | Cols [0-20211) | Local NNZ: 151319
+Applied 2D distribution
+Ghost columns identified: 8131 total ghost values needed
+Local vector initialized (size=20211 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 175693
+BALANCE: nnz_local   min=   24374  avg=  87846.50  max=  151319
+COMM:    ghost       min=    4859  avg=   6495.00  max=    8131  | recv_double_avg=  51960.00 B
+MEM:     bytes       min=  978096  avg=   1752858  max= 2527620
+STRUCT:  ghost_ratio min=   5.373  avg=    12.654  max=  19.935
+METRICS: t_total     = 3.478e-03        t_comp.   = 2.105e-03      t_comm= 1.373e-03
+         gflops_total= 1.010261e-01   gflops_comp= 1.669483e-01
+========================================
+
+[RESULT] 0,2,2D,0,0.002386808,0.000277519,151319,8131,302638
+[RESULT] 0,2,2D,1,0.002331257,0.000232220,151319,8131,302638
+[RESULT] 0,2,2D,2,0.002416849,0.000296354,151319,8131,302638
+[RESULT] 0,2,2D,3,0.002326250,0.000236273,151319,8131,302638
+[RESULT] 0,2,2D,4,0.002337456,0.000236988,151319,8131,302638
+[RESULT] 0,2,2D,5,0.013630867,0.011514425,151319,8131,302638
+[RESULT] 0,2,2D,6,0.002342939,0.000237942,151319,8131,302638
+[RESULT] 0,2,2D,7,0.002338648,0.000239611,151319,8131,302638
+[RESULT] 0,2,2D,8,0.002328396,0.000233412,151319,8131,302638
+[RESULT] 0,2,2D,9,0.002342224,0.000229359,151319,8131,302638
+Total execution time: 0.152 seconds

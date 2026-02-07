@@ -1,0 +1,39 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=4 | Distribution=2D
+2D Process Grid: 2 x 2 (rows x cols)
+Rank 1: Grid pos (0,1) | Rows [0-749012) | Cols [749012-1498023) | Local NNZ: 0
+Rank 2: Grid pos (1,0) | Rows [749012-1498023) | Cols [0-749012) | Local NNZ: 247082
+Rank 3: Grid pos (1,1) | Rows [749012-1498023) | Cols [749012-1498023) | Local NNZ: 15436372
+Rank 0: Grid pos (0,0) | Rows [0-749012) | Cols [0-749012) | Local NNZ: 15524280
+Applied 2D distribution
+Ghost columns identified: 561759 total ghost values needed
+Local vector initialized (size=374506 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min=       0  avg=7801933.50  max=15524280
+COMM:    ghost       min=       0  avg= 284531.25  max=  561759  | recv_double_avg=2276250.00 B
+MEM:     bytes       min=11984196  avg= 107883640  max=202769628
+STRUCT:  ghost_ratio min=   0.000  avg=     3.292  max=   5.912
+METRICS: t_total     = 1.201e-01        t_comp.   = 1.167e-01      t_comm= 3.399e-03
+         gflops_total= 5.197002e-01   gflops_comp= 5.348369e-01
+========================================
+
+[RESULT] 0,4,2D,0,0.120721102,0.004064322,15524280,561759,31048560
+[RESULT] 0,4,2D,1,0.120166063,0.003570795,15524280,561759,31048560
+[RESULT] 0,4,2D,2,0.120261908,0.003601789,15524280,561759,31048560
+[RESULT] 0,4,2D,3,0.120277643,0.003448486,15524280,561759,31048560
+[RESULT] 0,4,2D,4,0.119863749,0.003137827,15524280,561759,31048560
+[RESULT] 0,4,2D,5,0.119871140,0.003090620,15524280,561759,31048560
+[RESULT] 0,4,2D,6,0.119989872,0.003289700,15524280,561759,31048560
+[RESULT] 0,4,2D,7,0.120043278,0.003446817,15524280,561759,31048560
+[RESULT] 0,4,2D,8,0.119904995,0.003100634,15524280,561759,31048560
+[RESULT] 0,4,2D,9,0.119890213,0.003238916,15524280,561759,31048560
+Total execution time: 19.557 seconds

@@ -1,0 +1,37 @@
+Retrieving the matrix from '../matrices/msdoor.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+415863 415863 10328399
+Real Matrix: Rows=415863 | Cols=415863 | NNZ=10328399 | Procs=2 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 1 x 2
+Rank 1: Grid pos (0,1) | Local rows: 415863 | Local NNZ: 5150818
+Rank 0: Grid pos (0,0) | Local rows: 415863 | Local NNZ: 5177581
+Applied 2Dcyclic distribution
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=207932 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D_cyclic
+ITERATIONS: 10
+Matrix NNZ: 10328399
+BALANCE: nnz_local   min= 5150818  avg=5164199.50  max= 5177581
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+MEM:     bytes       min=68463624  avg=  68624206  max=68784788
+STRUCT:  ghost_ratio min=   0.000  avg=     0.000  max=   0.000
+METRICS: t_total     = 1.898e-02        t_comp.   = 1.778e-02      t_comm= 1.205e-03
+         gflops_total= 1.088071e+00   gflops_comp= 1.161806e+00
+========================================
+
+[RESULT] 0,2,2D_cyclic,0,0.028647423,0.010756493,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,1,0.017899513,0.000140905,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,2,0.017902851,0.000135183,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,3,0.017895460,0.000161648,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,4,0.017907858,0.000151157,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,5,0.017889261,0.000139236,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,6,0.017934322,0.000132561,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,7,0.017953634,0.000154257,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,8,0.017900944,0.000137091,5177581,0,10355162
+[RESULT] 0,2,2D_cyclic,9,0.017916679,0.000140429,5177581,0,10355162
+Total execution time: 6.223 seconds

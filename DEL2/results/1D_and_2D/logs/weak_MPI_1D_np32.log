@@ -1,0 +1,31 @@
+Synthetic Matrix (Weak Scaling): Rows/proc=10000 | Total rows=320000 | NNZ/row=~50 | Procs=32
+Dummy Matrix Generated: 320000 Global Rows | Total NNZ: 16000000
+Ghost columns identified: 245121 total ghost values needed
+Local vector initialized (size=10000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 16000000
+BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
+COMM:    ghost       min=  244503  avg= 245013.53  max=  245368  | recv_double_avg=1960108.25 B
+MEM:     bytes       min=11875596  avg=  11879669  max=11882504
+STRUCT:  ghost_ratio min=  48.901  avg=    49.003  max=  49.074
+METRICS: t_total     = 2.181e-02        t_comp.   = 7.397e-03      t_comm= 1.444e-02
+         gflops_total= 1.467380e+00   gflops_comp= 4.326338e+00
+========================================
+
+[RESULT] 0,32,1D,0,0.021003962,0.015153170,500000,245121,1000000
+[RESULT] 0,32,1D,1,0.019897699,0.014202356,500000,245121,1000000
+[RESULT] 0,32,1D,2,0.019611120,0.014095545,500000,245121,1000000
+[RESULT] 0,32,1D,3,0.019656658,0.014290810,500000,245121,1000000
+[RESULT] 0,32,1D,4,0.019916773,0.014108896,500000,245121,1000000
+[RESULT] 0,32,1D,5,0.019779444,0.014019728,500000,245121,1000000
+[RESULT] 0,32,1D,6,0.019876957,0.014078856,500000,245121,1000000
+[RESULT] 0,32,1D,7,0.019400120,0.014089823,500000,245121,1000000
+[RESULT] 0,32,1D,8,0.019730330,0.014161825,500000,245121,1000000
+[RESULT] 0,32,1D,9,0.019845724,0.014050245,500000,245121,1000000
+Total execution time: 0.315 seconds

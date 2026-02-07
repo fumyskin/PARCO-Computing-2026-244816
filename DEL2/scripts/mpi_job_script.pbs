@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #PBS -N spmv_mpi
-#PBS -l select=6:ncpus=24:mem=16gb
+#PBS -l select=2:ncpus=64:mem=16gb
 #PBS -l walltime=06:00:00
 #PBS -q short_cpuQ
 
@@ -89,24 +89,24 @@ echo "System info saved to: $SYSTEM_INFO_FILE"
 echo ""
 
 echo "Verifying environment..."
-if [ ! -d "../src" ] || [ ! -d "../include" ] || [ ! -d "../data" ]; then
-    echo "ERROR: Required directories (src/include/data) not found"
+if [ ! -d "../src" ] || [ ! -d "../include" ] || [ ! -d "../matrices" ]; then
+    echo "ERROR: Required directories (src/include/matrices) not found"
     echo "Current directory: $(pwd)"
     ls -la ..
     exit 1
 fi
 
 # Check benchmark script
-if [ ! -f "testsBash.sh" ]; then
-    echo "ERROR: testsBash.sh not found"
-    echo "Expected location: $(pwd)/testsBash.sh"
+if [ ! -f "mpi_bash_baseline.sh" ]; then
+    echo "ERROR: mpi_bash_script.sh not found"
+    echo "Expected location: $(pwd)/mpi_bash_script.sh"
     echo "Available files:"
     ls -la
     exit 1
 fi
 
 # Just to make sure that testsBash.sh is executable
-chmod +x testsBash.sh
+chmod +x mpi_bash_baseline.sh
 
 echo "Configuring MPI environment..."
 export MPICH_PROCESS_AFFINITY=1          
@@ -116,7 +116,7 @@ echo ""
 
 # Running the benchmark script
 echo "Starting time benchmark execution..."
-./testsBash.sh
+./mpi_bash_baseline.sh
 
 exit_code=$?
 
