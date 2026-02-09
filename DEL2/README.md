@@ -73,4 +73,18 @@ To reproduce the results:
 ``` bash
 tar -xzf <name_of_matrix>.tar.gz
 ```
-- Extract the .mtx file from their respective folders 
+- Extract the .mtx file from their respective folders. Make sure that in the `/matrices` folder are just the `.mtx` files
+
+## JOB SUBMISSION
+To submit the .pbs that executes 1D and 2D block distributions on SpMV :
+```bash
+qsub mpi_job_script_baseline.pbs
+```
+
+To submit the .pbs that executes sequential vs parallel I/O reading of Matrix Market file :
+```bash
+qsub mpi_job_script_parallel.pbs
+```
+
+> [!WARNING]
+> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYRBID MPI experiments as well. Since the cluster HP2 didn't work anymore I preferred to kept the original experimental setup as it is in order to be sure the source code is reproducible
