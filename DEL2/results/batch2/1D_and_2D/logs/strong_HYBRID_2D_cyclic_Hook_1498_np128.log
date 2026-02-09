@@ -1,0 +1,162 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=128 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 8 x 16
+Rank 12: Grid (0,12) | Local rows=187253 | NNZ=232959 | ColsGlobal
+Rank 10: Grid (0,10) | Local rows=187253 | NNZ=213828 | ColsGlobal
+Rank 14: Grid (0,14) | Local rows=187253 | NNZ=259674 | ColsGlobal
+Rank 18: Grid (1,2) | Local rows=187253 | NNZ=206410 | ColsGlobal
+Rank 8: Grid (0,8) | Local rows=187253 | NNZ=295045 | ColsGlobal
+Rank 13: Grid (0,13) | Local rows=187253 | NNZ=243469 | ColsGlobal
+Rank 16: Grid (1,0) | Local rows=187253 | NNZ=276182 | ColsGlobal
+Rank 21: Grid (1,5) | Local rows=187253 | NNZ=231629 | ColsGlobal
+Rank 4: Grid (0,4) | Local rows=187253 | NNZ=231835 | ColsGlobal
+Rank 1: Grid (0,1) | Local rows=187253 | NNZ=206889 | ColsGlobal
+Rank 5: Grid (0,5) | Local rows=187253 | NNZ=242386 | ColsGlobal
+Rank 120: Grid (7,8) | Local rows=187252 | NNZ=207489 | ColsGlobal
+Rank 24: Grid (1,8) | Local rows=187253 | NNZ=275937 | ColsGlobal
+Rank 126: Grid (7,14) | Local rows=187252 | NNZ=276565 | ColsGlobal
+Rank 23: Grid (1,7) | Local rows=187253 | NNZ=259208 | ColsGlobal
+Rank 122: Grid (7,10) | Local rows=187252 | NNZ=223484 | ColsGlobal
+Rank 11: Grid (0,11) | Local rows=187253 | NNZ=223448 | ColsGlobal
+Rank 9: Grid (0,9) | Local rows=187253 | NNZ=207130 | ColsGlobal
+Rank 0: Grid (0,0) | Local rows=187253 | NNZ=294786 | ColsGlobal
+Applied 2D cyclic distribution (global column indices preserved)
+Rank 70: Grid (4,6) | Local rows=187253 | NNZ=214171 | ColsGlobal
+Rank 28: Grid (1,12) | Local rows=187253 | NNZ=222960 | ColsGlobal
+Rank 19: Grid (1,3) | Local rows=187253 | NNZ=212761 | ColsGlobal
+Rank 78: Grid (4,14) | Local rows=187253 | NNZ=214224 | ColsGlobal
+Rank 112: Grid (7,0) | Local rows=187252 | NNZ=207441 | ColsGlobal
+Rank 123: Grid (7,11) | Local rows=187252 | NNZ=233376 | ColsGlobal
+Rank 116: Grid (7,4) | Local rows=187252 | NNZ=242967 | ColsGlobal
+Rank 76: Grid (4,12) | Local rows=187253 | NNZ=295613 | ColsGlobal
+Rank 113: Grid (7,1) | Local rows=187252 | NNZ=213471 | ColsGlobal
+Rank 118: Grid (7,6) | Local rows=187252 | NNZ=276483 | ColsGlobal
+Rank 77: Grid (4,13) | Local rows=187253 | NNZ=207654 | ColsGlobal
+Rank 20: Grid (1,4) | Local rows=187253 | NNZ=222121 | ColsGlobal
+Rank 27: Grid (1,11) | Local rows=187253 | NNZ=213689 | ColsGlobal
+Rank 15: Grid (0,15) | Local rows=187253 | NNZ=276302 | ColsGlobal
+Rank 6: Grid (0,6) | Local rows=187253 | NNZ=259444 | ColsGlobal
+Rank 127: Grid (7,15) | Local rows=187252 | NNZ=295526 | ColsGlobal
+Rank 62: Grid (3,14) | Local rows=187253 | NNZ=223094 | ColsGlobal
+Rank 64: Grid (4,0) | Local rows=187253 | NNZ=232159 | ColsGlobal
+Rank 7: Grid (0,7) | Local rows=187253 | NNZ=276094 | ColsGlobal
+Rank 82: Grid (5,2) | Local rows=187253 | NNZ=242858 | ColsGlobal
+Rank 17: Grid (1,1) | Local rows=187253 | NNZ=294497 | ColsGlobal
+Rank 119: Grid (7,7) | Local rows=187252 | NNZ=295176 | ColsGlobal
+Rank 86: Grid (5,6) | Local rows=187253 | NNZ=207613 | ColsGlobal
+Rank 30: Grid (1,14) | Local rows=187253 | NNZ=243332 | ColsGlobal
+Rank 84: Grid (5,4) | Local rows=187253 | NNZ=276209 | ColsGlobal
+Rank 3: Grid (0,3) | Local rows=187253 | NNZ=222282 | ColsGlobal
+Rank 111: Grid (6,15) | Local rows=187253 | NNZ=207781 | ColsGlobal
+Rank 90: Grid (5,10) | Local rows=187253 | NNZ=244147 | ColsGlobal
+Rank 29: Grid (1,13) | Local rows=187253 | NNZ=232588 | ColsGlobal
+Rank 81: Grid (5,1) | Local rows=187253 | NNZ=231918 | ColsGlobal
+Rank 2: Grid (0,2) | Local rows=187253 | NNZ=213041 | ColsGlobal
+Rank 92: Grid (5,12) | Local rows=187253 | NNZ=277040 | ColsGlobal
+Rank 88: Grid (5,8) | Local rows=187253 | NNZ=223298 | ColsGlobal
+Rank 110: Grid (6,14) | Local rows=187253 | NNZ=295138 | ColsGlobal
+Rank 22: Grid (1,6) | Local rows=187253 | NNZ=242776 | ColsGlobal
+Rank 60: Grid (3,12) | Local rows=187253 | NNZ=207089 | ColsGlobal
+Rank 52: Grid (3,4) | Local rows=187253 | NNZ=207145 | ColsGlobal
+Rank 87: Grid (5,7) | Local rows=187253 | NNZ=213977 | ColsGlobal
+Rank 32: Grid (2,0) | Local rows=187253 | NNZ=259588 | ColsGlobal
+Rank 54: Grid (3,6) | Local rows=187253 | NNZ=223298 | ColsGlobal
+Rank 104: Grid (6,8) | Local rows=187253 | NNZ=213921 | ColsGlobal
+Rank 109: Grid (6,13) | Local rows=187253 | NNZ=276504 | ColsGlobal
+Rank 55: Grid (3,7) | Local rows=187253 | NNZ=232673 | ColsGlobal
+Rank 31: Grid (1,15) | Local rows=187253 | NNZ=259896 | ColsGlobal
+Rank 50: Grid (3,2) | Local rows=187253 | NNZ=275711 | ColsGlobal
+Rank 125: Grid (7,13) | Local rows=187252 | NNZ=259883 | ColsGlobal
+Rank 121: Grid (7,9) | Local rows=187252 | NNZ=213810 | ColsGlobal
+Rank 124: Grid (7,12) | Local rows=187252 | NNZ=243448 | ColsGlobal
+Rank 58: Grid (3,10) | Local rows=187253 | NNZ=276782 | ColsGlobal
+Rank 100: Grid (6,4) | Local rows=187253 | NNZ=259634 | ColsGlobal
+Rank 75: Grid (4,11) | Local rows=187253 | NNZ=277189 | ColsGlobal
+Rank 79: Grid (4,15) | Local rows=187253 | NNZ=223598 | ColsGlobal
+Rank 73: Grid (4,9) | Local rows=187253 | NNZ=243109 | ColsGlobal
+Rank 69: Grid (4,5) | Local rows=187253 | NNZ=207364 | ColsGlobal
+Rank 36: Grid (2,4) | Local rows=187253 | NNZ=213383 | ColsGlobal
+Rank 25: Grid (1,9) | Local rows=187253 | NNZ=294618 | ColsGlobal
+Rank 98: Grid (6,2) | Local rows=187253 | NNZ=232158 | ColsGlobal
+Rank 26: Grid (1,10) | Local rows=187253 | NNZ=207160 | ColsGlobal
+Rank 71: Grid (4,7) | Local rows=187253 | NNZ=223435 | ColsGlobal
+Rank 115: Grid (7,3) | Local rows=187252 | NNZ=232169 | ColsGlobal
+Rank 44: Grid (2,12) | Local rows=187253 | NNZ=213349 | ColsGlobal
+Rank 117: Grid (7,5) | Local rows=187252 | NNZ=259204 | ColsGlobal
+Rank 46: Grid (2,14) | Local rows=187253 | NNZ=232442 | ColsGlobal
+Rank 114: Grid (7,2) | Local rows=187252 | NNZ=222780 | ColsGlobal
+Rank 48: Grid (3,0) | Local rows=187253 | NNZ=242959 | ColsGlobal
+Rank 72: Grid (4,8) | Local rows=187253 | NNZ=232611 | ColsGlobal
+Rank 61: Grid (3,13) | Local rows=187253 | NNZ=213332 | ColsGlobal
+Rank 74: Grid (4,10) | Local rows=187253 | NNZ=260124 | ColsGlobal
+Rank 38: Grid (2,6) | Local rows=187253 | NNZ=232654 | ColsGlobal
+Rank 63: Grid (3,15) | Local rows=187253 | NNZ=232810 | ColsGlobal
+Rank 43: Grid (2,11) | Local rows=187253 | NNZ=206956 | ColsGlobal
+Rank 65: Grid (4,1) | Local rows=187253 | NNZ=242483 | ColsGlobal
+Rank 80: Grid (5,0) | Local rows=187253 | NNZ=222723 | ColsGlobal
+Rank 37: Grid (2,5) | Local rows=187253 | NNZ=222687 | ColsGlobal
+Rank 83: Grid (5,3) | Local rows=187253 | NNZ=259674 | ColsGlobal
+Rank 42: Grid (2,10) | Local rows=187253 | NNZ=294759 | ColsGlobal
+Rank 39: Grid (2,7) | Local rows=187253 | NNZ=242993 | ColsGlobal
+Rank 89: Grid (5,9) | Local rows=187253 | NNZ=232717 | ColsGlobal
+Rank 67: Grid (4,3) | Local rows=187253 | NNZ=276283 | ColsGlobal
+Rank 91: Grid (5,11) | Local rows=187253 | NNZ=260913 | ColsGlobal
+Rank 66: Grid (4,2) | Local rows=187253 | NNZ=259088 | ColsGlobal
+Rank 85: Grid (5,5) | Local rows=187253 | NNZ=294793 | ColsGlobal
+Rank 68: Grid (4,4) | Local rows=187253 | NNZ=294831 | ColsGlobal
+Rank 93: Grid (5,13) | Local rows=187253 | NNZ=295352 | ColsGlobal
+Rank 105: Grid (6,9) | Local rows=187253 | NNZ=223117 | ColsGlobal
+Rank 103: Grid (6,7) | Local rows=187253 | NNZ=207710 | ColsGlobal
+Rank 53: Grid (3,5) | Local rows=187253 | NNZ=213737 | ColsGlobal
+Rank 108: Grid (6,12) | Local rows=187253 | NNZ=260262 | ColsGlobal
+Rank 57: Grid (3,9) | Local rows=187253 | NNZ=259681 | ColsGlobal
+Rank 95: Grid (5,15) | Local rows=187253 | NNZ=214175 | ColsGlobal
+Rank 107: Grid (6,11) | Local rows=187253 | NNZ=244412 | ColsGlobal
+Rank 106: Grid (6,10) | Local rows=187253 | NNZ=233028 | ColsGlobal
+Rank 51: Grid (3,3) | Local rows=187253 | NNZ=294717 | ColsGlobal
+Rank 33: Grid (2,1) | Local rows=187253 | NNZ=275635 | ColsGlobal
+Rank 94: Grid (5,14) | Local rows=187253 | NNZ=207692 | ColsGlobal
+Rank 49: Grid (3,1) | Local rows=187253 | NNZ=258907 | ColsGlobal
+Rank 56: Grid (3,8) | Local rows=187253 | NNZ=243212 | ColsGlobal
+Rank 35: Grid (2,3) | Local rows=187253 | NNZ=206555 | ColsGlobal
+Rank 59: Grid (3,11) | Local rows=187253 | NNZ=295316 | ColsGlobal
+Rank 101: Grid (6,5) | Local rows=187253 | NNZ=275935 | ColsGlobal
+Rank 45: Grid (2,13) | Local rows=187253 | NNZ=222562 | ColsGlobal
+Rank 97: Grid (6,1) | Local rows=187253 | NNZ=222603 | ColsGlobal
+Rank 99: Grid (6,3) | Local rows=187253 | NNZ=243090 | ColsGlobal
+Rank 96: Grid (6,0) | Local rows=187253 | NNZ=213565 | ColsGlobal
+Rank 47: Grid (2,15) | Local rows=187253 | NNZ=243415 | ColsGlobal
+Rank 102: Grid (6,6) | Local rows=187253 | NNZ=295538 | ColsGlobal
+Rank 34: Grid (2,2) | Local rows=187253 | NNZ=294282 | ColsGlobal
+Rank 41: Grid (2,9) | Local rows=187253 | NNZ=275676 | ColsGlobal
+Rank 40: Grid (2,8) | Local rows=187253 | NNZ=259256 | ColsGlobal
+2D Comm Pattern: grid 8 x 16 | expand ghosts on rank 0: 87775
+2D: local vector size = 93627 (column block), local rows = 187253
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D_cyclic
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min=  206410  avg= 243810.42  max=  295613
+COMM:    ghost       min=   71416  avg=  77729.21  max=   87776  | recv_double_avg= 621833.69 B
+METRICS: t_total     = 1.109e+01  t_comp = 5.258e-02  t_comm = 1.109e+01
+         gflops_total= 5.626980e-03  gflops_comp= 1.186972e+00
+========================================
+
+[RESULT] 0,128,2D_cyclic,0,10.492022276,10.489896297,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,1,10.496033907,10.493910313,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,2,10.495005131,10.492874861,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,3,10.496038914,10.493906260,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,4,10.759001017,10.756873369,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,5,10.241036177,10.238908529,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,6,9.991036415,9.988912344,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,7,10.236035109,10.233906269,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,8,10.236040115,10.233913898,294786,87775,589572
+[RESULT] 0,128,2D_cyclic,9,10.244044065,10.241906166,294786,87775,589572
+Total execution time: 1904.556 seconds

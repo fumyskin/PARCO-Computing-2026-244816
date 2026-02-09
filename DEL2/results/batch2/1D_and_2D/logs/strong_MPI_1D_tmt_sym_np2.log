@@ -1,0 +1,32 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=2 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 363244 total ghost values needed
+Local vector initialized (size=363357 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min= 1451661  avg=1451918.50  max= 1452176
+COMM:    ghost       min=  363244  avg= 363280.00  max=  363316  | recv_double_avg=2906240.00 B
+METRICS: t_total     = 1.577e-02  t_comp = 1.166e-02  t_comm = 4.111e-03
+         gflops_total= 3.681599e-01  gflops_comp= 4.979324e-01
+========================================
+
+[RESULT] 0,2,1D,0,0.017292976,0.006241798,1452176,363244,2904352
+[RESULT] 0,2,1D,1,0.015584469,0.004692078,1452176,363244,2904352
+[RESULT] 0,2,1D,2,0.015390635,0.004283428,1452176,363244,2904352
+[RESULT] 0,2,1D,3,0.015037775,0.004026175,1452176,363244,2904352
+[RESULT] 0,2,1D,4,0.014866590,0.003795385,1452176,363244,2904352
+[RESULT] 0,2,1D,5,0.014439344,0.003544331,1452176,363244,2904352
+[RESULT] 0,2,1D,6,0.016706228,0.003274202,1452176,363244,2904352
+[RESULT] 0,2,1D,7,0.019963026,0.004710674,1452176,363244,2904352
+[RESULT] 0,2,1D,8,0.014397383,0.003473520,1452176,363244,2904352
+[RESULT] 0,2,1D,9,0.014070272,0.003071308,1452176,363244,2904352
+Total execution time: 2.046 seconds

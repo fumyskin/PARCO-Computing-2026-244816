@@ -1,0 +1,36 @@
+Retrieving the matrix from '../matrices/bcsstk27.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1224 1224 28675
+Real Matrix: Rows=1224 | Cols=1224 | NNZ=28675 | Procs=2 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 1 x 2
+Rank 0: Grid (0,0) | Local rows=1224 | NNZ=14051 | ColsGlobal
+Applied 2D cyclic distribution (global column indices preserved)
+Rank 1: Grid (0,1) | Local rows=1224 | NNZ=14624 | ColsGlobal
+2D Comm Pattern: grid 1 x 2 | expand ghosts on rank 0: 306
+2D: local vector size = 612 (column block), local rows = 1224
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D_cyclic
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 28675
+BALANCE: nnz_local   min=   14051  avg=  14337.50  max=   14624
+COMM:    ghost       min=     306  avg=    306.00  max=     306  | recv_double_avg=   2448.00 B
+METRICS: t_total     = 2.130e-04  t_comp = 2.594e-05  t_comm = 1.871e-04
+         gflops_total= 2.692147e-01  gflops_comp= 2.210876e+00
+========================================
+
+[RESULT] 0,2,2D_cyclic,0,0.000212669,0.000188112,14051,306,28102
+[RESULT] 0,2,2D_cyclic,1,0.000218630,0.000192165,14051,306,28102
+[RESULT] 0,2,2D_cyclic,2,0.000210524,0.000186205,14051,306,28102
+[RESULT] 0,2,2D_cyclic,3,0.000216484,0.000191212,14051,306,28102
+[RESULT] 0,2,2D_cyclic,4,0.000229359,0.000200987,14051,306,28102
+[RESULT] 0,2,2D_cyclic,5,0.000202894,0.000177145,14051,306,28102
+[RESULT] 0,2,2D_cyclic,6,0.000243664,0.000215769,14051,306,28102
+[RESULT] 0,2,2D_cyclic,7,0.000209332,0.000182867,14051,306,28102
+[RESULT] 0,2,2D_cyclic,8,0.000188589,0.000164032,14051,306,28102
+[RESULT] 0,2,2D_cyclic,9,0.000198126,0.000172377,14051,306,28102
+Total execution time: 0.085 seconds

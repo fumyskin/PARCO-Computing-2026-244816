@@ -1,0 +1,32 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=128 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 16 total ghost values needed
+Local vector initialized (size=9 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 2596
+BALANCE: nnz_local   min=      11  avg=     20.28  max=      31
+COMM:    ghost       min=       2  avg=     11.34  max=      22  | recv_double_avg=     90.75 B
+METRICS: t_total     = 1.396e+00  t_comp = 4.125e-06  t_comm = 1.396e+00
+         gflops_total= 3.719659e-06  gflops_comp= 1.258776e+00
+========================================
+
+[RESULT] 0,128,1D,0,1.284995079,1.284990788,25,16,50
+[RESULT] 0,128,1D,1,1.163955450,1.163952112,25,16,50
+[RESULT] 0,128,1D,2,1.583991289,1.583987713,25,16,50
+[RESULT] 0,128,1D,3,1.483003378,1.483000278,25,16,50
+[RESULT] 0,128,1D,4,1.338996172,1.338993311,25,16,50
+[RESULT] 0,128,1D,5,1.293043137,1.293039799,25,16,50
+[RESULT] 0,128,1D,6,1.346032619,1.346029520,25,16,50
+[RESULT] 0,128,1D,7,1.140787125,1.140783310,25,16,50
+[RESULT] 0,128,1D,8,1.311988592,1.311984539,25,16,50
+[RESULT] 0,128,1D,9,1.038612366,1.038609028,25,16,50
+Total execution time: 36.234 seconds

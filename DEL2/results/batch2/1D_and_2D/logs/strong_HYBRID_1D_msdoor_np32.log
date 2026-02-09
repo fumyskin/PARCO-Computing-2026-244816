@@ -1,0 +1,32 @@
+Retrieving the matrix from '../matrices/msdoor.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+415863 415863 10328399
+Real Matrix: Rows=415863 | Cols=415863 | NNZ=10328399 | Procs=32 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 204959 total ghost values needed
+Local vector initialized (size=12996 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 10328399
+BALANCE: nnz_local   min=  318486  avg= 322762.47  max=  327441
+COMM:    ghost       min=  202777  avg= 205349.59  max=  207504  | recv_double_avg=1642796.75 B
+METRICS: t_total     = 2.760e-01  t_comp = 4.593e-02  t_comm = 2.367e-01
+         gflops_total= 7.484084e-02  gflops_comp= 4.497804e-01
+========================================
+
+[RESULT] 0,32,1D,0,0.259309053,0.256046772,320135,204959,640270
+[RESULT] 0,32,1D,1,0.258261442,0.256027222,320135,204959,640270
+[RESULT] 0,32,1D,2,0.258257151,0.256010294,320135,204959,640270
+[RESULT] 0,32,1D,3,0.321251392,0.256073236,320135,204959,640270
+[RESULT] 0,32,1D,4,0.325159311,0.256038427,320135,204959,640270
+[RESULT] 0,32,1D,5,0.258194208,0.192089558,320135,204959,640270
+[RESULT] 0,32,1D,6,0.325188398,0.256028891,320135,204959,640270
+[RESULT] 0,32,1D,7,0.258187532,0.192111015,320135,204959,640270
+[RESULT] 0,32,1D,8,0.258124590,0.192137480,320135,204959,640270
+[RESULT] 0,32,1D,9,0.238163948,0.193969727,320135,204959,640270
+Total execution time: 148.258 seconds

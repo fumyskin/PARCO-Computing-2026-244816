@@ -1,0 +1,32 @@
+Retrieving the matrix from '../matrices/Andrews.mtx'...
+%%MatrixMarket matrix coordinate integer symmetric
+60000 60000 410077
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=410077 | Procs=4 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 25678 total ghost values needed
+Local vector initialized (size=15000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  101144  avg= 102519.25  max=  104188
+COMM:    ghost       min=   25389  avg=  25560.00  max=   25678  | recv_double_avg= 204480.00 B
+METRICS: t_total     = 5.117e-02  t_comp = 1.710e-03  t_comm = 4.995e-02
+         gflops_total= 1.602764e-02  gflops_comp= 4.795660e-01
+========================================
+
+[RESULT] 0,4,1D,0,0.044149637,0.042754412,101144,25678,202288
+[RESULT] 0,4,1D,1,0.033671141,0.032307625,101144,25678,202288
+[RESULT] 0,4,1D,2,0.024654388,0.023236513,101144,25678,202288
+[RESULT] 0,4,1D,3,0.033328056,0.031088352,101144,25678,202288
+[RESULT] 0,4,1D,4,0.071526051,0.070276022,101144,25678,202288
+[RESULT] 0,4,1D,5,0.038244009,0.035279274,101144,25678,202288
+[RESULT] 0,4,1D,6,0.069504499,0.068101883,101144,25678,202288
+[RESULT] 0,4,1D,7,0.069758415,0.068426371,101144,25678,202288
+[RESULT] 0,4,1D,8,0.041378021,0.039894342,101144,25678,202288
+[RESULT] 0,4,1D,9,0.045611382,0.043358803,101144,25678,202288
+Total execution time: 1.797 seconds

@@ -1,0 +1,30 @@
+Synthetic Matrix (Weak Scaling): Rows/proc=10000 | Total rows=20000 | NNZ/row=~50 | Procs=8
+Dummy Matrix Generated: 20000 Global Rows | Total NNZ: 3999795
+2D Comm Pattern: grid 2 x 4 | expand ghosts on rank 0: 15000
+2D: local vector size = 5000 (column block), local rows = 10000
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D
+GRID: 2 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 3999795
+BALANCE: nnz_local   min=  499967  avg= 499974.38  max=  499980
+COMM:    ghost       min=   15000  avg=  15000.00  max=   15000  | recv_double_avg= 120000.00 B
+METRICS: t_total     = 1.984e-03  t_comp = 1.279e-03  t_comm = 8.928e-04
+         gflops_total= 4.032778e+00  gflops_comp= 6.252252e+00
+========================================
+
+[RESULT] 0,8,2D,0,0.001975775,0.000698328,499967,15000,999934
+[RESULT] 0,8,2D,1,0.001981020,0.000722885,499967,15000,999934
+[RESULT] 0,8,2D,2,0.001928568,0.000675440,499967,15000,999934
+[RESULT] 0,8,2D,3,0.001937866,0.000681877,499967,15000,999934
+[RESULT] 0,8,2D,4,0.001941442,0.000694275,499967,15000,999934
+[RESULT] 0,8,2D,5,0.001933336,0.000679255,499967,15000,999934
+[RESULT] 0,8,2D,6,0.001904964,0.000650406,499967,15000,999934
+[RESULT] 0,8,2D,7,0.001945257,0.000691414,499967,15000,999934
+[RESULT] 0,8,2D,8,0.001861334,0.000593185,499967,15000,999934
+[RESULT] 0,8,2D,9,0.001869440,0.000614643,499967,15000,999934
+Total execution time: 0.087 seconds

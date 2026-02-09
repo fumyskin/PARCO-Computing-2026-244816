@@ -1,0 +1,162 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=128 | Distribution=2D
+2D Process Grid (Block): 8 x 16 (rows x cols)
+Rank 0: Grid (0,0) | Rows [0,143) | Cols [0,72) | LocalRows=143 | NNZ=165 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+Rank 1: Grid (0,1) | Rows [0,143) | Cols [72,144) | LocalRows=143 | NNZ=137 | ColsGlobal
+Rank 2: Grid (0,2) | Rows [0,143) | Cols [144,216) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 3: Grid (0,3) | Rows [0,143) | Cols [216,288) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 4: Grid (0,4) | Rows [0,143) | Cols [288,360) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 5: Grid (0,5) | Rows [0,143) | Cols [360,432) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 6: Grid (0,6) | Rows [0,143) | Cols [432,504) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 7: Grid (0,7) | Rows [0,143) | Cols [504,576) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 8: Grid (0,8) | Rows [0,143) | Cols [576,648) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 9: Grid (0,9) | Rows [0,143) | Cols [648,720) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 10: Grid (0,10) | Rows [0,143) | Cols [720,792) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 13: Grid (0,13) | Rows [0,143) | Cols [936,1008) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 12: Grid (0,12) | Rows [0,143) | Cols [864,936) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 17: Grid (1,1) | Rows [143,286) | Cols [72,144) | LocalRows=143 | NNZ=21 | ColsGlobal
+Rank 14: Grid (0,14) | Rows [0,143) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 21: Grid (1,5) | Rows [143,286) | Cols [360,432) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 16: Grid (1,0) | Rows [143,286) | Cols [0,72) | LocalRows=143 | NNZ=7 | ColsGlobal
+Rank 11: Grid (0,11) | Rows [0,143) | Cols [792,864) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 18: Grid (1,2) | Rows [143,286) | Cols [144,216) | LocalRows=143 | NNZ=172 | ColsGlobal
+Rank 15: Grid (0,15) | Rows [0,143) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 20: Grid (1,4) | Rows [143,286) | Cols [288,360) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 19: Grid (1,3) | Rows [143,286) | Cols [216,288) | LocalRows=143 | NNZ=130 | ColsGlobal
+Rank 22: Grid (1,6) | Rows [143,286) | Cols [432,504) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 23: Grid (1,7) | Rows [143,286) | Cols [504,576) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 24: Grid (1,8) | Rows [143,286) | Cols [576,648) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 25: Grid (1,9) | Rows [143,286) | Cols [648,720) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 26: Grid (1,10) | Rows [143,286) | Cols [720,792) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 27: Grid (1,11) | Rows [143,286) | Cols [792,864) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 28: Grid (1,12) | Rows [143,286) | Cols [864,936) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 29: Grid (1,13) | Rows [143,286) | Cols [936,1008) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 30: Grid (1,14) | Rows [143,286) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 31: Grid (1,15) | Rows [143,286) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 32: Grid (2,0) | Rows [286,429) | Cols [0,72) | LocalRows=143 | NNZ=4 | ColsGlobal
+Rank 33: Grid (2,1) | Rows [286,429) | Cols [72,144) | LocalRows=143 | NNZ=27 | ColsGlobal
+Rank 34: Grid (2,2) | Rows [286,429) | Cols [144,216) | LocalRows=143 | NNZ=1 | ColsGlobal
+Rank 41: Grid (2,9) | Rows [286,429) | Cols [648,720) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 36: Grid (2,4) | Rows [286,429) | Cols [288,360) | LocalRows=143 | NNZ=132 | ColsGlobal
+Rank 43: Grid (2,11) | Rows [286,429) | Cols [792,864) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 38: Grid (2,6) | Rows [286,429) | Cols [432,504) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 45: Grid (2,13) | Rows [286,429) | Cols [936,1008) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 40: Grid (2,8) | Rows [286,429) | Cols [576,648) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 47: Grid (2,15) | Rows [286,429) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 42: Grid (2,10) | Rows [286,429) | Cols [720,792) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 49: Grid (3,1) | Rows [429,572) | Cols [72,144) | LocalRows=143 | NNZ=10 | ColsGlobal
+Rank 44: Grid (2,12) | Rows [286,429) | Cols [864,936) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 51: Grid (3,3) | Rows [429,572) | Cols [216,288) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 46: Grid (2,14) | Rows [286,429) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 53: Grid (3,5) | Rows [429,572) | Cols [360,432) | LocalRows=143 | NNZ=35 | ColsGlobal
+Rank 48: Grid (3,0) | Rows [429,572) | Cols [0,72) | LocalRows=143 | NNZ=9 | ColsGlobal
+Rank 55: Grid (3,7) | Rows [429,572) | Cols [504,576) | LocalRows=143 | NNZ=132 | ColsGlobal
+Rank 50: Grid (3,2) | Rows [429,572) | Cols [144,216) | LocalRows=143 | NNZ=1 | ColsGlobal
+Rank 57: Grid (3,9) | Rows [429,572) | Cols [648,720) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 52: Grid (3,4) | Rows [429,572) | Cols [288,360) | LocalRows=143 | NNZ=2 | ColsGlobal
+Rank 59: Grid (3,11) | Rows [429,572) | Cols [792,864) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 54: Grid (3,6) | Rows [429,572) | Cols [432,504) | LocalRows=143 | NNZ=144 | ColsGlobal
+Rank 61: Grid (3,13) | Rows [429,572) | Cols [936,1008) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 56: Grid (3,8) | Rows [429,572) | Cols [576,648) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 63: Grid (3,15) | Rows [429,572) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 58: Grid (3,10) | Rows [429,572) | Cols [720,792) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 65: Grid (4,1) | Rows [572,715) | Cols [72,144) | LocalRows=143 | NNZ=5 | ColsGlobal
+Rank 60: Grid (3,12) | Rows [429,572) | Cols [864,936) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 81: Grid (5,1) | Rows [715,858) | Cols [72,144) | LocalRows=143 | NNZ=12 | ColsGlobal
+Rank 62: Grid (3,14) | Rows [429,572) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 83: Grid (5,3) | Rows [715,858) | Cols [216,288) | LocalRows=143 | NNZ=1 | ColsGlobal
+Rank 64: Grid (4,0) | Rows [572,715) | Cols [0,72) | LocalRows=143 | NNZ=2 | ColsGlobal
+Rank 85: Grid (5,5) | Rows [715,858) | Cols [360,432) | LocalRows=143 | NNZ=8 | ColsGlobal
+Rank 66: Grid (4,2) | Rows [572,715) | Cols [144,216) | LocalRows=143 | NNZ=1 | ColsGlobal
+Rank 87: Grid (5,7) | Rows [715,858) | Cols [504,576) | LocalRows=143 | NNZ=20 | ColsGlobal
+Rank 68: Grid (4,4) | Rows [572,715) | Cols [288,360) | LocalRows=143 | NNZ=3 | ColsGlobal
+Rank 97: Grid (6,1) | Rows [858,1001) | Cols [72,144) | LocalRows=143 | NNZ=3 | ColsGlobal
+Rank 70: Grid (4,6) | Rows [572,715) | Cols [432,504) | LocalRows=143 | NNZ=12 | ColsGlobal
+Rank 99: Grid (6,3) | Rows [858,1001) | Cols [216,288) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 72: Grid (4,8) | Rows [572,715) | Cols [576,648) | LocalRows=143 | NNZ=133 | ColsGlobal
+Rank 105: Grid (6,9) | Rows [858,1001) | Cols [648,720) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 74: Grid (4,10) | Rows [572,715) | Cols [720,792) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 107: Grid (6,11) | Rows [858,1001) | Cols [792,864) | LocalRows=143 | NNZ=43 | ColsGlobal
+Rank 76: Grid (4,12) | Rows [572,715) | Cols [864,936) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 109: Grid (6,13) | Rows [858,1001) | Cols [936,1008) | LocalRows=143 | NNZ=120 | ColsGlobal
+Rank 78: Grid (4,14) | Rows [572,715) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 111: Grid (6,15) | Rows [858,1001) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 80: Grid (5,0) | Rows [715,858) | Cols [0,72) | LocalRows=143 | NNZ=1 | ColsGlobal
+Rank 113: Grid (7,1) | Rows [1001,1138) | Cols [72,144) | LocalRows=137 | NNZ=3 | ColsGlobal
+Rank 82: Grid (5,2) | Rows [715,858) | Cols [144,216) | LocalRows=143 | NNZ=2 | ColsGlobal
+Rank 84: Grid (5,4) | Rows [715,858) | Cols [288,360) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 86: Grid (5,6) | Rows [715,858) | Cols [432,504) | LocalRows=143 | NNZ=7 | ColsGlobal
+Rank 88: Grid (5,8) | Rows [715,858) | Cols [576,648) | LocalRows=143 | NNZ=13 | ColsGlobal
+Rank 90: Grid (5,10) | Rows [715,858) | Cols [720,792) | LocalRows=143 | NNZ=146 | ColsGlobal
+Rank 92: Grid (5,12) | Rows [715,858) | Cols [864,936) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 94: Grid (5,14) | Rows [715,858) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 96: Grid (6,0) | Rows [858,1001) | Cols [0,72) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 98: Grid (6,2) | Rows [858,1001) | Cols [144,216) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 100: Grid (6,4) | Rows [858,1001) | Cols [288,360) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 102: Grid (6,6) | Rows [858,1001) | Cols [432,504) | LocalRows=143 | NNZ=3 | ColsGlobal
+Rank 104: Grid (6,8) | Rows [858,1001) | Cols [576,648) | LocalRows=143 | NNZ=2 | ColsGlobal
+Rank 106: Grid (6,10) | Rows [858,1001) | Cols [720,792) | LocalRows=143 | NNZ=2 | ColsGlobal
+Rank 108: Grid (6,12) | Rows [858,1001) | Cols [864,936) | LocalRows=143 | NNZ=156 | ColsGlobal
+Rank 110: Grid (6,14) | Rows [858,1001) | Cols [1008,1080) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 112: Grid (7,0) | Rows [1001,1138) | Cols [0,72) | LocalRows=137 | NNZ=4 | ColsGlobal
+Rank 114: Grid (7,2) | Rows [1001,1138) | Cols [144,216) | LocalRows=137 | NNZ=0 | ColsGlobal
+Rank 116: Grid (7,4) | Rows [1001,1138) | Cols [288,360) | LocalRows=137 | NNZ=0 | ColsGlobal
+Rank 118: Grid (7,6) | Rows [1001,1138) | Cols [432,504) | LocalRows=137 | NNZ=0 | ColsGlobal
+Rank 120: Grid (7,8) | Rows [1001,1138) | Cols [576,648) | LocalRows=137 | NNZ=13 | ColsGlobal
+Rank 122: Grid (7,10) | Rows [1001,1138) | Cols [720,792) | LocalRows=137 | NNZ=5 | ColsGlobal
+Rank 124: Grid (7,12) | Rows [1001,1138) | Cols [864,936) | LocalRows=137 | NNZ=7 | ColsGlobal
+Rank 126: Grid (7,14) | Rows [1001,1138) | Cols [1008,1080) | LocalRows=137 | NNZ=146 | ColsGlobal
+Rank 69: Grid (4,5) | Rows [572,715) | Cols [360,432) | LocalRows=143 | NNZ=4 | ColsGlobal
+Rank 117: Grid (7,5) | Rows [1001,1138) | Cols [360,432) | LocalRows=137 | NNZ=0 | ColsGlobal
+Rank 71: Grid (4,7) | Rows [572,715) | Cols [504,576) | LocalRows=143 | NNZ=25 | ColsGlobal
+Rank 73: Grid (4,9) | Rows [572,715) | Cols [648,720) | LocalRows=143 | NNZ=117 | ColsGlobal
+Rank 89: Grid (5,9) | Rows [715,858) | Cols [648,720) | LocalRows=143 | NNZ=13 | ColsGlobal
+Rank 93: Grid (5,13) | Rows [715,858) | Cols [936,1008) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 95: Grid (5,15) | Rows [715,858) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 119: Grid (7,7) | Rows [1001,1138) | Cols [504,576) | LocalRows=137 | NNZ=5 | ColsGlobal
+Rank 121: Grid (7,9) | Rows [1001,1138) | Cols [648,720) | LocalRows=137 | NNZ=25 | ColsGlobal
+Rank 123: Grid (7,11) | Rows [1001,1138) | Cols [792,864) | LocalRows=137 | NNZ=5 | ColsGlobal
+Rank 77: Grid (4,13) | Rows [572,715) | Cols [936,1008) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 79: Grid (4,15) | Rows [572,715) | Cols [1080,1138) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 75: Grid (4,11) | Rows [572,715) | Cols [792,864) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 67: Grid (4,3) | Rows [572,715) | Cols [216,288) | LocalRows=143 | NNZ=1 | ColsGlobal
+Rank 35: Grid (2,3) | Rows [286,429) | Cols [216,288) | LocalRows=143 | NNZ=43 | ColsGlobal
+Rank 115: Grid (7,3) | Rows [1001,1138) | Cols [216,288) | LocalRows=137 | NNZ=1 | ColsGlobal
+Rank 101: Grid (6,5) | Rows [858,1001) | Cols [360,432) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 103: Grid (6,7) | Rows [858,1001) | Cols [504,576) | LocalRows=143 | NNZ=28 | ColsGlobal
+Rank 125: Grid (7,13) | Rows [1001,1138) | Cols [936,1008) | LocalRows=137 | NNZ=18 | ColsGlobal
+Rank 37: Grid (2,5) | Rows [286,429) | Cols [360,432) | LocalRows=143 | NNZ=120 | ColsGlobal
+Rank 39: Grid (2,7) | Rows [286,429) | Cols [504,576) | LocalRows=143 | NNZ=0 | ColsGlobal
+Rank 127: Grid (7,15) | Rows [1001,1138) | Cols [1080,1138) | LocalRows=137 | NNZ=89 | ColsGlobal
+Rank 91: Grid (5,11) | Rows [715,858) | Cols [792,864) | LocalRows=143 | NNZ=100 | ColsGlobal
+2D Comm Pattern: grid 8 x 16 | expand ghosts on rank 0: 0
+2D: local vector size = 72 (column block), local rows = 143
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 2596
+BALANCE: nnz_local   min=       0  avg=     20.28  max=     172
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 2.621e-02  t_comp = 1.144e-06  t_comm = 2.621e-02
+         gflops_total= 1.980579e-04  gflops_comp= 4.536839e+00
+========================================
+
+[RESULT] 0,128,2D,0,0.005015135,0.005013704,165,0,330
+[RESULT] 0,128,2D,1,0.000025749,0.000025034,165,0,330
+[RESULT] 0,128,2D,2,0.000025511,0.000024796,165,0,330
+[RESULT] 0,128,2D,3,0.000023603,0.000023127,165,0,330
+[RESULT] 0,128,2D,4,0.000033379,0.000032425,165,0,330
+[RESULT] 0,128,2D,5,0.020015478,0.020014763,165,0,330
+[RESULT] 0,128,2D,6,0.013012648,0.013011932,165,0,330
+[RESULT] 0,128,2D,7,0.025013685,0.025012970,165,0,330
+[RESULT] 0,128,2D,8,0.025010824,0.025010347,165,0,330
+[RESULT] 0,128,2D,9,0.000022411,0.000021458,165,0,330
+Total execution time: 0.851 seconds

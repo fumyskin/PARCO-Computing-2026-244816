@@ -1,0 +1,38 @@
+Retrieving the matrix from '../matrices/Andrews.mtx'...
+%%MatrixMarket matrix coordinate integer symmetric
+60000 60000 410077
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=410077 | Procs=4 | Distribution=2D
+2D Process Grid (Block): 2 x 2 (rows x cols)
+Rank 0: Grid (0,0) | Rows [0,30000) | Cols [0,30000) | LocalRows=30000 | NNZ=120991 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+Rank 2: Grid (1,0) | Rows [30000,60000) | Cols [0,30000) | LocalRows=30000 | NNZ=169668 | ColsGlobal
+Rank 1: Grid (0,1) | Rows [0,30000) | Cols [30000,60000) | LocalRows=30000 | NNZ=0 | ColsGlobal
+Rank 3: Grid (1,1) | Rows [30000,60000) | Cols [30000,60000) | LocalRows=30000 | NNZ=119418 | ColsGlobal
+2D Comm Pattern: grid 2 x 2 | expand ghosts on rank 0: 0
+2D: local vector size = 30000 (column block), local rows = 30000
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg= 102519.25  max=  169668
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 9.184e-03  t_comp = 1.063e-03  t_comm = 8.121e-03
+         gflops_total= 8.929990e-02  gflops_comp= 7.714160e-01
+========================================
+
+[RESULT] 0,4,2D,0,0.003533363,0.003430605,120991,0,241982
+[RESULT] 0,4,2D,1,0.004162073,0.004083872,120991,0,241982
+[RESULT] 0,4,2D,2,0.003119707,0.003046036,120991,0,241982
+[RESULT] 0,4,2D,3,0.001612902,0.001537561,120991,0,241982
+[RESULT] 0,4,2D,4,0.001569271,0.001482487,120991,0,241982
+[RESULT] 0,4,2D,5,0.009741068,0.001199961,120991,0,241982
+[RESULT] 0,4,2D,6,0.001263618,0.001185894,120991,0,241982
+[RESULT] 0,4,2D,7,0.001675129,0.000885487,120991,0,241982
+[RESULT] 0,4,2D,8,0.001150131,0.001070023,120991,0,241982
+[RESULT] 0,4,2D,9,0.001139641,0.001072407,120991,0,241982
+Total execution time: 1.449 seconds

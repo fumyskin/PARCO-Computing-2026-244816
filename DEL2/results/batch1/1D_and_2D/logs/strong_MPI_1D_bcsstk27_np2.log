@@ -1,0 +1,32 @@
+Retrieving the matrix from '../matrices/bcsstk27.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1224 1224 28675
+Real Matrix: Rows=1224 | Cols=1224 | NNZ=28675 | Procs=2 | Distribution=1D
+Applied 1D distribution
+Ghost columns identified: 611 total ghost values needed
+Local vector initialized (size=612 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 28675
+BALANCE: nnz_local   min=   14051  avg=  14337.50  max=   14624
+COMM:    ghost       min=     611  avg=    611.50  max=     612  | recv_double_avg=   4892.00 B
+METRICS: t_total     = 1.166e-04  t_comp = 4.628e-05  t_comm = 7.429e-05
+         gflops_total= 4.918081e-01  gflops_comp= 1.239275e+00
+========================================
+
+[RESULT] 0,2,1D,0,0.000081778,0.000034571,14624,611,29248
+[RESULT] 0,2,1D,1,0.000073671,0.000027418,14624,611,29248
+[RESULT] 0,2,1D,2,0.000088453,0.000042200,14624,611,29248
+[RESULT] 0,2,1D,3,0.000089407,0.000043154,14624,611,29248
+[RESULT] 0,2,1D,4,0.000080585,0.000034332,14624,611,29248
+[RESULT] 0,2,1D,5,0.000082016,0.000035763,14624,611,29248
+[RESULT] 0,2,1D,6,0.000085354,0.000038862,14624,611,29248
+[RESULT] 0,2,1D,7,0.000092030,0.000045776,14624,611,29248
+[RESULT] 0,2,1D,8,0.000094175,0.000047922,14624,611,29248
+[RESULT] 0,2,1D,9,0.000095844,0.000050545,14624,611,29248
+Total execution time: 0.029 seconds

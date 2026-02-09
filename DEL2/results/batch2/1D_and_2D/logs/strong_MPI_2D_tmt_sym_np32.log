@@ -1,0 +1,66 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=32 | Distribution=2D
+2D Process Grid (Block): 4 x 8 (rows x cols)
+Rank 4: Grid (0,4) | Rows [0,181679) | Cols [363360,454200) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 5: Grid (0,5) | Rows [0,181679) | Cols [454200,545040) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 6: Grid (0,6) | Rows [0,181679) | Cols [545040,635880) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 8: Grid (1,0) | Rows [181679,363358) | Cols [0,90840) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 9: Grid (1,1) | Rows [181679,363358) | Cols [90840,181680) | LocalRows=181679 | NNZ=1766 | ColsGlobal
+Rank 7: Grid (0,7) | Rows [0,181679) | Cols [635880,726713) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 3: Grid (0,3) | Rows [0,181679) | Cols [272520,363360) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 2: Grid (0,2) | Rows [0,181679) | Cols [181680,272520) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 27: Grid (3,3) | Rows [545037,726713) | Cols [272520,363360) | LocalRows=181676 | NNZ=0 | ColsGlobal
+Rank 29: Grid (3,5) | Rows [545037,726713) | Cols [454200,545040) | LocalRows=181676 | NNZ=1773 | ColsGlobal
+Rank 26: Grid (3,2) | Rows [545037,726713) | Cols [181680,272520) | LocalRows=181676 | NNZ=0 | ColsGlobal
+Rank 25: Grid (3,1) | Rows [545037,726713) | Cols [90840,181680) | LocalRows=181676 | NNZ=0 | ColsGlobal
+Rank 28: Grid (3,4) | Rows [545037,726713) | Cols [363360,454200) | LocalRows=181676 | NNZ=0 | ColsGlobal
+Rank 12: Grid (1,4) | Rows [181679,363358) | Cols [363360,454200) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 13: Grid (1,5) | Rows [181679,363358) | Cols [454200,545040) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 14: Grid (1,6) | Rows [181679,363358) | Cols [545040,635880) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 15: Grid (1,7) | Rows [181679,363358) | Cols [635880,726713) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 10: Grid (1,2) | Rows [181679,363358) | Cols [181680,272520) | LocalRows=181679 | NNZ=363206 | ColsGlobal
+Rank 16: Grid (2,0) | Rows [363358,545037) | Cols [0,90840) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 24: Grid (3,0) | Rows [545037,726713) | Cols [0,90840) | LocalRows=181676 | NNZ=0 | ColsGlobal
+Rank 1: Grid (0,1) | Rows [0,181679) | Cols [90840,181680) | LocalRows=181679 | NNZ=361473 | ColsGlobal
+Rank 23: Grid (2,7) | Rows [363358,545037) | Cols [635880,726713) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 22: Grid (2,6) | Rows [363358,545037) | Cols [545040,635880) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 17: Grid (2,1) | Rows [363358,545037) | Cols [90840,181680) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 31: Grid (3,7) | Rows [545037,726713) | Cols [635880,726713) | LocalRows=181676 | NNZ=361743 | ColsGlobal
+Rank 18: Grid (2,2) | Rows [363358,545037) | Cols [181680,272520) | LocalRows=181679 | NNZ=0 | ColsGlobal
+Rank 0: Grid (0,0) | Rows [0,181679) | Cols [0,90840) | LocalRows=181679 | NNZ=363270 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+Rank 19: Grid (2,3) | Rows [363358,545037) | Cols [272520,363360) | LocalRows=181679 | NNZ=1930 | ColsGlobal
+Rank 11: Grid (1,3) | Rows [181679,363358) | Cols [272520,363360) | LocalRows=181679 | NNZ=361252 | ColsGlobal
+Rank 30: Grid (3,6) | Rows [545037,726713) | Cols [545040,635880) | LocalRows=181676 | NNZ=362964 | ColsGlobal
+Rank 21: Grid (2,5) | Rows [363358,545037) | Cols [454200,545040) | LocalRows=181679 | NNZ=361312 | ColsGlobal
+Rank 20: Grid (2,4) | Rows [363358,545037) | Cols [363360,454200) | LocalRows=181679 | NNZ=363148 | ColsGlobal
+2D Comm Pattern: grid 4 x 8 | expand ghosts on rank 0: 0
+2D: local vector size = 90840 (column block), local rows = 181679
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D
+GRID: 4 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=       0  avg=  90744.91  max=  363270
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 9.944e-03  t_comp = 1.143e-03  t_comm = 9.690e-03
+         gflops_total= 5.840304e-01  gflops_comp= 5.080009e+00
+========================================
+
+[RESULT] 0,32,2D,0,0.010124445,0.009005070,363270,0,726540
+[RESULT] 0,32,2D,1,0.008542299,0.007437706,363270,0,726540
+[RESULT] 0,32,2D,2,0.009434462,0.008340597,363270,0,726540
+[RESULT] 0,32,2D,3,0.008255243,0.007166862,363270,0,726540
+[RESULT] 0,32,2D,4,0.007992268,0.006901503,363270,0,726540
+[RESULT] 0,32,2D,5,0.008405685,0.007315874,363270,0,726540
+[RESULT] 0,32,2D,6,0.008010149,0.006931782,363270,0,726540
+[RESULT] 0,32,2D,7,0.008340836,0.007255077,363270,0,726540
+[RESULT] 0,32,2D,8,0.008738756,0.007658243,363270,0,726540
+[RESULT] 0,32,2D,9,0.009199858,0.008120060,363270,0,726540
+Total execution time: 2.642 seconds

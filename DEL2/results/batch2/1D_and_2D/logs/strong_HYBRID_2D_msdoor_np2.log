@@ -1,0 +1,36 @@
+Retrieving the matrix from '../matrices/msdoor.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+415863 415863 10328399
+Real Matrix: Rows=415863 | Cols=415863 | NNZ=10328399 | Procs=2 | Distribution=2D
+2D Process Grid (Block): 1 x 2 (rows x cols)
+Rank 1: Grid (0,1) | Rows [0,415863) | Cols [207932,415863) | LocalRows=415863 | NNZ=4669633 | ColsGlobal
+Rank 0: Grid (0,0) | Rows [0,415863) | Cols [0,207932) | LocalRows=415863 | NNZ=5658766 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+2D Comm Pattern: grid 1 x 2 | expand ghosts on rank 0: 0
+2D: local vector size = 207932 (column block), local rows = 415863
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 10328399
+BALANCE: nnz_local   min= 4669633  avg=5164199.50  max= 5658766
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.043e-02  t_comp = 1.905e-03  t_comm = 8.773e-03
+         gflops_total= 1.980848e+00  gflops_comp= 1.084489e+01
+========================================
+
+[RESULT] 0,2,2D,0,0.030920506,0.022212505,5658766,0,11317532
+[RESULT] 0,2,2D,1,0.012369156,0.010927200,5658766,0,11317532
+[RESULT] 0,2,2D,2,0.010175228,0.008865595,5658766,0,11317532
+[RESULT] 0,2,2D,3,0.007748365,0.006538868,5658766,0,11317532
+[RESULT] 0,2,2D,4,0.007332325,0.006178379,5658766,0,11317532
+[RESULT] 0,2,2D,5,0.007265091,0.006170988,5658766,0,11317532
+[RESULT] 0,2,2D,6,0.007241964,0.006186247,5658766,0,11317532
+[RESULT] 0,2,2D,7,0.007244349,0.006192684,5658766,0,11317532
+[RESULT] 0,2,2D,8,0.007162333,0.006154060,5658766,0,11317532
+[RESULT] 0,2,2D,9,0.006823301,0.005808592,5658766,0,11317532
+Total execution time: 6.160 seconds

@@ -1,0 +1,50 @@
+Retrieving the matrix from '../matrices/Andrews.mtx'...
+%%MatrixMarket matrix coordinate integer symmetric
+60000 60000 410077
+Real Matrix: Rows=60000 | Cols=60000 | NNZ=410077 | Procs=16 | Distribution=2D
+2D Process Grid (Block): 4 x 4 (rows x cols)
+Rank 7: Grid (1,3) | Rows [15000,30000) | Cols [45000,60000) | LocalRows=15000 | NNZ=0 | ColsGlobal
+Rank 6: Grid (1,2) | Rows [15000,30000) | Cols [30000,45000) | LocalRows=15000 | NNZ=0 | ColsGlobal
+Rank 11: Grid (2,3) | Rows [30000,45000) | Cols [45000,60000) | LocalRows=15000 | NNZ=0 | ColsGlobal
+Rank 1: Grid (0,1) | Rows [0,15000) | Cols [15000,30000) | LocalRows=15000 | NNZ=0 | ColsGlobal
+Rank 2: Grid (0,2) | Rows [0,15000) | Cols [30000,45000) | LocalRows=15000 | NNZ=0 | ColsGlobal
+Rank 3: Grid (0,3) | Rows [0,15000) | Cols [45000,60000) | LocalRows=15000 | NNZ=0 | ColsGlobal
+Rank 15: Grid (3,3) | Rows [45000,60000) | Cols [45000,60000) | LocalRows=15000 | NNZ=38932 | ColsGlobal
+Rank 0: Grid (0,0) | Rows [0,15000) | Cols [0,15000) | LocalRows=15000 | NNZ=39806 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+Rank 5: Grid (1,1) | Rows [15000,30000) | Cols [15000,30000) | LocalRows=15000 | NNZ=39016 | ColsGlobal
+Rank 13: Grid (3,1) | Rows [45000,60000) | Cols [15000,30000) | LocalRows=15000 | NNZ=42473 | ColsGlobal
+Rank 8: Grid (2,0) | Rows [30000,45000) | Cols [0,15000) | LocalRows=15000 | NNZ=42593 | ColsGlobal
+Rank 14: Grid (3,2) | Rows [45000,60000) | Cols [30000,45000) | LocalRows=15000 | NNZ=41839 | ColsGlobal
+Rank 10: Grid (2,2) | Rows [30000,45000) | Cols [30000,45000) | LocalRows=15000 | NNZ=38647 | ColsGlobal
+Rank 4: Grid (1,0) | Rows [15000,30000) | Cols [0,15000) | LocalRows=15000 | NNZ=42169 | ColsGlobal
+Rank 12: Grid (3,0) | Rows [45000,60000) | Cols [0,15000) | LocalRows=15000 | NNZ=42091 | ColsGlobal
+Rank 9: Grid (2,1) | Rows [30000,45000) | Cols [15000,30000) | LocalRows=15000 | NNZ=42511 | ColsGlobal
+2D Comm Pattern: grid 4 x 4 | expand ghosts on rank 0: 0
+2D: local vector size = 15000 (column block), local rows = 15000
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+GRID: 4 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  25629.81  max=   42593
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 9.893e-04  t_comp = 1.964e-04  t_comm = 8.097e-04
+         gflops_total= 8.290295e-01  gflops_comp= 4.176755e+00
+========================================
+
+[RESULT] 0,16,2D,0,0.000849962,0.000678301,39806,0,79612
+[RESULT] 0,16,2D,1,0.000868559,0.000698328,39806,0,79612
+[RESULT] 0,16,2D,2,0.000842810,0.000672102,39806,0,79612
+[RESULT] 0,16,2D,3,0.000846863,0.000678062,39806,0,79612
+[RESULT] 0,16,2D,4,0.000851870,0.000681877,39806,0,79612
+[RESULT] 0,16,2D,5,0.000837564,0.000665903,39806,0,79612
+[RESULT] 0,16,2D,6,0.000851154,0.000681162,39806,0,79612
+[RESULT] 0,16,2D,7,0.000776291,0.000605822,39806,0,79612
+[RESULT] 0,16,2D,8,0.000785828,0.000616789,39806,0,79612
+[RESULT] 0,16,2D,9,0.000726461,0.000557423,39806,0,79612
+Total execution time: 0.249 seconds
