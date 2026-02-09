@@ -57,3 +57,20 @@ The repository is organized as follows:
 ```
 
 ## HOW TO REPRODUCE
+### MATRIX EXTRACTION
+> [!WARNING]
+> The full matrices used in the experiments are not included in this repository due to size constraints.
+
+To reproduce the results:
+- Download the following matrices from <https://sparse.tamu.edu/>:
+    - Andrews.mtx
+    - bcsstk27.mtx
+    - msdoor.mtx
+    - Hook_1498.mtx
+    - tmt_sym.mtx
+- Place the `.tar.gz` files in the `/matrices` folder
+- extract them by using the following command:
+``` bash
+tar -xzf <name_of_matrix>.tar.gz
+```
+- Extract the .mtx file from their respective folders 
