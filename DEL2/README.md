@@ -109,10 +109,33 @@ The results of the simulations are going to be collected into the `/results` fol
 ## PLOTTING
 To plot the results for 1D and 2D distribution SpMV go into the `/script` folder and type:
 ``` bash
+module load python-3.10.14_gcc91
 python3 plot_script.py
 ```
+The contents plotted are going to be:
+- `comm_volume_strong` -> heatmap + respective `.csv` of ghost entries per rank number
+- `comp_vs_comm_strong` -> computation vs communication histograms for strong scaling
+- `comparison` -> comparison for MPI strong scaling for different matrices
+- `data_reduction` -> `.csv` files associated for each iteration for each matrix
+- `speedup_strong` -> speedup for each matrix for strong scaling
+- `weak_scaling` -> weak scaling info
+
 To compute plots for sequential and parallel I/O reading go into the `/script` folder and type:
 ``` bash
+module load python-3.10.14_gcc91
 python3 plot_parallel.py
 ```
 
+The contents plotted are going to be speedup, io time comparison and computation vs communication breakdown
+
+## GUIDELINES: HOW TO NAVIGATE RESULTS AND PLOTS
+Regarding results, the MOST TELLING file I recommend checking for benchmark analysis is the `/results/summary` folder: for each process count are summarized:
+- `Time statistics`: computation vs communcation time, total execution time
+- `Load balance metrics`: min/avg/max nnz entries
+- `Communication metrics`: ghost entries number
+- `GFLOPS`
+
+Regarding plots, I recommend checking `speedup_strong`, `comp_vs_comm_strong`, `weak_scaling` the most: they illustrate clearly the most important conclusions of each simulation.
+
+> [!IMPORTANT]
+> In the final repository
