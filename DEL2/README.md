@@ -86,5 +86,19 @@ To submit the .pbs that executes sequential vs parallel I/O reading of Matrix Ma
 qsub mpi_job_script_parallel.pbs
 ```
 
+The results of the simulations are going to be collected into the `/results` folder :
+- `/1D_and_2D` folder contains the results of the 1D and 2D distribution simulations (as well as 2D_cyclic and HYBRID, but we're not concerned with those): 
+    - `1D_and_2D/logs` -> contains single logs
+    - `1D_and_2D/summary` -> **SUMMARY, FOR EACH MATRIX ANALYIZED, OF ALL THE METRICS MEASURED FOR EACH ITERATION** 
+    - `strong_scaling_all.csv` -> contains strong scaling information for all matrices measured
+    - `weak_scaling_all.csv` -> contains weak scaling information for all matrices measured
+    - `weak_scaling_hybrid.csv`, `weak_scaling_hybrid.csv` -> strong and weak scaling information of HYRBID MPI approach, but for the deliverable we are NOT concerned with these
+- `/parallel_io_reading` folder contains information regarding sequential and parallel I/O reading
+    - `parallel_io_reading/logs` -> contains single logs
+    - `parallel_io_reading/summary` -> **SUMMARY, FOR EACH MATRIX ANALYIZED, OF ALL THE METRICS MEASURED FOR EACH ITERATION** 
+
 > [!WARNING]
-> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYRBID MPI experiments as well. Since the cluster HP2 didn't work anymore I preferred to kept the original experimental setup as it is in order to be sure the source code is reproducible
+> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYRBID MPI experiments as well. Since the cluster HPC2 didn't work anymore I preferred to kept the original experimental setup as it is in order to be sure the source code is reproducible
+
+
+## PLOTTING
