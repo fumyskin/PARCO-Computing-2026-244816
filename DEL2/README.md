@@ -10,7 +10,7 @@ Included in this file are the following implementation:
 - 2D block and 2D cyclic distributions
 - Hybrid MPI approach
 
-However, the DELIVERABLE2 content will focus ONLY on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**.  
+However, the DELIVERABLE2 content and report will focus **ONLY** on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**. 
 
 > [!IMPORTANT] 
 > Due to high compuation times, I HIGHLY RECOMMEND RUNNING:
@@ -104,7 +104,7 @@ The results of the simulations are going to be collected into the `/results` fol
     - `strong/weak_scaling_parallel.csv`
 
 > [!WARNING]
-> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYBRID MPI experiments as well. Since the cluster HPC2 didn't work anymore I preferred to keep the original experimental setup as it is in order to be sure the source code is reproducible. 2D_cyclic and HYBRID MPI part of data are **NOT** to be considered in the DELIVERABLE2.
+> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYBRID MPI experiments as well. Since the cluster HPC2 didn't work anymore (HP3 started working) I preferred to keep the original experimental setup as it is in order to be sure the source code is reproducible. 2D_cyclic and HYBRID MPI part of data are **NOT** to be considered in the DELIVERABLE2.
 
 > [!IMPORTANT]
 > The `../summary` folders contain the **TOTAL BENCHMARK INFORMATION** that is human readable. **PLEASE REFER TO THESE to check metrics** for a given matrix.
@@ -135,7 +135,7 @@ python3 plot_parallel.py
 The contents plotted are going to be speedup, io time comparison and computation vs communication breakdown
 
 > [!WARNING]
-> The plot_script.py will plot also the 2D_cyclic and HYBRID MPI graphs as well. Since the cluster HPC2 didn't work anymore I preferred to keep the original graphs as they are in order to be sure the source code is reproducible. Hence, in the final DELIVERABLE2 there are going to be present graphs belonging to the 2D_cyclic and HYBRID MPI simulations. These are **NOT** to be considered in the final DELIVERABLE2 report.
+> The plot_script.py will plot also the 2D_cyclic and HYBRID MPI graphs as well. Since the cluster HPC2 didn't work anymore (HP3 started working) I preferred to keep the original graphs as they are in order to be sure the source code is reproducible. Hence, in the final DELIVERABLE2 there are going to be present graphs belonging to the 2D_cyclic and HYBRID MPI simulations. These are **NOT** to be considered in the final DELIVERABLE2 report.
 
 ## GUIDELINES: HOW TO NAVIGATE RESULTS AND PLOTS
 Regarding results, the MOST TELLING file I recommend checking for benchmark analysis is the `/results/summary` folder: for each process count are summarized:
