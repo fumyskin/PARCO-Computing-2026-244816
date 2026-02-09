@@ -1,0 +1,35 @@
+Using PARALLEL I/O (MPI_File_read_at_all)
+[Rank 0] Parsed header: 1138 rows, 1138 cols, 2596 nnz
+[Rank 0] Parsed local: 163 elements, send_bufs totals: 172 elements
+[Rank 1] Parsed local: 168 elements, send_bufs totals: 168 elements
+[Rank 2] Parsed local: 177 elements, send_bufs totals: 324 elements
+[Rank 3] Parsed local: 148 elements, send_bufs totals: 325 elements
+Parallel I/O Complete: Rows=1138 | Cols=1138 | Total NNZ=2597 | Procs=4
+I/O Time (max across ranks): 0.020225 seconds
+Ghost columns identified: 247 total ghost values needed
+Local vector initialized (size=285 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     PARALLEL (MPI_File_read_at_all)
+PROCESSES:    4
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   2597
+I/O TIME:     0.020225 seconds
+----------------------------------------
+BALANCE: nnz_local   min=     609  avg=    649.25  max=     668
+COMM:    ghost       min=     226  avg=    245.75  max=     260  | recv_bytes_avg=   1966.00 B
+MEM:     bytes       min=   25048  avg=     25687  max=   26016
+STRUCT:  ghost_ratio min=  37.087%  avg=    37.836%  max=  38.922%
+----------------------------------------
+TIMING:  t_total     = 8.440018e-05 s
+         t_comp      = 8.583069e-06 s
+         t_comm      = 7.605553e-05 s
+PERF:    gflops_total= 0.061540 GFLOPS
+         gflops_comp = 0.605145 GFLOPS
+========================================
+
+[RESULT] 0,4,parallel,0,0.000084400,0.000076056,666,247,1332,0.020225048
+Total execution time: 0.021 seconds

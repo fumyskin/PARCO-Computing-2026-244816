@@ -1,0 +1,95 @@
+Using PARALLEL I/O (MPI_File_read_at_all)
+[Rank 0] Parsed header: 1138 rows, 1138 cols, 2596 nnz
+[Rank 0] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 36] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 26] Parsed local: 0 elements, send_bufs totals: 1 elements
+[Rank 1] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 38] Parsed local: 0 elements, send_bufs totals: 4 elements
+[Rank 3] Parsed local: 0 elements, send_bufs totals: 1 elements
+[Rank 18] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 34] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 48] Parsed local: 0 elements, send_bufs totals: 5 elements
+[Rank 58] Parsed local: 1 elements, send_bufs totals: 3 elements
+[Rank 2] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 32] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 44] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 5] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 46] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 7] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 4] Parsed local: 2 elements, send_bufs totals: 5 elements
+[Rank 9] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 6] Parsed local: 0 elements, send_bufs totals: 1 elements
+[Rank 11] Parsed local: 0 elements, send_bufs totals: 2 elements
+[Rank 12] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 13] Parsed local: 1 elements, send_bufs totals: 2 elements
+[Rank 14] Parsed local: 0 elements, send_bufs totals: 1 elements
+[Rank 15] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 16] Parsed local: 0 elements, send_bufs totals: 3 elements
+[Rank 17] Parsed local: 0 elements, send_bufs totals: 3 elements
+[Rank 20] Parsed local: 2 elements, send_bufs totals: 0 elements
+[Rank 19] Parsed local: 0 elements, send_bufs totals: 4 elements
+[Rank 22] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 21] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 28] Parsed local: 3 elements, send_bufs totals: 0 elements
+[Rank 23] Parsed local: 0 elements, send_bufs totals: 4 elements
+[Rank 30] Parsed local: 0 elements, send_bufs totals: 5 elements
+[Rank 25] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 40] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 27] Parsed local: 0 elements, send_bufs totals: 3 elements
+[Rank 54] Parsed local: 2 elements, send_bufs totals: 1 elements
+[Rank 29] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 56] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 31] Parsed local: 0 elements, send_bufs totals: 1 elements
+[Rank 60] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 33] Parsed local: 2 elements, send_bufs totals: 0 elements
+[Rank 8] Parsed local: 0 elements, send_bufs totals: 4 elements
+[Rank 35] Parsed local: 0 elements, send_bufs totals: 3 elements
+[Rank 10] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 37] Parsed local: 1 elements, send_bufs totals: 2 elements
+[Rank 24] Parsed local: 3 elements, send_bufs totals: 0 elements
+[Rank 39] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 42] Parsed local: 0 elements, send_bufs totals: 2 elements
+[Rank 41] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 50] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 43] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 52] Parsed local: 0 elements, send_bufs totals: 3 elements
+[Rank 45] Parsed local: 0 elements, send_bufs totals: 3 elements
+[Rank 62] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 47] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 49] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 51] Parsed local: 1 elements, send_bufs totals: 1 elements
+[Rank 53] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 55] Parsed local: 1 elements, send_bufs totals: 3 elements
+[Rank 57] Parsed local: 1 elements, send_bufs totals: 0 elements
+[Rank 59] Parsed local: 0 elements, send_bufs totals: 0 elements
+[Rank 61] Parsed local: 2 elements, send_bufs totals: 2 elements
+[Rank 63] Parsed local: 0 elements, send_bufs totals: 0 elements
+Parallel I/O Complete: Rows=1138 | Cols=1138 | Total NNZ=2623 | Procs=64
+I/O Time (max across ranks): 0.149511 seconds
+Ghost columns identified: 24 total ghost values needed
+Local vector initialized (size=18 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     PARALLEL (MPI_File_read_at_all)
+PROCESSES:    64
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   2623
+I/O TIME:     0.149511 seconds
+----------------------------------------
+BALANCE: nnz_local   min=      31  avg=     40.98  max=      53
+COMM:    ghost       min=      14  avg=     22.47  max=      35  | recv_bytes_avg=    179.75 B
+MEM:     bytes       min=   14280  avg=     14469  max=   14720
+STRUCT:  ghost_ratio min=  41.176%  avg=    54.113%  max=  66.038%
+----------------------------------------
+TIMING:  t_total     = 1.955032e-03 s
+         t_comp      = 9.250641e-05 s
+         t_comm      = 1.911402e-03 s
+PERF:    gflops_total= 0.002683 GFLOPS
+         gflops_comp = 0.056710 GFLOPS
+========================================
+
+[RESULT] 0,64,parallel,0,0.000219107,0.000216246,43,24,86,0.149511337
+Total execution time: 0.155 seconds

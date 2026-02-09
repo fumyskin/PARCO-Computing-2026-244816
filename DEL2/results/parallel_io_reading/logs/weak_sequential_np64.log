@@ -1,0 +1,30 @@
+Generating Synthetic Matrix: Rows/proc=10000 | Total rows=640000 | NNZ/row=~50 | Procs=64
+Dummy Matrix Generated: Total Rows=640000 | Total NNZ=32000000
+I/O Time (max across ranks): 0.050995 seconds
+Ghost columns identified: 341628 total ghost values needed
+Local vector initialized (size=10000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
+PROCESSES:    64
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   32000000
+I/O TIME:     0.050995 seconds
+----------------------------------------
+BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
+COMM:    ghost       min=  340908  avg= 341542.47  max=  342173  | recv_bytes_avg=2732339.75 B
+MEM:     bytes       min=16487016  avg=  16492115  max=16497196
+STRUCT:  ghost_ratio min=  68.182%  avg=    68.308%  max=  68.435%
+----------------------------------------
+TIMING:  t_total     = 6.263256e-02 s
+         t_comp      = 1.943040e-02 s
+         t_comm      = 4.620719e-02 s
+PERF:    gflops_total= 1.021833 GFLOPS
+         gflops_comp = 3.293808 GFLOPS
+========================================
+
+[RESULT] 0,64,sequential,0,0.054874182,0.040222406,500000,341628,1000000,0.050994635
+Total execution time: 0.226 seconds

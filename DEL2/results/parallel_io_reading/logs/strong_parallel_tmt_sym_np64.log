@@ -1,0 +1,95 @@
+Using PARALLEL I/O (MPI_File_read_at_all)
+[Rank 0] Parsed header: 726713 rows, 726713 cols, 2903837 nnz
+[Rank 0] Parsed local: 774 elements, send_bufs totals: 782 elements
+[Rank 32] Parsed local: 695 elements, send_bufs totals: 1393 elements
+[Rank 30] Parsed local: 700 elements, send_bufs totals: 1410 elements
+[Rank 6] Parsed local: 759 elements, send_bufs totals: 1499 elements
+[Rank 16] Parsed local: 672 elements, send_bufs totals: 1387 elements
+[Rank 18] Parsed local: 709 elements, send_bufs totals: 1408 elements
+[Rank 24] Parsed local: 711 elements, send_bufs totals: 1392 elements
+[Rank 28] Parsed local: 710 elements, send_bufs totals: 1406 elements
+[Rank 34] Parsed local: 716 elements, send_bufs totals: 1400 elements
+[Rank 38] Parsed local: 681 elements, send_bufs totals: 1382 elements
+[Rank 40] Parsed local: 695 elements, send_bufs totals: 1407 elements
+[Rank 48] Parsed local: 699 elements, send_bufs totals: 1407 elements
+[Rank 52] Parsed local: 703 elements, send_bufs totals: 1400 elements
+[Rank 1] Parsed local: 759 elements, send_bufs totals: 743 elements
+[Rank 54] Parsed local: 696 elements, send_bufs totals: 1416 elements
+[Rank 3] Parsed local: 743 elements, send_bufs totals: 1492 elements
+[Rank 60] Parsed local: 705 elements, send_bufs totals: 1405 elements
+[Rank 5] Parsed local: 747 elements, send_bufs totals: 1496 elements
+[Rank 62] Parsed local: 693 elements, send_bufs totals: 1399 elements
+[Rank 7] Parsed local: 741 elements, send_bufs totals: 1488 elements
+[Rank 2] Parsed local: 736 elements, send_bufs totals: 1488 elements
+[Rank 9] Parsed local: 685 elements, send_bufs totals: 1410 elements
+[Rank 4] Parsed local: 749 elements, send_bufs totals: 1496 elements
+[Rank 11] Parsed local: 696 elements, send_bufs totals: 1394 elements
+[Rank 8] Parsed local: 710 elements, send_bufs totals: 1440 elements
+[Rank 13] Parsed local: 692 elements, send_bufs totals: 1418 elements
+[Rank 10] Parsed local: 707 elements, send_bufs totals: 1409 elements
+[Rank 15] Parsed local: 703 elements, send_bufs totals: 1409 elements
+[Rank 12] Parsed local: 709 elements, send_bufs totals: 1406 elements
+[Rank 17] Parsed local: 704 elements, send_bufs totals: 1409 elements
+[Rank 14] Parsed local: 711 elements, send_bufs totals: 1411 elements
+[Rank 19] Parsed local: 700 elements, send_bufs totals: 1407 elements
+[Rank 20] Parsed local: 718 elements, send_bufs totals: 1408 elements
+[Rank 21] Parsed local: 703 elements, send_bufs totals: 1406 elements
+[Rank 22] Parsed local: 709 elements, send_bufs totals: 1397 elements
+[Rank 23] Parsed local: 706 elements, send_bufs totals: 1411 elements
+[Rank 26] Parsed local: 717 elements, send_bufs totals: 1412 elements
+[Rank 25] Parsed local: 707 elements, send_bufs totals: 1420 elements
+[Rank 36] Parsed local: 682 elements, send_bufs totals: 1414 elements
+[Rank 27] Parsed local: 696 elements, send_bufs totals: 1405 elements
+[Rank 42] Parsed local: 713 elements, send_bufs totals: 1405 elements
+[Rank 29] Parsed local: 702 elements, send_bufs totals: 1397 elements
+[Rank 44] Parsed local: 706 elements, send_bufs totals: 1417 elements
+[Rank 31] Parsed local: 706 elements, send_bufs totals: 1408 elements
+[Rank 46] Parsed local: 708 elements, send_bufs totals: 1408 elements
+[Rank 33] Parsed local: 716 elements, send_bufs totals: 1391 elements
+[Rank 50] Parsed local: 702 elements, send_bufs totals: 1413 elements
+[Rank 35] Parsed local: 686 elements, send_bufs totals: 1403 elements
+[Rank 56] Parsed local: 723 elements, send_bufs totals: 1404 elements
+[Rank 37] Parsed local: 707 elements, send_bufs totals: 1406 elements
+[Rank 58] Parsed local: 707 elements, send_bufs totals: 1411 elements
+[Rank 39] Parsed local: 712 elements, send_bufs totals: 1402 elements
+[Rank 41] Parsed local: 698 elements, send_bufs totals: 1413 elements
+[Rank 43] Parsed local: 711 elements, send_bufs totals: 1386 elements
+[Rank 45] Parsed local: 701 elements, send_bufs totals: 1412 elements
+[Rank 47] Parsed local: 695 elements, send_bufs totals: 1414 elements
+[Rank 49] Parsed local: 698 elements, send_bufs totals: 1410 elements
+[Rank 51] Parsed local: 686 elements, send_bufs totals: 1407 elements
+[Rank 53] Parsed local: 708 elements, send_bufs totals: 1395 elements
+[Rank 55] Parsed local: 696 elements, send_bufs totals: 1392 elements
+[Rank 57] Parsed local: 696 elements, send_bufs totals: 1411 elements
+[Rank 59] Parsed local: 713 elements, send_bufs totals: 1400 elements
+[Rank 61] Parsed local: 708 elements, send_bufs totals: 1416 elements
+[Rank 63] Parsed local: 698 elements, send_bufs totals: 1400 elements
+Parallel I/O Complete: Rows=726713 | Cols=726713 | Total NNZ=2903867 | Procs=64
+I/O Time (max across ranks): 2.414085 seconds
+Ghost columns identified: 33413 total ghost values needed
+Local vector initialized (size=11355 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     PARALLEL (MPI_File_read_at_all)
+PROCESSES:    64
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   2903867
+I/O TIME:     2.414085 seconds
+----------------------------------------
+BALANCE: nnz_local   min=   45215  avg=  45372.92  max=   45602
+COMM:    ghost       min=   32972  avg=  33323.67  max=   33596  | recv_bytes_avg= 266589.38 B
+MEM:     bytes       min= 9617756  avg=   9622458  max= 9627080
+STRUCT:  ghost_ratio min=  72.829%  avg=    73.444%  max=  73.891%
+----------------------------------------
+TIMING:  t_total     = 1.041722e-02 s
+         t_comp      = 4.400253e-03 s
+         t_comm      = 7.265806e-03 s
+PERF:    gflops_total= 0.557513 GFLOPS
+         gflops_comp = 1.319864 GFLOPS
+========================================
+
+[RESULT] 0,64,parallel,0,0.010417223,0.007265806,45254,33413,90508,2.414084911
+Total execution time: 2.444 seconds

@@ -22,14 +22,14 @@ import matplotlib.pyplot as plt
 # ---------------------------------------------------------------------------
 # Directory layout
 # ---------------------------------------------------------------------------
-RESULTS_DIR = "../results/parallel_io"
+RESULTS_DIR = "../results/parallel_io_reading"
 PLOTS_DIR   = "../plots/parallel_io_reading"
 
 # Create output directory
 os.makedirs(PLOTS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
-# Color scheme
+# Color scheme -> pretty is important
 # ---------------------------------------------------------------------------
 IO_COLOURS = {
     "sequential": "#E63946",
