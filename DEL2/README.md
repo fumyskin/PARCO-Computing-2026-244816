@@ -10,7 +10,7 @@ Included in this file are the following implementation:
 - 2D block and 2D cyclic distributions
 - Hybrid MPI approach
 
-However, the DELIVERABLE2 content and report will focus **ONLY** on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**. 
+However, to guarantee a higher qualitative analysis in the 4 pages available, the DELIVERABLE2 content and report will focus **ONLY** on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**. 
 
 > [!IMPORTANT] 
 > Due to high compuation times, I HIGHLY RECOMMEND RUNNING:
