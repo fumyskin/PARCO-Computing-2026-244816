@@ -107,7 +107,7 @@ The results of the simulations are going to be collected into the `/results` fol
 
 
 ## PLOTTING
-To plot the results for 1D and 2D distribution SpMV go into the `/script` folder and type:
+To plot the results for 1D and 2D distribution SpMV go into the `/scripts` folder and type:
 ``` bash
 module load python-3.10.14_gcc91
 python3 plot_script.py
@@ -120,7 +120,7 @@ The contents plotted are going to be:
 - `speedup_strong` -> speedup for each matrix for strong scaling
 - `weak_scaling` -> weak scaling info
 
-To compute plots for sequential and parallel I/O reading go into the `/script` folder and type:
+To compute plots for sequential and parallel I/O reading go into the `/scripts` folder and type:
 ``` bash
 module load python-3.10.14_gcc91
 python3 plot_parallel.py
