@@ -31,12 +31,12 @@ The repository is organized as follows:
 ├── matrices                            #input matrices
 │   └── 1138_bus.mtx
 ├── plots                               #plots
-│   ├── batch1
-│   ├── batch2
+│   ├── batch1                          #plots of the 3 smallest matrices
+│   ├── batch2                          #plots of the 3 biggest matrices
 │   └── parallel_io_reading             #plots for sequential vs parallel reading
 ├── results
-│   ├── batch1
-│   ├── batch2
+│   ├── batch1                          #results of the 3 smallest matrices
+│   ├── batch2                          #results of the 3 biggest matrices
 │   └── parallel_io_reading             #results for sequential vs parallel reading
 ├── scripts
 │   ├── mpi_bash_baseline.sh            #bash script for main_baseline.c
