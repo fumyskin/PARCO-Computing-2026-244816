@@ -88,49 +88,26 @@ int main(int argc, char *argv[])
     }
 
     // ============================================================
-    // MATRIX LOADING SECTION - WITH PHASE-LEVEL TIMING
+    // MATRIX LOADING SECTION
     // ============================================================
-    // Phase timings (local per rank, reduced later)
-    double t_file_read    = 0.0;  // actual file reading
-    double t_communicate  = 0.0;  // bcast (seq) or alltoallv (par)
-    double t_distribute   = 0.0;  // local partitioning / distribution
-    double t_convert      = 0.0;  // COO -> CSR conversion
-    double t_io_total     = 0.0;  // entire I/O section
+    double io_start = MPI_Wtime();
     
     Sparse_Coordinate local_matrix = {0};
     Sparse_CSR local_csr = {0};
 
-    MPI_Barrier(MPI_COMM_WORLD);
-    double io_start = MPI_Wtime();
-
     if(!dummy){
         if (use_parallel_io) {
             // ====== PARALLEL I/O PATH ======
-            // Phase breakdown is inside load_mm_chunked, so we time the whole thing
-            // and also the COO->CSR conversion separately
             if (rank == 0) {
                 printf("Using PARALLEL I/O (MPI_File_read_at_all)\n");
             }
-            
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t0 = MPI_Wtime();
             
             if (load_mm_chunked(matrix, &local_matrix, rank, comm_size) != 0) {
                 if (rank == 0) fprintf(stderr, "Failed to load matrix with parallel I/O\n");
                 MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
             }
             
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t1 = MPI_Wtime();
-            
-            // load_mm_chunked includes: file read + parse + alltoallv + merge
-            // We attribute this as file_read + communicate combined
-            // (For finer granularity, you'd need to instrument load_mm_chunked itself)
-            t_file_read   = t1 - t0;  // includes read + parse + redistribute
-            t_communicate = 0.0;       // already included above
-            t_distribute  = 0.0;       // already included above
-            
-            // Extract global dimensions
+            // Extract global dimensions from local_matrix (they're broadcast inside load_mm_chunked)
             matrix_rows = local_matrix.n_rows;
             matrix_cols = local_matrix.n_cols;
             
@@ -138,17 +115,10 @@ int main(int argc, char *argv[])
             unsigned local_nnz_count = local_matrix.nnz;
             MPI_Allreduce(&local_nnz_count, &matrix_nnz, 1, MPI_UNSIGNED, MPI_SUM, MPI_COMM_WORLD);
             
-            // Time COO -> CSR conversion separately
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t2 = MPI_Wtime();
-            
+            // Convert local COO to CSR
             Sparse_CSR *temp_csr = coo_to_csr_matrix(&local_matrix);
             local_csr = *temp_csr;
             free(temp_csr);
-            
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t3 = MPI_Wtime();
-            t_convert = t3 - t2;
             
             if (rank == 0) {
                 printf("Parallel I/O Complete: Rows=%u | Cols=%u | Total NNZ=%u | Procs=%d\n", 
@@ -159,13 +129,7 @@ int main(int argc, char *argv[])
             // ====== SEQUENTIAL I/O PATH ======
             if (rank == 0) {
                 printf("Using SEQUENTIAL I/O (rank 0 reads, then broadcasts)\n");
-            }
-            
-            // --- Phase 1: File read (only rank 0 does real work) ---
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t0 = MPI_Wtime();
-            
-            if (rank == 0) {
+                
                 if (load_matrix_market(matrix, &coo_matrix) != 0) {
                     fprintf(stderr, "Failed to load matrix\n");
                     MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
@@ -174,15 +138,14 @@ int main(int argc, char *argv[])
                 matrix_rows = coo_matrix.n_rows;
                 matrix_cols = coo_matrix.n_cols;
                 matrix_nnz  = coo_matrix.nnz;
+
+                Sparse_CSR *temp_csr = coo_to_csr_matrix(&coo_matrix);
+                csr_matrix = *temp_csr; 
+                free(temp_csr);
+               
+                printf("Sequential I/O Complete: Rows=%u | Cols=%u | NNZ=%u | Procs=%d\n", 
+                       matrix_rows, matrix_cols, matrix_nnz, comm_size);
             }
-            
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t1 = MPI_Wtime();
-            t_file_read = t1 - t0;
-            
-            // --- Phase 2: Broadcast (communication) ---
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t2 = MPI_Wtime();
             
             // Broadcast dimensions
             MPI_Bcast(&matrix_rows, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
@@ -205,36 +168,11 @@ int main(int argc, char *argv[])
             MPI_Bcast(coo_matrix.col_indices, matrix_nnz, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
             MPI_Bcast(coo_matrix.values, matrix_nnz, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t3 = MPI_Wtime();
-            t_communicate = t3 - t2;
-            
-            // --- Phase 3: Local distribution ---
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t4 = MPI_Wtime();
-            
+            // Apply 1D distribution
             distribution_1D(&coo_matrix, &local_matrix, &local_csr, rank, comm_size);
             
-            MPI_Barrier(MPI_COMM_WORLD);
-            double t5 = MPI_Wtime();
-            t_distribute = t5 - t4;
-            
-            // Note: distribution_1D likely produces local_csr directly,
-            // so conversion time is embedded in distribute.
-            // If distribution_1D only produces local_matrix (COO), 
-            // uncomment below and time conversion separately:
-            // MPI_Barrier(MPI_COMM_WORLD);
-            // double t6 = MPI_Wtime();
-            // Sparse_CSR *temp_csr = coo_to_csr_matrix(&local_matrix);
-            // local_csr = *temp_csr;
-            // free(temp_csr);
-            // MPI_Barrier(MPI_COMM_WORLD);
-            // double t7 = MPI_Wtime();
-            // t_convert = t7 - t6;
-            
             if (rank == 0){
-                printf("Sequential I/O Complete: Rows=%u | Cols=%u | NNZ=%u | Procs=%d\n", 
-                       matrix_rows, matrix_cols, matrix_nnz, comm_size);
+                printf("Applied 1D distribution\n");
             }
         }
         
@@ -249,12 +187,15 @@ int main(int argc, char *argv[])
                    rows_per_process, matrix_rows, nnz_per_row, comm_size);
         }
         
+        // Generate random local matrix for each process
         generate_dummy_matrix(&local_matrix, rows_per_process, nnz_per_row, rank, comm_size);
         
+        // Convert to CSR
         Sparse_CSR *temp_csr = coo_to_csr_matrix(&local_matrix);
         local_csr = *temp_csr;
         free(temp_csr); 
 
+        // Calculate total nnz
         unsigned local_nnz_count = local_matrix.nnz;
         MPI_Allreduce(&local_nnz_count, &matrix_nnz, 1, MPI_UNSIGNED, MPI_SUM, MPI_COMM_WORLD);
 
@@ -263,44 +204,13 @@ int main(int argc, char *argv[])
         }
     }
     
-    MPI_Barrier(MPI_COMM_WORLD);
     double io_end = MPI_Wtime();
-    t_io_total = io_end - io_start;
-    
-    // Reduce all phase timings (max across ranks)
-    double t_file_read_max, t_communicate_max, t_distribute_max, t_convert_max, t_io_total_max;
-    MPI_Reduce(&t_file_read,   &t_file_read_max,   1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&t_communicate, &t_communicate_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&t_distribute,  &t_distribute_max,  1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&t_convert,     &t_convert_max,     1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-    MPI_Reduce(&t_io_total,    &t_io_total_max,    1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    double io_time = io_end - io_start;
+    double io_time_max;
+    MPI_Reduce(&io_time, &io_time_max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
     
     if (rank == 0) {
-        printf("\n--- I/O Phase Breakdown ---\n");
-        printf("  File read:      %.6f s\n", t_file_read_max);
-        printf("  Communication:  %.6f s\n", t_communicate_max);
-        printf("  Distribution:   %.6f s\n", t_distribute_max);
-        printf("  COO->CSR:       %.6f s\n", t_convert_max);
-        printf("  Total I/O:      %.6f s\n", t_io_total_max);
-        printf("---------------------------\n");
-    }
-
-    // ============================================================
-    // VERIFICATION: ensure local nnz sums to global nnz
-    // ============================================================
-    unsigned local_nnz_verify = local_matrix.nnz;
-    unsigned global_nnz_verify = 0;
-    MPI_Allreduce(&local_nnz_verify, &global_nnz_verify, 1, MPI_UNSIGNED, MPI_SUM, MPI_COMM_WORLD);
-    
-    if (rank == 0) {
-        if (global_nnz_verify == matrix_nnz) {
-            printf("VERIFICATION PASSED: sum(local_nnz)=%u == expected=%u\n", 
-                   global_nnz_verify, matrix_nnz);
-        } else {
-            printf("VERIFICATION FAILED: sum(local_nnz)=%u != expected=%u (diff=%d)\n", 
-                   global_nnz_verify, matrix_nnz, 
-                   (int)global_nnz_verify - (int)matrix_nnz);
-        }
+        printf("I/O Time (max across ranks): %.6f seconds\n", io_time_max);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -375,13 +285,14 @@ int main(int argc, char *argv[])
     // ============================================================
     unsigned nnz = local_csr.row_ptr[local_csr.n_rows];
     
+    // Calculate local memory usage
     size_t local_bytes = 0;
-    local_bytes += (local_csr.n_rows + 1) * sizeof(unsigned);
-    local_bytes += nnz * sizeof(unsigned);
-    local_bytes += nnz * sizeof(double);
-    local_bytes += local_vec_size * sizeof(double);
-    local_bytes += local_csr.n_rows * sizeof(double);
-    local_bytes += comm_pattern.num_ghost_cols * sizeof(double);
+    local_bytes += (local_csr.n_rows + 1) * sizeof(unsigned);  // row_ptr
+    local_bytes += nnz * sizeof(unsigned);                      // col_indices
+    local_bytes += nnz * sizeof(double);                        // values
+    local_bytes += local_vec_size * sizeof(double);             // local_rand_vec
+    local_bytes += local_csr.n_rows * sizeof(double);           // local_res
+    local_bytes += comm_pattern.num_ghost_cols * sizeof(double); // ghost values
     
     unsigned local_nnz = local_matrix.nnz;
     unsigned local_ghosts = comm_pattern.num_ghost_cols;
@@ -465,17 +376,10 @@ int main(int argc, char *argv[])
         printf("========================================\n");
         printf("I/O TYPE:     %s\n", use_parallel_io ? "PARALLEL (MPI_File_read_at_all)" : "SEQUENTIAL (Rank 0 + Bcast)");
         printf("PROCESSES:    %d\n", comm_size);
-        printf("THREADS:      %d\n", num_threads);
         printf("DISTRIBUTION: 1D (row-cyclic)\n");
         printf("ITERATIONS:   %d\n", repeats);
         printf("Matrix NNZ:   %u\n", matrix_nnz);
-        printf("----------------------------------------\n");
-        printf("I/O PHASE BREAKDOWN (max across ranks):\n");
-        printf("  t_file_read     = %.6f s\n", t_file_read_max);
-        printf("  t_communicate   = %.6f s\n", t_communicate_max);
-        printf("  t_distribute    = %.6f s\n", t_distribute_max);
-        printf("  t_coo_to_csr    = %.6f s\n", t_convert_max);
-        printf("  t_io_total      = %.6f s\n", t_io_total_max);
+        printf("I/O TIME:     %.6f seconds\n", io_time_max);
         printf("----------------------------------------\n");
         printf("BALANCE: nnz_local   min=%8u  avg=%10.2f  max=%8u\n", 
                nnz_min, nnz_avg, nnz_max);
@@ -494,10 +398,10 @@ int main(int argc, char *argv[])
         printf("========================================\n\n");
     }
 
-    // RAW OUTPUT DATA (includes phase timings for plotting)
+    // RAW OUTPUT DATA
     if (rank == 0){
         for (int r = 0; r < repeats; r++) {
-            printf("[RESULT] %d,%d,%s,%d,%.9f,%.9f,%u,%u,%d,%.9f,%.9f,%.9f,%.9f,%.9f\n",
+            printf("[RESULT] %d,%d,%s,%d,%.9f,%.9f,%u,%u,%d,%.9f\n",
                 rank, 
                 comm_size,
                 io_type,
@@ -507,11 +411,7 @@ int main(int argc, char *argv[])
                 pmetrics.local_nnz,
                 pmetrics.ghost_entries,
                 pmetrics.local_flops,
-                t_io_total_max,
-                t_file_read_max,
-                t_communicate_max,
-                t_distribute_max,
-                t_convert_max);
+                io_time_max);
             fflush(stdout); 
         }
     }
