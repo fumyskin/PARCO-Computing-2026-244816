@@ -8,7 +8,7 @@
 #include "distributions.h"
 
 // ============================================================================
-// 1D CYCLIC DISTRIBUTION 
+// 1D CYCLIC DISTRIBUTION -> OK
 // ============================================================================
 void distribution_1D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
                      Sparse_CSR *local_csr, int rank, int comm_size)
@@ -65,7 +65,7 @@ void distribution_1D(Sparse_Coordinate *matrix, Sparse_Coordinate *local_matrix,
 }
 
 // ============================================================================
-// DUMMY MATRIX GENERATION (1D cyclic, unchanged)
+// DUMMY MATRIX GENERATION (1D cyclic) -> OK
 // ============================================================================
 void generate_dummy_matrix(Sparse_Coordinate *local_matrix, unsigned rows_per_process,
                            unsigned nnz_per_row, int rank, int comm_size)
@@ -99,7 +99,7 @@ void generate_dummy_matrix(Sparse_Coordinate *local_matrix, unsigned rows_per_pr
 
 
 // ============================================================================
-// 2D GRID HELPERS
+// 2D GRID HELPERS -> OK
 // ============================================================================
 
 void create_2d_grid(int comm_size, int *proc_rows, int *proc_cols)
@@ -131,9 +131,9 @@ int coords_to_rank_2d(int row_coord, int col_coord, int proc_cols)
 // ============================================================================
 // 2D BLOCK DISTRIBUTION
 //
-// KEY CHANGE: Column indices remain GLOBAL in the local CSR.
-// Only row indices are remapped to local (0-based).
-// This is essential for the 2D communication pattern to work.
+// KEY CHANGE: Column indices remain GLOBAL in the local CSR -> OK
+// Only row indices are remapped to local (0-based) -> OK
+// This is essential for the 2D communication pattern to work 
 // ============================================================================
 
 static int owner_2d_block(unsigned row, unsigned col,
@@ -396,6 +396,7 @@ void generate_dummy_matrix_2d_block(Sparse_Coordinate *local_matrix, unsigned ro
     free(temp_cols);
     free(temp_vals);
 }
+
 
 void generate_dummy_matrix_2d_cyclic(Sparse_Coordinate *local_matrix, unsigned rows_per_proc,
                                      unsigned nnz_per_row, int rank, int comm_size)
