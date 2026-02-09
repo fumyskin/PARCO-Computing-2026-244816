@@ -1,0 +1,145 @@
+#!/bin/bash
+
+#PBS -N spmv_mpi
+#PBS -l select=2:ncpus=64:mem=16gb
+#PBS -l walltime=06:00:00
+#PBS -q short_cpuQ
+
+#Output files
+#PBS -o ../results/benchmark_mpi.out
+#PBS -e ../results/benchmark_mpi.err
+
+# Load modules gcc and mpich
+module load gcc91
+module load mpich-3.2.1--gcc-9.1.0     
+
+cd "$PBS_O_WORKDIR" || exit 1
+
+mkdir -p ../results
+mkdir -p ../plots
+
+echo " ----- "
+echo "MPI SpMV BENCHMARK JOB"
+echo " ----- "
+echo "Job ID:            $PBS_JOBID"
+echo "Job Name:          $PBS_JOBNAME"
+echo "Queue:             $PBS_QUEUE"
+echo "Working Directory: $(pwd)"
+echo "Start time:        $(date)"
+echo ""
+echo "--- PBS Resource Request ---"
+echo "Nodes:             2"
+echo "CPUs per node:     64"
+echo "MPI procs/node:    64"
+echo "Total MPI procs:   128"
+echo "Memory per node:   64 GB"
+echo "Walltime:          06:00:00"
+echo " ----- "
+echo ""
+
+echo "Saving system information..."
+SYSTEM_INFO_FILE="../results/system_info_${PBS_JOBID}.txt"
+{
+    echo " ----- "
+    echo "SYSTEM INFORMATION"
+    echo " ----- "
+    echo ""
+    echo "Job ID: $PBS_JOBID"
+    echo "Job Name: $PBS_JOBNAME"
+    echo "Date: $(date)"
+    echo ""
+    echo "--- Allocated Nodes ---"
+    cat "$PBS_NODEFILE" | sort | uniq
+    echo ""
+    echo "Total nodes: $(cat $PBS_NODEFILE | sort | uniq | wc -l)"
+    echo "Total processes: $(cat $PBS_NODEFILE | wc -l)"
+    echo ""
+    echo "--- Master Node: $(hostname) ---"
+    echo ""
+    echo "--- CPU Model ---"
+    lscpu | grep "Model name"
+    echo ""
+    echo "--- Architecture Details ---"
+    lscpu | grep -E "Architecture|CPU\(s\)|Thread|Core|Socket|NUMA"
+    echo ""
+    echo "--- CPU Frequencies ---"
+    lscpu | grep -E "MHz|max|min"
+    echo ""
+    echo "--- Cache Information ---"
+    lscpu | grep -i cache
+    echo ""
+    echo "--- Memory Information ---"
+    free -h
+    echo ""
+    echo "--- Network Information ---"
+    ifconfig | grep -A 1 "inet " | grep -v "127.0.0.1"
+    echo ""
+    echo "--- MPI Information ---"
+    which mpicc
+    mpicc --version
+    which mpirun
+    mpirun --version 2>&1 | head -5
+    echo ""
+    echo "--- Full lscpu Output ---"
+    lscpu
+    echo ""    
+} > "$SYSTEM_INFO_FILE"
+
+echo "System info saved to: $SYSTEM_INFO_FILE"
+echo ""
+
+echo "Verifying environment..."
+if [ ! -d "../src" ] || [ ! -d "../include" ] || [ ! -d "../matrices" ]; then
+    echo "ERROR: Required directories (src/include/matrices) not found"
+    echo "Current directory: $(pwd)"
+    ls -la ..
+    exit 1
+fi
+
+# Check benchmark script
+if [ ! -f "mpi_bash_parallel.sh" ]; then
+    echo "ERROR: mpi_bash_script.sh not found"
+    echo "Expected location: $(pwd)/mpi_bash_parallel.sh"
+    echo "Available files:"
+    ls -la
+    exit 1
+fi
+
+# Just to make sure that testsBash.sh is executable
+chmod +x mpi_bash_parallel.sh
+
+echo "Configuring MPI environment..."
+export MPICH_PROCESS_AFFINITY=1          
+export MPICH_CPU_BINDING=1               
+echo "MPI configuration set."
+echo ""
+
+# Running the benchmark script
+echo "Starting time benchmark execution..."
+./mpi_bash_parallel.sh
+
+exit_code=$?
+
+# Job info
+echo ""
+echo "--------------------------"
+if [ $exit_code -eq 0 ]; then
+    echo "Job completed successfully!"
+    if [ -f "../results/strong_scaling.csv" ]; then
+        num_strong=$(tail -n +2 ../results/strong_scaling.csv | wc -l)
+        echo "Strong scaling tests: $num_strong runs"
+        echo "  Output: ../results/strong_scaling.csv"
+    fi
+    
+    if [ -f "../results/weak_scaling.csv" ]; then
+        num_weak=$(tail -n +2 ../results/weak_scaling.csv | wc -l)
+        echo "Weak scaling tests: $num_weak runs"
+        echo "  Output: ../results/weak_scaling.csv"
+    fi
+else
+    echo "Job completed with errors (exit code: $exit_code)"
+fi
+echo "End time: $(date)"
+echo "--------------------------"
+
+exit $exit_code

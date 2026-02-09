@@ -476,7 +476,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
     MPI_Offset file_size;
     MPI_File_get_size(fh, &file_size);
     
-    // PHASE 1: read file chunks
+    // PHASE 1: read file chunks -> OK
     MPI_Offset bytes_read;
     char* buffer = read_file_chunk(fh, rank, comm_size, file_size, &bytes_read);
     if (!buffer) {
@@ -491,7 +491,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
         chunk_size = file_size - my_offset;
     }
     
-    // parse header, adjust cursor
+    // parse header, adjust cursor -> OK
     char* cursor = buffer;
     char* end_of_buffer = buffer + bytes_read;
     int n_rows = 0, n_cols = 0, nnz = 0;
@@ -535,7 +535,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
 
-    // PHASE 2: parse and partition
+    // PHASE 2: parse and partition -> OK
     SendBuffers* send_bufs = create_send_buffers(comm_size, 1000);
     
     // Check if any rank failed
@@ -590,7 +590,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
     
-    // PHASE 3: Exchange data
+    // PHASE 3: Exchange data -> OK
     unsigned* packed_s_rows = NULL;
     unsigned* packed_s_cols = NULL;
     double* packed_s_vals = NULL;
@@ -645,7 +645,7 @@ int load_mm_chunked(const char* filename, Sparse_Coordinate* matrix,
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
     
-    // PHASE 4: merge 
+    // PHASE 4: merge  ->OK
     unsigned final_nnz = 0;
     ret = merge_data(&local_rows, &local_cols, &local_vals, local_count,
                     recv_rows, recv_cols, recv_vals, total_recv, &final_nnz);
