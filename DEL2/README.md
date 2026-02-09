@@ -1,6 +1,6 @@
 # DELIVERABLE 2 run instructions
 
-## Overviews
+## Overview
 This folder contains the DELIVERABLE 2 source code.
 The following code is a playground to test different MPI approaches to the classical SpMV kernel.
 Included in this file are the following implementation:
@@ -76,12 +76,12 @@ tar -xzf <name_of_matrix>.tar.gz
 - Extract the .mtx file from their respective folders. Make sure that in the `/matrices` folder are just the `.mtx` files
 
 ## JOB SUBMISSION
-To submit the .pbs that executes 1D and 2D block distributions on SpMV :
+To submit the .pbs that executes 1D and 2D block distributions on SpMV go into the `/scripts` folder and type:
 ```bash
 qsub mpi_job_script_baseline.pbs
 ```
 
-To submit the .pbs that executes sequential vs parallel I/O reading of Matrix Market file :
+To submit the .pbs that executes sequential vs parallel I/O reading of Matrix Market file go into the `/scripts` folder and type:
 ```bash
 qsub mpi_job_script_parallel.pbs
 ```
@@ -107,12 +107,12 @@ The results of the simulations are going to be collected into the `/results` fol
 
 
 ## PLOTTING
-To plot the results collected go into the `/script` folder and type:
+To plot the results for 1D and 2D distribution SpMV go into the `/script` folder and type:
 ``` bash
 python3 plot_script.py
 ```
-To compute plots for 1D and 2D distribution SpMV
+To compute plots for sequential and parallel I/O reading go into the `/script` folder and type:
 ``` bash
 python3 plot_parallel.py
 ```
-To compute plots for sequential and parallel I/O reading 
+
