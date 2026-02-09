@@ -107,3 +107,12 @@ The results of the simulations are going to be collected into the `/results` fol
 
 
 ## PLOTTING
+To plot the results collected go into the `/script` folder and type:
+``` bash
+python3 plot_script.py
+```
+To compute plots for 1D and 2D distribution SpMV
+``` bash
+python3 plot_parallel.py
+```
+To compute plots for sequential and parallel I/O reading 
