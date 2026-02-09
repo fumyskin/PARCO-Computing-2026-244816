@@ -1,6 +1,6 @@
 Generating Synthetic Matrix: Rows/proc=10000 | Total rows=40000 | NNZ/row=~50 | Procs=4
 Dummy Matrix Generated: Total Rows=40000 | Total NNZ=2000000
-I/O Time (max across ranks): 0.047514 seconds
+I/O Time (max across ranks): 0.056640 seconds
 Ghost columns identified: 30000 total ghost values needed
 Local vector initialized (size=10000 per process)
 
@@ -10,21 +10,30 @@ COMPREHENSIVE METRICS SUMMARY
 I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
 PROCESSES:    4
 DISTRIBUTION: 1D (row-cyclic)
-ITERATIONS:   1
+ITERATIONS:   10
 Matrix NNZ:   2000000
-I/O TIME:     0.047514 seconds
+I/O TIME:     0.056640 seconds
 ----------------------------------------
 BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
 COMM:    ghost       min=   29999  avg=  29999.75  max=   30000  | recv_bytes_avg= 239998.00 B
 MEM:     bytes       min= 6796168  avg=   6796360  max= 6796500
 STRUCT:  ghost_ratio min=   6.000%  avg=     6.000%  max=   6.000%
 ----------------------------------------
-TIMING:  t_total     = 4.526615e-03 s
-         t_comp      = 4.078150e-03 s
-         t_comm      = 6.091595e-04 s
-PERF:    gflops_total= 0.883662 GFLOPS
-         gflops_comp = 0.980837 GFLOPS
+TIMING:  t_total     = 1.962217e-03 s
+         t_comp      = 1.888733e-03 s
+         t_comm      = 7.800530e-05 s
+PERF:    gflops_total= 2.038510 GFLOPS
+         gflops_comp = 2.117822 GFLOPS
 ========================================
 
-[RESULT] 0,4,sequential,0,0.004526615,0.000450850,500000,30000,1000000,0.047513962
-Total execution time: 0.062 seconds
+[RESULT] 0,4,sequential,0,0.002075599,0.000197033,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,1,0.001955929,0.000109668,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,2,0.001872307,0.000047640,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,3,0.001873166,0.000053625,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,4,0.001845322,0.000044383,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,5,0.001846248,0.000040359,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,6,0.001873223,0.000040954,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,7,0.001906289,0.000049289,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,8,0.001895909,0.000043715,500000,30000,1000000,0.056639792
+[RESULT] 0,4,sequential,9,0.001846968,0.000044003,500000,30000,1000000,0.056639792
+Total execution time: 0.083 seconds

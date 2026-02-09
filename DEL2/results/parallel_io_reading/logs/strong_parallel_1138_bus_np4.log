@@ -1,12 +1,12 @@
 Using PARALLEL I/O (MPI_File_read_at_all)
 [Rank 0] Parsed header: 1138 rows, 1138 cols, 2596 nnz
-[Rank 0] Parsed local: 163 elements, send_bufs totals: 172 elements
-[Rank 1] Parsed local: 168 elements, send_bufs totals: 168 elements
-[Rank 2] Parsed local: 177 elements, send_bufs totals: 324 elements
-[Rank 3] Parsed local: 148 elements, send_bufs totals: 325 elements
+[Rank 0] Parsed local: 557 elements, send_bufs totals: 60 elements
+[Rank 1] Parsed local: 521 elements, send_bufs totals: 73 elements
+[Rank 2] Parsed local: 499 elements, send_bufs totals: 77 elements
+[Rank 3] Parsed local: 577 elements, send_bufs totals: 0 elements
 Parallel I/O Complete: Rows=1138 | Cols=1138 | Total NNZ=2597 | Procs=4
-I/O Time (max across ranks): 0.020225 seconds
-Ghost columns identified: 247 total ghost values needed
+I/O Time (max across ranks): 0.048933 seconds
+Ghost columns identified: 213 total ghost values needed
 Local vector initialized (size=285 per process)
 
 ========================================
@@ -15,21 +15,30 @@ COMPREHENSIVE METRICS SUMMARY
 I/O TYPE:     PARALLEL (MPI_File_read_at_all)
 PROCESSES:    4
 DISTRIBUTION: 1D (row-cyclic)
-ITERATIONS:   1
+ITERATIONS:   10
 Matrix NNZ:   2597
-I/O TIME:     0.020225 seconds
+I/O TIME:     0.048933 seconds
 ----------------------------------------
-BALANCE: nnz_local   min=     609  avg=    649.25  max=     668
-COMM:    ghost       min=     226  avg=    245.75  max=     260  | recv_bytes_avg=   1966.00 B
-MEM:     bytes       min=   25048  avg=     25687  max=   26016
-STRUCT:  ghost_ratio min=  37.087%  avg=    37.836%  max=  38.922%
+BALANCE: nnz_local   min=     622  avg=    649.25  max=     687
+COMM:    ghost       min=     213  avg=    249.00  max=     276  | recv_bytes_avg=   1992.00 B
+MEM:     bytes       min=   25204  avg=     25713  max=   26372
+STRUCT:  ghost_ratio min=  33.810%  avg=    38.331%  max=  41.801%
 ----------------------------------------
-TIMING:  t_total     = 8.440018e-05 s
-         t_comp      = 8.583069e-06 s
-         t_comm      = 7.605553e-05 s
-PERF:    gflops_total= 0.061540 GFLOPS
-         gflops_comp = 0.605145 GFLOPS
+TIMING:  t_total     = 8.083000e-06 s
+         t_comp      = 1.628900e-06 s
+         t_comm      = 6.454100e-06 s
+PERF:    gflops_total= 0.642583 GFLOPS
+         gflops_comp = 3.188655 GFLOPS
 ========================================
 
-[RESULT] 0,4,parallel,0,0.000084400,0.000076056,666,247,1332,0.020225048
-Total execution time: 0.021 seconds
+[RESULT] 0,4,parallel,0,0.000004077,0.000001898,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,1,0.000002967,0.000001419,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,2,0.000003067,0.000001625,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,3,0.000002518,0.000001253,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,4,0.000002525,0.000001268,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,5,0.000002447,0.000001198,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,6,0.000002527,0.000001273,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,7,0.000002392,0.000001149,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,8,0.000005262,0.000004025,630,213,1260,0.048932867
+[RESULT] 0,4,parallel,9,0.000002882,0.000001474,630,213,1260,0.048932867
+Total execution time: 0.049 seconds

@@ -51,9 +51,14 @@ compile_code() {
     rm -f "$EXEC_MPI" "$EXEC_HYBRID"
     mkdir -p "$RESULTS_DIR"
 
-    # Compile MPI version
+    # Define the common files (everything EXCEPT the main files)
+    # Adjust this list based on what is actually in your /src folder
+    COMMON_FILES="$SRC_DIR/parallel_reading.c $SRC_DIR/distributions.c $SRC_DIR/communication.c $SRC_DIR/mmio.c $SRC_DIR/specifications.c"
+
+    # Compile MPI version (using main_parallel.c specifically)
     echo "Compiling MPI-only version..."
-    $MPICC $CFLAGS_MPI "$SRC_DIR"/*.c -o "$EXEC_MPI" -lm
+    $MPICC $CFLAGS_MPI "$SRC_DIR/main_baseline.c" $COMMON_FILES -o "$EXEC_MPI" -lm
+
     if [ $? -ne 0 ]; then
         echo "ERROR: MPI compilation failed!"
         exit 1
@@ -62,7 +67,8 @@ compile_code() {
 
     #Compile MPI+OpenMP version 
     echo "Compiling MPI+OpenMP hybrid version..."
-    $MPICC $CFLAGS_HYBRID "$SRC_DIR"/*.c -o "$EXEC_HYBRID" -lm
+    # FIX: Use explicit files here too, NO wildcard (*.c)
+    $MPICC $CFLAGS_HYBRID "$SRC_DIR/main_baseline.c" $COMMON_FILES -o "$EXEC_HYBRID" -lm
     if [ $? -ne 0 ]; then
         echo "ERROR: Hybrid compilation failed!"
         exit 1

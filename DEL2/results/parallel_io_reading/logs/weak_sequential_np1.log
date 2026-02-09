@@ -1,0 +1,39 @@
+Generating Synthetic Matrix: Rows/proc=10000 | Total rows=10000 | NNZ/row=~50 | Procs=1
+Dummy Matrix Generated: Total Rows=10000 | Total NNZ=500000
+I/O Time (max across ranks): 0.029385 seconds
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=10000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
+PROCESSES:    1
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   10
+Matrix NNZ:   500000
+I/O TIME:     0.029385 seconds
+----------------------------------------
+BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_bytes_avg=      0.00 B
+MEM:     bytes       min= 6185232  avg=   6185232  max= 6185232
+STRUCT:  ghost_ratio min=   0.000%  avg=     0.000%  max=   0.000%
+----------------------------------------
+TIMING:  t_total     = 6.115599e-04 s
+         t_comp      = 6.112831e-04 s
+         t_comm      = 2.768000e-07 s
+PERF:    gflops_total= 1.635163 GFLOPS
+         gflops_comp = 1.635903 GFLOPS
+========================================
+
+[RESULT] 0,1,sequential,0,0.000647761,0.000000293,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,1,0.000604997,0.000000355,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,2,0.000613977,0.000000088,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,3,0.000597462,0.000000434,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,4,0.000644312,0.000000093,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,5,0.000604717,0.000000376,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,6,0.000598058,0.000000414,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,7,0.000604000,0.000000101,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,8,0.000603588,0.000000389,500000,0,1000000,0.029384751
+[RESULT] 0,1,sequential,9,0.000596727,0.000000225,500000,0,1000000,0.029384751
+Total execution time: 0.037 seconds

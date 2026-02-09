@@ -3,10 +3,10 @@
 # Configuration
 SRC_DIR="../src"
 INCLUDE_DIR="../include"
-EXEC_PARALLEL="../results/spmv_parallel_io.out"
+EXEC_PARALLEL="../results/parallel_io_reading/spmv_parallel_io.out"
 MATRICES_DIR="../matrices"
-RESULTS_DIR="../results/parallel_io"
-SUMMARY_DIR="../results/parallel_io/summary"
+RESULTS_DIR="../results/parallel_io_reading"
+SUMMARY_DIR="../results/parallel_io_reading/summary"
 
 # MPI Configuration
 MAX_PROCESSES=128
@@ -54,7 +54,6 @@ compile_code() {
         "$SRC_DIR/parallel_reading.c" \
         "$SRC_DIR/distributions.c" \
         "$SRC_DIR/communication.c" \
-        "$SRC_DIR/tests.c" \
         "$SRC_DIR/mmio.c" \
         "$SRC_DIR/specifications.c" \
         -o "$EXEC_PARALLEL" -lm

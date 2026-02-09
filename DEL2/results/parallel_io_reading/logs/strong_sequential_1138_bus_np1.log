@@ -1,0 +1,43 @@
+Using SEQUENTIAL I/O (rank 0 reads, then broadcasts)
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Sequential I/O Complete: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=1
+Applied 1D distribution
+I/O Time (max across ranks): 0.003068 seconds
+Ghost columns identified: 0 total ghost values needed
+Local vector initialized (size=1138 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
+PROCESSES:    1
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   10
+Matrix NNZ:   2596
+I/O TIME:     0.003068 seconds
+----------------------------------------
+BALANCE: nnz_local   min=    2596  avg=   2596.00  max=    2596
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_bytes_avg=      0.00 B
+MEM:     bytes       min=   53916  avg=     53916  max=   53916
+STRUCT:  ghost_ratio min=   0.000%  avg=     0.000%  max=   0.000%
+----------------------------------------
+TIMING:  t_total     = 3.387200e-06 s
+         t_comp      = 3.343700e-06 s
+         t_comm      = 4.350000e-08 s
+PERF:    gflops_total= 1.532829 GFLOPS
+         gflops_comp = 1.552771 GFLOPS
+========================================
+
+[RESULT] 0,1,sequential,0,0.000004697,0.000000094,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,1,0.000003572,0.000000033,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,2,0.000003298,0.000000050,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,3,0.000003227,0.000000032,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,4,0.000003197,0.000000041,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,5,0.000003185,0.000000041,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,6,0.000003160,0.000000032,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,7,0.000003171,0.000000031,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,8,0.000003191,0.000000048,2596,0,5192,0.003068002
+[RESULT] 0,1,sequential,9,0.000003174,0.000000033,2596,0,5192,0.003068002
+Total execution time: 0.003 seconds

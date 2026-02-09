@@ -12,6 +12,9 @@ Included in this file are the following implementation:
 
 However, the DELIVERABLE2 content will focus ONLY on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**.  
 
+> [!IMPORTANT] : due to high compuation times, I HIGHLY RECOMMEND RUNNING:
+>- for **1D AND 2D TESTING**: all matrices, in batches or at once (note that bigger matrices take much longer to compute results)
+>- for **PARALLEL I/O VS SEQUENTIAL READING**: JUST `1138_bus.mtx` and `tmt_sym.mtx` are sufficient for understanding the reading functions' behaviors
 
 ## FOLDER ORGANIZATION
 The repository is organized as follows:
@@ -124,7 +127,7 @@ The contents plotted are going to be:
 
 To compute plots for sequential and parallel I/O reading go into the `/scripts` folder and type:
 ``` bash
-module load python-3.10.14_gcc91
+module load python-3.10.14_gcc91  #command to make sure python3 is installed
 python3 plot_parallel.py
 ```
 

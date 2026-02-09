@@ -1,0 +1,39 @@
+Generating Synthetic Matrix: Rows/proc=10000 | Total rows=80000 | NNZ/row=~50 | Procs=8
+Dummy Matrix Generated: Total Rows=80000 | Total NNZ=4000000
+I/O Time (max across ranks): 0.050075 seconds
+Ghost columns identified: 69858 total ghost values needed
+Local vector initialized (size=10000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
+PROCESSES:    8
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   10
+Matrix NNZ:   4000000
+I/O TIME:     0.050075 seconds
+----------------------------------------
+BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
+COMM:    ghost       min=   69840  avg=  69861.62  max=   69888  | recv_bytes_avg= 558893.00 B
+MEM:     bytes       min= 7596804  avg=   7597066  max= 7597352
+STRUCT:  ghost_ratio min=  13.968%  avg=    13.972%  max=  13.978%
+----------------------------------------
+TIMING:  t_total     = 2.904325e-03 s
+         t_comp      = 2.584938e-03 s
+         t_comm      = 3.251490e-04 s
+PERF:    gflops_total= 2.754513 GFLOPS
+         gflops_comp = 3.094852 GFLOPS
+========================================
+
+[RESULT] 0,8,sequential,0,0.002482642,0.001064764,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,1,0.001724831,0.000240409,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,2,0.001568474,0.000177253,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,3,0.002984786,0.000227148,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,4,0.002826344,0.000196772,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,5,0.002912526,0.000285987,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,6,0.002924208,0.000203509,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,7,0.002902412,0.000230336,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,8,0.002861344,0.000193335,500000,69858,1000000,0.050074981
+[RESULT] 0,8,sequential,9,0.002878463,0.000216107,500000,69858,1000000,0.050074981
+Total execution time: 0.085 seconds

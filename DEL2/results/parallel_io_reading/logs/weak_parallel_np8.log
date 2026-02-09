@@ -1,0 +1,39 @@
+Generating Synthetic Matrix: Rows/proc=10000 | Total rows=80000 | NNZ/row=~50 | Procs=8
+Dummy Matrix Generated: Total Rows=80000 | Total NNZ=4000000
+I/O Time (max across ranks): 0.055202 seconds
+Ghost columns identified: 69858 total ghost values needed
+Local vector initialized (size=10000 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     PARALLEL (MPI_File_read_at_all)
+PROCESSES:    8
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   10
+Matrix NNZ:   4000000
+I/O TIME:     0.055202 seconds
+----------------------------------------
+BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
+COMM:    ghost       min=   69840  avg=  69861.62  max=   69888  | recv_bytes_avg= 558893.00 B
+MEM:     bytes       min= 7596804  avg=   7597066  max= 7597352
+STRUCT:  ghost_ratio min=  13.968%  avg=    13.972%  max=  13.978%
+----------------------------------------
+TIMING:  t_total     = 3.046956e-03 s
+         t_comp      = 2.725181e-03 s
+         t_comm      = 3.217747e-04 s
+PERF:    gflops_total= 2.625571 GFLOPS
+         gflops_comp = 2.935585 GFLOPS
+========================================
+
+[RESULT] 0,8,parallel,0,0.002542820,0.001091634,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,1,0.001612721,0.000184478,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,2,0.001628237,0.000182742,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,3,0.001695097,0.000163801,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,4,0.001589782,0.000202730,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,5,0.001566691,0.000175916,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,6,0.001583223,0.000158991,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,7,0.001583784,0.000166972,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,8,0.001550345,0.000180590,500000,69858,1000000,0.055202106
+[RESULT] 0,8,parallel,9,0.001731185,0.000239013,500000,69858,1000000,0.055202106
+Total execution time: 0.089 seconds

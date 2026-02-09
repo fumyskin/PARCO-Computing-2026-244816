@@ -1,0 +1,48 @@
+Using PARALLEL I/O (MPI_File_read_at_all)
+[Rank 0] Parsed header: 1138 rows, 1138 cols, 2596 nnz
+[Rank 0] Parsed local: 242 elements, send_bufs totals: 22 elements
+[Rank 1] Parsed local: 233 elements, send_bufs totals: 60 elements
+[Rank 3] Parsed local: 228 elements, send_bufs totals: 0 elements
+[Rank 4] Parsed local: 183 elements, send_bufs totals: 0 elements
+[Rank 5] Parsed local: 204 elements, send_bufs totals: 0 elements
+[Rank 7] Parsed local: 265 elements, send_bufs totals: 0 elements
+[Rank 6] Parsed local: 270 elements, send_bufs totals: 0 elements
+[Rank 2] Parsed local: 243 elements, send_bufs totals: 73 elements
+Parallel I/O Complete: Rows=1138 | Cols=1138 | Total NNZ=2599 | Procs=8
+I/O Time (max across ranks): 0.098081 seconds
+Ghost columns identified: 125 total ghost values needed
+Local vector initialized (size=143 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     PARALLEL (MPI_File_read_at_all)
+PROCESSES:    8
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   10
+Matrix NNZ:   2599
+I/O TIME:     0.098081 seconds
+----------------------------------------
+BALANCE: nnz_local   min=     296  avg=    324.88  max=     351
+COMM:    ghost       min=     125  avg=    154.75  max=     176  | recv_bytes_avg=   1238.00 B
+MEM:     bytes       min=   19428  avg=     19930  max=   20292
+STRUCT:  ghost_ratio min=  41.391%  avg=    47.616%  max=  52.381%
+----------------------------------------
+TIMING:  t_total     = 2.889270e-05 s
+         t_comp      = 4.859000e-06 s
+         t_comm      = 2.521460e-05 s
+PERF:    gflops_total= 0.179907 GFLOPS
+         gflops_comp = 1.069767 GFLOPS
+========================================
+
+[RESULT] 0,8,parallel,0,0.000008970,0.000006506,302,125,604,0.098080627
+[RESULT] 0,8,parallel,1,0.000004111,0.000002729,302,125,604,0.098080627
+[RESULT] 0,8,parallel,2,0.000003573,0.000002628,302,125,604,0.098080627
+[RESULT] 0,8,parallel,3,0.000004977,0.000004060,302,125,604,0.098080627
+[RESULT] 0,8,parallel,4,0.000010875,0.000009882,302,125,604,0.098080627
+[RESULT] 0,8,parallel,5,0.000057853,0.000056927,302,125,604,0.098080627
+[RESULT] 0,8,parallel,6,0.000022134,0.000021240,302,125,604,0.098080627
+[RESULT] 0,8,parallel,7,0.000012181,0.000011256,302,125,604,0.098080627
+[RESULT] 0,8,parallel,8,0.000070619,0.000069699,302,125,604,0.098080627
+[RESULT] 0,8,parallel,9,0.000013720,0.000012839,302,125,604,0.098080627
+Total execution time: 0.085 seconds

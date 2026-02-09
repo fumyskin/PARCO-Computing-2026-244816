@@ -4,7 +4,7 @@ Retrieving the matrix from '../matrices/1138_bus.mtx'...
 1138 1138 2596
 Sequential I/O Complete: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=4
 Applied 1D distribution
-I/O Time (max across ranks): 0.004541 seconds
+I/O Time (max across ranks): 0.032544 seconds
 Ghost columns identified: 247 total ghost values needed
 Local vector initialized (size=285 per process)
 
@@ -14,21 +14,30 @@ COMPREHENSIVE METRICS SUMMARY
 I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
 PROCESSES:    4
 DISTRIBUTION: 1D (row-cyclic)
-ITERATIONS:   1
+ITERATIONS:   10
 Matrix NNZ:   2596
-I/O TIME:     0.004541 seconds
+I/O TIME:     0.032544 seconds
 ----------------------------------------
 BALANCE: nnz_local   min=     609  avg=    649.00  max=     668
 COMM:    ghost       min=     226  avg=    245.75  max=     260  | recv_bytes_avg=   1966.00 B
 MEM:     bytes       min=   14800  avg=     15448  max=   15780
 STRUCT:  ghost_ratio min=  37.110%  avg=    37.850%  max=  38.922%
 ----------------------------------------
-TIMING:  t_total     = 5.605221e-04 s
-         t_comp      = 7.390976e-06 s
-         t_comm      = 5.531311e-04 s
-PERF:    gflops_total= 0.009263 GFLOPS
-         gflops_comp = 0.702478 GFLOPS
+TIMING:  t_total     = 3.989300e-06 s
+         t_comp      = 1.119300e-06 s
+         t_comm      = 2.891400e-06 s
+PERF:    gflops_total= 1.301481 GFLOPS
+         gflops_comp = 4.638613 GFLOPS
 ========================================
 
-[RESULT] 0,4,sequential,0,0.000560522,0.000553131,665,247,1330,0.004540920
-Total execution time: 0.005 seconds
+[RESULT] 0,4,sequential,0,0.000003946,0.000001862,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,1,0.000007463,0.000006241,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,2,0.000009180,0.000008066,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,3,0.000004242,0.000003175,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,4,0.000002092,0.000001126,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,5,0.000001988,0.000000996,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,6,0.000002204,0.000001202,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,7,0.000001939,0.000001020,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,8,0.000002026,0.000001124,665,247,1330,0.032544124
+[RESULT] 0,4,sequential,9,0.000003197,0.000002272,665,247,1330,0.032544124
+Total execution time: 0.033 seconds
