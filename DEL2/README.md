@@ -142,5 +142,5 @@ Regarding plots, I recommend checking `speedup_strong`, `comp_vs_comm_strong`, `
 > [!IMPORTANT]
 > In the final repository, due to long exeuction times required to process large matrices, the 1D_and_2D folder has been divided in two: 
 > - `/results/batch1` contains the results of the smaller matrices: `1138_bus.mtx`, `Andrews.mtx` and `bcsstk27.mtx`
-> - `results/batch2` contains the results of the biggest matrices: `Hook_1498.mtx`, `msdoor.mtx`, `Andrews.mtx`
+> - `/results/batch2` contains the results of the biggest matrices: `Hook_1498.mtx`, `msdoor.mtx`, `Andrews.mtx`
 > In case you want to re run the testbenches, the instructions above for obtaining results and plots remain unchanged and you will obtain one single 1D_and_2D folder containing all information 
