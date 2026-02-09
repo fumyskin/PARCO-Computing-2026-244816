@@ -1,5 +1,5 @@
-#ifndef BONUS_UTILS_H
-#define BONUS_UTILS_H
+#ifndef PARALLEL_READING_H
+#define PARALLEL_READING_H
 
 #include "mmio.h"
 #include "specifications.h"
