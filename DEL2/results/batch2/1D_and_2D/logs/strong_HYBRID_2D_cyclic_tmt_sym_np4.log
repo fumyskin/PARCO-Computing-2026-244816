@@ -1,0 +1,38 @@
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Real Matrix: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=4 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 2 x 2
+Rank 1: Grid (0,1) | Local rows=363357 | NNZ=725992 | ColsGlobal
+Rank 0: Grid (0,0) | Local rows=363357 | NNZ=726184 | ColsGlobal
+Applied 2D cyclic distribution (global column indices preserved)
+Rank 2: Grid (1,0) | Local rows=363356 | NNZ=725736 | ColsGlobal
+Rank 3: Grid (1,1) | Local rows=363356 | NNZ=725925 | ColsGlobal
+2D Comm Pattern: grid 2 x 2 | expand ghosts on rank 0: 181678
+2D: local vector size = 363357 (column block), local rows = 363357
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 2903837
+BALANCE: nnz_local   min=  725736  avg= 725959.25  max=  726184
+COMM:    ghost       min=  181637  avg= 181662.25  max=  181678  | recv_double_avg=1453298.00 B
+METRICS: t_total     = 1.077e-02  t_comp = 1.045e-03  t_comm = 1.022e-02
+         gflops_total= 5.392569e-01  gflops_comp= 5.556376e+00
+========================================
+
+[RESULT] 0,4,2D_cyclic,0,0.006784201,0.005468607,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,1,0.006258011,0.005178690,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,2,0.006184578,0.005140066,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,3,0.006191254,0.005171061,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,4,0.006186008,0.005181313,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,5,0.006179571,0.005179882,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,6,0.006165504,0.005155325,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,7,0.006158113,0.005165815,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,8,0.006145954,0.005161524,726184,181678,1452368
+[RESULT] 0,4,2D_cyclic,9,0.006172895,0.005171537,726184,181678,1452368
+Total execution time: 8.630 seconds

@@ -1,0 +1,38 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=4 | Distribution=2D
+2D Process Grid (Block): 2 x 2 (rows x cols)
+Rank 1: Grid (0,1) | Rows [0,749012) | Cols [749012,1498023) | LocalRows=749012 | NNZ=0 | ColsGlobal
+Rank 2: Grid (1,0) | Rows [749012,1498023) | Cols [0,749012) | LocalRows=749011 | NNZ=247082 | ColsGlobal
+Rank 3: Grid (1,1) | Rows [749012,1498023) | Cols [749012,1498023) | LocalRows=749011 | NNZ=15436372 | ColsGlobal
+Rank 0: Grid (0,0) | Rows [0,749012) | Cols [0,749012) | LocalRows=749012 | NNZ=15524280 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+2D Comm Pattern: grid 2 x 2 | expand ghosts on rank 0: 0
+2D: local vector size = 749012 (column block), local rows = 749012
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min=       0  avg=7801933.50  max=15524280
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 3.911e-02  t_comp = 4.332e-03  t_comm = 3.673e-02
+         gflops_total= 1.596073e+00  gflops_comp= 1.440755e+01
+========================================
+
+[RESULT] 0,4,2D,0,0.033116817,0.028244495,15524280,0,31048560
+[RESULT] 0,4,2D,1,0.032800674,0.028190136,15524280,0,31048560
+[RESULT] 0,4,2D,2,0.052590132,0.048230410,15524280,0,31048560
+[RESULT] 0,4,2D,3,0.032723665,0.028357983,15524280,0,31048560
+[RESULT] 0,4,2D,4,0.028800011,0.024574995,15524280,0,31048560
+[RESULT] 0,4,2D,5,0.028765202,0.024573803,15524280,0,31048560
+[RESULT] 0,4,2D,6,0.028788567,0.024625540,15524280,0,31048560
+[RESULT] 0,4,2D,7,0.028770208,0.024584532,15524280,0,31048560
+[RESULT] 0,4,2D,8,0.028784037,0.024584770,15524280,0,31048560
+[RESULT] 0,4,2D,9,0.028763771,0.024615049,15524280,0,31048560
+Total execution time: 87.228 seconds

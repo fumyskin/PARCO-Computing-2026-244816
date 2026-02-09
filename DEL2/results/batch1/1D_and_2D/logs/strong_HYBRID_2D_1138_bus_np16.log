@@ -1,0 +1,50 @@
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Real Matrix: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=16 | Distribution=2D
+2D Process Grid (Block): 4 x 4 (rows x cols)
+Rank 0: Grid (0,0) | Rows [0,285) | Cols [0,285) | LocalRows=285 | NNZ=630 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+Rank 1: Grid (0,1) | Rows [0,285) | Cols [285,570) | LocalRows=285 | NNZ=0 | ColsGlobal
+Rank 8: Grid (2,0) | Rows [570,855) | Cols [0,285) | LocalRows=285 | NNZ=25 | ColsGlobal
+Rank 12: Grid (3,0) | Rows [855,1138) | Cols [0,285) | LocalRows=283 | NNZ=11 | ColsGlobal
+Rank 3: Grid (0,3) | Rows [0,285) | Cols [855,1138) | LocalRows=285 | NNZ=0 | ColsGlobal
+Rank 14: Grid (3,2) | Rows [855,1138) | Cols [570,855) | LocalRows=283 | NNZ=86 | ColsGlobal
+Rank 5: Grid (1,1) | Rows [285,570) | Cols [285,570) | LocalRows=285 | NNZ=567 | ColsGlobal
+Rank 9: Grid (2,1) | Rows [570,855) | Cols [285,570) | LocalRows=285 | NNZ=69 | ColsGlobal
+Rank 4: Grid (1,0) | Rows [285,570) | Cols [0,285) | LocalRows=285 | NNZ=93 | ColsGlobal
+Rank 11: Grid (2,3) | Rows [570,855) | Cols [855,1138) | LocalRows=285 | NNZ=0 | ColsGlobal
+Rank 2: Grid (0,2) | Rows [0,285) | Cols [570,855) | LocalRows=285 | NNZ=0 | ColsGlobal
+Rank 13: Grid (3,1) | Rows [855,1138) | Cols [285,570) | LocalRows=283 | NNZ=36 | ColsGlobal
+Rank 10: Grid (2,2) | Rows [570,855) | Cols [570,855) | LocalRows=285 | NNZ=528 | ColsGlobal
+Rank 7: Grid (1,3) | Rows [285,570) | Cols [855,1138) | LocalRows=285 | NNZ=0 | ColsGlobal
+Rank 15: Grid (3,3) | Rows [855,1138) | Cols [855,1138) | LocalRows=283 | NNZ=551 | ColsGlobal
+Rank 6: Grid (1,2) | Rows [285,570) | Cols [570,855) | LocalRows=285 | NNZ=0 | ColsGlobal
+2D Comm Pattern: grid 4 x 4 | expand ghosts on rank 0: 0
+2D: local vector size = 285 (column block), local rows = 285
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+GRID: 4 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 2596
+BALANCE: nnz_local   min=       0  avg=    162.25  max=     630
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 8.117e-02  t_comp = 1.338e-04  t_comm = 8.115e-02
+         gflops_total= 6.396793e-05  gflops_comp= 3.881095e-02
+========================================
+
+[RESULT] 0,16,2D,0,0.092995405,0.092983484,630,0,1260
+[RESULT] 0,16,2D,1,0.110999584,0.110989094,630,0,1260
+[RESULT] 0,16,2D,2,0.031354666,0.031344652,630,0,1260
+[RESULT] 0,16,2D,3,0.035720348,0.035710335,630,0,1260
+[RESULT] 0,16,2D,4,0.084005117,0.083994865,630,0,1260
+[RESULT] 0,16,2D,5,0.091025352,0.091017246,630,0,1260
+[RESULT] 0,16,2D,6,0.071004391,0.070995092,630,0,1260
+[RESULT] 0,16,2D,7,0.076846838,0.076836109,630,0,1260
+[RESULT] 0,16,2D,8,0.064018726,0.064000130,630,0,1260
+[RESULT] 0,16,2D,9,0.095728874,0.095718861,630,0,1260
+Total execution time: 3.132 seconds

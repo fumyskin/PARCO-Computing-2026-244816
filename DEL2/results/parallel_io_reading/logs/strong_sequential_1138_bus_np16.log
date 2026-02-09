@@ -1,29 +1,34 @@
---------------------------------------------------------------------------
-There are not enough slots available in the system to satisfy the 16
-slots that were requested by the application:
+Using SEQUENTIAL I/O (rank 0 reads, then broadcasts)
+Retrieving the matrix from '../matrices/1138_bus.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1138 1138 2596
+Sequential I/O Complete: Rows=1138 | Cols=1138 | NNZ=2596 | Procs=16
+Applied 1D distribution
+I/O Time (max across ranks): 0.002665 seconds
+Ghost columns identified: 80 total ghost values needed
+Local vector initialized (size=72 per process)
 
-  ../results/parallel_io_reading/spmv_parallel_io.out
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
+PROCESSES:    16
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   2596
+I/O TIME:     0.002665 seconds
+----------------------------------------
+BALANCE: nnz_local   min=     146  avg=    162.25  max=     178
+COMM:    ghost       min=      69  avg=     83.56  max=      99  | recv_bytes_avg=    668.50 B
+MEM:     bytes       min=    3728  avg=      4042  max=    4352
+STRUCT:  ghost_ratio min=  47.260%  avg=    51.422%  max=  55.618%
+----------------------------------------
+TIMING:  t_total     = 1.392365e-04 s
+         t_comp      = 2.384186e-06 s
+         t_comm      = 1.370907e-04 s
+PERF:    gflops_total= 0.037289 GFLOPS
+         gflops_comp = 2.177683 GFLOPS
+========================================
 
-Either request fewer slots for your application, or make more slots
-available for use.
-
-A "slot" is the Open MPI term for an allocatable unit where we can
-launch a process.  The number of slots available are defined by the
-environment in which Open MPI processes are run:
-
-  1. Hostfile, via "slots=N" clauses (N defaults to number of
-     processor cores if not provided)
-  2. The --host command line parameter, via a ":N" suffix on the
-     hostname (N defaults to 1 if not provided)
-  3. Resource manager (e.g., SLURM, PBS/Torque, LSF, etc.)
-  4. If none of a hostfile, the --host command line parameter, or an
-     RM is present, Open MPI defaults to the number of processor cores
-
-In all the above cases, if you want Open MPI to default to the number
-of hardware threads instead of the number of processor cores, use the
---use-hwthread-cpus option.
-
-Alternatively, you can use the --oversubscribe option to ignore the
-number of available slots when deciding the number of processes to
-launch.
---------------------------------------------------------------------------
+[RESULT] 0,16,sequential,0,0.000108242,0.000106096,163,80,326,0.002664566
+Total execution time: 0.007 seconds

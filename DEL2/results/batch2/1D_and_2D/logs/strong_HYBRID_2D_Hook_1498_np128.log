@@ -1,0 +1,162 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=128 | Distribution=2D
+2D Process Grid (Block): 8 x 16 (rows x cols)
+Rank 114: Grid (7,2) | Rows [1310771,1498023) | Cols [187254,280881) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 115: Grid (7,3) | Rows [1310771,1498023) | Cols [280881,374508) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 110: Grid (6,14) | Rows [1123518,1310771) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 112: Grid (7,0) | Rows [1310771,1498023) | Cols [0,93627) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 117: Grid (7,5) | Rows [1310771,1498023) | Cols [468135,561762) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 122: Grid (7,10) | Rows [1310771,1498023) | Cols [936270,1029897) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 119: Grid (7,7) | Rows [1310771,1498023) | Cols [655389,749016) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 124: Grid (7,12) | Rows [1310771,1498023) | Cols [1123524,1217151) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 105: Grid (6,9) | Rows [1123518,1310771) | Cols [842643,936270) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 113: Grid (7,1) | Rows [1310771,1498023) | Cols [93627,187254) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 121: Grid (7,9) | Rows [1310771,1498023) | Cols [842643,936270) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 116: Grid (7,4) | Rows [1310771,1498023) | Cols [374508,468135) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 92: Grid (5,12) | Rows [936265,1123518) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 94: Grid (5,14) | Rows [936265,1123518) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 98: Grid (6,2) | Rows [1123518,1310771) | Cols [187254,280881) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 96: Grid (6,0) | Rows [1123518,1310771) | Cols [0,93627) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 102: Grid (6,6) | Rows [1123518,1310771) | Cols [561762,655389) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 118: Grid (7,6) | Rows [1310771,1498023) | Cols [561762,655389) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 4: Grid (0,4) | Rows [0,187253) | Cols [374508,468135) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 106: Grid (6,10) | Rows [1123518,1310771) | Cols [936270,1029897) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 6: Grid (0,6) | Rows [0,187253) | Cols [561762,655389) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 120: Grid (7,8) | Rows [1310771,1498023) | Cols [749016,842643) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 111: Grid (6,15) | Rows [1123518,1310771) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 8: Grid (0,8) | Rows [0,187253) | Cols [749016,842643) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 101: Grid (6,5) | Rows [1123518,1310771) | Cols [468135,561762) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 103: Grid (6,7) | Rows [1123518,1310771) | Cols [655389,749016) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 10: Grid (0,10) | Rows [0,187253) | Cols [936270,1029897) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 16: Grid (1,0) | Rows [187253,374506) | Cols [0,93627) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 12: Grid (0,12) | Rows [0,187253) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 20: Grid (1,4) | Rows [187253,374506) | Cols [374508,468135) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 14: Grid (0,14) | Rows [0,187253) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 26: Grid (1,10) | Rows [187253,374506) | Cols [936270,1029897) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 107: Grid (6,11) | Rows [1123518,1310771) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=222105 | ColsGlobal
+Rank 22: Grid (1,6) | Rows [187253,374506) | Cols [561762,655389) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 24: Grid (1,8) | Rows [187253,374506) | Cols [749016,842643) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 123: Grid (7,11) | Rows [1310771,1498023) | Cols [1029897,1123524) | LocalRows=187252 | NNZ=0 | ColsGlobal
+Rank 89: Grid (5,9) | Rows [936265,1123518) | Cols [842643,936270) | LocalRows=187253 | NNZ=270437 | ColsGlobal
+Rank 28: Grid (1,12) | Rows [187253,374506) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 78: Grid (4,14) | Rows [749012,936265) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 84: Grid (5,4) | Rows [936265,1123518) | Cols [374508,468135) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 80: Grid (5,0) | Rows [936265,1123518) | Cols [0,93627) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 15: Grid (0,15) | Rows [0,187253) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 9: Grid (0,9) | Rows [0,187253) | Cols [842643,936270) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 13: Grid (0,13) | Rows [0,187253) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 11: Grid (0,11) | Rows [0,187253) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 23: Grid (1,7) | Rows [187253,374506) | Cols [655389,749016) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 77: Grid (4,13) | Rows [749012,936265) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 17: Grid (1,1) | Rows [187253,374506) | Cols [93627,187254) | LocalRows=187253 | NNZ=103275 | ColsGlobal
+Rank 88: Grid (5,8) | Rows [936265,1123518) | Cols [749016,842643) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 74: Grid (4,10) | Rows [749012,936265) | Cols [936270,1029897) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 79: Grid (4,15) | Rows [749012,936265) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 125: Grid (7,13) | Rows [1310771,1498023) | Cols [1217151,1310778) | LocalRows=187252 | NNZ=117165 | ColsGlobal
+Rank 108: Grid (6,12) | Rows [1123518,1310771) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=1917963 | ColsGlobal
+Rank 87: Grid (5,7) | Rows [936265,1123518) | Cols [655389,749016) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 76: Grid (4,12) | Rows [749012,936265) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 93: Grid (5,13) | Rows [936265,1123518) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 2: Grid (0,2) | Rows [0,187253) | Cols [187254,280881) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 29: Grid (1,13) | Rows [187253,374506) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 100: Grid (6,4) | Rows [1123518,1310771) | Cols [374508,468135) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 32: Grid (2,0) | Rows [374506,561759) | Cols [0,93627) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 99: Grid (6,3) | Rows [1123518,1310771) | Cols [280881,374508) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 97: Grid (6,1) | Rows [1123518,1310771) | Cols [93627,187254) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 104: Grid (6,8) | Rows [1123518,1310771) | Cols [749016,842643) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 95: Grid (5,15) | Rows [936265,1123518) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 3: Grid (0,3) | Rows [0,187253) | Cols [280881,374508) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 60: Grid (3,12) | Rows [561759,749012) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 68: Grid (4,4) | Rows [749012,936265) | Cols [374508,468135) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 5: Grid (0,5) | Rows [0,187253) | Cols [468135,561762) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 65: Grid (4,1) | Rows [749012,936265) | Cols [93627,187254) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 7: Grid (0,7) | Rows [0,187253) | Cols [655389,749016) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 33: Grid (2,1) | Rows [374506,561759) | Cols [93627,187254) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 67: Grid (4,3) | Rows [749012,936265) | Cols [280881,374508) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 126: Grid (7,14) | Rows [1310771,1498023) | Cols [1310778,1404405) | LocalRows=187252 | NNZ=1895760 | ColsGlobal
+Rank 27: Grid (1,11) | Rows [187253,374506) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 56: Grid (3,8) | Rows [561759,749012) | Cols [749016,842643) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 25: Grid (1,9) | Rows [187253,374506) | Cols [842643,936270) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 21: Grid (1,5) | Rows [187253,374506) | Cols [468135,561762) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 52: Grid (3,4) | Rows [561759,749012) | Cols [374508,468135) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 50: Grid (3,2) | Rows [561759,749012) | Cols [187254,280881) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 46: Grid (2,14) | Rows [374506,561759) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 81: Grid (5,1) | Rows [936265,1123518) | Cols [93627,187254) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 86: Grid (5,6) | Rows [936265,1123518) | Cols [561762,655389) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 48: Grid (3,0) | Rows [561759,749012) | Cols [0,93627) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 83: Grid (5,3) | Rows [936265,1123518) | Cols [280881,374508) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 82: Grid (5,2) | Rows [936265,1123518) | Cols [187254,280881) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 71: Grid (4,7) | Rows [749012,936265) | Cols [655389,749016) | LocalRows=187253 | NNZ=247257 | ColsGlobal
+Rank 85: Grid (5,5) | Rows [936265,1123518) | Cols [468135,561762) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 57: Grid (3,9) | Rows [561759,749012) | Cols [842643,936270) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 49: Grid (3,1) | Rows [561759,749012) | Cols [93627,187254) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 44: Grid (2,12) | Rows [374506,561759) | Cols [1123524,1217151) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 38: Grid (2,6) | Rows [374506,561759) | Cols [561762,655389) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 91: Grid (5,11) | Rows [936265,1123518) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=1700259 | ColsGlobal
+Rank 35: Grid (2,3) | Rows [374506,561759) | Cols [280881,374508) | LocalRows=187253 | NNZ=194738 | ColsGlobal
+Rank 42: Grid (2,10) | Rows [374506,561759) | Cols [936270,1029897) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 47: Grid (2,15) | Rows [374506,561759) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 30: Grid (1,14) | Rows [187253,374506) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 75: Grid (4,11) | Rows [749012,936265) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 40: Grid (2,8) | Rows [374506,561759) | Cols [749016,842643) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 31: Grid (1,15) | Rows [187253,374506) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 109: Grid (6,13) | Rows [1123518,1310771) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=1790124 | ColsGlobal
+Rank 41: Grid (2,9) | Rows [374506,561759) | Cols [842643,936270) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 63: Grid (3,15) | Rows [561759,749012) | Cols [1404405,1498023) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 62: Grid (3,14) | Rows [561759,749012) | Cols [1310778,1404405) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 39: Grid (2,7) | Rows [374506,561759) | Cols [655389,749016) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 69: Grid (4,5) | Rows [749012,936265) | Cols [468135,561762) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 64: Grid (4,0) | Rows [749012,936265) | Cols [0,93627) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 61: Grid (3,13) | Rows [561759,749012) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 0: Grid (0,0) | Rows [0,187253) | Cols [0,93627) | LocalRows=187253 | NNZ=1954287 | ColsGlobal
+Applied 2D block distribution (global column indices preserved)
+Rank 66: Grid (4,2) | Rows [749012,936265) | Cols [187254,280881) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 70: Grid (4,6) | Rows [749012,936265) | Cols [561762,655389) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 58: Grid (3,10) | Rows [561759,749012) | Cols [936270,1029897) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 59: Grid (3,11) | Rows [561759,749012) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 34: Grid (2,2) | Rows [374506,561759) | Cols [187254,280881) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 51: Grid (3,3) | Rows [561759,749012) | Cols [280881,374508) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 127: Grid (7,15) | Rows [1310771,1498023) | Cols [1404405,1498023) | LocalRows=187252 | NNZ=1895598 | ColsGlobal
+Rank 45: Grid (2,13) | Rows [374506,561759) | Cols [1217151,1310778) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 53: Grid (3,5) | Rows [561759,749012) | Cols [468135,561762) | LocalRows=187253 | NNZ=265659 | ColsGlobal
+Rank 1: Grid (0,1) | Rows [0,187253) | Cols [93627,187254) | LocalRows=187253 | NNZ=1879605 | ColsGlobal
+Rank 43: Grid (2,11) | Rows [374506,561759) | Cols [1029897,1123524) | LocalRows=187253 | NNZ=0 | ColsGlobal
+Rank 90: Grid (5,10) | Rows [936265,1123518) | Cols [936270,1029897) | LocalRows=187253 | NNZ=1957689 | ColsGlobal
+Rank 19: Grid (1,3) | Rows [187253,374506) | Cols [280881,374508) | LocalRows=187253 | NNZ=1793020 | ColsGlobal
+Rank 54: Grid (3,6) | Rows [561759,749012) | Cols [561762,655389) | LocalRows=187253 | NNZ=1939428 | ColsGlobal
+Rank 18: Grid (1,2) | Rows [187253,374506) | Cols [187254,280881) | LocalRows=187253 | NNZ=1990917 | ColsGlobal
+Rank 73: Grid (4,9) | Rows [749012,936265) | Cols [842643,936270) | LocalRows=187253 | NNZ=1700842 | ColsGlobal
+Rank 72: Grid (4,8) | Rows [749012,936265) | Cols [749016,842643) | LocalRows=187253 | NNZ=1968255 | ColsGlobal
+Rank 55: Grid (3,7) | Rows [561759,749012) | Cols [655389,749016) | LocalRows=187253 | NNZ=1711881 | ColsGlobal
+Rank 37: Grid (2,5) | Rows [374506,561759) | Cols [468135,561762) | LocalRows=187253 | NNZ=1708788 | ColsGlobal
+Rank 36: Grid (2,4) | Rows [374506,561759) | Cols [374508,468135) | LocalRows=187253 | NNZ=1982682 | ColsGlobal
+2D Comm Pattern: grid 8 x 16 | expand ghosts on rank 0: 0
+2D: local vector size = 93627 (column block), local rows = 187253
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min=       0  avg= 243810.42  max= 1990917
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.075e+01  t_comp = 3.509e-03  t_comm = 1.075e+01
+         gflops_total= 5.806065e-03  gflops_comp= 1.778884e+01
+========================================
+
+[RESULT] 0,128,2D,0,9.729040861,9.725749731,1954287,0,3908574
+[RESULT] 0,128,2D,1,9.728037596,9.724740982,1954287,0,3908574
+[RESULT] 0,128,2D,2,9.984005213,9.980708599,1954287,0,3908574
+[RESULT] 0,128,2D,3,9.732041121,9.728737116,1954287,0,3908574
+[RESULT] 0,128,2D,4,9.728005171,9.724708557,1954287,0,3908574
+[RESULT] 0,128,2D,5,9.984001160,9.980709791,1954287,0,3908574
+[RESULT] 0,128,2D,6,9.985005379,9.981709957,1954287,0,3908574
+[RESULT] 0,128,2D,7,10.493021011,10.489733219,1954287,0,3908574
+[RESULT] 0,128,2D,8,10.240012646,10.236712217,1954287,0,3908574
+[RESULT] 0,128,2D,9,10.240020752,10.236722946,1954287,0,3908574
+Total execution time: 1922.847 seconds

@@ -1,0 +1,47 @@
+Using PARALLEL I/O (MPI_File_read_at_all)
+[Rank 0] Parsed header: 726713 rows, 726713 cols, 2903837 nnz
+[Rank 0] Parsed local: 12053 elements, send_bufs totals: 12149 elements
+[Rank 4] Parsed local: 11254 elements, send_bufs totals: 22456 elements
+[Rank 6] Parsed local: 11175 elements, send_bufs totals: 22527 elements
+[Rank 14] Parsed local: 11281 elements, send_bufs totals: 22545 elements
+[Rank 2] Parsed local: 11281 elements, send_bufs totals: 22580 elements
+[Rank 8] Parsed local: 11240 elements, send_bufs totals: 22444 elements
+[Rank 12] Parsed local: 11280 elements, send_bufs totals: 22516 elements
+[Rank 10] Parsed local: 11263 elements, send_bufs totals: 22464 elements
+[Rank 1] Parsed local: 11924 elements, send_bufs totals: 11949 elements
+[Rank 3] Parsed local: 11257 elements, send_bufs totals: 22438 elements
+[Rank 5] Parsed local: 11214 elements, send_bufs totals: 22410 elements
+[Rank 7] Parsed local: 11256 elements, send_bufs totals: 22476 elements
+[Rank 9] Parsed local: 11194 elements, send_bufs totals: 22464 elements
+[Rank 11] Parsed local: 11222 elements, send_bufs totals: 22510 elements
+[Rank 13] Parsed local: 11252 elements, send_bufs totals: 22456 elements
+[Rank 15] Parsed local: 11180 elements, send_bufs totals: 22541 elements
+Parallel I/O Complete: Rows=726713 | Cols=726713 | Total NNZ=2903844 | Procs=16
+I/O Time (max across ranks): 27.980405 seconds
+Ghost columns identified: 126558 total ghost values needed
+Local vector initialized (size=45420 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     PARALLEL (MPI_File_read_at_all)
+PROCESSES:    16
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   2903844
+I/O TIME:     27.980405 seconds
+----------------------------------------
+BALANCE: nnz_local   min=  181131  avg= 181490.25  max=  181724
+COMM:    ghost       min=  122919  avg= 124785.44  max=  126983  | recv_bytes_avg= 998283.50 B
+MEM:     bytes       min=12240844  avg=  12260078  max=12279704
+STRUCT:  ghost_ratio min=  67.862%  avg=    68.756%  max=  69.901%
+----------------------------------------
+TIMING:  t_total     = 7.906914e-03 s
+         t_comp      = 2.892733e-03 s
+         t_comm      = 5.197048e-03 s
+PERF:    gflops_total= 0.734508 GFLOPS
+         gflops_comp = 2.007682 GFLOPS
+========================================
+
+[RESULT] 0,16,parallel,0,0.006470203,0.003607988,181271,126558,362542,27.980405092
+Total execution time: 28.007 seconds

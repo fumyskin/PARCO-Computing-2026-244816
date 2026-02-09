@@ -1,6 +1,6 @@
 Generating Synthetic Matrix: Rows/proc=10000 | Total rows=40000 | NNZ/row=~50 | Procs=4
 Dummy Matrix Generated: Total Rows=40000 | Total NNZ=2000000
-I/O Time (max across ranks): 0.044119 seconds
+I/O Time (max across ranks): 0.047699 seconds
 Ghost columns identified: 30000 total ghost values needed
 Local vector initialized (size=10000 per process)
 
@@ -10,30 +10,21 @@ COMPREHENSIVE METRICS SUMMARY
 I/O TYPE:     PARALLEL (MPI_File_read_at_all)
 PROCESSES:    4
 DISTRIBUTION: 1D (row-cyclic)
-ITERATIONS:   10
+ITERATIONS:   1
 Matrix NNZ:   2000000
-I/O TIME:     0.044119 seconds
+I/O TIME:     0.047699 seconds
 ----------------------------------------
 BALANCE: nnz_local   min=  500000  avg= 500000.00  max=  500000
 COMM:    ghost       min=   29999  avg=  29999.75  max=   30000  | recv_bytes_avg= 239998.00 B
 MEM:     bytes       min= 6796168  avg=   6796360  max= 6796500
 STRUCT:  ghost_ratio min=   6.000%  avg=     6.000%  max=   6.000%
 ----------------------------------------
-TIMING:  t_total     = 1.970679e-03 s
-         t_comp      = 1.863367e-03 s
-         t_comm      = 1.073119e-04 s
-PERF:    gflops_total= 2.029758 GFLOPS
-         gflops_comp = 2.146652 GFLOPS
+TIMING:  t_total     = 4.727602e-03 s
+         t_comp      = 4.118204e-03 s
+         t_comm      = 6.101131e-04 s
+PERF:    gflops_total= 0.846095 GFLOPS
+         gflops_comp = 0.971297 GFLOPS
 ========================================
 
-[RESULT] 0,4,parallel,0,0.002236477,0.000376230,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,1,0.001899567,0.000095602,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,2,0.001883018,0.000049712,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,3,0.001852621,0.000046435,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,4,0.001891032,0.000052673,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,5,0.001845359,0.000052419,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,6,0.001904002,0.000044140,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,7,0.002035834,0.000194741,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,8,0.001926999,0.000040759,500000,30000,1000000,0.044119172
-[RESULT] 0,4,parallel,9,0.001880533,0.000046007,500000,30000,1000000,0.044119172
-Total execution time: 0.070 seconds
+[RESULT] 0,4,parallel,0,0.004695892,0.000610113,500000,30000,1000000,0.047699213
+Total execution time: 0.062 seconds

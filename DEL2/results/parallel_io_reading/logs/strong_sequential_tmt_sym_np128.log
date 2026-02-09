@@ -1,0 +1,34 @@
+Using SEQUENTIAL I/O (rank 0 reads, then broadcasts)
+Retrieving the matrix from '../matrices/tmt_sym.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+726713 726713 2903837
+Sequential I/O Complete: Rows=726713 | Cols=726713 | NNZ=2903837 | Procs=128
+Applied 1D distribution
+I/O Time (max across ranks): 5.185614 seconds
+Ghost columns identified: 16797 total ghost values needed
+Local vector initialized (size=5678 per process)
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+I/O TYPE:     SEQUENTIAL (Rank 0 + Bcast)
+PROCESSES:    128
+DISTRIBUTION: 1D (row-cyclic)
+ITERATIONS:   1
+Matrix NNZ:   2903837
+I/O TIME:     5.185614 seconds
+----------------------------------------
+BALANCE: nnz_local   min=   22549  avg=  22686.23  max=   22844
+COMM:    ghost       min=   16668  avg=  16839.34  max=   17020  | recv_bytes_avg= 134714.69 B
+MEM:     bytes       min=  517924  avg=    520502  max=  523832
+STRUCT:  ghost_ratio min=  73.746%  avg=    74.227%  max=  74.548%
+----------------------------------------
+TIMING:  t_total     = 2.790499e-02 s
+         t_comp      = 1.327038e-03 s
+         t_comm      = 2.709913e-02 s
+PERF:    gflops_total= 0.208123 GFLOPS
+         gflops_comp = 4.376419 GFLOPS
+========================================
+
+[RESULT] 0,128,sequential,0,0.027420521,0.026977301,22609,16797,45218,5.185613632
+Total execution time: 5.369 seconds

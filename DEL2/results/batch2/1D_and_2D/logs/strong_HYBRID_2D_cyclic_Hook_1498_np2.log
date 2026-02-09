@@ -1,0 +1,36 @@
+Retrieving the matrix from '../matrices/Hook_1498.mtx'...
+%%MatrixMarket matrix coordinate real symmetric
+1498023 1498023 31207734
+Real Matrix: Rows=1498023 | Cols=1498023 | NNZ=31207734 | Procs=2 | Distribution=2D_cyclic
+2D Process Grid (Cyclic): 1 x 2
+Rank 1: Grid (0,1) | Local rows=1498023 | NNZ=15602939 | ColsGlobal
+Rank 0: Grid (0,0) | Local rows=1498023 | NNZ=15604795 | ColsGlobal
+Applied 2D cyclic distribution (global column indices preserved)
+2D Comm Pattern: grid 1 x 2 | expand ghosts on rank 0: 374506
+2D: local vector size = 749012 (column block), local rows = 1498023
+
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D_cyclic
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 31207734
+BALANCE: nnz_local   min=15602939  avg=15603867.00  max=15604795
+COMM:    ghost       min=  374506  avg= 374506.00  max=  374506  | recv_double_avg=2996048.00 B
+METRICS: t_total     = 2.412e-02  t_comp = 5.945e-03  t_comm = 1.972e-02
+         gflops_total= 2.587233e+00  gflops_comp= 1.049930e+01
+========================================
+
+[RESULT] 0,2,2D_cyclic,0,0.026027918,0.020836353,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,1,0.024147511,0.019416332,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,2,0.023796558,0.019221544,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,3,0.023831844,0.019378424,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,4,0.023911715,0.019623995,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,5,0.023920298,0.019668102,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,6,0.023950100,0.019764423,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,7,0.023807287,0.019691467,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,8,0.023955584,0.019812346,15604795,374506,31209590
+[RESULT] 0,2,2D_cyclic,9,0.023895264,0.019785166,15604795,374506,31209590
+Total execution time: 19.063 seconds

@@ -1,0 +1,644 @@
+========== [MPI/1D] 1 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 1
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  410077  avg= 410077.00  max=  410077
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.638e-03  t_comp = 1.637e-03  t_comm = 5.960e-07
+         gflops_total= 5.006805e-01  gflops_comp= 5.008627e-01
+========================================
+
+========== [MPI/1D] 2 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  202663  avg= 205038.50  max=  207414
+COMM:    ghost       min=   19555  avg=  19752.00  max=   19949  | recv_double_avg= 158016.00 B
+METRICS: t_total     = 1.990e-03  t_comp = 1.632e-03  t_comm = 3.720e-04
+         gflops_total= 4.120422e-01  gflops_comp= 5.024943e-01
+========================================
+
+========== [MPI/1D] 4 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  101144  avg= 102519.25  max=  104188
+COMM:    ghost       min=   25389  avg=  25560.00  max=   25678  | recv_double_avg= 204480.00 B
+METRICS: t_total     = 1.508e-03  t_comp = 1.133e-03  t_comm = 3.746e-04
+         gflops_total= 5.440416e-01  gflops_comp= 7.239005e-01
+========================================
+
+========== [MPI/1D] 8 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   50521  avg=  51259.62  max=   52386
+COMM:    ghost       min=   21754  avg=  21979.62  max=   22332  | recv_double_avg= 175837.00 B
+METRICS: t_total     = 8.231e-04  t_comp = 4.832e-04  t_comm = 3.740e-04
+         gflops_total= 9.964300e-01  gflops_comp= 1.697496e+00
+========================================
+
+========== [MPI/1D] 16 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   25205  avg=  25629.81  max=   26296
+COMM:    ghost       min=   14915  avg=  15106.44  max=   15479  | recv_double_avg= 120851.50 B
+METRICS: t_total     = 7.018e-04  t_comp = 2.381e-04  t_comm = 5.100e-04
+         gflops_total= 1.168629e+00  gflops_comp= 3.444798e+00
+========================================
+
+========== [MPI/1D] 32 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   12520  avg=  12814.91  max=   13327
+COMM:    ghost       min=    8826  avg=   9026.41  max=    9452  | recv_double_avg=  72211.25 B
+METRICS: t_total     = 1.029e-03  t_comp = 1.262e-04  t_comm = 9.255e-04
+         gflops_total= 7.974165e-01  gflops_comp= 6.499103e+00
+========================================
+
+========== [MPI/1D] 64 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    6127  avg=   6407.45  max=    6770
+COMM:    ghost       min=    4678  avg=   4957.20  max=    5252  | recv_double_avg=  39657.62 B
+METRICS: t_total     = 1.256e-03  t_comp = 7.782e-05  t_comm = 1.181e-03
+         gflops_total= 6.531805e-01  gflops_comp= 1.053914e+01
+========================================
+
+========== [MPI/1D] 128 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    3050  avg=   3203.73  max=    3464
+COMM:    ghost       min=    2463  avg=   2603.41  max=    2840  | recv_double_avg=  20827.31 B
+METRICS: t_total     = 6.981e-02  t_comp = 6.919e-05  t_comm = 6.979e-02
+         gflops_total= 1.174758e-02  gflops_comp= 1.185381e+01
+========================================
+
+========== [MPI/2D] 2 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  119418  avg= 205038.50  max=  290659
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 2.766e-03  t_comp = 8.787e-04  t_comm = 1.887e-03
+         gflops_total= 2.965521e-01  gflops_comp= 9.334062e-01
+========================================
+
+========== [MPI/2D] 4 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg= 102519.25  max=  169668
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 9.979e-04  t_comp = 4.816e-04  t_comm = 7.652e-04
+         gflops_total= 8.219184e-01  gflops_comp= 1.703127e+00
+========================================
+
+========== [MPI/2D] 8 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D
+GRID: 2 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  51259.62  max=   84984
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.149e-03  t_comp = 3.884e-04  t_comm = 1.064e-03
+         gflops_total= 7.139989e-01  gflops_comp= 2.111580e+00
+========================================
+
+========== [MPI/2D] 16 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+GRID: 4 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  25629.81  max=   42593
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 9.893e-04  t_comp = 1.964e-04  t_comm = 8.097e-04
+         gflops_total= 8.290295e-01  gflops_comp= 4.176755e+00
+========================================
+
+========== [MPI/2D] 32 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D
+GRID: 4 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  12814.91  max=   25524
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 8.118e-04  t_comp = 1.535e-04  t_comm = 7.609e-04
+         gflops_total= 1.010331e+00  gflops_comp= 5.343236e+00
+========================================
+
+========== [MPI/2D] 64 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 2D
+GRID: 8 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=   6407.45  max=   14578
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 6.548e-04  t_comp = 7.863e-05  t_comm = 6.298e-04
+         gflops_total= 1.252585e+00  gflops_comp= 1.043049e+01
+========================================
+
+========== [MPI/2D] 128 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=   3203.73  max=    8688
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 6.450e-04  t_comp = 6.945e-05  t_comm = 6.153e-04
+         gflops_total= 1.271475e+00  gflops_comp= 1.180905e+01
+========================================
+
+========== [MPI/2D_cyclic] 2 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D_cyclic
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  203389  avg= 205038.50  max=  206688
+COMM:    ghost       min=   15000  avg=  15000.00  max=   15000  | recv_double_avg= 120000.00 B
+METRICS: t_total     = 2.117e-03  t_comp = 9.816e-04  t_comm = 1.135e-03
+         gflops_total= 3.874893e-01  gflops_comp= 8.355133e-01
+========================================
+
+========== [MPI/2D_cyclic] 4 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   53459  avg= 102519.25  max=  153229
+COMM:    ghost       min=    7236  avg=  12338.00  max=   15000  | recv_double_avg=  98704.00 B
+METRICS: t_total     = 1.577e-03  t_comp = 5.705e-04  t_comm = 1.076e-03
+         gflops_total= 5.201444e-01  gflops_comp= 1.437576e+00
+========================================
+
+========== [MPI/2D_cyclic] 8 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D_cyclic
+GRID: 2 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   26698  avg=  51259.62  max=   76932
+COMM:    ghost       min=    6527  avg=   9294.88  max=   11250  | recv_double_avg=  74359.00 B
+METRICS: t_total     = 1.967e-03  t_comp = 5.517e-04  t_comm = 1.517e-03
+         gflops_total= 4.169061e-01  gflops_comp= 1.486721e+00
+========================================
+
+========== [MPI/2D_cyclic] 16 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D_cyclic
+GRID: 4 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   13258  avg=  25629.81  max=   45934
+COMM:    ghost       min=    4496  avg=   7569.94  max=   11250  | recv_double_avg=  60559.50 B
+METRICS: t_total     = 1.429e-03  t_comp = 2.943e-04  t_comm = 1.227e-03
+         gflops_total= 5.741042e-01  gflops_comp= 2.787211e+00
+========================================
+
+========== [MPI/2D_cyclic] 32 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D_cyclic
+GRID: 4 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    6574  avg=  12814.91  max=   23085
+COMM:    ghost       min=    2863  avg=   4433.84  max=    6563  | recv_double_avg=  35470.75 B
+METRICS: t_total     = 1.462e-03  t_comp = 2.133e-04  t_comm = 1.334e-03
+         gflops_total= 5.609509e-01  gflops_comp= 3.844407e+00
+========================================
+
+========== [MPI/2D_cyclic] 64 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 2D_cyclic
+GRID: 8 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    3257  avg=   6407.45  max=   15267
+COMM:    ghost       min=    1839  avg=   3224.06  max=    6563  | recv_double_avg=  25792.50 B
+METRICS: t_total     = 1.059e-03  t_comp = 9.568e-05  t_comm = 9.922e-04
+         gflops_total= 7.742809e-01  gflops_comp= 8.572079e+00
+========================================
+
+========== [MPI/2D_cyclic] 128 processes | N/A threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D_cyclic
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    1582  avg=   3203.73  max=    7674
+COMM:    ghost       min=    1004  avg=   1727.10  max=    3516  | recv_double_avg=  13816.81 B
+METRICS: t_total     = 1.406e-03  t_comp = 8.569e-05  t_comm = 1.375e-03
+         gflops_total= 5.834917e-01  gflops_comp= 9.571439e+00
+========================================
+
+========== [HYBRID/1D] 1 processes | 64 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 1
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  410077  avg= 410077.00  max=  410077
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.959e-03  t_comp = 1.936e-03  t_comm = 2.344e-05
+         gflops_total= 4.186514e-01  gflops_comp= 4.237205e-01
+========================================
+
+========== [HYBRID/1D] 2 processes | 32 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  202663  avg= 205038.50  max=  207414
+COMM:    ghost       min=   19555  avg=  19752.00  max=   19949  | recv_double_avg= 158016.00 B
+METRICS: t_total     = 2.252e-03  t_comp = 1.883e-03  t_comm = 3.696e-04
+         gflops_total= 3.641264e-01  gflops_comp= 4.356164e-01
+========================================
+
+========== [HYBRID/1D] 4 processes | 16 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  101144  avg= 102519.25  max=  104188
+COMM:    ghost       min=   25389  avg=  25560.00  max=   25678  | recv_double_avg= 204480.00 B
+METRICS: t_total     = 5.117e-02  t_comp = 1.710e-03  t_comm = 4.995e-02
+         gflops_total= 1.602764e-02  gflops_comp= 4.795660e-01
+========================================
+
+========== [HYBRID/1D] 8 processes | 8 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   50521  avg=  51259.62  max=   52386
+COMM:    ghost       min=   21754  avg=  21979.62  max=   22332  | recv_double_avg= 175837.00 B
+METRICS: t_total     = 5.563e-02  t_comp = 7.834e-03  t_comm = 5.505e-02
+         gflops_total= 1.474173e-02  gflops_comp= 1.046874e-01
+========================================
+
+========== [HYBRID/1D] 16 processes | 4 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   25205  avg=  25629.81  max=   26296
+COMM:    ghost       min=   14915  avg=  15106.44  max=   15479  | recv_double_avg= 120851.50 B
+METRICS: t_total     = 9.900e-02  t_comp = 1.125e-02  t_comm = 8.932e-02
+         gflops_total= 8.284424e-03  gflops_comp= 7.291358e-02
+========================================
+
+========== [HYBRID/1D] 32 processes | 2 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   12520  avg=  12814.91  max=   13327
+COMM:    ghost       min=    8826  avg=   9026.41  max=    9452  | recv_double_avg=  72211.25 B
+METRICS: t_total     = 2.753e-01  t_comp = 2.201e-02  t_comm = 2.533e-01
+         gflops_total= 2.979325e-03  gflops_comp= 3.726147e-02
+========================================
+
+========== [HYBRID/1D] 64 processes | 1 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    6127  avg=   6407.45  max=    6770
+COMM:    ghost       min=    4678  avg=   4957.20  max=    5252  | recv_double_avg=  39657.62 B
+METRICS: t_total     = 8.061e-01  t_comp = 6.697e-05  t_comm = 8.061e-01
+         gflops_total= 1.017377e-03  gflops_comp= 1.224626e+01
+========================================
+
+========== [HYBRID/1D] 128 processes | 1 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 1D
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    3050  avg=   3203.73  max=    3464
+COMM:    ghost       min=    2463  avg=   2603.41  max=    2840  | recv_double_avg=  20827.31 B
+METRICS: t_total     = 2.292e+00  t_comp = 5.252e-05  t_comm = 2.292e+00
+         gflops_total= 3.579024e-04  gflops_comp= 1.561496e+01
+========================================
+
+========== [HYBRID/2D] 2 processes | 32 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  119418  avg= 205038.50  max=  290659
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.131e-03  t_comp = 1.573e-04  t_comm = 9.738e-04
+         gflops_total= 7.251212e-01  gflops_comp= 5.214454e+00
+========================================
+
+========== [HYBRID/2D] 4 processes | 16 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg= 102519.25  max=  169668
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 9.184e-03  t_comp = 1.063e-03  t_comm = 8.121e-03
+         gflops_total= 8.929990e-02  gflops_comp= 7.714160e-01
+========================================
+
+========== [HYBRID/2D] 8 processes | 8 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D
+GRID: 2 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  51259.62  max=   84984
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.319e-01  t_comp = 5.640e-03  t_comm = 1.319e-01
+         gflops_total= 6.216520e-03  gflops_comp= 1.454086e-01
+========================================
+
+========== [HYBRID/2D] 16 processes | 4 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D
+GRID: 4 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  25629.81  max=   42593
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 1.675e-01  t_comp = 7.536e-03  t_comm = 1.634e-01
+         gflops_total= 4.897642e-03  gflops_comp= 1.088310e-01
+========================================
+
+========== [HYBRID/2D] 32 processes | 2 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D
+GRID: 4 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=  12814.91  max=   25524
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 5.418e-01  t_comp = 8.374e-03  t_comm = 5.412e-01
+         gflops_total= 1.513694e-03  gflops_comp= 9.794165e-02
+========================================
+
+========== [HYBRID/2D] 64 processes | 1 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 2D
+GRID: 8 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=   6407.45  max=   14578
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 5.886e-01  t_comp = 9.925e-05  t_comm = 5.885e-01
+         gflops_total= 1.393514e-03  gflops_comp= 8.263212e+00
+========================================
+
+========== [HYBRID/2D] 128 processes | 1 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=       0  avg=   3203.73  max=    8688
+COMM:    ghost       min=       0  avg=      0.00  max=       0  | recv_double_avg=      0.00 B
+METRICS: t_total     = 2.586e+00  t_comp = 7.470e-05  t_comm = 2.586e+00
+         gflops_total= 3.171614e-04  gflops_comp= 1.097981e+01
+========================================
+
+========== [HYBRID/2D_cyclic] 2 processes | 32 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 2
+DISTRIBUTION: 2D_cyclic
+GRID: 1 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=  203389  avg= 205038.50  max=  206688
+COMM:    ghost       min=   15000  avg=  15000.00  max=   15000  | recv_double_avg= 120000.00 B
+METRICS: t_total     = 1.445e-03  t_comp = 1.462e-04  t_comm = 1.324e-03
+         gflops_total= 5.675403e-01  gflops_comp= 5.611705e+00
+========================================
+
+========== [HYBRID/2D_cyclic] 4 processes | 16 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 4
+DISTRIBUTION: 2D_cyclic
+GRID: 2 x 2 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   53459  avg= 102519.25  max=  153229
+COMM:    ghost       min=    7236  avg=  12338.00  max=   15000  | recv_double_avg=  98704.00 B
+METRICS: t_total     = 5.512e-03  t_comp = 1.549e-04  t_comm = 5.423e-03
+         gflops_total= 1.487988e-01  gflops_comp= 5.294713e+00
+========================================
+
+========== [HYBRID/2D_cyclic] 8 processes | 8 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 8
+DISTRIBUTION: 2D_cyclic
+GRID: 2 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   26698  avg=  51259.62  max=   76932
+COMM:    ghost       min=    6527  avg=   9294.88  max=   11250  | recv_double_avg=  74359.00 B
+METRICS: t_total     = 1.680e-01  t_comp = 1.347e-02  t_comm = 1.679e-01
+         gflops_total= 4.881300e-03  gflops_comp= 6.087482e-02
+========================================
+
+========== [HYBRID/2D_cyclic] 16 processes | 4 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 16
+DISTRIBUTION: 2D_cyclic
+GRID: 4 x 4 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=   13258  avg=  25629.81  max=   45934
+COMM:    ghost       min=    4496  avg=   7569.94  max=   11250  | recv_double_avg=  60559.50 B
+METRICS: t_total     = 2.085e-01  t_comp = 6.050e-03  t_comm = 2.076e-01
+         gflops_total= 3.934517e-03  gflops_comp= 1.355591e-01
+========================================
+
+========== [HYBRID/2D_cyclic] 32 processes | 2 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 32
+DISTRIBUTION: 2D_cyclic
+GRID: 4 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    6574  avg=  12814.91  max=   23085
+COMM:    ghost       min=    2863  avg=   4433.84  max=    6563  | recv_double_avg=  35470.75 B
+METRICS: t_total     = 6.536e-01  t_comp = 1.615e-02  t_comm = 6.485e-01
+         gflops_total= 1.254841e-03  gflops_comp= 5.079373e-02
+========================================
+
+========== [HYBRID/2D_cyclic] 64 processes | 1 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 64
+DISTRIBUTION: 2D_cyclic
+GRID: 8 x 8 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    3257  avg=   6407.45  max=   15267
+COMM:    ghost       min=    1839  avg=   3224.06  max=    6563  | recv_double_avg=  25792.50 B
+METRICS: t_total     = 8.536e-01  t_comp = 1.422e-04  t_comm = 8.535e-01
+         gflops_total= 9.607709e-04  gflops_comp= 5.767899e+00
+========================================
+
+========== [HYBRID/2D_cyclic] 128 processes | 1 threads ==========
+========================================
+COMPREHENSIVE METRICS SUMMARY
+========================================
+PROCESSES: 128
+DISTRIBUTION: 2D_cyclic
+GRID: 8 x 16 (proc_rows x proc_cols)
+ITERATIONS: 10
+Matrix NNZ: 410077
+BALANCE: nnz_local   min=    1582  avg=   3203.73  max=    7674
+COMM:    ghost       min=    1004  avg=   1727.10  max=    3516  | recv_double_avg=  13816.81 B
+METRICS: t_total     = 2.966e+00  t_comp = 1.135e-04  t_comm = 2.966e+00
+         gflops_total= 2.764769e-04  gflops_comp= 7.225321e+00
+========================================
+
