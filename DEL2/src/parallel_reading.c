@@ -347,7 +347,7 @@ int exchange_data(int* send_counts, int comm_size,
     }
     
     // For huge matrices, check if total_recv is reasonable
-    // Max safe allocation: 1 GB per rank (adjust if needed)
+    // Max safe allocation: 1 GB per rank (adjust if needed) -> heuristic that should be revised in further works
     long max_elements_per_type = (1024LL * 1024LL * 1024LL) / 8; // 1GB / 8 bytes (double)
     if (*total_recv > max_elements_per_type) {
         local_error = 1; // Mark as error if too large
