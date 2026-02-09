@@ -1,5 +1,6 @@
 # DELIVERABLE 2 run instructions
 
+## Overviews
 This folder contains the DELIVERABLE 2 source code.
 The following code is a playground to test different MPI approaches to the classical SpMV kernel.
 Included in this file are the following implementation:
@@ -13,7 +14,7 @@ However, the DELIVERABLE content will focus only on exploring, apart from the ba
 
 
 ## FOLDER ORGANIZATION
-inserisci diagramma ad albero della repo
+The repository is organized as follows:
 ``` bash
 .
 ├── Deliverable2-MPI.pdf
@@ -27,16 +28,16 @@ inserisci diagramma ad albero della repo
 │   ├── parallel_reading.h
 │   ├── specifications.h
 │   └── tests.h
-├── matrices
+├── matrices                            #input matrices
 │   └── 1138_bus.mtx
-├── plots
+├── plots                               #plots
 │   ├── batch1
 │   ├── batch2
-│   └── parallel_io_reading
+│   └── parallel_io_reading             #plots for sequential vs parallel reading
 ├── results
 │   ├── batch1
 │   ├── batch2
-│   └── parallel_io_reading
+│   └── parallel_io_reading             #results for sequential vs parallel reading
 ├── scripts
 │   ├── mpi_bash_baseline.sh            #bash script for main_baseline.c
 │   ├── mpi_bash_parallel.sh            #bash script for main_parallel.c
@@ -45,14 +46,14 @@ inserisci diagramma ad albero della repo
 │   ├── plot_parallel.py                #python script for parallel_io_reading results
 │   └── plot_script.py                  #python script for 1D_and_2D results
 └── src
-    ├── communication.c
-    ├── distributions.c
-    ├── main_baseline.c
-    ├── main_parallel.c
-    ├── mmio.c
-    ├── parallel_reading.c
-    ├── specifications.c
-    └── tests.c
+    ├── communication.c                 #utils for finding/exchanging ghost entries
+    ├── distributions.c                 #utils for 1D, 2D (block and cyclic) distributions
+    ├── main_baseline.c                 #main for 1D, 2D (block and cyclic), HYBRID MPI runs
+    ├── main_parallel.c                 #main for sequential and parallel I/O reading comparison
+    ├── mmio.c                          #utils for reading Matrix Market files
+    ├── parallel_reading.c              #utils for parallel reading I/O
+    ├── specifications.c                #utils for SpMV, COO->CSR operations
+    └── tests.c                         #tests for 1D, 2D block and 2D cyclic
 ```
 
 ## HOW TO REPRODUCE
