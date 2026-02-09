@@ -11,6 +11,21 @@
 #include "communication.h"       
 #include "tests.h"
 
+/* format better later
+ NOTE: THE FOLLOWING MAIN IS A PLAYGROUND THAT CONTAINS MANY FUNCTIONALITIES :
+ - 1D CYCLIC DISTRIBUTION
+ - 2D BLOCK DISTRIBUTION
+ - 2D CYCLIC DISTRIBUTION
+ - HYBRID MPI IMPLEMENTATION
+
+ All of them can be used and tested, HOWEVER, I have decided for this deliverable to focus ONLY on 
+ - 1D (baseline)
+ - 2D BLOCK DISTRIBUTION (bonus 1)
+ - PARALLEL I/O READING ATTEMPT (see parallel_bonus.c) (bonus 2)
+ - EXTRA METRICS (bonus 3)
+
+ Hence, the deliverable 2 content will explore only such options (Professor is ok with that)
+*/
 
 int main(int argc, char *argv[])
 {
@@ -248,7 +263,7 @@ int main(int argc, char *argv[])
         MPI_Barrier(MPI_COMM_WORLD);
 
     } else {
-        // ====== 1D PATH (unchanged) ======
+        // ====== 1D PATH ======
 
         find_ghost_vals(&local_csr, &comm_pattern, rank, comm_size, matrix_cols);
 
