@@ -10,7 +10,7 @@ Included in this file are the following implementation:
 - 2D block and 2D cyclic distributions
 - Hybrid MPI approach
 
-However, the DELIVERABLE content will focus only on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**.
+However, the DELIVERABLE2 content will focus ONLY on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**.  
 
 
 ## FOLDER ORGANIZATION
@@ -109,7 +109,7 @@ The results of the simulations are going to be collected into the `/results` fol
 ## PLOTTING
 To plot the results for 1D and 2D distribution SpMV go into the `/scripts` folder and type:
 ``` bash
-module load python-3.10.14_gcc91
+module load python-3.10.14_gcc91  #command to make sure python3 is installed
 python3 plot_script.py
 ```
 The contents plotted are going to be:
@@ -119,6 +119,8 @@ The contents plotted are going to be:
 - `data_reduction` -> `.csv` files associated for each iteration for each matrix
 - `speedup_strong` -> speedup for each matrix for strong scaling
 - `weak_scaling` -> weak scaling info
+
+**NB: the results labelled with _Hybrid are the hyrbid MPI results so should not be considered**
 
 To compute plots for sequential and parallel I/O reading go into the `/scripts` folder and type:
 ``` bash
