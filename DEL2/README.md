@@ -135,7 +135,7 @@ python3 plot_parallel.py
 The contents plotted are going to be speedup, io time comparison and computation vs communication breakdown
 
 > [!WARNING]
-> The plot_script.py will plot also the 2D_cyclic and HYBRID MPI graphs as well. Since the cluster HPC2 didn't work anymore (HP3 started working) I preferred to keep the original graphs as they are in order to be sure the source code is reproducible. Hence, in the final DELIVERABLE2 there are going to be present graphs belonging to the 2D_cyclic and HYBRID MPI simulations. These are **NOT** to be considered in the final DELIVERABLE2 report.
+> The plot_script.py will plot also the 2D_cyclic and HYBRID MPI graphs as well. Since the cluster HPC2 didn't work anymore (HP3 started working) I preferred to keep the original graphs as they are in order to be sure the source code is reproducible. Hence, in the final DELIVERABLE2 there are going to be present graphs which will inevitably refer also to the 2D_cyclic and HYBRID MPI simulations. The parts related to 2D cyclic and HYBRID MPI are **NOT** to be considered in the final DELIVERABLE2 reported graphs.
 
 ## GUIDELINES: HOW TO NAVIGATE RESULTS AND PLOTS
 Regarding results, the MOST TELLING file I recommend checking for benchmark analysis is the `/results/summary` folder: for each process count are summarized:
