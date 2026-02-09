@@ -12,7 +12,8 @@ Included in this file are the following implementation:
 
 However, the DELIVERABLE2 content will focus ONLY on exploring, apart from the baseline, **parallel I/O reading** approach and **2D block partitioning**, studying them with **bonus metrics**.  
 
-> [!IMPORTANT] : due to high compuation times, I HIGHLY RECOMMEND RUNNING:
+> [!IMPORTANT] 
+> Due to high compuation times, I HIGHLY RECOMMEND RUNNING:
 >- for **1D AND 2D TESTING**: all matrices, in batches or at once (note that bigger matrices take much longer to compute results)
 >- for **PARALLEL I/O VS SEQUENTIAL READING**: JUST `1138_bus.mtx` and `tmt_sym.mtx` are sufficient for understanding the reading functions' behaviors
 
