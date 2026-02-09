@@ -100,10 +100,10 @@ The results of the simulations are going to be collected into the `/results` fol
     - `strong/weak_scaling_parallel.csv`
 
 > [!WARNING]
-> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYRBID MPI experiments as well. Since the cluster HPC2 didn't work anymore I preferred to keep the original experimental setup as it is in order to be sure the source code is reproducible. 2D_cyclic and HYBRID MPI data are not to be considered
+> The mpi_job_script_baseline.pbs will run also the 2D_cyclic and HYBRID MPI experiments as well. Since the cluster HPC2 didn't work anymore I preferred to keep the original experimental setup as it is in order to be sure the source code is reproducible. 2D_cyclic and HYBRID MPI data are NOT to be considered
 
 > [!IMPORTANT]
-> The `../summary` folders contain the TOTAL BENCHMARK INFORMATION that is human readable. PLEASE REFER TO THESE to check metrics for a given matrix.
+> The `../summary` folders contain the **TOTAL BENCHMARK INFORMATION** that is human readable. **PLEASE REFER TO THESE to check metrics** for a given matrix.
 
 
 ## PLOTTING
